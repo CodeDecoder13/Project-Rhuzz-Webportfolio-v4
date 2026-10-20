@@ -58,6 +58,12 @@ body {
   }
 }
 
+@keyframes drawer {
+  from {
+    transform: translateX(105%);
+  }
+}
+
 @keyframes rise {
   from {
     opacity: 0;

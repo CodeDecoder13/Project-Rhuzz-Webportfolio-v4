@@ -1,11 +1,11 @@
 import Hero from "@/components/Hero";
+import Work from "@/components/Work";
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      {/* #work target for the skip link; replaced by the project grid in Phase 5 */}
-      <section id="work" className="min-h-[50vh]" />
+      <Work />
     </main>
   );
 }
