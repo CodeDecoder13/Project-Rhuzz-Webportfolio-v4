@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# rhuzz v4
 
-## Getting Started
-
-First, run the development server:
+Portfolio of Rhuzzel Paramio. Next.js 16 (App Router, Cache Components), React 19, Tailwind v4. The brief is `../Project-task.md`.
 
 ```bash
+npm install --legacy-peer-deps   # @hookform/resolvers has optional peers npm can't resolve
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint && npm run typecheck && npm test && npm run build
+npm run e2e                      # Playwright smoke + axe; builds and serves on :3100
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Read `AGENTS.md` and `node_modules/next/dist/docs/` before changing Next APIs: this version differs from Next 15.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Set in `.env.local` for dev and in Vercel for production:
 
-## Learn More
+- `RESEND_API_KEY`: Resend API key (required)
+- `CONTACT_TO`: inbox that receives contact-form messages (required)
+- `CONTACT_FROM`: optional verified sender, e.g. `Portfolio <hi@yourdomain>`; defaults to Resend's onboarding sender
 
-To learn more about Next.js, take a look at the following resources:
+Without the first two the contact form returns "not configured".
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Content still owed by the owner
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Real problem/solution/result and cover images per project (`content/projects.ts`)
+- Repo URLs for the Playwright suite and CI/CD templates
+- Bio, dates, graduation status, per-skill levels (`content/about.ts`, `content/stack.ts`)
+- `public/paramio-rhuzzel-cv-updated.pdf` (the header and contact links point to it)
+- Legal text review: `[DATE]`, `[12 months]`, `[30 days]`, jurisdiction in `app/terms` and `app/privacy`
+- Final domain: `metadataBase` in `app/layout.tsx`, `app/sitemap.ts`, `app/robots.ts` use `https://rhuzz.online`
 
-## Deploy on Vercel
+## Deploy (Vercel)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Import the repo, set **Root Directory** to `my-app`.
+2. Add the env vars above; set Install Command to `npm install --legacy-peer-deps`.
+3. Add the domain, then run Lighthouse on mobile (target 95+ for Performance/Accessibility/Best Practices/SEO).

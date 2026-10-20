@@ -2,9 +2,9 @@ import Link from "next/link";
 import { site } from "@/content/site";
 
 const nav = [
-  ["About", "/#about"],
-  ["Projects", "/#work"],
-  ["Contact", "/#contact"],
+  ["About", "/about"],
+  ["Projects", "/projects"],
+  ["Contact", "/contact"],
 ] as const;
 
 const pill = "rounded-full border-[1.5px] px-[18px] py-[9px] font-mono text-xs uppercase tracking-[.06em]";
@@ -15,20 +15,17 @@ export default function Header() {
       <Link href="/" className="display text-[34px]">
         rhuzz<i className="not-italic text-blue">.</i>
       </Link>
-      <nav aria-label="Primary" className="mono flex gap-7 max-[800px]:hidden">
+      <nav aria-label="Primary" className="mono flex gap-4 min-[801px]:gap-7">
         {nav.map(([label, href]) => (
           <Link key={href} href={href} className="hover:text-blue">
             {label}
           </Link>
         ))}
       </nav>
-      <div className="flex items-center justify-end gap-2.5">
+      <div className="flex items-center justify-end gap-2.5 max-[800px]:hidden">
         <a href={site.cv} className={`${pill} border-ink text-ink`}>
           Download CV
         </a>
-        <Link href="/#work" className={`${pill} border-blue bg-blue text-white`}>
-          View projects ↗
-        </Link>
       </div>
     </header>
   );

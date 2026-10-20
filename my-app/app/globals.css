@@ -8,7 +8,8 @@
   --line: rgba(11, 27, 51, 0.16);
   --sky: #8dbbf2;
   --blue: #1f5fbf;
-  --fail: #c8553d;
+  /* Darker than the brief's #C8553D (4.0:1 on paper); this is 5.3:1 so small FAIL text meets AA. */
+  --fail: #b04129;
 }
 
 @theme inline {

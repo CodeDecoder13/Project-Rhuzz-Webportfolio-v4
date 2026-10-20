@@ -6,6 +6,8 @@ import { projects, type Project } from "@/content/projects";
 import ProjectDetail, { Tags } from "./ProjectDetail";
 
 const cats = ["All", "Web Dev", "QA", "Capstone"] as const;
+// Small labels sit in a chip: the brief's cover colours alone don't reach AA contrast at 12px.
+const chip = "mono absolute rounded-full bg-paper px-2 py-px text-ink";
 const initials = (t: string) => t.split(" ").map((w) => w[0]).slice(0, 3).join("");
 
 function Card({ p, i, onOpen }: { p: Project; i: number; onOpen: (el: HTMLElement) => void }) {
@@ -25,10 +27,10 @@ function Card({ p, i, onOpen }: { p: Project; i: number; onOpen: (el: HTMLElemen
         ) : (
           <>
             <b className="display text-[clamp(48px,6vw,84px)] opacity-90">{initials(p.title)}</b>
-            <span className="mono absolute bottom-2.5 right-3 opacity-60">image placeholder</span>
+            <span className={chip + " bottom-2.5 right-3"}>image placeholder</span>
           </>
         )}
-        <span className="mono absolute left-3.5 top-3">{String(i + 1).padStart(2, "0")}</span>
+        <span className={chip + " left-3.5 top-3"}>{String(i + 1).padStart(2, "0")}</span>
       </div>
       <div className="px-[18px] pb-[18px] pt-4">
         <h3 className="display text-[26px] leading-[1.05]">{p.title}</h3>

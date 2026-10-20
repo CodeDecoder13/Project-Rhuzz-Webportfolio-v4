@@ -32,7 +32,7 @@ export default function MusicPlayer() {
       <audio ref={audio} loop preload="none" src="/assets/music/soundtrack.mp3" onError={() => setState("missing")} />
       <button
         type="button"
-        aria-label="Toggle soundtrack"
+        // No aria-label: it must contain the visible text (WCAG 2.5.3), so the content names the button.
         aria-pressed={state === "on"}
         onClick={() => (state === "on" ? pause() : play())}
         className="fixed bottom-5 right-5 z-[15] flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-[18px] text-white shadow-[0_10px_30px_rgba(11,27,51,.35)]"
