@@ -35,7 +35,7 @@ export default function MusicPlayer() {
         // No aria-label: it must contain the visible text (WCAG 2.5.3), so the content names the button.
         aria-pressed={state === "on"}
         onClick={() => (state === "on" ? pause() : play())}
-        className="fixed bottom-5 right-5 z-[15] flex items-center gap-3 rounded-full bg-ink py-2 pl-2 pr-[18px] text-white shadow-[0_10px_30px_rgba(11,27,51,.35)]"
+        className="fixed bottom-5 right-5 z-[15] flex items-center gap-3 rounded-full border border-white/25 bg-ink py-2 pl-2 pr-[18px] text-white shadow-[0_10px_30px_rgba(11,27,51,.35)]"
       >
         <span
           className={`size-10 rounded-full border border-[#2c3d5e] bg-[radial-gradient(circle,var(--blue)_0_18%,#0B1B33_19%_24%,transparent_25%),repeating-radial-gradient(#111_0_2px,#1d2a44_3px_4px)] ${state === "on" ? "animate-[spin_3s_linear_infinite]" : ""}`}

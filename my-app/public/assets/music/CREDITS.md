@@ -1,9 +1,8 @@
-# Music credit (required, CC BY 4.0)
+# Music
 
-"Volatile Reaction" by Kevin MacLeod (incompetech.com)
-Licensed under Creative Commons: By Attribution 4.0 License
-http://creativecommons.org/licenses/by/4.0/
-Source: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Volatile%20Reaction.mp3
-Saved as: soundtrack.mp3
+`soundtrack.mp3` is what the site player loads (`components/MusicPlayer.tsx`). Nothing else references the track.
 
-Show this credit in the site footer. Verify the license on the track's incompetech page before launch.
+- While this file is Kevin MacLeod's "Volatile Reaction" (CC BY 4.0, incompetech.com), CC BY requires a visible credit.
+  The footer credit was removed on request, so replace the file or restore the credit before launch.
+- To use NF - "Search": save the mp3 over `soundtrack.mp3` (same path, no code change). It is commercially
+  copyrighted, so only publish it if you hold the rights; hosts can take the site down on a copyright claim.

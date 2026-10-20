@@ -111,7 +111,10 @@ test("legal pages are reachable from the footer", async ({ page }) => {
   await expect(page.getByText("Not legal advice").locator("visible=true")).toHaveCount(1);
 });
 
-test("footer carries the music credit", async ({ page }) => {
+test("footer lists site links and contact details", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByText("Volatile Reaction")).toBeVisible();
+  const footer = page.getByRole("contentinfo");
+  await expect(footer.getByRole("navigation", { name: "Footer" }).getByRole("link")).toHaveCount(7);
+  await expect(footer.getByRole("link", { name: "boyparamio@gmail.com" })).toBeVisible();
+  await expect(footer.getByText("Volatile Reaction")).toHaveCount(0);
 });
