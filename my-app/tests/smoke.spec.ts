@@ -15,6 +15,31 @@ test("home loads with centered nav and no view-projects button", async ({ page }
   await expect(page.getByText("View projects")).toHaveCount(0);
 });
 
+test.describe("mobile", () => {
+  test.use({ viewport: { width: 375, height: 700 } });
+
+  test("burger menu replaces the nav and opens the pages", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("navigation", { name: "Primary" })).toBeHidden();
+    const burger = page.getByRole("button", { name: "Menu" });
+    await expect(burger).toHaveAttribute("aria-expanded", "false");
+    await burger.click();
+    const menu = page.getByRole("navigation", { name: "Mobile" });
+    await expect(menu.getByRole("link")).toHaveText(["About", "Projects", "Contact", "Download CV"]);
+    await page.keyboard.press("Escape");
+    await expect(menu).toBeHidden();
+    await burger.click();
+    await menu.getByRole("link", { name: "Contact" }).click();
+    await expect(page).toHaveURL("/contact");
+    await expect(menu).toBeHidden();
+  });
+
+  test("hero text is white over the photo", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveCSS("color", "rgb(255, 255, 255)");
+  });
+});
+
 test("gate can be skipped with Esc", async ({ page }) => {
   await page.goto("/");
   const gate = page.getByRole("dialog", { name: "Enter portfolio" });

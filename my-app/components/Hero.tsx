@@ -23,7 +23,8 @@ export default function Hero() {
           sizes="(max-width: 800px) 90vw, 50vw"
           className="relative z-[1] h-[92%] w-auto max-w-[90vw] object-contain object-bottom min-[801px]:max-[1100px]:ml-[24vw]"
         />
-        <div className="absolute bottom-[20vh] left-[max(32px,6vw)] z-[3] max-w-[min(32ch,30vw)] max-[800px]:bottom-[24vh] max-[800px]:left-4 max-[800px]:max-w-[50vw] min-[801px]:max-[1100px]:max-w-[27vw]">
+        {/* On mobile the text overlaps the photo, so it turns white; the shadow keeps it legible over the light shirt and sky. */}
+        <div className="absolute bottom-[20vh] left-[max(32px,6vw)] z-[3] max-w-[min(32ch,30vw)] max-[800px]:bottom-[24vh] max-[800px]:left-4 max-[800px]:max-w-[50vw] max-[800px]:text-white max-[800px]:[text-shadow:0_2px_10px_rgba(11,27,51,.65)] min-[801px]:max-[1100px]:max-w-[27vw]">
           <h1 className="display animate-[rise_.6s_both] text-[clamp(48px,6.4vw,104px)] min-[801px]:max-[1100px]:text-[6vw]">
             Rhuzzel
             <br />
