@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>rhuzz v4 mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F2F6FB;--card:#FFFFFF;--ink:#0B1B33;--muted:#51627A;--line:rgba(11,27,51,.16);--sky:#8DBBF2;--blue:#1F5FBF;--fail:#C8553D}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 'Space Grotesk',system-ui,sans-serif}
+.mono{font:500 12px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.08em}
+.display{font-family:Anton,Impact,sans-serif;text-transform:uppercase;line-height:.9;font-weight:400}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+#gate{position:fixed;inset:0;z-index:30;background:rgba(11,27,51,.86);backdrop-filter:blur(14px);display:grid;place-items:center;text-align:center;color:var(--paper);padding:24px;transition:opacity .4s,transform .4s}
+#gate.out{opacity:0;transform:scale(1.04);pointer-events:none}
+#gate h2{font-size:clamp(56px,11vw,128px)}#gate h2 span{color:var(--sky)}
+#gate .mono{color:#9FB4D1;margin-bottom:16px}
+.go{margin-top:28px;background:var(--sky);color:var(--ink);border:0;padding:16px 28px;border-radius:99px;font:500 14px 'JetBrains Mono',monospace;cursor:pointer;letter-spacing:.06em}
+.go.alt{background:none;color:#fff;border:1.5px solid #fff}
+.skip{display:block;margin-top:14px;color:#9FB4D1;font-size:13px}
+.top{position:fixed;top:0;left:0;right:0;z-index:10;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:16px 32px;background:linear-gradient(var(--paper),transparent)}
+.logo{font-size:34px}.logo i{color:var(--blue);font-style:normal}
+.nav{display:flex;gap:28px}.acts{display:flex;gap:10px;align-items:center;justify-content:flex-end}.cta.sm{padding:9px 18px;font-size:12px}.nav a{text-decoration:none}.nav a:hover{color:var(--blue)}
+.badge{display:flex;gap:8px;align-items:center}.dot{width:10px;height:10px;border-radius:50%;background:var(--blue);animation:p 2s infinite}
+@keyframes p{50%{opacity:.3}}
+.first{height:100vh;min-height:600px;display:flex;flex-direction:column}
+.hero{position:relative;flex:1;min-height:0;overflow:hidden;display:flex;justify-content:center;align-items:flex-end;background:radial-gradient(55% 65% at 52% 62%,rgba(31,95,191,.30),transparent 72%),linear-gradient(180deg,#F2F6FB 0%,#D6E5F8 60%,#B7D0F0 100%)}
+.hero img{position:relative;z-index:1;height:92%;width:auto;max-width:90vw;object-fit:contain;object-position:bottom}
+.hero .ghost{position:absolute;z-index:0;top:9vh;right:-1vw;font-size:min(44vw,620px);line-height:.85;background:linear-gradient(var(--blue) 10%,rgba(31,95,191,0) 88%);-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none}
+.hero .intro{position:absolute;z-index:3;left:max(32px,6vw);bottom:20vh;max-width:min(32ch,30vw)}
+.hero h1{font-size:clamp(48px,6.4vw,104px);color:var(--ink)}
+.hero .intro p{margin-top:16px;font-weight:600;color:var(--ink);font-size:clamp(16px,1.35vw,20px)}
+.hero .dlg{position:absolute;z-index:3;right:max(32px,6vw);bottom:8%;background:#fff;border:1.5px solid var(--ink);border-radius:18px;padding:16px 24px;box-shadow:0 12px 32px rgba(11,27,51,.18);font:600 clamp(20px,2.3vw,34px)/1.1 'Space Grotesk',sans-serif;letter-spacing:-.02em}
+.cta{display:inline-block;background:var(--ink);color:var(--paper);padding:14px 26px;border-radius:99px;text-decoration:none;font:500 13px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;border:1.5px solid var(--ink);cursor:pointer}
+.cta.alt{background:none;color:var(--ink)}
+.cta.g{background:var(--blue);color:#fff;border-color:var(--blue)}
+.marq{border-block:1.5px solid var(--ink);overflow:hidden;white-space:nowrap;padding:12px 0;background:var(--sky)}
+.marq div{display:inline-block;animation:m 28s linear infinite;font-family:Anton;font-size:28px;text-transform:uppercase}
+@keyframes m{to{transform:translateX(-50%)}}
+section{padding:96px 32px}
+.k{display:flex;gap:16px;align-items:baseline;margin-bottom:32px;flex-wrap:wrap}.k h2{font-size:clamp(44px,8vw,110px)}
+.fl{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.fl button{background:none;border:1.5px solid var(--ink);border-radius:99px;padding:6px 16px;cursor:pointer;color:var(--ink)}
+.fl button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.wg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pt{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;border:1.5px solid var(--ink);border-radius:16px;overflow:hidden;background:var(--card);transition:transform .25s,box-shadow .25s}
+.pt:hover,.pt:focus-visible{transform:translateY(-4px);box-shadow:6px 6px 0 var(--ink)}
+.pt:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.cv{aspect-ratio:16/10;display:grid;place-items:center;position:relative;border-bottom:1.5px solid var(--ink)}
+.cv b{font:400 clamp(48px,6vw,84px) Anton;opacity:.9}
+.cv .no{position:absolute;top:12px;left:14px}.cv .ph{position:absolute;bottom:10px;right:12px;opacity:.6}
+.pb{padding:16px 18px 18px}.pb h3{font:400 26px/1.05 Anton;text-transform:uppercase}.pb .meta{color:var(--muted);margin:6px 0 10px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}.tag{border:1.5px solid var(--ink);border-radius:99px;padding:2px 10px;font:500 11px 'JetBrains Mono',monospace}
+.feat{background:var(--ink);color:var(--sky);border-radius:99px;padding:1px 8px;margin-left:6px;font-size:10px}
+#dr{position:fixed;inset:0 0 0 auto;width:min(480px,100%);background:var(--card);border-left:1.5px solid var(--ink);z-index:25;transform:translateX(105%);transition:transform .3s;padding:28px;overflow:auto}
+#dr.open{transform:none}
+#dr h3{font:400 44px/1 Anton;text-transform:uppercase;margin:8px 0 14px}
+#dr h4{margin-top:18px}#dr p{color:var(--muted)}
+#dr .x{float:right;background:none;border:1.5px solid var(--ink);border-radius:99px;padding:4px 12px;cursor:pointer}
+.man{background:var(--ink);color:var(--paper)}
+.man p{font:400 clamp(36px,7vw,96px)/.95 Anton;text-transform:uppercase}.man span{color:var(--sky)}
+.sv{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink)}
+.sv div{padding:28px 24px 28px 0;border-right:1px solid var(--line)}.sv div+div{padding-left:24px}.sv div:last-child{border-right:0}
+.sv b{font:400 64px Anton;color:var(--blue)}.sv h3{font:400 34px/1 Anton;text-transform:uppercase;margin:8px 0}.sv p{color:var(--muted)}
+.st{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.st div{border:1.5px solid var(--ink);border-radius:14px;padding:16px;min-height:140px;display:flex;flex-direction:column;justify-content:space-between;background:var(--card)}
+.st div:last-child{background:var(--sky)}.st b{font:400 32px Anton}
+.pf{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}
+.card{border:1.5px solid var(--ink);border-radius:14px;padding:28px;background:var(--card)}
+.rep .n{font:400 clamp(64px,9vw,120px)/1 Anton}.rep .f{color:var(--fail)}
+.bar{height:10px;background:var(--line);border-radius:5px;margin:16px 0;overflow:hidden}.bar i{display:block;width:87%;height:100%;background:var(--blue)}
+.mp{position:fixed;right:20px;bottom:20px;z-index:15;display:flex;align-items:center;gap:12px;background:var(--ink);color:#fff;border:0;border-radius:99px;padding:8px 18px 8px 8px;cursor:pointer;box-shadow:0 10px 30px rgba(11,27,51,.35);font-family:inherit}
+.mp .disc{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle,var(--blue) 0 18%,#0B1B33 19% 24%,transparent 25%),repeating-radial-gradient(#111 0 2px,#1d2a44 3px 4px);border:1px solid #2c3d5e}
+.mp.on .disc{animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mp small{display:block;font:500 9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#9FB4D1;text-align:left}
+.mp b{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase}
+.ct{background:var(--sky)}.ct h2{font-size:clamp(56px,13vw,200px)}
+footer{background:var(--ink);color:var(--paper);padding:28px 32px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer a{text-decoration:none;color:var(--sky)}footer a:hover{text-decoration:underline}
+@media(max-width:1100px) and (min-width:801px){.hero img{margin-left:24vw}.hero .intro{max-width:27vw}.hero h1{font-size:6vw}}
+@media(max-width:800px){.wg,.sv,.pf{grid-template-columns:1fr}.st{grid-template-columns:1fr 1fr}.sv div{border-right:0;padding-left:0!important;border-bottom:1px solid var(--line)}section{padding:64px 16px}.top{padding-inline:16px}.nav,.badge{display:none}.top{gap:8px}.hero .intro{left:16px;bottom:24vh;max-width:50vw}.hero .dlg{right:16px;bottom:4%}.hero .ghost{font-size:60vw;top:12vh}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="gate" role="dialog" aria-label="Enter portfolio">
+  <div>
+    <div class="mono">Rhuzzel Paramio · Full-stack + QA</div>
+    <h2 class="display">Enter the<br><span>portfolio</span></h2>
+    <button class="go" id="enter">$ run portfolio</button> <button class="go alt" id="enterSound">with sound ♪</button>
+    <a class="skip" href="#work" onclick="enter()">Skip intro · sound off</a>
+  </div>
+</div>
+<header class="top">
+  <div class="logo display">rhuzz<i>.</i></div>
+  <nav class="nav mono" aria-label="Primary"><a href="#about">About</a><a href="#work">Projects</a><a href="#contact">Contact</a></nav>
+  <div class="acts"><a class="cta alt sm" href="#">Download CV</a><a class="cta g sm" href="#work">View projects ↗</a></div>
+</header>
+
+<div class="first">
+<div class="hero">
+  <div class="ghost display" aria-hidden="true">RP</div>
+  <img src="assets/rhuzz-cutout.png" alt="Rhuzzel Paramio in a black blazer and navy tie">
+  <div class="intro"><h1 class="display">Rhuzzel<br>Paramio</h1><p>I build web systems, then try to break them. Shipped with proof that they pass.</p></div>
+  <div class="dlg">Full-stack Engineer /<br>QA Specialist</div>
+</div>
+<div class="marq" aria-hidden="true"><div>Next.js ✦ Vue 3 ✦ Laravel ✦ .NET ✦ Playwright ✦ Selenium ✦ Docker ✦ PostgreSQL ✦ GitHub Actions ✦ Next.js ✦ Vue 3 ✦ Laravel ✦ .NET ✦ Playwright ✦ Selenium ✦ Docker ✦ PostgreSQL ✦ GitHub Actions ✦ </div></div>
+</div>
+
+<section id="work">
+  <div class="k"><span class="mono">01 /</span><h2 class="display">Selected work</h2></div>
+  <div class="fl" role="group" aria-label="Filter projects"></div>
+  <div class="wg" id="grid"></div>
+</section>
+
+<section class="man">
+  <div class="k"><span class="mono">02 /</span><span class="mono" style="color:#9FB4D1">Behind the work</span></div>
+  <p>Ship it.<br>Then <span>break it.</span><br>Fix what broke.<br>Prove it <span>passes.</span><br>Repeat.</p>
+</section>
+
+<section id="do">
+  <div class="k"><span class="mono">03 /</span><h2 class="display">What I do</h2></div>
+  <div class="sv">
+    <div><b>01</b><h3>Full-stack builds</h3><p>Scalable web apps on modern stacks.</p><div class="mono" style="margin-top:12px">Vue / Next / Laravel</div></div>
+    <div><b>02</b><h3>Automation + QA</h3><p>Quality through layered testing.</p><div class="mono" style="margin-top:12px">Selenium / Playwright</div></div>
+    <div><b>03</b><h3>CI/CD + DevOps</h3><p>Deployments run by pipelines.</p><div class="mono" style="margin-top:12px">Docker / Actions / Jenkins</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="k"><span class="mono">04 /</span><h2 class="display">How I work</h2></div>
+  <div class="st">
+    <div><b>01</b><span class="mono">New</span></div><div><b>02</b><span class="mono">Assigned</span></div><div><b>03</b><span class="mono">In progress</span></div>
+    <div><b>04</b><span class="mono">Fixed</span></div><div><b>05</b><span class="mono">Verified</span></div><div><b>06 ✓</b><span class="mono">Closed</span></div>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="k"><span class="mono">05 /</span><h2 class="display">Proof</h2></div>
+  <div class="pf">
+    <div class="card rep"><div class="mono">Sample test run</div><div class="n">148<span style="font-size:.4em">/156</span></div><div class="bar"><i></i></div><div class="mono">87% coverage · <span class="f">5 failed</span> · 4m 32s</div></div>
+    <div class="card"><div class="mono" style="margin-bottom:12px">Certifications</div><div class="tags"><span class="tag">CCNA Intro</span><span class="tag">Cybersecurity</span><span class="tag">Data Science</span><span class="tag">GenAI · Google</span><span class="tag">Python</span><span class="tag">Java</span></div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="k"><span class="mono">06 /</span><h2 class="display">About</h2></div>
+  <div class="pf">
+    <div class="card"><div class="mono" style="margin-bottom:12px">My story</div><p style="color:var(--muted)">Placeholder bio: software engineer focused on reliable, tested software, with a BS in Software Engineering from FEU Institute of Technology.</p>
+      <div class="mono" style="margin:20px 0 8px">Experience</div>
+      <p><b>QA Intern / Software Developer</b> · 2023-24<br><b>Freelance Developer</b> · 2022-present<br><b>Technical Lead, university projects</b> · 2022-24</p></div>
+    <div class="card"><div class="mono" style="margin-bottom:12px">Education</div>
+      <p><b>BS Software Engineering</b>, FEU Institute of Technology · 2020-25<br><b>TVL (ICT)</b>, Panpacific University · 2018-20</p>
+      <div class="mono" style="margin:20px 0 8px">Beyond code</div><div class="tags"><span class="tag">Gaming</span><span class="tag">Coffee</span><span class="tag">Anime</span><span class="tag">Lo-fi</span><span class="tag">Photography</span></div></div>
+  </div>
+</section>
+
+<section class="ct" id="contact">
+  <div class="k"><span class="mono">07 /</span><span class="mono">Replies in 24-48h</span></div>
+  <h2 class="display">Let's ship<br>it ↗</h2>
+  <p style="margin:20px 0"><a class="cta" href="#">Send a message</a></p>
+</section>
+<footer class="mono"><span>© 2026 Rhuzzel Paramio</span><span><a href="terms.html">Terms &amp; Conditions</a> · <a href="privacy.html">Privacy Policy</a></span><span>GitHub · LinkedIn · Email</span><span style="width:100%;opacity:.7">Music: "Volatile Reaction" by Kevin MacLeod (incompetech.com), CC BY 4.0</span></footer>
+
+<audio id="bgm" loop preload="none" src="assets/music/soundtrack.mp3"></audio>
+<button class="mp" id="mp" aria-label="Toggle soundtrack"><span class="disc"></span><span><small>PORTFOLIO SOUNDTRACK</small><b id="mps">Sound off</b></span></button>
+<aside id="dr" aria-label="Project details" aria-hidden="true"></aside>
+
+<script>
+const g=document.getElementById('gate');
+function enter(){g.classList.add('out');setTimeout(()=>g.remove(),420)}
+const bgm=document.getElementById('bgm'),mp=document.getElementById('mp'),mps=document.getElementById('mps');
+function setP(on,msg){mp.classList.toggle('on',on);mps.textContent=msg||(on?'Playing':'Sound off')}
+function play(){bgm.volume=.5;bgm.play().then(()=>{setP(true);try{localStorage.setItem('snd','1')}catch(e){}}).catch(()=>setP(false,'Add track'))}
+function pause(){bgm.pause();setP(false);try{localStorage.setItem('snd','0')}catch(e){}}
+mp.onclick=()=>bgm.paused?play():pause();
+bgm.onerror=()=>setP(false,'Add track');
+document.getElementById('enter').onclick=enter;
+document.getElementById('enterSound').onclick=()=>{enter();play()};
+addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('gate'))enter();else closeD()}});
+
+// placeholder content: replace problem/solution/result and images later
+const P=[
+ {t:'Selenium Test Framework V2',c:'QA',f:1,s:['Selenium','C#','NUnit','ExtentReports'],code:'https://github.com/CodeDecoder13/Selenium-V.2',bg:'#1F5FBF',fg:'#F2F6FB'},
+ {t:'Playwright E2E Suite',c:'QA',s:['Playwright','TypeScript','GitHub Actions','Allure'],code:'#',bg:'#8DBBF2',fg:'#0B1B33'},
+ {t:'Portfolio Website V2',c:'Web Dev',s:['Next.js','TypeScript','Tailwind','Framer Motion','Supabase'],code:'https://github.com/CodeDecoder13/Project-Webportfolio',live:'https://project-rhuzzparamio.vercel.app',bg:'#DCE8F7',fg:'#0B1B33'},
+ {t:'CI/CD Pipeline Templates',c:'QA',s:['Jenkins','GitHub Actions','Azure DevOps','Docker','Bash'],code:'#',bg:'#4E86D4',fg:'#F2F6FB'},
+ {t:'Project Airzen',c:'Capstone',s:['Python','Docker','Kubernetes','CodeIgniter','Flutter'],code:'#',bg:'#0B1B33',fg:'#8DBBF2'},
+ {t:'Portfolio Website V1',c:'Web Dev',s:['HTML','CSS','JavaScript'],code:'#',live:'#',bg:'#B8C7DD',fg:'#0B1B33'},
+ {t:'Construction Contractors Inc',c:'Web Dev',s:['Vue 3','Laravel 12','Shadcn Vue','Tailwind','PostgreSQL'],live:'https://construction-contractors-inc-production.up.railway.app',bg:'#8DBBF2',fg:'#0B1B33'},
+ {t:'DevCollab',c:'Web Dev',s:['Vue 3','Laravel 12','Shadcn Vue','Tailwind','PostgreSQL'],live:'https://devcollab-production-9ce4.up.railway.app',bg:'#1F5FBF',fg:'#F2F6FB'},
+ {t:'Eagles Fraternal Portal',c:'Web Dev',s:['Vue 3','Laravel 12','Shadcn Vue','Tailwind','PostgreSQL'],live:'https://eagles-portal-management-production.up.railway.app/admin',bg:'#DCE8F7',fg:'#0B1B33'}
+];
+const cats=['All','Web Dev','QA','Capstone'];let cur='All';
+const grid=document.getElementById('grid'),fl=document.querySelector('.fl'),dr=document.getElementById('dr');
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function render(){
+  fl.innerHTML=cats.map(c=>`<button class="mono" aria-pressed="${c===cur}" data-c="${c}">${c}</button>`).join('');
+  grid.innerHTML=P.map((p,i)=>({p,i})).filter(({p})=>cur==='All'||p.c===cur).map(({p,i})=>`
+   <button class="pt" data-i="${i}"><div class="cv" style="background:${p.bg};color:${p.fg}"><span class="no mono">${String(i+1).padStart(2,'0')}</span><b>${esc(p.t.split(' ').map(w=>w[0]).slice(0,3).join(''))}</b><span class="ph mono">image placeholder</span></div>
+   <div class="pb"><h3>${esc(p.t)}</h3><div class="meta mono">${p.c}${p.f?'<span class="feat">FEATURED</span>':''}</div><div class="tags">${p.s.slice(0,4).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div></div></button>`).join('');
+}
+fl.onclick=e=>{const c=e.target.dataset.c;if(c){cur=c;render()}};
+grid.onclick=e=>{const b=e.target.closest('.pt');if(b)openD(+b.dataset.i)};
+function openD(i){const p=P[i];
+  dr.innerHTML=`<button class="x mono" onclick="closeD()">Close</button><div class="mono">${String(i+1).padStart(2,'0')} · ${p.c}</div><h3>${esc(p.t)}</h3>
+  <div class="tags">${p.s.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
+  <h4>Problem</h4><p>Placeholder: what needed solving, and for whom.</p><h4>Solution</h4><p>Placeholder: what you built and the key decisions.</p><h4>Result</h4><p>Placeholder: a measurable outcome.</p>
+  <p style="margin-top:24px;display:flex;gap:8px">${p.code?`<a class="cta alt" href="${p.code}">Code</a>`:''}${p.live?`<a class="cta g" href="${p.live}">Live demo ↗</a>`:''}</p>`;
+  dr.classList.add('open');dr.setAttribute('aria-hidden','false');dr.querySelector('.x').focus()}
+function closeD(){dr.classList.remove('open');dr.setAttribute('aria-hidden','true')}
+render();
+</script>
+</body>
+</html>

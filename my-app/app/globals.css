@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f2f6fb;
+  --card: #ffffff;
+  --ink: #0b1b33;
+  --muted: #51627a;
+  --line: rgba(11, 27, 51, 0.16);
+  --sky: #8dbbf2;
+  --blue: #1f5fbf;
+  --fail: #c8553d;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-sky: var(--sky);
+  --color-blue: var(--blue);
+  --color-fail: var(--fail);
+  --font-display: var(--font-anton);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.display {
+  font-family: var(--font-anton), Impact, sans-serif;
+  text-transform: uppercase;
+  line-height: 0.9;
+  font-weight: 400;
+}
+
+.mono {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
