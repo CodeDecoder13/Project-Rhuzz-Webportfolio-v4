@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Anton, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import Gate from "@/components/Gate";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import MusicPlayer from "@/components/MusicPlayer";
+import { site } from "@/content/site";
 import "./globals.css";
 
 const anton = Anton({ variable: "--font-anton", subsets: ["latin"], weight: "400" });
@@ -28,6 +30,16 @@ export const metadata: Metadata = {
     "Portfolio of Rhuzzel Paramio: web systems built, then broken, then shipped with proof that they pass.",
 };
 
+const personLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  jobTitle: site.role,
+  url: "https://rhuzz.online",
+  email: site.email,
+  sameAs: [site.github, site.linkedin],
+}).replace(/</g, "\\u003c");
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -41,8 +53,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to projects
         </a>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: personLd }} />
         <Header />
         {children}
+        <Footer />
         <MusicPlayer />
         <Gate />
       </body>
