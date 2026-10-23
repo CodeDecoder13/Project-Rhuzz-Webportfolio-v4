@@ -1,6 +1,10 @@
 // Owner to confirm dates, graduation status, bio and soft skills.
 export const about = {
-  bio: "Placeholder: short story about who you are and how you work.",
+  statement: "Developer by training. Tester by habit.",
+  bio: [
+    "I'm a Software Engineering graduate from FEU Institute of Technology. I build full-stack web apps with Vue, Laravel and Next.js, and I've put them live for real use as a freelancer.",
+    "Somewhere between leading university project teams and a QA internship, I picked up a habit I can't drop: before I write a feature, I ask how someone would break it. It makes my code boring in the best way. Fewer surprises, fewer late-night fixes.",
+  ],
   experience: [
     { role: "QA Intern / Software Developer", period: "2023-24" },
     { role: "Freelance Developer", period: "2022-present" },

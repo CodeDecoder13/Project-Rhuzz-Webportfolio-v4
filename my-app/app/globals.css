@@ -88,3 +88,20 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Scroll-driven reveal: each element eases in as it enters the viewport, so rows appear one at a time.
+   Browsers without animation-timeline just show everything. */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 50%;
+  }
+}

@@ -27,7 +27,7 @@ export default function QaTestingPage() {
       </Section>
       <Lifecycle />
       <Section>
-        <TestReport full />
+        <TestReport />
       </Section>
     </main>
   );
