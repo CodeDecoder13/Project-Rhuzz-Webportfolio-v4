@@ -1,4 +1,4 @@
-// Owner to confirm dates, graduation status, bio and soft skills.
+// Owner to confirm bio and soft skills.
 export const about = {
   statement: "Developer by training. Tester by habit.",
   bio: [
@@ -6,8 +6,9 @@ export const about = {
     "Somewhere between leading university project teams and a QA internship, I picked up a habit I can't drop: before I write a feature, I ask how someone would break it. It makes my code boring in the best way. Fewer surprises, fewer late-night fixes.",
   ],
   experience: [
-    { role: "QA Intern / Software Developer", period: "2023-24" },
-    { role: "Freelance Developer", period: "2022-present" },
+    { role: "Junior IT Architect, Prisma International Corporation", period: "2026-present" },
+    { role: "Freelance Software Engineer", period: "2024-25" },
+    { role: "QA Intern / Software Developer, Reed Elsevier PH", period: "2023" },
     { role: "Technical Lead, university projects", period: "2022-24" },
   ],
   education: [
@@ -21,7 +22,10 @@ export const about = {
     { year: "2014", event: "Junior High, Tayug Foundational Academy" },
     { year: "2018", event: "TVL ICT, Panpacific University" },
     { year: "2020", event: "BS Software Engineering, FEU Institute of Technology" },
-    { year: "2022", event: "Freelance developer; technical lead on university projects" },
-    { year: "2023", event: "QA Intern / Software Developer" },
+    { year: "2022", event: "Technical lead on university projects" },
+    { year: "2023", event: "QA Intern / Software Developer, Reed Elsevier PH" },
+    { year: "2024", event: "Freelance Software Engineer" },
+    { year: "2025", event: "Graduated, BS Software Engineering" },
+    { year: "2026", event: "Junior IT Architect, Prisma International Corporation" },
   ],
 };
