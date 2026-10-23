@@ -23,7 +23,7 @@ function Card({ p, i, onOpen }: { p: Project; i: number; onOpen: (el: HTMLElemen
         style={{ background: p.coverBg, color: p.coverFg }}
       >
         {p.cover ? (
-          <Image src={p.cover} alt="" fill sizes="(max-width: 800px) 100vw, 33vw" className="object-cover object-top" />
+          <Image src={p.cover} alt="" fill quality={90} sizes="(max-width: 800px) 100vw, 50vw" className="object-cover object-top" />
         ) : (
           <>
             <b className="display text-[clamp(48px,6vw,84px)] opacity-90">{initials(p.title)}</b>

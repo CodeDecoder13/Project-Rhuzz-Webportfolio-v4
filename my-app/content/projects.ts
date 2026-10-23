@@ -71,7 +71,7 @@ const all: Project[] = [
   },
   {
     slug: "project-airzen",
-    cover: "/assets/webdev/proejct-airzen.png",
+    cover: "/assets/webdev/project-airzen.png",
     title: "Project Airzen",
     category: "Capstone",
     stack: ["Python", "Docker", "Kubernetes", "CodeIgniter", "Flutter"],
