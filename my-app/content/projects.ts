@@ -7,7 +7,6 @@ export type Project = {
   featured?: boolean;
   hidden?: boolean;
   stack: string[];
-  code?: string;
   live?: string;
   cover?: string;
   coverBg: string;
@@ -32,7 +31,6 @@ const all: Project[] = [
     category: "QA",
     featured: true,
     stack: ["Selenium", "C#", "NUnit", "ExtentReports"],
-    code: "https://github.com/CodeDecoder13/Selenium-V.2",
     coverBg: "#1F5FBF",
     coverFg: "#F2F6FB",
     ...placeholder,
@@ -53,7 +51,6 @@ const all: Project[] = [
     title: "Portfolio Website V2",
     category: "Web Dev",
     stack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion", "Supabase"],
-    code: "https://github.com/CodeDecoder13/Project-Webportfolio",
     live: "https://project-rhuzzparamio.vercel.app",
     coverBg: "#DCE8F7",
     coverFg: "#0B1B33",
@@ -75,7 +72,6 @@ const all: Project[] = [
     title: "Project Airzen",
     category: "Capstone",
     stack: ["Python", "Docker", "Kubernetes", "CodeIgniter", "Flutter"],
-    code: "https://github.com/CodeDecoder13/AirZen",
     coverBg: "#0B1B33",
     coverFg: "#8DBBF2",
     ...placeholder,
@@ -86,7 +82,6 @@ const all: Project[] = [
     title: "Portfolio Website V1",
     category: "Web Dev",
     stack: ["HTML", "CSS", "JavaScript"],
-    code: "https://github.com/CodeDecoder13/Project_Rhuzz",
     live: "https://project-rhuzz.vercel.app",
     coverBg: "#B8C7DD",
     coverFg: "#0B1B33",
@@ -132,7 +127,6 @@ const all: Project[] = [
     category: "Web Dev",
     cover: "/assets/webdev/portfolio-v3.png",
     stack: ["Next.js", "TypeScript", "Tailwind", "Motion"],
-    code: "https://github.com/CodeDecoder13/Project-Rhuzz-Webportfolio-v4",
     coverBg: "#0B1B33",
     coverFg: "#8DBBF2",
     ...placeholder,

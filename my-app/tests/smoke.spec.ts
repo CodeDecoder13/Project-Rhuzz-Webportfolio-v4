@@ -87,7 +87,7 @@ test("drawer opens, syncs the URL and closes", async ({ page }) => {
 test("case study route renders and unknown slug does not", async ({ page }) => {
   await page.goto("/projects/project-airzen");
   await expect(page.getByRole("heading", { level: 2, name: "Project Airzen" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Code" })).toHaveAttribute("href", /CodeDecoder13\/AirZen/);
+  await expect(page.getByRole("link", { name: "Code" })).toHaveCount(0);
   await page.goto("/projects/nope");
   await expect(page.getByText("Not found")).toBeVisible();
 });

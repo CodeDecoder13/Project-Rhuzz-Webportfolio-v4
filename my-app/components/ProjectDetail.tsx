@@ -30,11 +30,6 @@ export default function ProjectDetail({ project: p, index }: { project: Project;
         </section>
       ))}
       <p className="mt-6 flex gap-2">
-        {p.code && (
-          <a href={p.code} target="_blank" rel="noopener noreferrer" className={`${link} border-ink text-ink`}>
-            Code
-          </a>
-        )}
         {p.live && (
           <a href={p.live} target="_blank" rel="noopener noreferrer" className={`${link} border-blue bg-blue text-white`}>
             Live demo ↗
