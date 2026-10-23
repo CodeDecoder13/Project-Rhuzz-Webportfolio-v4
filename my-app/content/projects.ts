@@ -142,7 +142,7 @@ const all: Project[] = [
     title: "OmniPOS",
     category: "Web Dev",
     cover: "/assets/webdev/omnipos.png",
-    stack: ["Web App"], // TODO(owner): real stack
+    stack: ["Vue 3", "Laravel 13", "Tailwind"],
     live: "https://omnipos.shop",
     coverBg: "#1F5FBF",
     coverFg: "#F2F6FB",
@@ -153,7 +153,7 @@ const all: Project[] = [
     title: "Whale Wallet",
     category: "Web Dev",
     cover: "/assets/webdev/whalewallet.png",
-    stack: ["Web App"], // TODO(owner): real stack
+    stack: ["Vue 3", "Laravel 13", "Tailwind"],
     live: "https://whale-wallet.cloud",
     coverBg: "#8DBBF2",
     coverFg: "#0B1B33",
