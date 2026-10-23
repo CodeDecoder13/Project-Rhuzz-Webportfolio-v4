@@ -127,6 +127,7 @@ const all: Project[] = [
     category: "Web Dev",
     cover: "/assets/webdev/portfolio-v3.png",
     stack: ["Next.js", "TypeScript", "Tailwind", "Motion"],
+    live: "https://project-rhuzz-graduated-version-production-0689.up.railway.app",
     coverBg: "#0B1B33",
     coverFg: "#8DBBF2",
     ...placeholder,
