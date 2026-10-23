@@ -64,7 +64,7 @@ test("nav links open the dedicated pages", async ({ page }) => {
 test("filter changes the card count", async ({ page }) => {
   await page.goto("/projects");
   const cards = page.locator("#work button[aria-haspopup='dialog']");
-  for (const [filter, count] of [["All", 9], ["Web Dev", 5], ["QA", 3], ["Capstone", 1]] as const) {
+  for (const [filter, count] of [["All", 8], ["Web Dev", 7], ["Capstone", 1]] as const) {
     await page.getByRole("button", { name: filter, exact: true }).click();
     await expect(cards).toHaveCount(count);
   }

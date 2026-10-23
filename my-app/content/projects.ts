@@ -5,6 +5,7 @@ export type Project = {
   title: string;
   category: Category;
   featured?: boolean;
+  hidden?: boolean;
   stack: string[];
   code?: string;
   live?: string;
@@ -23,9 +24,10 @@ const placeholder = {
 };
 
 // Repo URLs marked TODO in the brief are left undefined until the owner confirms them.
-export const projects: Project[] = [
+const all: Project[] = [
   {
     slug: "selenium-test-framework-v2",
+    hidden: true,
     title: "Selenium Test Framework V2",
     category: "QA",
     featured: true,
@@ -37,6 +39,7 @@ export const projects: Project[] = [
   },
   {
     slug: "playwright-e2e-suite",
+    hidden: true,
     title: "Playwright E2E Suite",
     category: "QA",
     stack: ["Playwright", "TypeScript", "GitHub Actions", "Allure"],
@@ -46,6 +49,7 @@ export const projects: Project[] = [
   },
   {
     slug: "portfolio-website-v2",
+    cover: "/assets/webdev/portfolio-v2.png",
     title: "Portfolio Website V2",
     category: "Web Dev",
     stack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion", "Supabase"],
@@ -57,6 +61,7 @@ export const projects: Project[] = [
   },
   {
     slug: "cicd-pipeline-templates",
+    hidden: true,
     title: "CI/CD Pipeline Templates",
     category: "QA",
     stack: ["Jenkins", "GitHub Actions", "Azure DevOps", "Docker", "Bash"],
@@ -66,6 +71,7 @@ export const projects: Project[] = [
   },
   {
     slug: "project-airzen",
+    cover: "/assets/webdev/proejct-airzen.png",
     title: "Project Airzen",
     category: "Capstone",
     stack: ["Python", "Docker", "Kubernetes", "CodeIgniter", "Flutter"],
@@ -76,6 +82,7 @@ export const projects: Project[] = [
   },
   {
     slug: "portfolio-website-v1",
+    cover: "/assets/webdev/portfolio-v1.png",
     title: "Portfolio Website V1",
     category: "Web Dev",
     stack: ["HTML", "CSS", "JavaScript"],
@@ -87,6 +94,8 @@ export const projects: Project[] = [
   },
   {
     slug: "construction-contractors-inc",
+    cover: "/assets/webdev/nexora.png",
+    hidden: true,
     title: "Construction Contractors Inc",
     category: "Web Dev",
     stack: ["Vue 3", "Laravel 12", "Shadcn Vue", "Tailwind", "PostgreSQL"],
@@ -97,6 +106,7 @@ export const projects: Project[] = [
   },
   {
     slug: "devcollab",
+    cover: "/assets/webdev/devcollab.png",
     title: "DevCollab",
     category: "Web Dev",
     stack: ["Vue 3", "Laravel 12", "Shadcn Vue", "Tailwind", "PostgreSQL"],
@@ -107,6 +117,7 @@ export const projects: Project[] = [
   },
   {
     slug: "eagles-fraternal-portal",
+    cover: "/assets/webdev/eagles.png",
     title: "Eagles Fraternal Portal",
     category: "Web Dev",
     stack: ["Vue 3", "Laravel 12", "Shadcn Vue", "Tailwind", "PostgreSQL"],
@@ -115,4 +126,41 @@ export const projects: Project[] = [
     coverFg: "#0B1B33",
     ...placeholder,
   },
+  {
+    slug: "portfolio-website-v3",
+    title: "Portfolio Website V3",
+    category: "Web Dev",
+    cover: "/assets/webdev/portfolio-v3.png",
+    stack: ["Next.js", "TypeScript", "Tailwind", "Motion"],
+    code: "https://github.com/CodeDecoder13/Project-Rhuzz-Webportfolio-v4",
+    coverBg: "#0B1B33",
+    coverFg: "#8DBBF2",
+    ...placeholder,
+  },
+  {
+    slug: "omnipos",
+    title: "OmniPOS",
+    category: "Web Dev",
+    cover: "/assets/webdev/omnipos.png",
+    stack: ["Web App"], // TODO(owner): real stack
+    live: "https://omnipos.shop",
+    coverBg: "#1F5FBF",
+    coverFg: "#F2F6FB",
+    ...placeholder,
+  },
+  {
+    slug: "whale-wallet",
+    title: "Whale Wallet",
+    category: "Web Dev",
+    cover: "/assets/webdev/whalewallet.png",
+    stack: ["Web App"], // TODO(owner): real stack
+    live: "https://whale-wallet.cloud",
+    coverBg: "#8DBBF2",
+    coverFg: "#0B1B33",
+    ...placeholder,
+  },
 ];
+
+// ponytail: hidden projects stay in the file so un-hiding is deleting one line.
+export const projects = all.filter((p) => !p.hidden);
+

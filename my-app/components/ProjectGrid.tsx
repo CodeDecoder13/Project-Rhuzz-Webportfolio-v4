@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { projects, type Project } from "@/content/projects";
 import ProjectDetail, { Tags } from "./ProjectDetail";
 
-const cats = ["All", "Web Dev", "QA", "Capstone"] as const;
+const cats = ["All", ...new Set(projects.map((p) => p.category))];
 // Small labels sit in a chip: the brief's cover colours alone don't reach AA contrast at 12px.
 const chip = "mono absolute rounded-full bg-paper px-2 py-px text-ink";
 const initials = (t: string) => t.split(" ").map((w) => w[0]).slice(0, 3).join("");
@@ -23,7 +23,7 @@ function Card({ p, i, onOpen }: { p: Project; i: number; onOpen: (el: HTMLElemen
         style={{ background: p.coverBg, color: p.coverFg }}
       >
         {p.cover ? (
-          <Image src={p.cover} alt="" fill sizes="(max-width: 800px) 100vw, 33vw" className="object-cover" />
+          <Image src={p.cover} alt="" fill sizes="(max-width: 800px) 100vw, 33vw" className="object-cover object-top" />
         ) : (
           <>
             <b className="display text-[clamp(48px,6vw,84px)] opacity-90">{initials(p.title)}</b>
