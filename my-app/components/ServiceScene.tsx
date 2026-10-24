@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 const INK = "#0B1B33";
 const BLUE = "#1F5FBF";
@@ -55,25 +55,24 @@ function Box({
 }
 
 function Label({
-  x,
+  cx,
   y,
-  w,
   text,
   fill,
   color = INK,
 }: {
-  x: number;
+  cx: number;
   y: number;
-  w: number;
   text: string;
   fill: string;
   color?: string;
 }) {
+  const w = Math.round(text.length * 5.8 + 20);
   return (
     <>
-      <Box x={x} y={y} w={w} h={18} fill={fill} rx={9} sw={2.5} />
+      <Box x={cx - w / 2} y={y} w={w} h={18} fill={fill} rx={9} sw={2.5} />
       <text
-        x={x + w / 2}
+        x={cx}
         y={y + 12.5}
         textAnchor="middle"
         fontSize="9"
@@ -83,6 +82,36 @@ function Label({
       >
         {text}
       </text>
+    </>
+  );
+}
+
+// Items fade in and out one after another (see .sw3 / .sw4 in globals.css); the first one is the static fallback.
+function Swap({
+  items,
+  step = 2,
+  children,
+}: {
+  items: unknown[];
+  step?: number;
+  children: (item: never) => ReactNode;
+}) {
+  return (
+    <>
+      {items.map((item, i) => (
+        <g
+          key={i}
+          className={`sw${items.length}${i === 0 ? " sw-first" : ""}`}
+          style={
+            {
+              animationDelay: `${i * step}s`,
+              animationDuration: `${items.length * step}s`,
+            } as CSSProperties
+          }
+        >
+          {children(item as never)}
+        </g>
+      ))}
     </>
   );
 }
@@ -254,6 +283,82 @@ function Laptop() {
   );
 }
 
+type Icon = "coffee" | "coin" | "clock";
+
+function IconArt({ kind, cx }: { kind: Icon; cx: number }) {
+  if (kind === "coffee")
+    return (
+      <g transform={`translate(${cx - 9} 17)`}>
+        <path
+          className="steam"
+          d="M5 6q-3-3 0-6M10 6q-3-3 0-6"
+          fill="none"
+          stroke={INK}
+          strokeWidth={1.8}
+          strokeLinecap="round"
+        />
+        <path d="M17 11h2a3 3 0 010 7h-2" fill="none" {...thin} />
+        <rect x={0} y={8} width={17} height={14} rx={3} fill="#fff" {...thin} />
+        <path
+          d="M3 13h11"
+          stroke={FAIL}
+          strokeWidth={2}
+          strokeLinecap="round"
+        />
+      </g>
+    );
+  if (kind === "coin")
+    return (
+      <g>
+        <circle cx={cx} cy={28} r={10} fill={YELLOW} {...thin} />
+        <text
+          x={cx}
+          y={32.5}
+          textAnchor="middle"
+          fontSize="12"
+          fontWeight="700"
+          fill={INK}
+          style={MONO}
+        >
+          $
+        </text>
+      </g>
+    );
+  return (
+    <g transform={`translate(${cx} 28)`}>
+      <circle r={10} fill="#fff" {...thin} />
+      <path className="clk" d="M0 0V-6.5" {...thin} strokeWidth={2} />
+      <path d="M0 0H5" {...thin} strokeWidth={2} />
+    </g>
+  );
+}
+
+// Thought cloud: what the character is imagining (coffee, money, time).
+function Thought({ items }: { items: Icon[] }) {
+  const slots = items.length === 3 ? [26, 51, 76] : [34, 68];
+  return (
+    <g className="cloud-float">
+      <g fill="#fff" stroke={INK} strokeWidth={3}>
+        <circle cx={24} cy={28} r={16} />
+        <circle cx={51} cy={22} r={19} />
+        <circle cx={78} cy={28} r={16} />
+        <rect x={24} y={28} width={54} height={16} />
+      </g>
+      <g fill="#fff">
+        <circle cx={24} cy={28} r={14} />
+        <circle cx={51} cy={22} r={17} />
+        <circle cx={78} cy={28} r={14} />
+        <rect x={24} y={26} width={54} height={16} />
+      </g>
+      <circle cx={56} cy={52} r={4} fill="#fff" {...thin} strokeWidth={2} />
+      <circle cx={62} cy={60} r={2.6} fill="#fff" {...thin} strokeWidth={2} />
+      {items.map((k, i) => (
+        <IconArt key={k} kind={k} cx={slots[i]} />
+      ))}
+    </g>
+  );
+}
+
 // Walking, facing right, laptop open in front.
 function Walker() {
   return (
@@ -307,10 +412,22 @@ const code = [
   [0, 36, YELLOW],
 ] as const;
 
+const aiTools = ["CLAUDE CODE", "CODEX", "KIMI", "OLLAMA"];
+const cloudA = [
+  ["RAILWAY", INK, "#fff"],
+  ["VERCEL", "#fff", INK],
+  ["GOOGLE CLOUD", SKY, INK],
+] as const;
+const cloudB = [
+  ["SENTRY", SKY, INK],
+  ["DOCKER", "#fff", INK],
+  ["AZURE", BLUE, "#fff"],
+] as const;
+
 const alt = [
-  "A developer seen from behind, sitting and coding at a monitor, with an AI assistant bot and Claude Code beside it",
-  "A developer seen from behind holding a laptop and watching a presentation that demos bugs and test results",
-  "A developer walking with a laptop past a CI/CD pipeline and cloud platforms",
+  "A developer sitting at a computer, typing code and imagining coffee and money, with an AI assistant that cycles through Claude Code, Codex, Kimi and Ollama",
+  "A developer standing with a laptop, imagining coffee, time and money, while watching a presentation that demos a bug and test results",
+  "A developer pacing with a laptop while a build, test and deploy pipeline runs and cloud platforms drift by",
 ];
 
 export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
@@ -323,7 +440,7 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
         <rect x={132} y={160} width={10} height={70} fill={INK} />
         <rect x={336} y={160} width={10} height={70} fill={INK} />
         <Box x={120} y={150} w={236} h={12} fill={BLUE} rx={3} />
-        {/* monitor: a dark code editor */}
+        {/* monitor: a dark code editor, typed right to left in a loop */}
         <rect x={204} y={130} width={16} height={14} fill={INK} />
         <rect
           x={188}
@@ -346,6 +463,8 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
               fill="#4a6791"
             />
             <rect
+              className="code-ln"
+              style={{ animationDelay: `${i * 0.25}s` }}
               x={172 + indent}
               y={47 + i * 9.5}
               width={len}
@@ -372,7 +491,7 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
           fill="#fff"
           {...thin}
         />
-        {/* AI assistant, Claude Code and Claude AI */}
+        {/* AI assistant that keeps swapping coding agents */}
         <AiBot />
         <path
           d="M296 62l10 18 6-18z"
@@ -392,27 +511,24 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
           fill={BLUE}
           style={MONO}
         >
-          ✦ CLAUDE
+          ✦ AI CODER
         </text>
-        <text
-          x={312}
-          y={51}
-          textAnchor="middle"
-          fontSize="9"
-          fontWeight="700"
-          fill={INK}
-          style={MONO}
-        >
-          CODE
-        </text>
-        <Label
-          x={252}
-          y={186}
-          w={68}
-          text="CLAUDE AI"
-          fill={BLUE}
-          color="#fff"
-        />
+        <Swap items={aiTools}>
+          {(t: string) => (
+            <text
+              x={312}
+              y={52}
+              textAnchor="middle"
+              fontSize="9"
+              fontWeight="700"
+              fill={INK}
+              style={MONO}
+            >
+              {t}
+            </text>
+          )}
+        </Swap>
+        <Label cx={286} y={186} text="CLAUDE AI" fill={BLUE} color="#fff" />
         {/* the coder: same character as the walker, seated and facing the monitor */}
         <rect x={46} y={106} width={10} height={54} rx={4} fill={INK} />
         <Leg d="M70 166h44v48" />
@@ -425,6 +541,7 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
         <g className="t-arm">
           <Arm x1={92} y1={118} x2={146} y2={146} />
         </g>
+        <Thought items={["coffee", "coin"]} />
       </>
     );
   } else if (level === 2) {
@@ -453,10 +570,11 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
         >
           BUG DEMO
         </text>
+        {/* the bug */}
         <circle
           className="b-ring"
           cx={191}
-          cy={94}
+          cy={90}
           r={32}
           fill="none"
           stroke={FAIL}
@@ -466,15 +584,15 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
         <g className="b-bug">
           <g {...line} strokeWidth={2.5}>
             <path
-              d="M176 78l-12-8M176 90h-14M176 102l-12 8M206 78l12-8M206 90h14M206 102l12 8"
+              d="M176 74l-12-8M176 86h-14M176 98l-12 8M206 74l12-8M206 86h14M206 98l12 8"
               fill="none"
             />
-            <ellipse cx={191} cy={94} rx={15} ry={20} fill={FAIL} />
-            <circle cx={191} cy={70} r={8} fill={FAIL} />
-            <path d="M187 62l-5-7M195 62l5-7" fill="none" />
+            <ellipse cx={191} cy={90} rx={15} ry={20} fill={FAIL} />
+            <circle cx={191} cy={66} r={8} fill={FAIL} />
+            <path d="M187 58l-5-7M195 58l5-7" fill="none" />
           </g>
           <path
-            d="M191 78v34"
+            d="M191 74v34"
             stroke="#fff"
             strokeWidth={2}
             strokeLinecap="round"
@@ -482,7 +600,7 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
         </g>
         {/* test results */}
         {[0, 1, 2].map((i) => {
-          const y = 62 + i * 20;
+          const y = 58 + i * 16;
           return (
             <g key={i}>
               {i === 1 ? (
@@ -514,12 +632,13 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
             </g>
           );
         })}
+        {/* bars stand on the baseline */}
         <path d="M168 122h160" stroke={INK} strokeWidth={2} />
-        {[16, 24, 12, 30].map((h, i) => (
+        {[12, 20, 8, 24].map((h, i) => (
           <rect
             key={i}
             x={236 + i * 22}
-            y={136 - h}
+            y={122 - h}
             width={14}
             height={h}
             fill={i === 2 ? FAIL : BLUE}
@@ -541,6 +660,7 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
           <Arm x1={92} y1={118} x2={112} y2={142} />
           <circle cx={150} cy={138} r={5.5} fill={SKIN} {...thin} />
         </g>
+        <Thought items={["coffee", "clock", "coin"]} />
       </>
     );
   } else {
@@ -552,13 +672,13 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
     scene = (
       <>
         <Walker />
-        {/* CI/CD pipeline */}
+        {/* CI/CD pipeline: each stage fills, then ticks off, in a loop */}
         {steps.map(([t, x, fill, color], i) => (
-          <g key={t} className={t === "DEPLOY" ? "d-pulse" : undefined}>
+          <g key={t}>
             <Box x={x} y={10} w={60} h={26} fill={fill} rx={6} sw={2.5} />
             <text
               x={x + 30}
-              y={27}
+              y={25}
               textAnchor="middle"
               fontSize="10"
               fontWeight="700"
@@ -567,6 +687,43 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
             >
               {t}
             </text>
+            <rect
+              x={x + 8}
+              y={29}
+              width={44}
+              height={3}
+              rx={1.5}
+              fill={color === "#fff" ? "#fff" : BLUE}
+              opacity={0.25}
+            />
+            <rect
+              className="pl-bar"
+              style={{ animationDelay: `${i * 1.3}s` }}
+              x={x + 8}
+              y={29}
+              width={44}
+              height={3}
+              rx={1.5}
+              fill={color === "#fff" ? "#fff" : BLUE}
+            />
+            <g className="pl-ok" style={{ animationDelay: `${i * 1.3}s` }}>
+              <circle
+                cx={x + 58}
+                cy={10}
+                r={7}
+                fill="#fff"
+                {...thin}
+                strokeWidth={2}
+              />
+              <path
+                d={`M${x + 54.5} 10l2.5 2.5 4-5`}
+                fill="none"
+                stroke={BLUE}
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </g>
             {i < 2 && (
               <path
                 d={`M${x + 62} 23h16m-5-5l5 5-5 5`}
@@ -577,23 +734,31 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
             )}
           </g>
         ))}
-        {/* cloud platforms */}
-        <g fill="#fff" stroke={INK} strokeWidth={3}>
-          <circle cx={238} cy={104} r={20} />
-          <circle cx={272} cy={86} r={26} />
-          <circle cx={308} cy={102} r={22} />
-          <rect x={238} y={104} width={70} height={20} />
+        {/* cloud platforms: the cloud drifts and the providers swap */}
+        <g className="cloud-drift">
+          <g fill="#fff" stroke={INK} strokeWidth={3}>
+            <circle cx={232} cy={108} r={22} />
+            <circle cx={272} cy={86} r={30} />
+            <circle cx={314} cy={106} r={24} />
+            <rect x={232} y={106} width={82} height={26} />
+          </g>
+          <g fill="#fff">
+            <circle cx={232} cy={108} r={20} />
+            <circle cx={272} cy={86} r={28} />
+            <circle cx={314} cy={106} r={22} />
+            <rect x={232} y={104} width={82} height={29} />
+          </g>
+          <Swap items={[...cloudA]}>
+            {([t, fill, color]: (typeof cloudA)[number]) => (
+              <Label cx={272} y={88} text={t} fill={fill} color={color} />
+            )}
+          </Swap>
+          <Swap items={[...cloudB]}>
+            {([t, fill, color]: (typeof cloudB)[number]) => (
+              <Label cx={272} y={110} text={t} fill={fill} color={color} />
+            )}
+          </Swap>
         </g>
-        <g fill="#fff">
-          <circle cx={238} cy={104} r={18} />
-          <circle cx={272} cy={86} r={24} />
-          <circle cx={308} cy={102} r={20} />
-          <rect x={238} y={102} width={70} height={20} />
-        </g>
-        <Label x={246} y={72} w={54} text="RAILWAY" fill={INK} color="#fff" />
-        <Label x={250} y={96} w={50} text="SENTRY" fill={SKY} />
-        <Label x={196} y={206} w={50} text="VERCEL" fill="#fff" />
-        <Label x={254} y={206} w={52} text="DOCKER" fill="#fff" />
       </>
     );
   }

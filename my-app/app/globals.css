@@ -138,9 +138,6 @@ body {
     transform-origin: 90px 150px;
     animation: pace 5s ease-in-out infinite;
   }
-  .svc:is(:hover, :focus-within) .d-pulse {
-    animation: pulse 0.9s ease-in-out infinite alternate;
-  }
 }
 
 .b-ring {
@@ -201,10 +198,10 @@ body {
     transform: translateX(0) scaleX(1);
   }
   42% {
-    transform: translateX(60px) scaleX(1);
+    transform: translateX(44px) scaleX(1);
   }
   50% {
-    transform: translateX(60px) scaleX(-1);
+    transform: translateX(44px) scaleX(-1);
   }
   92% {
     transform: translateX(0) scaleX(-1);
@@ -213,8 +210,162 @@ body {
     transform: translateX(0) scaleX(1);
   }
 }
-@keyframes pulse {
+
+/* Ambient loops in the "What I do" scenes (no hover needed); reduced motion turns them off. */
+.sw3,
+.sw4 {
+  opacity: 0;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+.sw3 {
+  animation-name: swap3;
+}
+.sw4 {
+  animation-name: swap4;
+}
+.sw-first {
+  opacity: 1;
+}
+@keyframes swap3 {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  4%,
+  29% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  33%,
+  100% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+@keyframes swap4 {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  3%,
+  22% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  25%,
+  100% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* Code is typed in from the right, line by line. */
+.code-ln {
+  transform-box: fill-box;
+  transform-origin: right center;
+  animation: type-rtl 3.6s steps(9) infinite;
+}
+@keyframes type-rtl {
+  0% {
+    transform: scaleX(0);
+  }
+  55%,
+  92% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+.cloud-float {
+  animation: cloud-bob 3.2s ease-in-out infinite alternate;
+}
+@keyframes cloud-bob {
   to {
-    opacity: 0.55;
+    transform: translateY(-3px);
+  }
+}
+.steam {
+  animation: steam 1.6s ease-in-out infinite;
+}
+@keyframes steam {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: translateY(1px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+.clk {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: tick 4s linear infinite;
+}
+@keyframes tick {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cloud-drift {
+  animation: drift 5s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  from {
+    transform: translate(-10px, 2px);
+  }
+  to {
+    transform: translate(10px, -3px);
+  }
+}
+
+/* CI/CD pipeline: stage bar fills, tick pops in, then it resets. */
+.pl-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: pl-fill 5.2s ease-out infinite;
+}
+.pl-ok {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pl-tick 5.2s ease-out infinite;
+  opacity: 0;
+}
+@keyframes pl-fill {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  22%,
+  88% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+@keyframes pl-tick {
+  0%,
+  20% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  28%,
+  88% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
   }
 }
