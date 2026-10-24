@@ -10,7 +10,7 @@ export default function Services() {
         {services.map((s, i) => (
           <div
             key={s.title}
-            className="border-b border-line pb-7 min-[801px]:border-b-0"
+            className="svc border-b border-line pb-7 min-[801px]:border-b-0"
           >
             <div className="mb-5 overflow-hidden rounded-[14px] border-[1.5px] border-ink">
               <ServiceScene level={(i + 1) as 1 | 2 | 3} />

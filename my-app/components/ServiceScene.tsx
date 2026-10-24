@@ -308,7 +308,7 @@ function Laptop() {
 // Walking, facing right, laptop open in front.
 function Walker() {
   return (
-    <>
+    <g className="w-walk">
       <path d="M14 150h18M8 166h24M16 182h16" {...line} />
       <Leg d="M70 160L48 212" />
       <Leg d="M86 160L106 206L108 218" />
@@ -321,7 +321,7 @@ function Walker() {
         <Arm x1={92} y1={118} x2={112} y2={142} />
         <circle cx={150} cy={138} r={5.5} fill={SKIN} {...thin} />
       </g>
-    </>
+    </g>
   );
 }
 
@@ -406,7 +406,14 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
             />
           </g>
         ))}
-        <rect x={238} y={113} width={8} height={9} fill={YELLOW} />
+        <rect
+          className="t-cursor"
+          x={238}
+          y={113}
+          width={8}
+          height={9}
+          fill={YELLOW}
+        />
         <rect
           x={134}
           y={141}
@@ -464,8 +471,12 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
         <Shoe x={64} y={216} />
         <Shoe x={86} y={216} />
         <Torso x={62} y={100} w={48} h={60} back />
-        <BackHead cx={86} cy={76} />
-        <Arm x1={106} y1={116} x2={150} y2={144} />
+        <g className="t-head">
+          <BackHead cx={86} cy={76} />
+        </g>
+        <g className="t-arm">
+          <Arm x1={106} y1={116} x2={150} y2={144} />
+        </g>
       </>
     );
   } else if (level === 2) {
@@ -494,22 +505,33 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
         >
           BUG DEMO
         </text>
-        {/* the bug */}
-        <g {...line} strokeWidth={2.5}>
-          <path
-            d="M176 78l-12-8M176 90h-14M176 102l-12 8M206 78l12-8M206 90h14M206 102l12 8"
-            fill="none"
-          />
-          <ellipse cx={191} cy={94} rx={15} ry={20} fill={FAIL} />
-          <circle cx={191} cy={70} r={8} fill={FAIL} />
-          <path d="M187 62l-5-7M195 62l5-7" fill="none" />
-        </g>
-        <path
-          d="M191 78v34"
-          stroke="#fff"
-          strokeWidth={2}
-          strokeLinecap="round"
+        <circle
+          className="b-ring"
+          cx={191}
+          cy={94}
+          r={32}
+          fill="none"
+          stroke={FAIL}
+          strokeWidth={2.5}
+          strokeDasharray="5 4"
         />
+        <g className="b-bug">
+          <g {...line} strokeWidth={2.5}>
+            <path
+              d="M176 78l-12-8M176 90h-14M176 102l-12 8M206 78l12-8M206 90h14M206 102l12 8"
+              fill="none"
+            />
+            <ellipse cx={191} cy={94} rx={15} ry={20} fill={FAIL} />
+            <circle cx={191} cy={70} r={8} fill={FAIL} />
+            <path d="M187 62l-5-7M195 62l5-7" fill="none" />
+          </g>
+          <path
+            d="M191 78v34"
+            stroke="#fff"
+            strokeWidth={2}
+            strokeLinecap="round"
+          />
+        </g>
         {/* test results */}
         {[0, 1, 2].map((i) => {
           const y = 62 + i * 20;
@@ -563,20 +585,24 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
         <Shoe x={58} y={220} />
         <Shoe x={80} y={220} />
         <Torso x={50} y={100} w={46} h={62} back />
-        <BackHead cx={74} cy={76} />
-        <Arm x1={90} y1={118} x2={104} y2={142} />
-        <g transform="rotate(-8 124 128)">
-          <Box x={104} y={110} w={42} h={30} fill={SKY} rx={3} />
-          <circle
-            cx={125}
-            cy={125}
-            r={4}
-            fill="#fff"
-            stroke={INK}
-            strokeWidth={2}
-          />
+        <g className="b-head">
+          <BackHead cx={74} cy={76} />
         </g>
-        <circle cx={136} cy={142} r={5.5} fill={SKIN} {...thin} />
+        <g className="b-lap">
+          <Arm x1={90} y1={118} x2={104} y2={142} />
+          <g transform="rotate(-8 124 128)">
+            <Box x={104} y={110} w={42} h={30} fill={SKY} rx={3} />
+            <circle
+              cx={125}
+              cy={125}
+              r={4}
+              fill="#fff"
+              stroke={INK}
+              strokeWidth={2}
+            />
+          </g>
+          <circle cx={136} cy={142} r={5.5} fill={SKIN} {...thin} />
+        </g>
       </>
     );
   } else {
@@ -590,7 +616,7 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
         <Walker />
         {/* CI/CD pipeline */}
         {steps.map(([t, x, fill, color], i) => (
-          <g key={t}>
+          <g key={t} className={t === "DEPLOY" ? "d-pulse" : undefined}>
             <Box x={x} y={10} w={60} h={26} fill={fill} rx={6} sw={2.5} />
             <text
               x={x + 30}
