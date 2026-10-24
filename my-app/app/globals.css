@@ -211,21 +211,38 @@ body {
   }
 }
 
-/* Ambient loops in the "What I do" scenes (no hover needed); reduced motion turns them off. */
+/* Everything below plays while the card is hovered or focused; idle cards stay still. */
+.cloud-float {
+  opacity: 0;
+  transform: translateY(6px) scale(0.92);
+  transform-origin: 50px 40px;
+  transition:
+    opacity 0.25s ease-out,
+    transform 0.25s ease-out;
+}
+.svc:is(:hover, :focus-within) .cloud-float {
+  opacity: 1;
+  transform: none;
+}
+.svc:is(:hover, :focus-within) .cloud-bob {
+  animation: cloud-bob 3.2s ease-in-out infinite alternate;
+}
+@keyframes cloud-bob {
+  to {
+    transform: translateY(-3px);
+  }
+}
+
 .sw3,
 .sw4 {
-  opacity: 0;
   animation-iteration-count: infinite;
   animation-fill-mode: both;
 }
-.sw3 {
+.svc:is(:hover, :focus-within) .sw3 {
   animation-name: swap3;
 }
-.sw4 {
+.svc:is(:hover, :focus-within) .sw4 {
   animation-name: swap4;
-}
-.sw-first {
-  opacity: 1;
 }
 @keyframes swap3 {
   0% {
@@ -264,6 +281,8 @@ body {
 .code-ln {
   transform-box: fill-box;
   transform-origin: right center;
+}
+.svc:is(:hover, :focus-within) .code-ln {
   animation: type-rtl 3.6s steps(9) infinite;
 }
 @keyframes type-rtl {
@@ -281,15 +300,10 @@ body {
   }
 }
 
-.cloud-float {
-  animation: cloud-bob 3.2s ease-in-out infinite alternate;
-}
-@keyframes cloud-bob {
-  to {
-    transform: translateY(-3px);
-  }
-}
 .steam {
+  opacity: 0.6;
+}
+.svc:is(:hover, :focus-within) .steam {
   animation: steam 1.6s ease-in-out infinite;
 }
 @keyframes steam {
@@ -306,6 +320,8 @@ body {
 .clk {
   transform-box: fill-box;
   transform-origin: 50% 100%;
+}
+.svc:is(:hover, :focus-within) .clk {
   animation: tick 4s linear infinite;
 }
 @keyframes tick {
@@ -314,7 +330,7 @@ body {
   }
 }
 
-.cloud-drift {
+.svc:is(:hover, :focus-within) .cloud-drift {
   animation: drift 5s ease-in-out infinite alternate;
 }
 @keyframes drift {
@@ -330,13 +346,18 @@ body {
 .pl-bar {
   transform-box: fill-box;
   transform-origin: left center;
-  animation: pl-fill 5.2s ease-out infinite;
+  transform: scaleX(0);
 }
 .pl-ok {
   transform-box: fill-box;
   transform-origin: center;
-  animation: pl-tick 5.2s ease-out infinite;
   opacity: 0;
+}
+.svc:is(:hover, :focus-within) .pl-bar {
+  animation: pl-fill 5.2s ease-out infinite;
+}
+.svc:is(:hover, :focus-within) .pl-ok {
+  animation: pl-tick 5.2s ease-out infinite;
 }
 @keyframes pl-fill {
   0% {

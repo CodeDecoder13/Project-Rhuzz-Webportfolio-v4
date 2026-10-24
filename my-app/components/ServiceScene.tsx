@@ -104,6 +104,7 @@ function Swap({
           className={`sw${items.length}${i === 0 ? " sw-first" : ""}`}
           style={
             {
+              opacity: i === 0 ? 1 : 0,
               animationDelay: `${i * step}s`,
               animationDuration: `${items.length * step}s`,
             } as CSSProperties
@@ -338,23 +339,25 @@ function Thought({ items }: { items: Icon[] }) {
   const slots = items.length === 3 ? [26, 51, 76] : [34, 68];
   return (
     <g className="cloud-float">
-      <g fill="#fff" stroke={INK} strokeWidth={3}>
-        <circle cx={24} cy={28} r={16} />
-        <circle cx={51} cy={22} r={19} />
-        <circle cx={78} cy={28} r={16} />
-        <rect x={24} y={28} width={54} height={16} />
+      <g className="cloud-bob">
+        <g fill="#fff" stroke={INK} strokeWidth={3}>
+          <circle cx={24} cy={28} r={16} />
+          <circle cx={51} cy={22} r={19} />
+          <circle cx={78} cy={28} r={16} />
+          <rect x={24} y={28} width={54} height={16} />
+        </g>
+        <g fill="#fff">
+          <circle cx={24} cy={28} r={14} />
+          <circle cx={51} cy={22} r={17} />
+          <circle cx={78} cy={28} r={14} />
+          <rect x={24} y={26} width={54} height={16} />
+        </g>
+        <circle cx={56} cy={52} r={4} fill="#fff" {...thin} strokeWidth={2} />
+        <circle cx={62} cy={60} r={2.6} fill="#fff" {...thin} strokeWidth={2} />
+        {items.map((k, i) => (
+          <IconArt key={k} kind={k} cx={slots[i]} />
+        ))}
       </g>
-      <g fill="#fff">
-        <circle cx={24} cy={28} r={14} />
-        <circle cx={51} cy={22} r={17} />
-        <circle cx={78} cy={28} r={14} />
-        <rect x={24} y={26} width={54} height={16} />
-      </g>
-      <circle cx={56} cy={52} r={4} fill="#fff" {...thin} strokeWidth={2} />
-      <circle cx={62} cy={60} r={2.6} fill="#fff" {...thin} strokeWidth={2} />
-      {items.map((k, i) => (
-        <IconArt key={k} kind={k} cx={slots[i]} />
-      ))}
     </g>
   );
 }
