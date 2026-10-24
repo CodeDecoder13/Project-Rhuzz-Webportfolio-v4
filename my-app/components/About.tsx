@@ -34,7 +34,26 @@ export default function About({ n }: { n?: string }) {
                   className={`absolute -left-[31px] top-1.5 size-3 rounded-full border-[1.5px] border-ink ${i === about.journey.length - 1 ? "bg-blue" : "bg-card"}`}
                 />
                 <span className="mono text-blue">{j.year}</span>
-                <p className="leading-snug">{j.event}</p>
+                <p className="leading-snug">
+                  {j.event}
+                  {"grad" in j && (
+                    <svg
+                      role="img"
+                      aria-label="Graduation cap"
+                      viewBox="0 0 24 24"
+                      className="ml-2 inline size-6 align-[-5px] text-blue"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M2 9l10-5 10 5-10 5z" />
+                      <path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5" />
+                      <path d="M22 9v6" />
+                    </svg>
+                  )}
+                </p>
               </li>
             ))}
           </ol>

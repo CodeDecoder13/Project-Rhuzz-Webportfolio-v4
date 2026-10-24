@@ -25,7 +25,7 @@ export const about = {
     { year: "2022", event: "Technical lead on university projects" },
     { year: "2023", event: "QA Intern / Software Developer, Reed Elsevier PH" },
     { year: "2024", event: "Freelance Software Engineer" },
-    { year: "2025", event: "Graduated, BS Software Engineering" },
+    { year: "2025", event: "Graduated, BS Software Engineering", grad: true },
     { year: "2026", event: "Junior IT Architect, Prisma International Corporation" },
   ],
 };
