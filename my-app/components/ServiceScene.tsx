@@ -161,9 +161,7 @@ function BackHead({ cx, cy }: { cx: number; cy: number }) {
         fill={SKIN}
         {...thin}
       />
-      <ellipse cx={cx} cy={cy + 4} rx={17} ry={19} fill={SKIN} {...thin} />
-      <path d={`M${cx - 17} ${cy}q-2 14 7 22l5-4v-18z`} fill={INK} />
-      <circle cx={cx + 14} cy={cy + 8} r={4.5} fill={SKIN} {...thin} />
+      <ellipse cx={cx} cy={cy + 4} rx={17} ry={19} fill="#3B2F3A" {...thin} />
       <path
         d={`M${cx - 20} ${cy}q0-24 20-24 q20 0 20 24z`}
         fill={CAP}
@@ -182,20 +180,6 @@ function BackHead({ cx, cy }: { cx: number; cy: number }) {
         fill={BRIM}
         {...thin}
         strokeWidth={1.8}
-      />
-      <circle
-        cx={cx + 13}
-        cy={cy - 12}
-        r={5.5}
-        fill={YELLOW}
-        {...thin}
-        strokeWidth={1.8}
-      />
-      <path
-        d={`M${cx + 11} ${cy - 13.5}v1.5M${cx + 15} ${cy - 13.5}v1.5`}
-        stroke={INK}
-        strokeWidth={1.4}
-        strokeLinecap="round"
       />
       <path d={`M${cx + 16} ${cy - 8}l16 3-2 7-14-2z`} fill={BRIM} {...thin} />
     </g>
@@ -474,20 +458,12 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
           color="#fff"
         />
         {/* the coder, from behind */}
-        <Leg d="M76 184v30" />
-        <Leg d="M98 184v30" />
+        <Leg d="M76 168v46" />
+        <Leg d="M98 168v46" />
+        <rect x={54} y={152} width={64} height={16} rx={6} fill={INK} />
         <Shoe x={64} y={216} />
         <Shoe x={86} y={216} />
         <Torso x={62} y={100} w={48} h={60} back />
-        <rect
-          x={58}
-          y={128}
-          width={56}
-          height={40}
-          rx={9}
-          fill={PANTS}
-          {...line}
-        />
         <BackHead cx={86} cy={76} />
         <Arm x1={106} y1={116} x2={150} y2={144} />
       </>
