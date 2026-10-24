@@ -1,9 +1,6 @@
 import Image from "next/image";
 import { Section } from "./Section";
 
-// TODO(owner): drop a transparent cut-out at public/assets/behind-cutout.png, then set this to its path.
-const photo: string | undefined = undefined;
-
 const icon = "size-9 shrink-0 text-sky";
 const stats = [
   {
@@ -25,33 +22,36 @@ const stats = [
   },
 ];
 
-// Annotation labels around the photo; hidden on mobile where there's no room.
-const tags = [
-  { text: "Test automation", cls: "left-0 top-[34%]", line: "order-last" },
-  { text: "Full-stack builds", cls: "right-0 top-[26%]", line: "" },
-  {
-    text: "CI/CD pipelines",
-    cls: "left-[4%] bottom-[22%]",
-    line: "order-last",
-  },
-  { text: "Bug reports & proof", cls: "right-0 bottom-[16%]", line: "" },
+// Annotation labels; each line runs into the portrait. Hidden on mobile where there's no room.
+const left = [
+  { text: "Test automation", top: "30%", reach: 62 },
+  { text: "CI/CD pipelines", top: "72%", reach: 87 },
 ];
+const right = [
+  { text: "Full-stack builds", top: "24%", reach: 126 },
+  { text: "Bug reports & proof", top: "62%", reach: 76 },
+];
+
+const dot = (
+  <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-ink" />
+);
 
 export default function Manifesto() {
   return (
-    <Section className="bg-ink text-paper">
+    <Section className="bg-[#E4EEFB] bg-[linear-gradient(rgba(11,27,51,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(11,27,51,.05)_1px,transparent_1px)] bg-[size:48px_48px]">
       <p className="mono mb-5">
-        <span className="text-sky">02</span> / Behind the work
+        <span className="text-blue">02</span> / Behind the work
       </p>
       <h2 className="display mb-12 text-[clamp(44px,8.5vw,128px)] leading-[.95]">
         I don&rsquo;t just ship it.
         <br />
-        <span className="text-sky">I prove it works.</span>
+        <span className="text-blue">I prove it works.</span>
       </h2>
-      <div className="grid grid-cols-1 gap-10 min-[801px]:grid-cols-[minmax(0,.9fr)_1.1fr]">
+      <div className="grid grid-cols-1 gap-10 min-[801px]:grid-cols-[minmax(0,.8fr)_1.2fr]">
         <div className="max-w-[46ch] text-lg">
           <p>
-            I&rsquo;m <span className="text-sky">Rhuzzel Paramio</span>, a
+            I&rsquo;m{" "}
+            <span className="font-semibold text-blue">Rhuzzel Paramio</span>, a
             full-stack engineer and QA specialist building web systems that hold
             up after launch.
           </p>
@@ -78,7 +78,7 @@ export default function Manifesto() {
           <p className="mt-5 text-2xl font-bold leading-tight">
             If it can&rsquo;t be tested, it isn&rsquo;t done.
           </p>
-          <ul className="mt-8 divide-y divide-white/20 rounded-2xl border border-white/25 bg-white/5 px-5">
+          <ul className="mt-8 divide-y divide-white/20 rounded-2xl border-[1.5px] border-ink bg-ink px-5 text-paper shadow-[6px_6px_0_var(--blue)]">
             {stats.map((s) => (
               <li key={s.title} className="flex items-center gap-4 py-4">
                 <svg
@@ -103,40 +103,55 @@ export default function Manifesto() {
             ))}
           </ul>
         </div>
-        <div className="relative min-h-[420px] min-[801px]:min-h-[640px]">
+        <div className="relative flex h-[560px] items-end justify-center min-[801px]:h-[820px]">
           <div
             aria-hidden="true"
-            className="display absolute inset-x-0 top-0 select-none bg-[linear-gradient(rgba(242,246,251,.28),rgba(242,246,251,0)_85%)] bg-clip-text text-center text-[clamp(72px,13vw,190px)] leading-[.85] text-transparent"
+            className="display absolute inset-x-0 top-0 select-none bg-[linear-gradient(rgba(31,95,191,.3),rgba(31,95,191,0)_85%)] bg-clip-text text-center text-[clamp(72px,13vw,190px)] leading-[.85] text-transparent"
           >
             Tested.
           </div>
-          {photo ? (
-            <Image
-              src={photo}
-              alt="Rhuzzel Paramio"
-              fill
-              sizes="(max-width: 800px) 100vw, 50vw"
-              className="object-contain object-bottom"
-            />
-          ) : (
-            <div className="absolute inset-x-[12%] bottom-0 top-[22%] grid place-items-center rounded-t-[40%] border-[1.5px] border-dashed border-white/40 text-center">
-              <span className="mono px-6 text-[#9FB4D1]">
-                Photo placeholder
-              </span>
-            </div>
-          )}
-          {tags.map((t) => (
-            <div
-              key={t.text}
-              className={`mono absolute hidden items-center gap-3 min-[801px]:flex ${t.cls}`}
-            >
-              <span>{t.text}</span>
-              <span
-                aria-hidden="true"
-                className={`h-px w-14 bg-paper ${t.line}`}
-              />
-            </div>
-          ))}
+          <div className="relative hidden h-full flex-1 min-[801px]:block">
+            {left.map((t) => (
+              <div
+                key={t.text}
+                style={{ top: t.top }}
+                className="mono absolute inset-x-0 z-[2] flex items-center gap-3"
+              >
+                <span className="shrink-0">{t.text}</span>
+                <span
+                  aria-hidden="true"
+                  style={{ marginRight: -t.reach }}
+                  className="h-px flex-1 bg-ink"
+                />
+                {dot}
+              </div>
+            ))}
+          </div>
+          <Image
+            src="/assets/portrait-crop.png"
+            alt="Rhuzzel Paramio"
+            width={690}
+            height={1452}
+            sizes="(max-width: 800px) 90vw, 400px"
+            className="relative z-[1] h-full w-auto max-w-[90vw] shrink-0 object-contain object-bottom grayscale"
+          />
+          <div className="relative hidden h-full flex-1 min-[801px]:block">
+            {right.map((t) => (
+              <div
+                key={t.text}
+                style={{ top: t.top }}
+                className="mono absolute inset-x-0 z-[2] flex items-center gap-3"
+              >
+                {dot}
+                <span
+                  aria-hidden="true"
+                  style={{ marginLeft: -t.reach }}
+                  className="h-px flex-1 bg-ink"
+                />
+                <span className="shrink-0">{t.text}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </Section>
