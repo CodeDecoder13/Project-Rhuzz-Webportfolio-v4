@@ -149,43 +149,6 @@ function Head({ cx, cy }: { cx: number; cy: number }) {
   );
 }
 
-// Back view, turned slightly to the right so the brim and ear show: he's looking at the screen.
-function BackHead({ cx, cy }: { cx: number; cy: number }) {
-  return (
-    <g>
-      <rect
-        x={cx - 6}
-        y={cy + 10}
-        width={12}
-        height={14}
-        fill={SKIN}
-        {...thin}
-      />
-      <ellipse cx={cx} cy={cy + 4} rx={17} ry={19} fill="#3B2F3A" {...thin} />
-      <path
-        d={`M${cx - 20} ${cy}q0-24 20-24 q20 0 20 24z`}
-        fill={CAP}
-        {...thin}
-      />
-      <path
-        d={`M${cx} ${cy - 24}q2 10 0 24`}
-        fill="none"
-        {...thin}
-        strokeWidth={1.8}
-      />
-      <circle
-        cx={cx}
-        cy={cy - 25}
-        r={2.5}
-        fill={BRIM}
-        {...thin}
-        strokeWidth={1.8}
-      />
-      <path d={`M${cx + 16} ${cy - 8}l16 3-2 7-14-2z`} fill={BRIM} {...thin} />
-    </g>
-  );
-}
-
 function Arm({
   x1,
   y1,
@@ -211,19 +174,7 @@ function Arm({
   );
 }
 
-function Torso({
-  x,
-  y,
-  w,
-  h,
-  back = false,
-}: {
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-  back?: boolean;
-}) {
+function Torso({ x, y, w, h }: { x: number; y: number; w: number; h: number }) {
   return (
     <>
       <rect x={x + 4} y={y + 4} width={w} height={h} rx={9} fill={INK} />
@@ -246,13 +197,11 @@ function Torso({
         {...line}
         strokeWidth={2}
       />
-      {!back && (
-        <path
-          d={`M${x + w / 2 - 5} ${y - 3}v9M${x + w / 2} ${y - 3}v9M${x + w / 2 + 5} ${y - 3}v9`}
-          stroke={INK}
-          strokeWidth={1.4}
-        />
-      )}
+      <path
+        d={`M${x + w / 2 - 5} ${y - 3}v9M${x + w / 2} ${y - 3}v9M${x + w / 2 + 5} ${y - 3}v9`}
+        stroke={INK}
+        strokeWidth={1.4}
+      />
     </>
   );
 }
@@ -464,18 +413,17 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
           fill={BLUE}
           color="#fff"
         />
-        {/* the coder, from behind */}
-        <Leg d="M76 168v46" />
-        <Leg d="M98 168v46" />
-        <rect x={54} y={152} width={64} height={16} rx={6} fill={INK} />
-        <Shoe x={64} y={216} />
-        <Shoe x={86} y={216} />
-        <Torso x={62} y={100} w={48} h={60} back />
+        {/* the coder: same character as the walker, seated and facing the monitor */}
+        <rect x={46} y={106} width={10} height={54} rx={4} fill={INK} />
+        <Leg d="M70 166h44v48" />
+        <Shoe x={102} y={214} />
+        <rect x={52} y={154} width={62} height={14} rx={6} fill={INK} />
+        <Torso x={58} y={100} w={44} h={58} />
         <g className="t-head">
-          <BackHead cx={86} cy={76} />
+          <Head cx={80} cy={76} />
         </g>
         <g className="t-arm">
-          <Arm x1={106} y1={116} x2={150} y2={144} />
+          <Arm x1={92} y1={118} x2={146} y2={146} />
         </g>
       </>
     );
@@ -579,29 +527,19 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
             strokeWidth={2}
           />
         ))}
-        {/* the tester, from behind, laptop in hand */}
+        {/* the tester: same character as the walker, standing and facing the board */}
         <Leg d="M66 160v58" />
         <Leg d="M88 160v58" />
         <Shoe x={58} y={220} />
         <Shoe x={80} y={220} />
-        <Torso x={50} y={100} w={46} h={62} back />
+        <Torso x={54} y={102} w={44} h={62} />
         <g className="b-head">
-          <BackHead cx={74} cy={76} />
+          <Head cx={78} cy={78} />
         </g>
         <g className="b-lap">
-          <Arm x1={90} y1={118} x2={104} y2={142} />
-          <g transform="rotate(-8 124 128)">
-            <Box x={104} y={110} w={42} h={30} fill={SKY} rx={3} />
-            <circle
-              cx={125}
-              cy={125}
-              r={4}
-              fill="#fff"
-              stroke={INK}
-              strokeWidth={2}
-            />
-          </g>
-          <circle cx={136} cy={142} r={5.5} fill={SKIN} {...thin} />
+          <Laptop />
+          <Arm x1={92} y1={118} x2={112} y2={142} />
+          <circle cx={150} cy={138} r={5.5} fill={SKIN} {...thin} />
         </g>
       </>
     );

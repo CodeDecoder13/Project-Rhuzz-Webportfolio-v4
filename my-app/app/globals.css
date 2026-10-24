@@ -107,38 +107,38 @@ body {
 }
 
 /* "What I do" scenes come alive on hover: transform and opacity only. The reduced-motion rule above turns them off. */
-@media (hover: hover) and (pointer: fine) {
-  .svc:hover .t-arm {
-    transform-origin: 106px 116px;
+@media all {
+  .svc:is(:hover, :focus-within) .t-arm {
+    transform-origin: 92px 118px;
     animation: tap 0.12s ease-in-out infinite alternate;
   }
-  .svc:hover .t-head {
-    transform-origin: 86px 92px;
+  .svc:is(:hover, :focus-within) .t-head {
+    transform-origin: 80px 92px;
     animation: nod 0.24s ease-in-out infinite alternate;
   }
-  .svc:hover .t-cursor {
+  .svc:is(:hover, :focus-within) .t-cursor {
     animation: blink 0.8s steps(1) infinite;
   }
-  .svc:hover .b-head {
-    transform-origin: 74px 92px;
+  .svc:is(:hover, :focus-within) .b-head {
+    transform-origin: 78px 92px;
     animation: look 1.4s ease-in-out infinite alternate;
   }
-  .svc:hover .b-lap {
+  .svc:is(:hover, :focus-within) .b-lap {
     animation: bob 0.9s ease-in-out infinite alternate;
   }
-  .svc:hover .b-bug {
+  .svc:is(:hover, :focus-within) .b-bug {
     transform-origin: 191px 94px;
     animation: wiggle 0.3s ease-in-out infinite alternate;
   }
-  .svc:hover .b-ring {
+  .svc:is(:hover, :focus-within) .b-ring {
     transform-origin: 191px 94px;
     animation: ping 1.1s ease-out infinite;
   }
-  .svc:hover .w-walk {
+  .svc:is(:hover, :focus-within) .w-walk {
     transform-origin: 90px 150px;
     animation: pace 5s ease-in-out infinite;
   }
-  .svc:hover .d-pulse {
+  .svc:is(:hover, :focus-within) .d-pulse {
     animation: pulse 0.9s ease-in-out infinite alternate;
   }
 }
