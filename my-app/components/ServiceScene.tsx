@@ -161,7 +161,8 @@ function BackHead({ cx, cy }: { cx: number; cy: number }) {
         fill={SKIN}
         {...thin}
       />
-      <ellipse cx={cx} cy={cy + 4} rx={17} ry={19} fill={INK} {...thin} />
+      <ellipse cx={cx} cy={cy + 4} rx={17} ry={19} fill={SKIN} {...thin} />
+      <path d={`M${cx - 17} ${cy}q-2 14 7 22l5-4v-18z`} fill={INK} />
       <circle cx={cx + 14} cy={cy + 8} r={4.5} fill={SKIN} {...thin} />
       <path
         d={`M${cx - 20} ${cy}q0-24 20-24 q20 0 20 24z`}
@@ -181,6 +182,20 @@ function BackHead({ cx, cy }: { cx: number; cy: number }) {
         fill={BRIM}
         {...thin}
         strokeWidth={1.8}
+      />
+      <circle
+        cx={cx + 13}
+        cy={cy - 12}
+        r={5.5}
+        fill={YELLOW}
+        {...thin}
+        strokeWidth={1.8}
+      />
+      <path
+        d={`M${cx + 11} ${cy - 13.5}v1.5M${cx + 15} ${cy - 13.5}v1.5`}
+        stroke={INK}
+        strokeWidth={1.4}
+        strokeLinecap="round"
       />
       <path d={`M${cx + 16} ${cy - 8}l16 3-2 7-14-2z`} fill={BRIM} {...thin} />
     </g>
