@@ -143,3 +143,13 @@ test("footer lists site links and contact details", async ({ page }) => {
   await expect(footer.getByRole("link", { name: "boyparamio@gmail.com" })).toBeVisible();
   await expect(footer.getByText("Volatile Reaction")).toHaveCount(0);
 });
+
+test("hero has Message and Book me with a hover hint", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("link", { name: "Message", exact: true })).toHaveAttribute("href", "/contact");
+  const tip = page.getByRole("tooltip");
+  await expect(tip).toHaveCSS("opacity", "0");
+  await page.getByRole("link", { name: "Book me" }).hover();
+  await expect(tip).toContainText("schedule a 1:1");
+  await expect(tip).toHaveCSS("opacity", "1");
+});

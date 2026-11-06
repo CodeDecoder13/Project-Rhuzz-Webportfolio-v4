@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { site } from "@/content/site";
 import Marquee from "./Marquee";
 
 export default function Hero() {
@@ -34,6 +36,33 @@ export default function Hero() {
             I build web systems, then try to break them. Shipped with proof that
             they pass.
           </p>
+          <div className="mt-5 flex animate-[rise_.6s_.2s_both] flex-wrap gap-2.5">
+            <Link
+              href="/contact"
+              className="rounded-full border-[1.5px] border-ink bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-paper max-[800px]:[text-shadow:none]"
+            >
+              Message
+            </Link>
+            <span className="group relative">
+              <a
+                href={site.calendly || "/contact"}
+                target={site.calendly ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                aria-describedby="book-tip"
+                className="block rounded-full border-[1.5px] border-ink bg-white px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-ink max-[800px]:[text-shadow:none]"
+              >
+                Book me
+              </a>
+              <span
+                id="book-tip"
+                role="tooltip"
+                className="pointer-events-none absolute bottom-full left-0 z-10 mb-2 w-60 translate-y-1 rounded-[12px] border-[1.5px] border-ink bg-ink px-3.5 py-2.5 text-sm font-medium leading-snug text-paper opacity-0 transition-[opacity,transform] duration-150 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 max-[800px]:[text-shadow:none]"
+              >
+                Want to collaborate, or schedule a 1:1? Pick a time that works
+                for you.
+              </span>
+            </span>
+          </div>
         </div>
         <div className="absolute bottom-[8%] right-[max(32px,6vw)] z-[3] animate-[rise_.6s_.24s_both] rounded-[18px] border-[1.5px] border-ink bg-white px-6 py-4 text-[clamp(20px,2.3vw,34px)] font-semibold leading-[1.1] tracking-[-.02em] shadow-[0_12px_32px_rgba(11,27,51,.18)] max-[800px]:right-4 max-[800px]:bottom-[4%]">
           Full-stack Engineer /<br />
