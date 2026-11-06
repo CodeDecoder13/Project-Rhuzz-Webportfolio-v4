@@ -13,7 +13,7 @@ const layers = [
 
 export default function QaTestingPage() {
   return (
-    <main className="pt-14">
+    <main className="page-in pt-14">
       <Section>
         <SectionHead title="QA & testing" />
         <div className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-3">

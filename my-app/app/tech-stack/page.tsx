@@ -18,7 +18,7 @@ function Dots({ level }: { level: Level }) {
 
 export default function TechStackPage() {
   return (
-    <main className="pt-14">
+    <main className="page-in pt-14">
       <Section>
         <SectionHead title="Tech stack" />
         <p className="mono mb-6 text-muted">Proficiency: ●●● Expert · ●● Advanced · ● Intermediate</p>

@@ -5,7 +5,7 @@ export const metadata: Metadata = { title: "About" };
 
 export default function AboutPage() {
   return (
-    <main className="pt-14">
+    <main className="page-in pt-14">
       <About />
     </main>
   );

@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Contact" };
 
 export default function ContactPage() {
   return (
-    <main className="pt-14">
+    <main className="page-in pt-14">
       <Section>
         <SectionHead title="Contact" />
         <div className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-[1.2fr_1fr]">

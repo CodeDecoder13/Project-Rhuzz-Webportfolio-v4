@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Certifications" };
 
 export default function CertificationsPage() {
   return (
-    <main className="pt-14">
+    <main className="page-in pt-14">
       <Section>
         <SectionHead title="Certifications" />
         <ul className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-3">

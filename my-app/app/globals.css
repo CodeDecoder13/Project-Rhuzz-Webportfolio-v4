@@ -390,3 +390,27 @@ body {
     transform: scale(1);
   }
 }
+
+/* Page entrance: the first screen of an inner page rises in, one block after another. */
+@keyframes page-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+.page-in > section:first-child > *,
+.page-in:not(:has(> section)) > * {
+  animation: page-rise 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+.page-in > section:first-child > :nth-child(2),
+.page-in:not(:has(> section)) > :nth-child(2) {
+  animation-delay: 0.08s;
+}
+.page-in > section:first-child > :nth-child(3),
+.page-in:not(:has(> section)) > :nth-child(3) {
+  animation-delay: 0.16s;
+}
+.page-in > section:first-child > :nth-child(n + 4),
+.page-in:not(:has(> section)) > :nth-child(n + 4) {
+  animation-delay: 0.24s;
+}

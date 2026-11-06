@@ -17,7 +17,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
   const index = projects.findIndex((x) => x.slug === slug);
   if (index < 0) notFound();
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 pb-24 pt-28 min-[801px]:px-8">
+    <main className="page-in mx-auto w-full max-w-3xl px-4 pb-24 pt-28 min-[801px]:px-8">
       <Link href="/projects" className="mono mb-6 inline-block hover:text-blue">
         ← All projects
       </Link>

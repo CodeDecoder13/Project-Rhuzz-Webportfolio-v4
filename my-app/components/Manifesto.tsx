@@ -42,13 +42,13 @@ export default function Manifesto() {
       <p className="mono mb-5">
         <span className="text-blue">02</span> / Behind the work
       </p>
-      <h2 className="display mb-12 text-[clamp(44px,8.5vw,128px)] leading-[.95]">
+      <h2 className="reveal display mb-12 text-[clamp(44px,8.5vw,128px)] leading-[.95]">
         I don&rsquo;t just ship it.
         <br />
         <span className="text-blue">I prove it works.</span>
       </h2>
       <div className="grid grid-cols-1 gap-10 min-[801px]:grid-cols-[minmax(0,.8fr)_1.2fr]">
-        <div className="max-w-[46ch] text-lg">
+        <div className="reveal max-w-[46ch] text-lg">
           <p>
             I&rsquo;m{" "}
             <span className="font-semibold text-blue">Rhuzzel Paramio</span>, a
@@ -103,7 +103,7 @@ export default function Manifesto() {
             ))}
           </ul>
         </div>
-        <div className="relative flex h-[560px] items-end justify-center min-[801px]:h-[820px]">
+        <div className="reveal relative flex h-[560px] items-end justify-center min-[801px]:h-[820px]">
           <div
             aria-hidden="true"
             className="display absolute inset-x-0 top-0 select-none bg-[linear-gradient(rgba(31,95,191,.3),rgba(31,95,191,0)_85%)] bg-clip-text text-center text-[clamp(72px,13vw,190px)] leading-[.85] text-transparent"

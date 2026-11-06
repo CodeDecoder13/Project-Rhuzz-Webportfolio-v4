@@ -9,12 +9,12 @@ export default function ContactSection() {
         <span className="mono">07 /</span>
         <span className="mono">Replies in {site.replyTime}</span>
       </div>
-      <h2 className="display text-[clamp(56px,13vw,200px)]">
+      <h2 className="reveal display text-[clamp(56px,13vw,200px)]">
         Let&apos;s ship
         <br />
         it ↗
       </h2>
-      <p className="my-5">
+      <p className="reveal my-5">
         <Link
           href="/contact"
           className="inline-block rounded-full border-[1.5px] border-ink bg-ink px-[26px] py-3.5 font-mono text-[13px] uppercase tracking-[.06em] text-paper"
@@ -22,7 +22,7 @@ export default function ContactSection() {
           Send a message
         </Link>
       </p>
-      <ul className="mono flex flex-wrap gap-x-6 gap-y-2">
+      <ul className="reveal mono flex flex-wrap gap-x-6 gap-y-2">
         <li>
           <a href={`mailto:${site.email}`}>{site.email}</a>
         </li>

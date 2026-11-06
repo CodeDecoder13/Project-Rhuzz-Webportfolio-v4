@@ -8,9 +8,22 @@ import ProjectDetail, { Tags } from "./ProjectDetail";
 const cats = ["All", ...new Set(projects.map((p) => p.category))];
 // Small labels sit in a chip: the brief's cover colours alone don't reach AA contrast at 12px.
 const chip = "mono absolute rounded-full bg-paper px-2 py-px text-ink";
-const initials = (t: string) => t.split(" ").map((w) => w[0]).slice(0, 3).join("");
+const initials = (t: string) =>
+  t
+    .split(" ")
+    .map((w) => w[0])
+    .slice(0, 3)
+    .join("");
 
-function Card({ p, i, onOpen }: { p: Project; i: number; onOpen: (el: HTMLElement) => void }) {
+function Card({
+  p,
+  i,
+  onOpen,
+}: {
+  p: Project;
+  i: number;
+  onOpen: (el: HTMLElement) => void;
+}) {
   return (
     <button
       type="button"
@@ -23,20 +36,37 @@ function Card({ p, i, onOpen }: { p: Project; i: number; onOpen: (el: HTMLElemen
         style={{ background: p.coverBg, color: p.coverFg }}
       >
         {p.cover ? (
-          <Image src={p.cover} alt="" fill quality={90} sizes="(max-width: 800px) 100vw, 50vw" className="object-cover object-top" />
+          <Image
+            src={p.cover}
+            alt=""
+            fill
+            quality={90}
+            sizes="(max-width: 800px) 100vw, 50vw"
+            className="object-cover object-top"
+          />
         ) : (
           <>
-            <b className="display text-[clamp(48px,6vw,84px)] opacity-90">{initials(p.title)}</b>
-            <span className={chip + " bottom-2.5 right-3"}>image placeholder</span>
+            <b className="display text-[clamp(48px,6vw,84px)] opacity-90">
+              {initials(p.title)}
+            </b>
+            <span className={chip + " bottom-2.5 right-3"}>
+              image placeholder
+            </span>
           </>
         )}
-        <span className={chip + " left-3.5 top-3"}>{String(i + 1).padStart(2, "0")}</span>
+        <span className={chip + " left-3.5 top-3"}>
+          {String(i + 1).padStart(2, "0")}
+        </span>
       </div>
       <div className="px-[18px] pb-[18px] pt-4">
         <h3 className="display text-[26px] leading-[1.05]">{p.title}</h3>
         <div className="mono mb-2.5 mt-1.5 text-muted">
           {p.category}
-          {p.featured && <span className="ml-1.5 rounded-full bg-ink px-2 py-px text-[10px] text-sky">FEATURED</span>}
+          {p.featured && (
+            <span className="ml-1.5 rounded-full bg-ink px-2 py-px text-[10px] text-sky">
+              FEATURED
+            </span>
+          )}
         </div>
         <Tags items={p.stack.slice(0, 4)} />
       </div>
@@ -80,7 +110,11 @@ export default function ProjectGrid() {
 
   return (
     <>
-      <div role="group" aria-label="Filter projects" className="mb-6 flex flex-wrap gap-2">
+      <div
+        role="group"
+        aria-label="Filter projects"
+        className="mb-6 flex flex-wrap gap-2"
+      >
         {cats.map((c) => (
           <button
             key={c}
@@ -94,7 +128,14 @@ export default function ProjectGrid() {
         ))}
       </div>
       <div className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-3">
-        {projects.map((p, i) => (cat === "All" || p.category === cat) && <Card key={p.slug} p={p} i={i} onOpen={(el) => openAt(i, el)} />)}
+        {projects.map(
+          (p, i) =>
+            (cat === "All" || p.category === cat) && (
+              <div key={p.slug} className="reveal">
+                <Card p={p} i={i} onOpen={(el) => openAt(i, el)} />
+              </div>
+            ),
+        )}
       </div>
       {open !== null && (
         <aside
