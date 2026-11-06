@@ -3,11 +3,16 @@ import { Anton, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import Gate from "@/components/Gate";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import RevealRoot from "@/components/RevealRoot";
 import MusicPlayer from "@/components/MusicPlayer";
 import { site } from "@/content/site";
 import "./globals.css";
 
-const anton = Anton({ variable: "--font-anton", subsets: ["latin"], weight: "400" });
+const anton = Anton({
+  variable: "--font-anton",
+  subsets: ["latin"],
+  weight: "400",
+});
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
@@ -22,7 +27,8 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://rhuzz.online"),
   title: {
-    default: "Rhuzzel Paramio — Full-stack Engineer / QA Specialist / AI Engineer",
+    default:
+      "Rhuzzel Paramio — Full-stack Engineer / QA Specialist / AI Engineer",
     template: "%s — Rhuzzel Paramio",
   },
   description:
@@ -52,10 +58,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to projects
         </a>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: personLd }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: personLd }}
+        />
         <Header />
         {children}
         <Footer />
+        <RevealRoot />
         <MusicPlayer />
         <Gate />
       </body>

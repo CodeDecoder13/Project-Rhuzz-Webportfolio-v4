@@ -29,7 +29,7 @@ function Card({
       type="button"
       aria-haspopup="dialog"
       onClick={(e) => onOpen(e.currentTarget)}
-      className="flex flex-col overflow-hidden rounded-2xl border-[1.5px] border-ink bg-card text-left transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--ink)] focus-visible:-translate-y-1 focus-visible:shadow-[6px_6px_0_var(--ink)]"
+      className="flex w-full flex-col overflow-hidden rounded-2xl border-[1.5px] border-ink bg-card text-left transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--ink)] focus-visible:-translate-y-1 focus-visible:shadow-[6px_6px_0_var(--ink)]"
     >
       <div
         className="relative grid aspect-[16/10] place-items-center border-b-[1.5px] border-ink"
@@ -131,7 +131,7 @@ export default function ProjectGrid() {
         {projects.map(
           (p, i) =>
             (cat === "All" || p.category === cat) && (
-              <div key={p.slug} className="reveal">
+              <div key={p.slug} className="reveal flex">
                 <Card p={p} i={i} onOpen={(el) => openAt(i, el)} />
               </div>
             ),
