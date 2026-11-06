@@ -1,25 +1,32 @@
 "use client";
 
-import { animate, inView } from "motion";
+import { animate, inView, stagger } from "motion";
 import { useEffect } from "react";
 
-const from = "perspective(900px) translateY(48px) rotateX(-14deg)";
+const from = "perspective(900px) translateY(44px) rotateX(-12deg)";
 const to = "perspective(900px) translateY(0px) rotateX(0deg)";
+const clear = (el: HTMLElement, props: string[]) =>
+  props.forEach((p) => el.style.removeProperty(p));
 
-// Below-the-fold .reveal elements flip up in 3D as they scroll in. Everything above the fold, and anyone
-// with JS off or reduced motion, just sees the content. ponytail: CSS 3D transforms, not three.js (a canvas for this is overkill).
+// Below-the-fold content arrives like this (motion drives all of it):
+//  .reveal      blocks flip up in 3D on a spring, fading and de-blurring as they land, staggered across a row
+//  [data-split] big headings lift word by word out of a mask
+// Anything already on screen, plus no-JS and reduced-motion visitors, just sees the content.
+// ponytail: CSS 3D transforms, not three.js (a canvas for this is overkill).
 export default function RevealRoot() {
   useEffect(() => {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const armed = new WeakSet<Element>();
     let raf = 0;
+    const offscreen = (el: HTMLElement) => {
+      const r = el.getBoundingClientRect();
+      // Pages the router keeps mounted but hidden have no box yet; they get armed when they show.
+      return !armed.has(el) && (r.width || r.height) && r.top >= innerHeight;
+    };
 
     const arm = () => {
       document.querySelectorAll<HTMLElement>(".reveal").forEach((el) => {
-        const r = el.getBoundingClientRect();
-        // Pages the router keeps mounted but hidden have no box yet; they get armed when they show.
-        if (armed.has(el) || (!r.width && !r.height) || r.top < innerHeight)
-          return;
+        if (!offscreen(el)) return;
         armed.add(el);
         const nth = [...(el.parentElement?.children ?? [])]
           .filter((c) => c.classList.contains("reveal"))
@@ -27,21 +34,47 @@ export default function RevealRoot() {
         el.style.opacity = "0";
         el.style.transform = from;
         el.style.transformOrigin = "50% 100%";
+        el.style.filter = "blur(6px)";
+        inView(
+          el,
+          () => {
+            const delay = (nth % 4) * 0.09;
+            animate(
+              el,
+              { opacity: [0, 1], filter: ["blur(6px)", "blur(0px)"] },
+              { duration: 0.7, delay, ease: "easeOut" },
+            );
+            animate(
+              el,
+              { transform: [from, to] },
+              { type: "spring", duration: 1, bounce: 0.1, delay },
+            ).finished.then(() =>
+              clear(el, ["opacity", "transform", "transform-origin", "filter"]),
+            );
+          },
+          { margin: "0px 0px -8% 0px" },
+        );
+      });
+
+      document.querySelectorAll<HTMLElement>("[data-split]").forEach((el) => {
+        if (!offscreen(el)) return;
+        armed.add(el);
+        const words = [...el.querySelectorAll<HTMLElement>("[data-word]")];
+        words.forEach((w) => (w.style.transform = "translateY(112%)"));
         inView(
           el,
           () => {
             animate(
-              el,
-              { opacity: [0, 1], transform: [from, to] },
+              words,
+              { transform: ["translateY(112%)", "translateY(0%)"] },
               {
-                duration: 0.8,
-                delay: (nth % 3) * 0.08,
-                ease: [0.23, 1, 0.32, 1],
+                type: "spring",
+                duration: 1,
+                bounce: 0.12,
+                delay: stagger(0.08),
               },
             ).finished.then(() =>
-              ["opacity", "transform", "transform-origin"].forEach((p) =>
-                el.style.removeProperty(p),
-              ),
+              words.forEach((w) => clear(w, ["transform"])),
             );
           },
           { margin: "0px 0px -8% 0px" },

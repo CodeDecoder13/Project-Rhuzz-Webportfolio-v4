@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/content/site";
 import BookButton from "./BookButton";
+import HeroMotion from "./HeroMotion";
 import Marquee from "./Marquee";
 
 export default function Hero() {
@@ -13,9 +14,21 @@ export default function Hero() {
       >
         <div
           aria-hidden="true"
-          className="display absolute right-[-1vw] top-[9vh] z-0 select-none bg-[linear-gradient(var(--blue)_10%,rgba(31,95,191,0)_88%)] bg-clip-text leading-[.85] text-transparent [font-size:min(44vw,620px)] max-[800px]:top-[12vh] max-[800px]:[font-size:60vw]"
+          data-ghost
+          className="display absolute right-[-1vw] top-[9vh] z-0 flex select-none leading-[.85] [font-size:min(44vw,620px)] max-[800px]:top-[12vh] max-[800px]:[font-size:60vw]"
         >
-          RP
+          <span
+            data-h="r"
+            className="inline-block bg-[linear-gradient(var(--blue)_10%,rgba(31,95,191,0)_88%)] bg-clip-text text-transparent"
+          >
+            R
+          </span>
+          <span
+            data-h="p"
+            className="inline-block bg-[linear-gradient(var(--blue)_10%,rgba(31,95,191,0)_88%)] bg-clip-text text-transparent"
+          >
+            P
+          </span>
         </div>
         <Image
           src="/assets/rhuzz-cutout.png"
@@ -24,20 +37,27 @@ export default function Hero() {
           height={1207}
           preload
           sizes="(max-width: 800px) 90vw, 50vw"
+          data-h="photo"
           className="relative z-[1] h-[92%] w-auto max-w-[90vw] object-contain object-bottom min-[801px]:max-[1100px]:ml-[24vw]"
         />
         {/* On mobile the text overlaps the photo, so it turns white; the shadow keeps it legible over the light shirt and sky. */}
         <div className="absolute bottom-[20vh] left-[max(32px,6vw)] z-[3] max-w-[min(32ch,30vw)] max-[800px]:bottom-[24vh] max-[800px]:left-4 max-[800px]:max-w-[50vw] max-[800px]:text-white max-[800px]:[text-shadow:0_2px_10px_rgba(11,27,51,.65)] min-[801px]:max-[1100px]:max-w-[27vw]">
-          <h1 className="display animate-[rise_.6s_both] text-[clamp(48px,6.4vw,104px)] min-[801px]:max-[1100px]:text-[6vw]">
+          <h1
+            data-h="left"
+            className="display text-[clamp(48px,6.4vw,104px)] min-[801px]:max-[1100px]:text-[6vw]"
+          >
             Rhuzzel
             <br />
             Paramio
           </h1>
-          <p className="mt-4 animate-[rise_.6s_.12s_both] text-[clamp(16px,1.35vw,20px)] font-semibold">
+          <p
+            data-h="left"
+            className="mt-4 text-[clamp(16px,1.35vw,20px)] font-semibold"
+          >
             I build web systems, then try to break them. Shipped with proof that
             they pass.
           </p>
-          <div className="mt-5 flex animate-[rise_.6s_.2s_both] flex-wrap gap-2.5">
+          <div data-h="left" className="mt-5 flex flex-wrap gap-2.5">
             <Link
               href="/contact"
               className="rounded-full border-[1.5px] border-ink bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-paper max-[800px]:[text-shadow:none]"
@@ -61,13 +81,19 @@ export default function Hero() {
             </span>
           </div>
         </div>
-        <div className="absolute bottom-[8%] right-[max(32px,6vw)] z-[3] animate-[rise_.6s_.24s_both] rounded-[18px] border-[1.5px] border-ink bg-white px-6 py-4 text-[clamp(20px,2.3vw,34px)] font-semibold leading-[1.1] tracking-[-.02em] shadow-[0_12px_32px_rgba(11,27,51,.18)] max-[800px]:right-4 max-[800px]:bottom-[4%]">
+        <div
+          data-h="right"
+          className="absolute bottom-[8%] right-[max(32px,6vw)] z-[3] rounded-[18px] border-[1.5px] border-ink bg-white px-6 py-4 text-[clamp(20px,2.3vw,34px)] font-semibold leading-[1.1] tracking-[-.02em] shadow-[0_12px_32px_rgba(11,27,51,.18)] max-[800px]:right-4 max-[800px]:bottom-[4%]"
+        >
           Full-stack Engineer /<br />
           QA Specialist /<br />
           AI Engineer
         </div>
       </section>
-      <Marquee />
+      <div data-h="up">
+        <Marquee />
+      </div>
+      <HeroMotion />
     </div>
   );
 }

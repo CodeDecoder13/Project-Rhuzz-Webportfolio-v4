@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { ENTER_EVENT } from "./HeroMotion";
 import { PLAY_EVENT } from "./MusicPlayer";
 
 const btn = "rounded-full px-7 py-4 font-mono text-sm tracking-[.06em]";
@@ -28,6 +29,7 @@ export default function Gate() {
       sessionStorage.setItem("gate", "1");
     } catch {}
     if (sound) window.dispatchEvent(new Event(PLAY_EVENT));
+    window.dispatchEvent(new Event(ENTER_EVENT));
     setPhase("out");
     setTimeout(() => {
       setPhase("closed");

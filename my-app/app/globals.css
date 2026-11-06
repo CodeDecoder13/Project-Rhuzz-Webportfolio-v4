@@ -401,3 +401,23 @@ body {
 .page-in:not(:has(> section)) > :nth-child(n + 4) {
   animation-delay: 0.24s;
 }
+
+/* Hero pieces wait invisible until HeroMotion flies them in (it shows them at once for reduced motion). */
+[data-h] {
+  opacity: 0;
+}
+
+/* Inner pages: premium entrance (longer, softer curve, a touch of blur) replacing the first quick rise. */
+@keyframes page-rise {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(24px);
+  }
+}
+.page-in > section:first-child > *,
+.page-in:not(:has(> section)) > * {
+  animation-name: page-rise;
+  animation-duration: 0.9s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
