@@ -170,8 +170,8 @@ test("How I work: tabs switch the track and hovering a step shows its scene", as
   const stage = page.locator("[aria-hidden=true]", { hasText: /Brief #07|Ticket #142/ });
   await expect(stage).toContainText("Brief #07");
   await expect(stage).toContainText("Idle");
-  await page.locator("ol li", { hasText: "Add AI" }).hover();
-  await expect(stage).toContainText("Gemini reads it");
+  await page.locator("ol li", { hasText: "AI-assisted" }).hover();
+  await expect(stage).toContainText("reviewed by me");
   await page.getByRole("tab", { name: "QA Engineer" }).click();
   await expect(stage).toContainText("Ticket #142");
   await page.locator("ol li", { hasText: "In progress" }).hover();

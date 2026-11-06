@@ -439,37 +439,41 @@ const devScenes: ReactNode[] = [
     </div>
   </>,
 
-  // 04 Add AI: a receipt becomes checked data
+  // 04 AI-assisted: Claude Code and Codex speed up the build, I review everything
   <>
-    <Card className="space-y-1">
-      <Label>RECEIPT</Label>
-      <p className="font-mono text-[12px]">Mercury Drug · ₱482.00</p>
+    <Card className="space-y-1.5">
+      <Label>PROMPT</Label>
+      <p className="font-mono text-[12px]">
+        Add the SAVE10 discount to checkout, with tests
+      </p>
     </Card>
-    <motion.div
-      variants={item}
-      className="mono text-center text-[11px] text-blue"
-    >
-      ▼ Gemini reads it
-    </motion.div>
+    <div className="flex items-center gap-2">
+      <Tag>✦ Claude Code</Tag>
+      <Tag>Codex</Tag>
+    </div>
     <motion.div
       variants={item}
       className="rounded-xl border-[1.5px] border-ink bg-ink p-3 font-mono text-[12px] leading-relaxed text-paper shadow-[4px_4px_0_var(--blue)]"
     >
-      <motion.p variants={type}>{'{ merchant: "Mercury Drug",'}</motion.p>
       <motion.p variants={type} className="text-sky">
-        {"  amount: 482 }"}
+        + total = subtotal − discount(code)
+      </motion.p>
+      <motion.p variants={type} className="text-sky">
+        + {`test("applies SAVE10 to the total")`}
       </motion.p>
     </motion.div>
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 1.2, type: "spring", duration: 0.4, bounce: 0.3 }}
+      transition={{ delay: 1.3, type: "spring", duration: 0.4, bounce: 0.3 }}
+      className="flex flex-wrap gap-2"
     >
-      <Tag>checked against your data ✓</Tag>
+      <Tag>reviewed by me ✓</Tag>
+      <Tag>ships faster</Tag>
     </motion.div>
   </>,
 
-  // 05 Ship: CI, then live
+  // 05 Ship: CI, then the right cloud
   <>
     <div className="flex items-center gap-2">
       {["build", "test", "deploy"].map((s, i) => (
@@ -483,19 +487,33 @@ const devScenes: ReactNode[] = [
             className="absolute inset-0 origin-left bg-sky"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ delay: 0.4 + i * 0.5, duration: 0.45, ease }}
+            transition={{ delay: 0.4 + i * 0.45, duration: 0.4, ease }}
           />
         </motion.div>
       ))}
     </div>
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 2, type: "spring", duration: 0.5, bounce: 0.3 }}
-      className="flex gap-2"
-    >
-      <Tag>● live on Railway</Tag>
-      <Tag>rollback: 1 click</Tag>
+    <div className="flex flex-wrap gap-2">
+      {["Railway", "Vercel", "Hostinger", "Google Cloud", "Amazon AWS"].map(
+        (c, i) => (
+          <motion.span
+            key={c}
+            initial={{ opacity: 0, y: 8, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              delay: 1.8 + i * 0.15,
+              type: "spring",
+              duration: 0.45,
+              bounce: 0.3,
+            }}
+            className="mono rounded-full border-[1.5px] border-ink bg-white px-2.5 py-0.5 text-[10px] shadow-[2px_2px_0_var(--ink)]"
+          >
+            ● {c}
+          </motion.span>
+        ),
+      )}
+    </div>
+    <motion.div variants={item} className="mono text-[10px] text-muted">
+      rollback: one click
     </motion.div>
   </>,
 

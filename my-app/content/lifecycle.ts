@@ -22,12 +22,12 @@ export const tracks: Record<
         text: "Vue or Next.js up front, Laravel or Node behind it, typed end to end, in small reviewable commits.",
       },
       {
-        name: "Add AI",
-        text: "Where it earns its place: Gemini assistants, receipt reading, n8n automations. Every answer is checked against real data.",
+        name: "AI-assisted",
+        text: "Claude Code and Codex draft, refactor and write tests so I build faster. I review every line before it ships.",
       },
       {
         name: "Ship",
-        text: "CI runs lint, types and tests, then Railway or Vercel deploys. Rollback is always one click away.",
+        text: "CI runs lint, types and tests, then I deploy to the right cloud: Railway, Vercel, Hostinger, Google Cloud or Amazon.",
       },
       {
         name: "Watch",
