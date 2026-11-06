@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/content/site";
+import BookButton from "./BookButton";
 import Marquee from "./Marquee";
 
 export default function Hero() {
@@ -44,15 +45,11 @@ export default function Hero() {
               Message
             </Link>
             <span className="group relative">
-              <a
-                href={site.calendly || "/contact"}
-                target={site.calendly ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                aria-describedby="book-tip"
+              <BookButton
+                url={site.calendly}
+                describedBy="book-tip"
                 className="block rounded-full border-[1.5px] border-ink bg-white px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-ink max-[800px]:[text-shadow:none]"
-              >
-                Book me
-              </a>
+              />
               <span
                 id="book-tip"
                 role="tooltip"

@@ -7,6 +7,5 @@ export const site = {
   location: "Philippines",
   replyTime: "24-48h",
   cv: "/paramio-rhuzzel-cv-updated.pdf",
-  // Your Calendly event link, e.g. https://calendly.com/<username>/30min. Until it is set, "Book me" opens the contact page.
-  calendly: "" as string,
+  calendly: "https://calendly.com/boyparamio/30min",
 } as const;

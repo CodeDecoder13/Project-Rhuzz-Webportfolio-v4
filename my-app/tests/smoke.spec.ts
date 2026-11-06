@@ -153,3 +153,14 @@ test("hero has Message and Book me with a hover hint", async ({ page }) => {
   await expect(tip).toContainText("schedule a 1:1");
   await expect(tip).toHaveCSS("opacity", "1");
 });
+
+test("Book me opens the Calendly modal and Esc closes it", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "Book me" }).click();
+  const dialog = page.getByRole("dialog", { name: "Book a call" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.locator("iframe")).toHaveAttribute("src", /calendly\.com\/boyparamio\/30min/);
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(page.getByRole("link", { name: "Book me" })).toBeFocused();
+});
