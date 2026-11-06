@@ -21,6 +21,17 @@ const stats = [
   },
 ];
 
+const facts = [
+  [
+    "Now",
+    "Junior IT Architect at Prisma International. Websites, internal tools and n8n automation for global clients.",
+  ],
+  [
+    "Shipped",
+    "OmniPOS (30% faster checkout), Whale Wallet (Gemini receipt reader) and AirZen (ESP32 sensors to a Laravel API).",
+  ],
+];
+
 // Annotation labels; each line runs into the portrait. Hidden on mobile where there's no room.
 const left = [
   { text: "Test automation", top: "30%", reach: 62 },
@@ -44,7 +55,7 @@ export default function Manifesto() {
       </p>
       <h2
         data-split
-        className="display mb-6 text-[clamp(40px,min(6.4vw,8.5svh),104px)] leading-[.95] min-[801px]:mb-8"
+        className="display mb-6 text-[clamp(40px,min(6.4vw,7.5svh),104px)] leading-[.95] min-[801px]:mb-8"
       >
         {["I don’t just ship it.", "I prove it works."].map((line, li) => (
           <span key={li} className={`block ${li ? "text-blue" : ""}`}>
@@ -83,6 +94,14 @@ export default function Manifesto() {
               If it can&rsquo;t be tested, it isn&rsquo;t done.
             </p>
           </div>
+          <dl className="mt-4 space-y-2 border-t border-ink/20 pt-3 text-[clamp(12px,1.6svh,14px)] leading-snug">
+            {facts.map(([k, v]) => (
+              <div key={k} className="flex gap-3">
+                <dt className="mono w-16 shrink-0 pt-0.5 text-blue">{k}</dt>
+                <dd>{v}</dd>
+              </div>
+            ))}
+          </dl>
           <ul className="mt-4 grid grid-cols-1 divide-y divide-white/20 rounded-2xl border-[1.5px] border-ink bg-ink px-4 text-paper shadow-[6px_6px_0_var(--blue)]">
             {stats.map((s) => (
               <li key={s.title} className="flex items-center gap-3 py-2">
