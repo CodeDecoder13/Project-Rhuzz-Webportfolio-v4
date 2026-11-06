@@ -7,7 +7,7 @@ import {
   type Variants,
 } from "motion/react";
 import type { ReactNode } from "react";
-import { lifecycle } from "@/content/lifecycle";
+import { tracks, type Track } from "@/content/lifecycle";
 import HowCover from "./HowCover";
 
 // One bug ticket (#142) travels through all six steps. Each scene is a short, single-idea animation.
@@ -82,7 +82,7 @@ function Tag({
   );
 }
 
-const scenes: ReactNode[] = [
+const qaScenes: ReactNode[] = [
   // 01 New: the bug lands and gets written down
   <>
     <Card>
@@ -327,6 +327,222 @@ const scenes: ReactNode[] = [
   </>,
 ];
 
+const mono = { fontFamily: "var(--font-jetbrains-mono)" };
+
+const devScenes: ReactNode[] = [
+  // 01 Discover: the problem and the person
+  <>
+    <Card>
+      <Label>BRIEF #07</Label>
+      <b className="text-[15px] leading-tight">Split bills with friends</b>
+    </Card>
+    <Card className="space-y-1.5">
+      {[
+        "Who: students sharing rent",
+        "Pain: nobody knows who owes what",
+        "Win: settle up in two taps",
+      ].map((t) => (
+        <motion.p key={t} variants={type} className="font-mono text-[12px]">
+          {t}
+        </motion.p>
+      ))}
+    </Card>
+    <div className="flex gap-2">
+      <Tag>user</Tag>
+      <Tag>problem</Tag>
+      <Tag>success</Tag>
+    </div>
+  </>,
+
+  // 02 Design: the data model and the API, before code
+  <>
+    <Card>
+      <Label>DATA MODEL</Label>
+      <svg
+        viewBox="0 0 300 64"
+        className="mt-1 w-full"
+        fill="none"
+        stroke="#0B1B33"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      >
+        {[
+          ["users", 8],
+          ["bills", 110],
+          ["splits", 212],
+        ].map(([t, x], i) => (
+          <motion.g
+            key={t}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.1 + i * 0.18,
+              type: "spring",
+              duration: 0.5,
+              bounce: 0.2,
+            }}
+          >
+            <rect
+              x={x as number}
+              y="14"
+              width="80"
+              height="36"
+              rx="6"
+              fill="#fff"
+            />
+            <text
+              x={(x as number) + 40}
+              y="37"
+              textAnchor="middle"
+              fontSize="12"
+              fontWeight="700"
+              fill="#0B1B33"
+              stroke="none"
+              style={mono}
+            >
+              {t}
+            </text>
+          </motion.g>
+        ))}
+        {[88, 190].map((x, i) => (
+          <motion.path
+            key={x}
+            d={`M${x} 32H${x + 22}`}
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ delay: 0.45 + i * 0.18, duration: 0.3 }}
+          />
+        ))}
+      </svg>
+    </Card>
+    <div className="flex gap-2">
+      <Tag>GET /bills</Tag>
+      <Tag>POST /splits</Tag>
+    </div>
+  </>,
+
+  // 03 Build: three typed layers
+  <>
+    {[
+      ["UI", "Vue 3 / Next.js"],
+      ["API", "Laravel / Node"],
+      ["DB", "PostgreSQL"],
+    ].map(([k, v]) => (
+      <Card key={k} className="flex items-center justify-between py-2.5">
+        <span className="display text-[22px] leading-none text-blue">{k}</span>
+        <span className="mono text-[11px]">{v}</span>
+      </Card>
+    ))}
+    <div className="flex gap-2">
+      <Tag>typed end to end</Tag>
+      <Tag>small commits</Tag>
+    </div>
+  </>,
+
+  // 04 Add AI: a receipt becomes checked data
+  <>
+    <Card className="space-y-1">
+      <Label>RECEIPT</Label>
+      <p className="font-mono text-[12px]">Mercury Drug · ₱482.00</p>
+    </Card>
+    <motion.div
+      variants={item}
+      className="mono text-center text-[11px] text-blue"
+    >
+      ▼ Gemini reads it
+    </motion.div>
+    <motion.div
+      variants={item}
+      className="rounded-xl border-[1.5px] border-ink bg-ink p-3 font-mono text-[12px] leading-relaxed text-paper shadow-[4px_4px_0_var(--blue)]"
+    >
+      <motion.p variants={type}>{'{ merchant: "Mercury Drug",'}</motion.p>
+      <motion.p variants={type} className="text-sky">
+        {"  amount: 482 }"}
+      </motion.p>
+    </motion.div>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 1.2, type: "spring", duration: 0.4, bounce: 0.3 }}
+    >
+      <Tag>checked against your data ✓</Tag>
+    </motion.div>
+  </>,
+
+  // 05 Ship: CI, then live
+  <>
+    <div className="flex items-center gap-2">
+      {["build", "test", "deploy"].map((s, i) => (
+        <motion.div
+          key={s}
+          variants={item}
+          className="relative flex-1 overflow-hidden rounded-xl border-[1.5px] border-ink bg-white px-2 py-3 text-center shadow-[3px_3px_0_var(--ink)]"
+        >
+          <span className="mono relative z-10 text-[11px]">{s}</span>
+          <motion.span
+            className="absolute inset-0 origin-left bg-sky"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.4 + i * 0.5, duration: 0.45, ease }}
+          />
+        </motion.div>
+      ))}
+    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 2, type: "spring", duration: 0.5, bounce: 0.3 }}
+      className="flex gap-2"
+    >
+      <Tag>● live on Railway</Tag>
+      <Tag>rollback: 1 click</Tag>
+    </motion.div>
+  </>,
+
+  // 06 Watch: logs and real usage feed the next fix
+  <>
+    <Card>
+      <Label>REQUESTS · LAST 24H</Label>
+      <svg
+        viewBox="0 0 300 70"
+        className="mt-1 w-full"
+        fill="none"
+        stroke="#1F5FBF"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <motion.path
+          d="M6 52 L46 44 L86 48 L126 30 L166 36 L206 20 L246 26 L294 12"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 1.1, ease, delay: 0.2 }}
+        />
+        <motion.circle
+          cx="294"
+          cy="12"
+          r="5"
+          fill="#1F5FBF"
+          stroke="none"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{
+            delay: 1.2,
+            type: "spring",
+            duration: 0.4,
+            bounce: 0.5,
+          }}
+        />
+      </svg>
+    </Card>
+    <div className="flex flex-wrap gap-2">
+      <Tag>error spotted</Tag>
+      <Tag>fixed ✓</Tag>
+      <Tag>next: iterate</Tag>
+    </div>
+  </>,
+];
+
 function Cover() {
   return (
     <>
@@ -351,7 +567,15 @@ function Cover() {
 }
 
 // active === null is the idle cover; nothing advances on its own, the visitor drives it.
-export default function HowStage({ active }: { active: number | null }) {
+export default function HowStage({
+  track,
+  active,
+}: {
+  track: Track;
+  active: number | null;
+}) {
+  const steps = tracks[track].steps;
+  const scenes = track === "qa" ? qaScenes : devScenes;
   const reduce = useReducedMotion();
   return (
     <div
@@ -359,7 +583,7 @@ export default function HowStage({ active }: { active: number | null }) {
       className="flex h-full flex-col overflow-hidden rounded-[16px] border-[1.5px] border-ink bg-[#E4EEFB] bg-[linear-gradient(rgba(11,27,51,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(11,27,51,.05)_1px,transparent_1px)] bg-[size:24px_24px] shadow-[8px_8px_0_var(--blue)]"
     >
       <div className="flex shrink-0 items-center justify-between border-b-[1.5px] border-ink bg-white px-4 py-2">
-        <span className="mono">Ticket #142</span>
+        <span className="mono">{tracks[track].ticket}</span>
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
             key={active ?? "idle"}
@@ -369,14 +593,14 @@ export default function HowStage({ active }: { active: number | null }) {
             transition={{ duration: 0.2, ease }}
             className="mono rounded-full bg-ink px-2.5 py-px text-sky"
           >
-            {active === null ? "Idle" : lifecycle[active].name}
+            {active === null ? "Idle" : steps[active].name}
           </motion.span>
         </AnimatePresence>
       </div>
       <div className="relative min-h-0 flex-1">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
-            key={active ?? "cover"}
+            key={`${track}-${active ?? "cover"}`}
             variants={scene}
             initial={reduce ? false : "hidden"}
             animate="show"
@@ -390,7 +614,7 @@ export default function HowStage({ active }: { active: number | null }) {
         </AnimatePresence>
       </div>
       <div className="flex shrink-0 gap-1.5 border-t-[1.5px] border-ink bg-white px-4 py-2.5">
-        {lifecycle.map((s, i) => (
+        {steps.map((s, i) => (
           <span key={s.name} className="h-1.5 flex-1 rounded-full bg-ink/15">
             <span
               className={`block h-full rounded-full bg-blue transition-[width] duration-300 ease-out ${active !== null && i <= active ? "w-full" : "w-0"}`}
