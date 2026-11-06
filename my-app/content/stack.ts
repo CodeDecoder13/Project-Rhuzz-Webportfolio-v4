@@ -1,15 +1,87 @@
 export type Level = "Expert" | "Advanced" | "Intermediate";
 
-// Owner to confirm per-skill levels; default is Advanced.
-const g = (names: string[], level: Level = "Advanced") => names.map((name) => ({ name, level }));
+// Source: Paramio_cv-updated.pdf. Owner to confirm per-skill levels; default is Advanced.
+const g = (names: string[], level: Level = "Advanced") =>
+  names.map((name) => ({ name, level }));
 
 export const stack = [
-  { group: "Frontend", skills: g(["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "HTML5/CSS3"]) },
-  { group: "Backend", skills: g(["Node.js", "Laravel", ".NET", "Prisma", "Express.js", "GraphQL"]) },
-  { group: "Database", skills: g(["PostgreSQL", "MySQL", "Supabase", "MongoDB", "Redis"]) },
-  { group: "QA & DevOps", skills: g(["Selenium", "Playwright", "Jenkins", "Azure DevOps", "GitHub Actions", "Docker", "Git", "Jira"]) },
   {
-    group: "Other tools",
-    skills: g(["VS Code", "Postman", "Figma", "Notion", "Slack", "npm", "pnpm", "Vercel", "Netlify", "Linux", "REST", "WebSockets", "OAuth", "JWT", "Agile/Scrum"]),
+    group: "Languages",
+    skills: g([
+      "PHP",
+      "TypeScript",
+      "JavaScript",
+      "C#",
+      "Python",
+      "Java",
+      "C++",
+    ]),
+  },
+  {
+    group: "Frontend",
+    skills: g([
+      "Vue 3",
+      "React",
+      "Next.js",
+      "Angular",
+      "Tailwind CSS",
+      "Bootstrap",
+      "Inertia.js",
+      "HTML/CSS",
+    ]),
+  },
+  {
+    group: "Backend & data",
+    skills: g([
+      "Laravel",
+      "Node.js (Express)",
+      ".NET",
+      "PostgreSQL",
+      "MySQL",
+      "Drizzle ORM",
+      "Prisma",
+    ]),
+  },
+  {
+    group: "AI & automation",
+    skills: g([
+      "Google Gemini API",
+      "LLM integration",
+      "AI receipt reading",
+      "AI chat assistants",
+      "n8n",
+      "Zapier",
+      "Twilio",
+      "Claude Code",
+      "ChatGPT",
+      "Gemini",
+      "Grok",
+    ]),
+  },
+  {
+    group: "QA & DevOps",
+    skills: g([
+      "Selenium (C#)",
+      "Playwright (C#)",
+      "Jenkins",
+      "JMeter",
+      "Postman",
+      "Azure DevOps",
+      "Git",
+      "GitHub",
+      "Bitbucket",
+      "Railway",
+    ]),
+  },
+  {
+    group: "CMS & tools",
+    skills: g([
+      "WordPress",
+      "Elementor",
+      "Forminator",
+      "Figma",
+      "Jira",
+      "Tauri",
+    ]),
   },
 ];

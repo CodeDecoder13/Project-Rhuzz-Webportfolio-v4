@@ -20,10 +20,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  // ponytail: domain unconfirmed (brief: rhuzz.online), update when final
   metadataBase: new URL("https://rhuzz.online"),
   title: {
-    default: "Rhuzzel Paramio — Full-stack Engineer / QA Specialist",
+    default: "Rhuzzel Paramio — Full-stack Engineer / QA Specialist / AI Engineer",
     template: "%s — Rhuzzel Paramio",
   },
   description:

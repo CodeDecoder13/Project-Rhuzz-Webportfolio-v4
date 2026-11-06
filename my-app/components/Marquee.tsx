@@ -1,4 +1,4 @@
-const items = "Next.js ✦ Vue 3 ✦ Laravel ✦ .NET ✦ Playwright ✦ Selenium ✦ Docker ✦ PostgreSQL ✦ GitHub Actions ✦ ";
+const items = "Next.js ✦ Vue 3 ✦ Laravel ✦ .NET ✦ Playwright ✦ Selenium ✦ Docker ✦ PostgreSQL ✦ GitHub Actions ✦ n8n ✦ Gemini ✦ ";
 
 export default function Marquee() {
   return (

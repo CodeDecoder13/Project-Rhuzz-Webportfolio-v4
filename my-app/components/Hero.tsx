@@ -31,12 +31,14 @@ export default function Hero() {
             Paramio
           </h1>
           <p className="mt-4 animate-[rise_.6s_.12s_both] text-[clamp(16px,1.35vw,20px)] font-semibold">
-            I build web systems, then try to break them. Shipped with proof that they pass.
+            I build web systems, then try to break them. Shipped with proof that
+            they pass.
           </p>
         </div>
         <div className="absolute bottom-[8%] right-[max(32px,6vw)] z-[3] animate-[rise_.6s_.24s_both] rounded-[18px] border-[1.5px] border-ink bg-white px-6 py-4 text-[clamp(20px,2.3vw,34px)] font-semibold leading-[1.1] tracking-[-.02em] shadow-[0_12px_32px_rgba(11,27,51,.18)] max-[800px]:right-4 max-[800px]:bottom-[4%]">
           Full-stack Engineer /<br />
-          QA Specialist
+          QA Specialist /<br />
+          AI Engineer
         </div>
       </section>
       <Marquee />

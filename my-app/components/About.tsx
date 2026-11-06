@@ -21,6 +21,8 @@ export default function About({ n }: { n?: string }) {
           </div>
           <div className="mono mb-2 mt-7">How I work with people</div>
           <Tags items={about.softSkills} />
+          <div className="mono mb-2 mt-5">Languages</div>
+          <Tags items={about.languages} />
           <div className="mono mb-2 mt-5">Beyond code</div>
           <Tags items={about.interests} />
         </div>
@@ -57,6 +59,45 @@ export default function About({ n }: { n?: string }) {
               </li>
             ))}
           </ol>
+        </div>
+      </div>
+
+      <h3 className="display mb-4 mt-12 text-[clamp(32px,4vw,48px)]">
+        Experience
+      </h3>
+      <div className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-2">
+        {about.experience.map((e) => (
+          <div key={e.role} className={`${card} reveal`}>
+            <div className="mono text-blue">{e.period}</div>
+            <h4 className="mt-1 text-xl font-bold leading-tight">{e.role}</h4>
+            <p className="mono mb-3 mt-1 text-muted">{e.org}</p>
+            <ul className="list-disc space-y-1.5 pl-5 text-muted marker:text-blue">
+              {e.points.map((p) => (
+                <li key={p}>{p}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 grid grid-cols-1 gap-4 min-[801px]:grid-cols-2">
+        <div className={card}>
+          <div className="mono mb-3">Education</div>
+          <ul className="space-y-2">
+            {about.education.map((e) => (
+              <li key={e.school}>
+                <b>{e.program}</b>, {e.school} · {e.period}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className={card}>
+          <div className="mono mb-3">Leadership</div>
+          <ul className="list-disc space-y-1.5 pl-5 marker:text-blue">
+            {about.leadership.map((l) => (
+              <li key={l}>{l}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </Section>

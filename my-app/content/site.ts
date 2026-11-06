@@ -1,6 +1,6 @@
 export const site = {
   name: "Rhuzzel Paramio",
-  role: "Full-stack Engineer / QA Specialist",
+  role: "Full-stack Engineer / QA Specialist / AI Engineer",
   email: "boyparamio@gmail.com",
   github: "https://github.com/CodeDecoder13",
   linkedin: "https://linkedin.com/in/rhuzz-6904b7187",

@@ -71,10 +71,14 @@ const all: Project[] = [
     cover: "/assets/webdev/project-airzen.png",
     title: "Project Airzen",
     category: "Capstone",
-    stack: ["Python", "Docker", "Kubernetes", "CodeIgniter", "Flutter"],
+    stack: ["Laravel", "Vue", "PostgreSQL", "ESP32", "Railway"],
     coverBg: "#0B1B33",
     coverFg: "#8DBBF2",
-    ...placeholder,
+    problem:
+      "Indoor air quality is invisible without sensors and a clear way to read them.",
+    solution:
+      "Rebuilt my college thesis into a live web app: ESP32 sensors (temperature, humidity, CO, CO2, dust) post to a Laravel API that computes AQI with the EPA breakpoint formula and returns recommendations on a gauge dashboard.",
+    result: "Deployed on a custom domain on Railway.",
   },
   {
     slug: "portfolio-website-v1",
@@ -137,25 +141,49 @@ const all: Project[] = [
     title: "OmniPOS",
     category: "Web Dev",
     cover: "/assets/webdev/omnipos.png",
-    stack: ["Vue 3", "Laravel 13", "Tailwind"],
+    stack: [
+      "Laravel 12",
+      "Vue 3",
+      "TypeScript",
+      "Inertia.js",
+      "Tailwind CSS",
+      "PostgreSQL",
+    ],
     live: "https://omnipos.shop",
     coverBg: "#1F5FBF",
     coverFg: "#F2F6FB",
-    ...placeholder,
+    problem:
+      "Several businesses and branches needed one POS without sharing data, staff or subscriptions.",
+    solution:
+      "A multi-tenant platform with tenant-isolated architecture, a real-time POS interface, inventory and branch management, role-based access control, shift management, reporting dashboards and a Kitchen Display System.",
+    result: "Cut checkout time by about 30%.",
   },
   {
     slug: "whale-wallet",
     title: "Whale Wallet",
     category: "Web Dev",
     cover: "/assets/webdev/whalewallet.png",
-    stack: ["Vue 3", "Laravel 13", "Tailwind"],
+    stack: [
+      "Laravel 13",
+      "Vue 3",
+      "TypeScript",
+      "Inertia.js",
+      "Tailwind CSS 4",
+      "PostgreSQL",
+      "Google Gemini",
+      "Railway",
+    ],
     live: "https://whale-wallet.cloud",
     coverBg: "#8DBBF2",
     coverFg: "#0B1B33",
-    ...placeholder,
+    problem:
+      "Filipino users struggle to see how much they can safely spend before payday.",
+    solution:
+      "A finance app that forecasts balances from bills, subscriptions and spending. A Google Gemini assistant logs expenses, reads GCash, Maya and bank receipts and edits bills by chat, with every quoted figure checked against the user's data.",
+    result:
+      "A daily safe-to-spend amount until payday. Secured with two-factor authentication and passkeys, a REST API for a companion mobile app, about 250 PHPUnit tests, deployed on Railway.",
   },
 ];
 
 // ponytail: hidden projects stay in the file so un-hiding is deleting one line.
 export const projects = all.filter((p) => !p.hidden);
-
