@@ -1,26 +1,26 @@
 import type { CSSProperties, ReactNode } from "react";
 
-const INK = "#0B1B33";
-const BLUE = "#1F5FBF";
-const SKY = "#8DBBF2";
+export const INK = "#0B1B33";
+export const BLUE = "#1F5FBF";
+export const SKY = "#8DBBF2";
 const FAIL = "#b04129";
 const SKIN = "#F8C9B0";
 const CAP = "#E8DCC4";
 const BRIM = "#D2C197";
-const YELLOW = "#F6E65A";
+export const YELLOW = "#F6E65A";
 const BLUSH = "#F08C6B";
-const PANTS = "#17325c";
+export const PANTS = "#17325c";
 const MONO = { fontFamily: "var(--font-jetbrains-mono)" };
-const line = {
+export const line = {
   stroke: INK,
   strokeWidth: 3,
   strokeLinejoin: "round" as const,
   strokeLinecap: "round" as const,
 };
-const thin = { ...line, strokeWidth: 2.5 };
+export const thin = { ...line, strokeWidth: 2.5 };
 
 // Flat fills, thick ink outlines and hard offset shadows: the same neo-brutalist language as the site.
-function Box({
+export function Box({
   x,
   y,
   w,
@@ -118,7 +118,7 @@ function Swap({
 }
 
 // Front view: cap with a smiley, blush and a flat profile.
-function Head({ cx, cy }: { cx: number; cy: number }) {
+export function Head({ cx, cy }: { cx: number; cy: number }) {
   return (
     <g>
       <rect
@@ -179,7 +179,7 @@ function Head({ cx, cy }: { cx: number; cy: number }) {
   );
 }
 
-function Arm({
+export function Arm({
   x1,
   y1,
   x2,
@@ -204,7 +204,17 @@ function Arm({
   );
 }
 
-function Torso({ x, y, w, h }: { x: number; y: number; w: number; h: number }) {
+export function Torso({
+  x,
+  y,
+  w,
+  h,
+}: {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}) {
   return (
     <>
       <rect x={x + 4} y={y + 4} width={w} height={h} rx={9} fill={INK} />
@@ -236,7 +246,7 @@ function Torso({ x, y, w, h }: { x: number; y: number; w: number; h: number }) {
   );
 }
 
-function Leg({ d }: { d: string }) {
+export function Leg({ d }: { d: string }) {
   return (
     <>
       <path
@@ -259,7 +269,7 @@ function Leg({ d }: { d: string }) {
   );
 }
 
-function Shoe({ x, y }: { x: number; y: number }) {
+export function Shoe({ x, y }: { x: number; y: number }) {
   return (
     <rect x={x} y={y} width={26} height={10} rx={5} fill="#fff" {...thin} />
   );

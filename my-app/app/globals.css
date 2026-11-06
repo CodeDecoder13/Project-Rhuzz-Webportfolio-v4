@@ -421,3 +421,21 @@ body {
   animation-duration: 0.9s;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* "How I work" cover: the developer keeps typing while the panel is idle (reduced motion turns it off). */
+.cv-arm {
+  transform-origin: 92px 118px;
+  animation: tap 0.14s ease-in-out infinite alternate;
+}
+.cv-head {
+  transform-origin: 80px 92px;
+  animation: nod 0.9s ease-in-out infinite alternate;
+}
+.cv-ln {
+  transform-box: fill-box;
+  transform-origin: right center;
+  animation: type-rtl 3.6s steps(9) infinite;
+}
+.cv-cursor {
+  animation: blink 0.8s steps(1) infinite;
+}

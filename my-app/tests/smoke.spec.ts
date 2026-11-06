@@ -164,3 +164,15 @@ test("Book me opens the Calendly modal and Esc closes it", async ({ page }) => {
   await expect(dialog).toBeHidden();
   await expect(page.getByRole("link", { name: "Book me" })).toBeFocused();
 });
+
+test("How I work: hovering a step shows its ticket scene", async ({ page }) => {
+  await page.goto("/");
+  const stage = page.locator("[aria-hidden=true]", { hasText: "Ticket #142" });
+  await expect(stage).toContainText("Idle");
+  await expect(stage).toContainText("Hover a step");
+  await page.locator("ol li", { hasText: "In progress" }).hover();
+  await expect(stage).toContainText("In progress");
+  await expect(stage).toContainText("applies SAVE10");
+  await page.mouse.move(2, 2);
+  await expect(stage).toContainText("Idle");
+});
