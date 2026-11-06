@@ -781,7 +781,7 @@ export default function ServiceScene({ level }: { level: 1 | 2 | 3 }) {
       viewBox="0 0 360 240"
       role="img"
       aria-label={alt[level - 1]}
-      className="block h-auto w-full"
+      className="block h-auto w-full min-[801px]:h-full"
     >
       <rect width="360" height="240" fill="#DCE8F7" />
       <path d="M0 230H360" {...line} />

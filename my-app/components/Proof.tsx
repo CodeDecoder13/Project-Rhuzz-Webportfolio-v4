@@ -4,9 +4,9 @@ import TestReport from "./TestReport";
 
 export default function Proof() {
   return (
-    <Section id="proof">
+    <Section id="proof" fit>
       <SectionHead n="05" title="Proof" />
-      <p className="reveal mb-8 max-w-[52ch] text-lg text-muted">
+      <p className="reveal mb-[clamp(10px,2.6svh,28px)] max-w-[52ch] text-[clamp(14px,2svh,18px)] text-muted">
         A sample run from my own test suite. The failures stay on the page,
         because finding them is the job.
       </p>
@@ -23,7 +23,7 @@ export default function Proof() {
             {certs.map((c) => (
               <li
                 key={c.name}
-                className="flex items-baseline justify-between gap-4 border-t border-line py-3 first:border-t-0 first:pt-0"
+                className="flex items-baseline justify-between gap-4 border-t border-line py-[clamp(5px,1.3svh,12px)] first:border-t-0 first:pt-0"
               >
                 <b className="font-semibold">{c.name}</b>
                 <span className="mono shrink-0 text-muted">

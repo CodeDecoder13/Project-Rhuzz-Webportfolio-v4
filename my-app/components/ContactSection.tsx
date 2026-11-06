@@ -4,12 +4,12 @@ import { Section } from "./Section";
 
 export default function ContactSection() {
   return (
-    <Section id="contact" className="bg-sky">
+    <Section id="contact" fit className="bg-sky">
       <div className="mb-8 flex flex-wrap items-baseline gap-4">
         <span className="mono">07 /</span>
         <span className="mono">Replies in {site.replyTime}</span>
       </div>
-      <h2 className="reveal display text-[clamp(56px,13vw,200px)]">
+      <h2 className="reveal display text-[clamp(56px,min(13vw,19svh),200px)]">
         Let&apos;s ship
         <br />
         it ↗

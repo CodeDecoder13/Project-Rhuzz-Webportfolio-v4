@@ -16,7 +16,7 @@ export default function Home() {
       <Services />
       <Lifecycle />
       <Proof />
-      <About n="06" />
+      <About n="06" compact />
       <ContactSection />
     </main>
   );

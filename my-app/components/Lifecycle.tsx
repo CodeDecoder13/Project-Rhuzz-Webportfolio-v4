@@ -12,13 +12,13 @@ export default function Lifecycle() {
   const list = useRef<HTMLOListElement>(null);
 
   return (
-    <Section>
+    <Section fit>
       <SectionHead n="04" title="How I work" />
       <div
         onPointerLeave={(e) => e.pointerType === "mouse" && setActive(null)}
         className="grid gap-5 min-[801px]:grid-cols-2 min-[801px]:items-start min-[801px]:gap-12"
       >
-        <div className="sticky top-[72px] z-[4] h-[212px] min-[801px]:top-24 min-[801px]:order-last min-[801px]:h-[min(660px,80svh)]">
+        <div className="sticky top-[72px] z-[4] h-[212px] min-[801px]:top-28 min-[801px]:order-last min-[801px]:h-[min(660px,calc(100svh-290px))]">
           <HowStage active={active} />
         </div>
         <ol
@@ -41,16 +41,16 @@ export default function Lifecycle() {
                   setActive(null)
                 }
                 onClick={() => setActive(i)}
-                className="reveal relative cursor-default pb-4 outline-none last:pb-0"
+                className="reveal relative cursor-default pb-[clamp(4px,1svh,14px)] outline-none last:pb-0"
               >
                 <span
                   aria-hidden="true"
-                  className={`absolute -left-[31px] top-7 size-3 rounded-full border-[1.5px] border-ink transition-colors duration-200 min-[801px]:-left-[47px] ${on ? "bg-blue" : "bg-paper"}`}
+                  className={`absolute -left-[31px] top-[clamp(16px,3svh,30px)] size-3 rounded-full border-[1.5px] border-ink transition-colors duration-200 min-[801px]:-left-[47px] ${on ? "bg-blue" : "bg-paper"}`}
                 />
                 <div
-                  className={`flex items-start gap-5 rounded-[14px] border-[1.5px] p-5 transition-[transform,box-shadow,border-color] duration-200 ease-out active:scale-[.99] min-[801px]:p-6 ${last ? "bg-sky" : "bg-card"} ${on ? "-translate-y-0.5 border-blue shadow-[6px_6px_0_var(--ink)]" : "border-ink"}`}
+                  className={`flex items-start gap-5 rounded-[14px] border-[1.5px] p-[clamp(8px,1.5svh,22px)] transition-[transform,box-shadow,border-color] duration-200 ease-out active:scale-[.99] ${last ? "bg-sky" : "bg-card"} ${on ? "-translate-y-0.5 border-blue shadow-[6px_6px_0_var(--ink)]" : "border-ink"}`}
                 >
-                  <b className="display text-[40px] min-[801px]:text-[56px]">
+                  <b className="display text-[clamp(24px,5svh,52px)] leading-none">
                     {String(i + 1).padStart(2, "0")}
                   </b>
                   <div>
@@ -58,7 +58,9 @@ export default function Lifecycle() {
                       {step.name}
                       {last && " ✓"}
                     </h3>
-                    <p className="mt-1.5 text-ink/80">{step.text}</p>
+                    <p className="mt-1 text-[clamp(12px,1.75svh,16px)] leading-snug text-ink/80">
+                      {step.text}
+                    </p>
                   </div>
                 </div>
               </li>
