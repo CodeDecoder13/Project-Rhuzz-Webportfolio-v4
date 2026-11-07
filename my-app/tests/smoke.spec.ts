@@ -140,7 +140,7 @@ test("contact chat greets and streams the reply", async ({ page }) => {
     }),
   );
   await page.goto("/contact");
-  await expect(page.getByRole("log")).toContainText("AI assistant");
+  await expect(page.getByRole("log")).toContainText("I'm Rhuzz");
   await page.getByLabel("Message", { exact: true }).fill("What does he do?");
   await page.getByRole("button", { name: "Send", exact: true }).click();
   await expect(page.getByRole("log")).toContainText("What does he do?");
