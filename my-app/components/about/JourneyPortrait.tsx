@@ -10,7 +10,7 @@ import {
 import Image from "next/image";
 import { useEffect } from "react";
 
-// The card's background. At rest: picture 2 as a faint blue silhouette on the right edge. While the card is hovered
+// The card's background, the whole photo (not cropped) pinned to the right edge at full card height. At rest: picture 2 as a faint blue silhouette on the right edge. While the card is hovered
 // (or tapped), picture 1 opens over it in full colour from the face outward. Both fade into the card on the text side.
 // Web-sized copies of the originals in /public/assets/about.
 export default function JourneyPortrait({ meet }: { meet: boolean }) {
@@ -32,7 +32,7 @@ export default function JourneyPortrait({ meet }: { meet: boolean }) {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-y-0 right-0 w-[52%] [mask-image:linear-gradient(to_left,#000_55%,transparent_100%)] max-[800px]:w-full max-[800px]:opacity-30"
+      className="pointer-events-none absolute inset-y-0 right-0 aspect-[2/3] h-full [mask-image:linear-gradient(to_left,#000_62%,transparent_100%)] max-[800px]:aspect-auto max-[800px]:w-full max-[800px]:opacity-30"
     >
       <Image
         src="/assets/about/picture-2-web.jpg"
@@ -41,7 +41,7 @@ export default function JourneyPortrait({ meet }: { meet: boolean }) {
         height={1798}
         quality={85}
         sizes="(max-width: 800px) 100vw, 40vw"
-        className="absolute inset-0 size-full object-cover object-top grayscale contrast-125"
+        className="absolute inset-0 size-full object-cover grayscale contrast-125"
       />
       <div className="absolute inset-0 bg-blue mix-blend-multiply" />
       <div className="absolute inset-0 bg-white/45" />
@@ -53,7 +53,7 @@ export default function JourneyPortrait({ meet }: { meet: boolean }) {
           height={1798}
           quality={85}
           sizes="(max-width: 800px) 100vw, 40vw"
-          className="size-full object-cover object-top"
+          className="size-full object-cover"
         />
       </motion.div>
     </div>

@@ -194,7 +194,7 @@ export function LeadershipJourney() {
       >
         <JourneyPortrait meet={meet} />
         <div className="mono relative mb-4 text-blue">The road so far</div>
-        <div className="relative min-[801px]:max-w-[58%]">
+        <div className="relative min-[801px]:max-w-[62%]">
           <ol className="space-y-1">
             {about.journey.map((j) => (
               <li
