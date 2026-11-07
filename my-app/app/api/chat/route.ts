@@ -70,7 +70,7 @@ export async function POST(req: Request) {
       parts: [{ text: m.content }],
     }));
 
-  const model = process.env.GEMINI_MODEL || "gemini-3.8-flash";
+  const model = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
   const up = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`,
     {
@@ -83,16 +83,22 @@ export async function POST(req: Request) {
         generationConfig: {
           temperature: 0.6,
           maxOutputTokens: 500,
-          thinkingConfig: { thinkingBudget: 0 },
         },
       }),
+      signal: AbortSignal.timeout(25_000),
     },
   ).catch(() => null);
-  if (!up?.ok || !up.body)
+  if (!up?.ok || !up.body) {
+    console.error(
+      "[chat] upstream",
+      up?.status,
+      await up?.text().catch(() => ""),
+    );
     return Response.json(
       { error: "The assistant is unavailable right now." },
       { status: 502 },
     );
+  }
 
   const enc = new TextEncoder();
   const dec = new TextDecoder();
