@@ -4,8 +4,8 @@ import { projects } from "@/content/projects";
 import { certs } from "@/content/certs";
 import AboutMotion from "./AboutMotion";
 
-// Placeholder: the home-page cut-out until the owner supplies an about-page portrait.
-export const aboutPhoto = "/assets/rhuzz-cutout.png";
+// Half-body crop (head to hips) of About_me_nobg.png at its native 920x1330, so it stays sharp.
+export const aboutPhoto = "/assets/about-half.png";
 
 const ghost =
   "bg-[linear-gradient(var(--blue)_10%,rgba(31,95,191,0)_88%)] bg-clip-text text-transparent";
@@ -27,7 +27,7 @@ export default function AboutHero() {
       </noscript>
       <div
         data-a="tag"
-        className="mono absolute right-[max(16px,5vw)] top-24 z-[3] flex items-center gap-2 rounded-full border-[1.5px] border-ink bg-white px-3.5 py-1.5"
+        className="mono absolute right-[max(16px,5vw)] top-24 z-[3] max-[800px]:left-4 max-[800px]:right-auto max-[800px]:top-[74px] flex items-center gap-2 rounded-full border-[1.5px] border-ink bg-white px-3.5 py-1.5"
       >
         <span aria-hidden="true" className="size-2 rounded-full bg-blue" />
         Open to opportunities
@@ -49,9 +49,10 @@ export default function AboutHero() {
           data-a="photo"
           src={aboutPhoto}
           alt="Rhuzzel Paramio in a black blazer and navy tie"
-          width={696}
-          height={1207}
+          width={920}
+          height={1330}
           preload
+          quality={90}
           sizes="(max-width: 800px) 80vw, 45vw"
           className="relative z-[1] h-[84svh] w-auto max-w-[88vw] object-contain object-bottom max-[800px]:h-[46svh]"
         />
