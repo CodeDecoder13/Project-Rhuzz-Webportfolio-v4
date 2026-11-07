@@ -33,6 +33,9 @@ export const metadata: Metadata = {
   },
   description:
     "Portfolio of Rhuzzel Paramio: web systems built, then broken, then shipped with proof that they pass.",
+  alternates: { canonical: "./" }, // each page names itself as the canonical URL so Google indexes one version
+  // Search Console "HTML tag" verification: set GOOGLE_SITE_VERIFICATION to the content="..." value it gives you.
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
 };
 
 const personLd = JSON.stringify({
