@@ -19,7 +19,10 @@ export async function POST(req: Request) {
       fields: z.flattenError(parsed.error).fieldErrors,
     });
   const { name, role, email, website } = parsed.data;
-  if (website) return Response.json({ ok: true }); // honeypot: pretend success, send nothing
+  if (website) {
+    console.warn("[cv] honeypot hit, nothing sent");
+    return Response.json({ ok: true }); // honeypot: pretend success, send nothing
+  }
 
   const bad = await checkEmail(email);
   if (bad) return fail(bad, 400, { fields: { email: [bad] } });

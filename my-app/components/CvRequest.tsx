@@ -64,7 +64,7 @@ export default function CvRequest({
       role: String(f.get("role") ?? ""),
       email: String(f.get("email") ?? ""),
       consent: f.get("consent") === "on",
-      website: String(f.get("website") ?? ""),
+      website: String(f.get("hp_trap") ?? ""),
     };
     const parsed = cvSchema.safeParse(data);
     if (!parsed.success) {
@@ -228,7 +228,7 @@ export default function CvRequest({
                   <div aria-hidden="true" className="absolute -left-[9999px]">
                     <input
                       type="text"
-                      name="website"
+                      name="hp_trap"
                       tabIndex={-1}
                       autoComplete="off"
                     />
