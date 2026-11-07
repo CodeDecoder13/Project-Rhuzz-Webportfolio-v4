@@ -183,7 +183,7 @@ export function LeadershipJourney() {
       </div>
 
       <div
-        className={card}
+        className={`${card} relative overflow-hidden`}
         onPointerEnter={(e) => e.pointerType === "mouse" && setMeet(true)}
         onPointerLeave={(e) => e.pointerType === "mouse" && setMeet(false)}
         onClick={(e) =>
@@ -192,8 +192,9 @@ export function LeadershipJourney() {
           setMeet((m) => !m)
         }
       >
-        <div className="mono mb-4 text-blue">The road so far</div>
-        <div className="grid grid-cols-1 gap-5 min-[801px]:grid-cols-[1fr_minmax(0,.62fr)]">
+        <JourneyPortrait meet={meet} />
+        <div className="mono relative mb-4 text-blue">The road so far</div>
+        <div className="relative min-[801px]:max-w-[58%]">
           <ol className="space-y-1">
             {about.journey.map((j) => (
               <li
@@ -225,7 +226,6 @@ export function LeadershipJourney() {
               </li>
             ))}
           </ol>
-          <JourneyPortrait meet={meet} />
         </div>
       </div>
     </div>
