@@ -1,5 +1,6 @@
+import { after } from "next/server";
 import { z } from "zod";
-import { sendCv } from "@/lib/cvMail";
+import { notifyOwner, sendCv } from "@/lib/cvMail";
 import { checkEmail } from "@/lib/emailCheck";
 import { allow } from "@/lib/rateLimit";
 import { cvSchema } from "@/lib/validators";
@@ -40,5 +41,6 @@ export async function POST(req: Request) {
       err,
       err.includes("not configured") || err.includes("missing") ? 500 : 502,
     );
+  after(() => notifyOwner({ name, role, email })); // sent once the response is out
   return Response.json({ ok: true });
 }

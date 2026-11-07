@@ -86,12 +86,11 @@ function ownerHtml({ name, role, email }: Req, when: string) {
   );
 }
 
-// Emails the CV to the visitor, then tells Rhuzzel. Returns an error message, or null on success.
+// Emails the CV to the visitor. Returns an error message, or null on success.
 export async function sendCv(r: Req) {
   const { RESEND_API_KEY, CONTACT_TO } = process.env;
   if (!RESEND_API_KEY || !CONTACT_TO)
     return "Resume emails are not configured.";
-  const resend = new Resend(RESEND_API_KEY);
   let pdf: Buffer;
   try {
     pdf = await readFile(CV_PATH);
@@ -99,33 +98,51 @@ export async function sendCv(r: Req) {
     console.error("[cv] cannot read", CV_PATH);
     return "The resume file is missing on the server.";
   }
-  const { error } = await resend.emails.send({
+  const { error } = await new Resend(RESEND_API_KEY).emails.send({
     from: from(),
     to: r.email,
     replyTo: CONTACT_TO,
     subject: `${site.name}: resume`,
     html: visitorHtml(r),
-    text: `Hi ${r.name.split(" ")[0]},\n\nThanks for stopping by. My resume is attached as a PDF.\n\nBook a call: ${site.calendly}\nPortfolio: ${base}\n\n${site.name}\n${site.role}`,
+    text: `Hi ${r.name.split(" ")[0]},
+
+Thanks for stopping by. My resume is attached as a PDF.
+
+Book a call: ${site.calendly}
+Portfolio: ${base}
+
+${site.name}
+${site.role}`,
     attachments: [{ filename: "Rhuzzel-Paramio-Resume.pdf", content: pdf }],
   });
-  if (error)
+  if (error) {
+    console.error("[cv] resend", error.name, error.message);
     return "Could not send the email. Please check the address and try again.";
-  // The visitor already has the resume; a failed heads-up to me must not turn that into an error.
+  }
+  return null;
+}
+
+// Heads-up to Rhuzzel about who took the resume. Run after the response (see the route) so the visitor isn't kept waiting;
+// a failure here must never affect them, so it only logs.
+export async function notifyOwner(r: Req) {
+  const { RESEND_API_KEY, CONTACT_TO } = process.env;
+  if (!RESEND_API_KEY || !CONTACT_TO) return;
   const when =
     new Date().toLocaleString("en-PH", {
       timeZone: "Asia/Manila",
       dateStyle: "medium",
       timeStyle: "short",
     }) + " (PH time)";
-  await resend.emails
-    .send({
-      from: from(),
-      to: CONTACT_TO,
-      replyTo: r.email,
-      subject: `[CV] ${r.name} (${r.role}) got your resume`,
-      html: ownerHtml(r, when),
-      text: `${r.name} requested your resume.\nRole: ${r.role}\nEmail: ${r.email}\nWhen: ${when}`,
-    })
-    .catch(() => null);
-  return null;
+  const { error } = await new Resend(RESEND_API_KEY).emails.send({
+    from: from(),
+    to: CONTACT_TO,
+    replyTo: r.email,
+    subject: `[CV] ${r.name} (${r.role}) got your resume`,
+    html: ownerHtml(r, when),
+    text: `${r.name} requested your resume.
+Role: ${r.role}
+Email: ${r.email}
+When: ${when}`,
+  });
+  if (error) console.error("[cv] owner notice", error.name, error.message);
 }
