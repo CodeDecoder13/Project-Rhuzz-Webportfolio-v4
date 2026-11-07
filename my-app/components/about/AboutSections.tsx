@@ -1,13 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { about } from "@/content/about";
 import { projects } from "@/content/projects";
 import { site } from "@/content/site";
 import { tracks } from "@/content/lifecycle";
 import BookButton from "../BookButton";
 import HowCover from "../HowCover";
-import { Tags } from "../ProjectDetail";
 import { Section, SectionHead, card } from "../Section";
+import { FocusItem } from "./AboutFocus";
+import { ExperienceExplorer, TimelineCards } from "./ExperienceExplorer";
+import ProcessList from "./ProcessList";
+import QuoteCard from "./QuoteCard";
+import SkillsPanel from "./SkillsPanel";
 
 const pill =
   "mono inline-block rounded-full border-[1.5px] border-ink px-5 py-2.5 transition-transform duration-150 ease-out active:scale-[.97]";
@@ -39,7 +42,7 @@ export function ProjectTeasers() {
       </div>
       <ul className="grid grid-cols-1 gap-5 min-[801px]:grid-cols-3">
         {list.map((p, i) => (
-          <li key={p.slug} className="reveal">
+          <FocusItem key={p.slug} slug={p.slug}>
             <Link
               href={`/projects/${p.slug}`}
               className="group block overflow-hidden rounded-2xl border-[1.5px] border-ink bg-card transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--ink)] focus-visible:-translate-y-1 focus-visible:shadow-[6px_6px_0_var(--ink)]"
@@ -76,7 +79,7 @@ export function ProjectTeasers() {
                 </span>
               </div>
             </Link>
-          </li>
+          </FocusItem>
         ))}
       </ul>
     </Section>
@@ -93,157 +96,36 @@ const icons: Record<string, string> = {
   Watch:
     "M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6z",
 };
-const skills = [
-  "Laravel",
-  "Vue 3",
-  "Next.js",
-  "TypeScript",
-  "Tailwind CSS",
-  "PostgreSQL",
-  "Selenium (C#)",
-  "Playwright (C#)",
-  "Jenkins",
-  "n8n",
-  "Google Gemini API",
-  "Railway",
-];
 
-// 02 Education and skills, work process, and a quote: the reference's three-column band, in neo-brutalist cards.
+// 02 Education and skills, work process, and a quote: three cards that respond to hover, tap and scroll.
 export function Profile() {
-  const steps = tracks.dev.steps;
   return (
     <Section>
       <div className="grid grid-cols-1 gap-5 min-[801px]:grid-cols-[1fr_1.15fr_.85fr]">
         <div className={card}>
-          <h2 className="display mb-4 text-[clamp(28px,3vw,40px)]">
-            Education &amp; skills
-          </h2>
-          <div className="mono mb-2 text-blue">Education</div>
-          <ul className="space-y-3">
-            {about.education.slice(0, 2).map((e) => (
-              <li
-                key={e.school}
-                className="flex items-baseline justify-between gap-3 border-b border-line pb-3"
-              >
-                <span>
-                  <b className="block leading-snug">{e.program}</b>
-                  <span className="text-muted">{e.school}</span>
-                </span>
-                <span className="mono shrink-0">{e.period}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mono mb-2 mt-5 text-blue">Skills</div>
-          <Tags items={skills} />
-          <div className="mono mb-2 mt-5 text-blue">Languages</div>
-          <Tags items={about.languages} />
+          <SkillsPanel />
         </div>
-
         <div className={card}>
           <h2 className="display mb-4 text-[clamp(28px,3vw,40px)]">
             Work process
           </h2>
-          <ol className="relative space-y-4">
-            <span
-              aria-hidden="true"
-              className="absolute bottom-6 left-[19px] top-6 w-px bg-ink/25"
-            />
-            {steps.map((s, i) => (
-              <li key={s.name} className="relative flex gap-4">
-                <span className="relative z-[1] grid size-10 shrink-0 place-items-center rounded-full border-[1.5px] border-ink bg-white">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    className="size-[18px] text-blue"
-                  >
-                    <path d={icons[s.name]} />
-                  </svg>
-                </span>
-                <div>
-                  <h3 className="mono">
-                    <span className="text-blue">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>{" "}
-                    · {s.name}
-                  </h3>
-                  <p className="text-[15px] leading-snug text-muted">
-                    {s.text.split(/(?<=\.)\s/)[0]}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
+          <ProcessList steps={tracks.dev.steps} icons={icons} />
         </div>
-
-        <figure className="reveal flex flex-col justify-between rounded-[14px] border-[1.5px] border-ink bg-blue p-[clamp(16px,3svh,32px)] text-white shadow-[6px_6px_0_var(--ink)]">
-          <span
-            aria-hidden="true"
-            className="display text-[96px] leading-[.6] text-sky"
-          >
-            &ldquo;
-          </span>
-          <blockquote className="display text-[clamp(30px,3.4vw,46px)] leading-[1.02]">
-            If it can&rsquo;t be tested, it isn&rsquo;t done.
-          </blockquote>
-          <figcaption className="mt-8">
-            <p className="display text-[44px] leading-none text-sky">Rhuzzel</p>
-            <p className="mono mt-3">
-              Let&rsquo;s build something that holds up.
-            </p>
-          </figcaption>
-        </figure>
+        <div className="reveal flex">
+          <QuoteCard />
+        </div>
       </div>
     </Section>
   );
 }
 
-// 03 Experience: the same role cards, now with a section head.
+// 03 Experience: a role selector with details, and a timeline whose years select the role.
 export function Experience() {
   return (
     <Section>
       <SectionHead title="Experience" />
-      <div className="grid grid-cols-1 gap-5 min-[801px]:grid-cols-2">
-        {about.experience.map((e) => (
-          <div key={e.role} className={card}>
-            <div className="mono text-blue">{e.period}</div>
-            <h3 className="mt-1 text-xl font-bold leading-tight">{e.role}</h3>
-            <p className="mono mb-3 mt-1 text-muted">{e.org}</p>
-            <ul className="list-disc space-y-1.5 pl-5 text-muted marker:text-blue">
-              {e.points.map((p) => (
-                <li key={p}>{p}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <div className="mt-5 grid grid-cols-1 gap-5 min-[801px]:grid-cols-2">
-        <div className={card}>
-          <div className="mono mb-3 text-blue">Leadership</div>
-          <ul className="list-disc space-y-1.5 pl-5 marker:text-blue">
-            {about.leadership.map((l) => (
-              <li key={l}>{l}</li>
-            ))}
-          </ul>
-        </div>
-        <div className={card}>
-          <div className="mono mb-3 text-blue">The road so far</div>
-          <ol className="space-y-2">
-            {about.journey.map((j) => (
-              <li key={j.year} className="flex gap-4">
-                <span className="mono w-10 shrink-0 pt-0.5 text-blue">
-                  {j.year}
-                </span>
-                <span className="leading-snug">{j.event}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
+      <ExperienceExplorer />
+      <TimelineCards />
     </Section>
   );
 }

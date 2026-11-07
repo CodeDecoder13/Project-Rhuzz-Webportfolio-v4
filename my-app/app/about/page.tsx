@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AboutFocusProvider } from "@/components/about/AboutFocus";
 import AboutHero from "@/components/about/AboutHero";
 import {
   AboutContact,
@@ -12,11 +13,13 @@ export const metadata: Metadata = { title: "About" };
 export default function AboutPage() {
   return (
     <main>
-      <AboutHero />
-      <ProjectTeasers />
-      <Profile />
-      <Experience />
-      <AboutContact />
+      <AboutFocusProvider>
+        <AboutHero />
+        <ProjectTeasers />
+        <Profile />
+        <Experience />
+        <AboutContact />
+      </AboutFocusProvider>
     </main>
   );
 }

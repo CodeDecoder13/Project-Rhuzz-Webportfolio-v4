@@ -8,6 +8,8 @@ export const about = {
   ],
   experience: [
     {
+      id: "prisma",
+      stack: ["WordPress", "Elementor", "n8n", "PostgreSQL", "D3.js", "Twilio"],
       role: "Junior IT Architect (Contractor)",
       org: "Prisma International Corporation (Prisma Languages)",
       period: "Apr 2026 - Present",
@@ -18,6 +20,8 @@ export const about = {
       ],
     },
     {
+      id: "freelance-25",
+      stack: ["Next.js", "Tailwind CSS", "Prisma", "PostgreSQL"],
       role: "Mid Full Stack Web Developer | QA Specialist (Freelance)",
       org: "Freelance",
       period: "Feb - Oct 2025",
@@ -28,6 +32,8 @@ export const about = {
       ],
     },
     {
+      id: "reed",
+      stack: ["Selenium", "Playwright", "C#", "Jenkins", "Git"],
       role: "Software QA Intern",
       org: "Reed Elsevier Shared Services Philippines Inc.",
       period: "Dec 2023 - Jul 2024",
@@ -38,6 +44,8 @@ export const about = {
       ],
     },
     {
+      id: "freelance-23",
+      stack: ["Development", "QA"],
       role: "Junior Software Engineer | QA Specialist (Freelance)",
       org: "Freelance",
       period: "Sep 2023 - Feb 2024",
@@ -51,11 +59,15 @@ export const about = {
       school: "FEU Institute of Technology",
       program: "B.S. Computer Science, Software Engineering",
       period: "2020-25",
+      detail:
+        "Specialization in Software Engineering. Graduated November 2025.",
     },
     {
       school: "Panpacific University",
       program: "TVL ICT (with honors)",
       period: "2018-20",
+      detail:
+        "Information and Communications Technology track, graduated with honors.",
     },
     {
       school: "Tayug Foundational Academy",
@@ -90,12 +102,26 @@ export const about = {
         "BS Computer Science (Software Engineering), FEU Institute of Technology",
     },
     { year: "2022", event: "Technical lead on university projects" },
-    { year: "2023", event: "QA Intern / Software Developer, Reed Elsevier PH" },
-    { year: "2024", event: "Freelance Software Engineer" },
-    { year: "2025", event: "Graduated, BS Computer Science", grad: true },
+    {
+      year: "2023",
+      event: "QA Intern / Software Developer, Reed Elsevier PH",
+      role: "reed",
+    },
+    {
+      year: "2024",
+      event: "Freelance Software Engineer",
+      role: "freelance-23",
+    },
+    {
+      year: "2025",
+      event: "Graduated, BS Computer Science",
+      grad: true,
+      role: "freelance-25",
+    },
     {
       year: "2026",
       event: "Junior IT Architect, Prisma International Corporation",
+      role: "prisma",
     },
   ],
 };

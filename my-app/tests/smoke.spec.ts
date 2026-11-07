@@ -179,3 +179,11 @@ test("How I work: tabs switch the track and hovering a step shows its scene", as
   await page.mouse.move(2, 2);
   await expect(stage).toContainText("Idle");
 });
+
+test("About: a picked skill lights up projects and the role explorer switches roles", async ({ page }) => {
+  await page.goto("/about");
+  await page.getByRole("button", { name: "Laravel", exact: true }).click();
+  await expect(page.getByText("✓ Laravel").first()).toBeVisible();
+  await page.getByRole("tab", { name: /Software QA Intern/ }).click();
+  await expect(page.getByRole("heading", { level: 3, name: "Software QA Intern" })).toBeVisible();
+});

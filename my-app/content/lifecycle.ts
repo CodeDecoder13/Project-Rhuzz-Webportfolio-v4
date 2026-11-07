@@ -3,7 +3,11 @@ export type Track = "dev" | "qa";
 // "How I work" comes in two flavours; each is six steps long so the panel and cards line up.
 export const tracks: Record<
   Track,
-  { label: string; ticket: string; steps: { name: string; text: string }[] }
+  {
+    label: string;
+    ticket: string;
+    steps: { name: string; text: string; output?: string }[];
+  }
 > = {
   dev: {
     label: "Full-stack / AI Engineer",
@@ -11,26 +15,32 @@ export const tracks: Record<
     steps: [
       {
         name: "Discover",
+        output: "A one-page brief",
         text: "I start with the problem and the person: who it's for, what hurts, and what success looks like.",
       },
       {
         name: "Design",
+        output: "Data model, API routes, wireframes",
         text: "Data model, API shape and key screens before any code, so the hard decisions get made early.",
       },
       {
         name: "Build",
+        output: "Typed code in small PRs",
         text: "Vue or Next.js up front, Laravel or Node behind it, typed end to end, in small reviewable commits.",
       },
       {
         name: "AI-assisted",
+        output: "Faster drafts, generated tests, reviewed diffs",
         text: "Claude Code and Codex draft, refactor and write tests so I build faster. I review every line before it ships.",
       },
       {
         name: "Ship",
+        output: "Green CI and a live URL",
         text: "CI runs lint, types and tests, then I deploy to the right cloud: Railway, Vercel, Hostinger, Google Cloud or Amazon.",
       },
       {
         name: "Watch",
+        output: "Logs, alerts and the next fix",
         text: "Logs, errors and real usage show what to fix next. Shipping is the start of the loop, not the end.",
       },
     ],
