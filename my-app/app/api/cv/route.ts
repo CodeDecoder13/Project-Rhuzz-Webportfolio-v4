@@ -12,9 +12,6 @@ const fail = (error: string, status: number, extra?: object) =>
 export async function POST(req: Request) {
   const ip =
     req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
-  if (!allow(`cv:${ip}`))
-    return fail("Too many requests. Please try again later.", 429);
-
   const body = await req.json().catch(() => null);
   const parsed = cvSchema.safeParse(body);
   if (!parsed.success)
@@ -26,6 +23,11 @@ export async function POST(req: Request) {
 
   const bad = await checkEmail(email);
   if (bad) return fail(bad, 400, { fields: { email: [bad] } });
+
+  // Only requests that would actually send an email count, so typos and validation errors never use up the allowance.
+  // Per connection 8 an hour; ponytail: in-memory per serverless instance, so it only slows casual abuse.
+  if (!allow(`cv:${ip}`, Date.now(), 8))
+    return fail("Too many requests. Please try again in about an hour.", 429);
 
   // The same address can't be used to flood someone else's inbox: 2 resumes per address per hour.
   // Counted only once the address passed the checks, so typos don't use up the allowance.
