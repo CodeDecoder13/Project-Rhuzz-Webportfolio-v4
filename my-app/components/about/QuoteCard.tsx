@@ -45,7 +45,7 @@ export default function QuoteCard() {
         rx.set(0);
         ry.set(0);
       }}
-      className="flex w-full flex-col justify-between rounded-[14px] border-[1.5px] border-ink bg-blue p-[clamp(16px,3svh,32px)] text-white shadow-[6px_6px_0_var(--ink)]"
+      className="island-light flex w-full flex-col justify-between rounded-[14px] border-[1.5px] border-ink bg-blue p-[clamp(16px,3svh,32px)] text-white shadow-[6px_6px_0_var(--ink)]"
     >
       <span
         aria-hidden="true"
@@ -91,7 +91,7 @@ export default function QuoteCard() {
         <button
           type="button"
           onClick={() => setI((i + 1) % quotes.length)}
-          className="mono shrink-0 rounded-full border-[1.5px] border-white px-3.5 py-2 transition-[background-color,color,transform] duration-150 ease-out hover:bg-white hover:text-blue active:scale-[.97]"
+          className="mono shrink-0 rounded-full border-[1.5px] border-white px-3.5 py-2 transition-[background-color,color,transform] duration-150 ease-out hover:bg-card hover:text-blue active:scale-[.97]"
         >
           Next ›
         </button>

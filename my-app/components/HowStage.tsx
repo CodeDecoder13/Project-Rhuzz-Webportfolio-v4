@@ -56,7 +56,7 @@ function Card({
   return (
     <motion.div
       variants={item}
-      className={`rounded-xl border-[1.5px] border-ink bg-white p-3 shadow-[4px_4px_0_var(--ink)] ${className}`}
+      className={`rounded-xl border-[1.5px] border-ink bg-card p-3 shadow-[4px_4px_0_var(--ink)] ${className}`}
     >
       {children}
     </motion.div>
@@ -480,7 +480,7 @@ const devScenes: ReactNode[] = [
         <motion.div
           key={s}
           variants={item}
-          className="relative flex-1 overflow-hidden rounded-xl border-[1.5px] border-ink bg-white px-2 py-3 text-center shadow-[3px_3px_0_var(--ink)]"
+          className="relative flex-1 overflow-hidden rounded-xl border-[1.5px] border-ink bg-card px-2 py-3 text-center shadow-[3px_3px_0_var(--ink)]"
         >
           <span className="mono relative z-10 text-[11px]">{s}</span>
           <motion.span
@@ -505,7 +505,7 @@ const devScenes: ReactNode[] = [
               duration: 0.45,
               bounce: 0.3,
             }}
-            className="mono rounded-full border-[1.5px] border-ink bg-white px-2.5 py-0.5 text-[10px] shadow-[2px_2px_0_var(--ink)]"
+            className="mono rounded-full border-[1.5px] border-ink bg-card px-2.5 py-0.5 text-[10px] shadow-[2px_2px_0_var(--ink)]"
           >
             ● {c}
           </motion.span>
@@ -598,9 +598,9 @@ export default function HowStage({
   return (
     <div
       aria-hidden="true"
-      className="flex h-full flex-col overflow-hidden rounded-[16px] border-[1.5px] border-ink bg-[#E4EEFB] bg-[linear-gradient(rgba(11,27,51,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(11,27,51,.05)_1px,transparent_1px)] bg-[size:24px_24px] shadow-[8px_8px_0_var(--blue)]"
+      className="island-light flex h-full flex-col overflow-hidden rounded-[16px] border-[1.5px] border-ink bg-[#E4EEFB] bg-[linear-gradient(rgba(11,27,51,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(11,27,51,.05)_1px,transparent_1px)] bg-[size:24px_24px] shadow-[8px_8px_0_var(--blue)]"
     >
-      <div className="flex shrink-0 items-center justify-between border-b-[1.5px] border-ink bg-white px-4 py-2">
+      <div className="flex shrink-0 items-center justify-between border-b-[1.5px] border-ink bg-card px-4 py-2">
         <span className="mono">{tracks[track].ticket}</span>
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
@@ -631,7 +631,7 @@ export default function HowStage({
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className="flex shrink-0 gap-1.5 border-t-[1.5px] border-ink bg-white px-4 py-2.5">
+      <div className="flex shrink-0 gap-1.5 border-t-[1.5px] border-ink bg-card px-4 py-2.5">
         {steps.map((s, i) => (
           <span key={s.name} className="h-1.5 flex-1 rounded-full bg-ink/15">
             <span

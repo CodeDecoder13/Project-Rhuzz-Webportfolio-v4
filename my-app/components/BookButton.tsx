@@ -72,7 +72,7 @@ export default function BookButton({
               role="dialog"
               aria-modal="true"
               aria-label="Book a call"
-              className="flex h-dvh w-full max-w-[1240px] min-[801px]:h-[min(96dvh,860px)] animate-[rise_.25s_cubic-bezier(.23,1,.32,1)_both] flex-col overflow-hidden rounded-none min-[801px]:rounded-[16px] border-[1.5px] border-ink bg-white shadow-[8px_8px_0_var(--blue)]"
+              className="flex h-dvh w-full max-w-[1240px] min-[801px]:h-[min(96dvh,860px)] animate-[rise_.25s_cubic-bezier(.23,1,.32,1)_both] flex-col overflow-hidden rounded-none min-[801px]:rounded-[16px] border-[1.5px] border-ink bg-card shadow-[8px_8px_0_var(--blue)]"
             >
               <div className="flex shrink-0 items-center justify-between border-b-[1.5px] border-ink bg-sky px-4 py-2.5">
                 <span className="mono">Book a call · 30 min</span>
@@ -80,7 +80,7 @@ export default function BookButton({
                   ref={close}
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="mono rounded-full border-[1.5px] border-ink bg-white px-3 py-1"
+                  className="mono rounded-full border-[1.5px] border-ink bg-card px-3 py-1"
                 >
                   Close
                 </button>

@@ -179,7 +179,7 @@ export function AboutContact() {
             <BookButton
               url={site.calendly}
               describedBy="about-book-tip"
-              className={`${pill} bg-white text-ink`}
+              className={`${pill} bg-card text-ink`}
             />
           </div>
         </div>
@@ -187,7 +187,7 @@ export function AboutContact() {
           {contact.map(([k, v, href, d]) => {
             const row = (
               <>
-                <span className="grid size-11 shrink-0 place-items-center rounded-full border-[1.5px] border-ink bg-white">
+                <span className="grid size-11 shrink-0 place-items-center rounded-full border-[1.5px] border-ink bg-card">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"

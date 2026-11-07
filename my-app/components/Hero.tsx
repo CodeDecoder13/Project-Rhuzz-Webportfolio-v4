@@ -10,7 +10,7 @@ export default function Hero() {
     <div className="flex h-screen min-h-[600px] flex-col">
       <section
         aria-label="Introduction"
-        className="relative flex min-h-0 flex-1 items-end justify-center overflow-hidden bg-[radial-gradient(55%_65%_at_52%_62%,rgba(31,95,191,.3),transparent_72%),linear-gradient(180deg,#F2F6FB_0%,#D6E5F8_60%,#B7D0F0_100%)]"
+        className="relative flex min-h-0 flex-1 items-end justify-center overflow-hidden bg-[radial-gradient(55%_65%_at_52%_62%,var(--glow),transparent_72%),linear-gradient(180deg,var(--hero-a)_0%,var(--hero-b)_60%,var(--hero-c)_100%)]"
       >
         <div
           aria-hidden="true"
@@ -68,7 +68,7 @@ export default function Hero() {
               <BookButton
                 url={site.calendly}
                 describedBy="book-tip"
-                className="block rounded-full border-[1.5px] border-ink bg-white px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-ink max-[800px]:[text-shadow:none]"
+                className="block rounded-full border-[1.5px] border-ink bg-card px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-ink max-[800px]:[text-shadow:none]"
               />
               <span
                 id="book-tip"
@@ -83,7 +83,7 @@ export default function Hero() {
         </div>
         <div
           data-h="right"
-          className="absolute bottom-[8%] right-[max(32px,6vw)] z-[3] rounded-[18px] border-[1.5px] border-ink bg-white px-6 py-4 text-[clamp(20px,2.3vw,34px)] font-semibold leading-[1.1] tracking-[-.02em] shadow-[0_12px_32px_rgba(11,27,51,.18)] max-[800px]:right-4 max-[800px]:bottom-[4%]"
+          className="absolute bottom-[8%] right-[max(32px,6vw)] z-[3] rounded-[18px] border-[1.5px] border-ink bg-card px-6 py-4 text-[clamp(20px,2.3vw,34px)] font-semibold leading-[1.1] tracking-[-.02em] shadow-[0_12px_32px_rgba(11,27,51,.18)] max-[800px]:right-4 max-[800px]:bottom-[4%]"
         >
           Full-stack Engineer /<br />
           QA Specialist /<br />

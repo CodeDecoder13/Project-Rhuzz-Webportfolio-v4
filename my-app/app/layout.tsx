@@ -45,12 +45,19 @@ const personLd = JSON.stringify({
   sameAs: [site.github, site.linkedin],
 }).replace(/</g, "\\u003c");
 
+const THEME_INIT = `try{var t=localStorage.getItem("theme");if(t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`${anton.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Sets the theme before first paint so there is no flash: saved choice, else the system preference. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+      </head>
       <body className="min-h-full flex flex-col">
         <a
           href="#work"

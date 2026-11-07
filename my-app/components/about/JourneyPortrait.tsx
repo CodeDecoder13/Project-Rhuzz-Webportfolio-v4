@@ -44,7 +44,7 @@ export default function JourneyPortrait({ meet }: { meet: boolean }) {
         className="absolute inset-0 size-full object-cover grayscale contrast-125"
       />
       <div className="absolute inset-0 bg-blue mix-blend-multiply" />
-      <div className="absolute inset-0 bg-white/45" />
+      <div className="absolute inset-0 bg-card/45" />
       <motion.div style={{ clipPath: clip }} className="absolute inset-0">
         <Image
           src="/assets/about/picture-1-web.jpg"

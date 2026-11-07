@@ -6,12 +6,20 @@ test.beforeEach(async ({ page }, info) => {
   await page.addInitScript(() => sessionStorage.setItem("gate", "1"));
 });
 
-test("home loads with centered nav and no view-projects button", async ({ page }) => {
+test("home loads with centered nav and no view-projects button", async ({
+  page,
+}) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/Rhuzzel Paramio/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Rhuzzel");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Rhuzzel",
+  );
   const nav = page.getByRole("navigation", { name: "Primary" });
-  await expect(nav.getByRole("link")).toHaveText(["About", "Projects", "Contact"]);
+  await expect(nav.getByRole("link")).toHaveText([
+    "About",
+    "Projects",
+    "Contact",
+  ]);
   await expect(page.getByText("View projects")).toHaveCount(0);
 });
 
@@ -20,12 +28,19 @@ test.describe("mobile", () => {
 
   test("burger menu replaces the nav and opens the pages", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("navigation", { name: "Primary" })).toBeHidden();
+    await expect(
+      page.getByRole("navigation", { name: "Primary" }),
+    ).toBeHidden();
     const burger = page.getByRole("button", { name: "Menu" });
     await expect(burger).toHaveAttribute("aria-expanded", "false");
     await burger.click();
     const menu = page.getByRole("navigation", { name: "Mobile" });
-    await expect(menu.getByRole("link")).toHaveText(["About", "Projects", "Contact", "Download CV"]);
+    await expect(menu.getByRole("link")).toHaveText([
+      "About",
+      "Projects",
+      "Contact",
+      "Download CV",
+    ]);
     await page.keyboard.press("Escape");
     await expect(menu).toBeHidden();
     await burger.click();
@@ -36,7 +51,10 @@ test.describe("mobile", () => {
 
   test("hero text is white over the photo", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveCSS("color", "rgb(255, 255, 255)");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveCSS(
+      "color",
+      "rgb(255, 255, 255)",
+    );
   });
 });
 
@@ -55,16 +73,25 @@ test("nav links open the dedicated pages", async ({ page }) => {
     ["Projects", "/projects", "Selected work"],
     ["Contact", "/contact", "Contact"],
   ]) {
-    await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: link }).click();
+    await page
+      .getByRole("navigation", { name: "Primary" })
+      .getByRole("link", { name: link })
+      .click();
     await expect(page).toHaveURL(path);
-    await expect(page.getByRole("heading", { level: 2, name: heading })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { level: 2, name: heading }),
+    ).toBeVisible();
   }
 });
 
 test("filter changes the card count", async ({ page }) => {
   await page.goto("/projects");
   const cards = page.locator("#work button[aria-haspopup='dialog']");
-  for (const [filter, count] of [["All", 8], ["Web Dev", 7], ["Capstone", 1]] as const) {
+  for (const [filter, count] of [
+    ["All", 8],
+    ["Web Dev", 7],
+    ["Capstone", 1],
+  ] as const) {
     await page.getByRole("button", { name: filter, exact: true }).click();
     await expect(cards).toHaveCount(count);
   }
@@ -86,7 +113,9 @@ test("drawer opens, syncs the URL and closes", async ({ page }) => {
 
 test("case study route renders and unknown slug does not", async ({ page }) => {
   await page.goto("/projects/project-airzen");
-  await expect(page.getByRole("heading", { level: 2, name: "Project Airzen" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 2, name: "Project Airzen" }),
+  ).toBeVisible();
   await expect(page.getByRole("link", { name: "Code" })).toHaveCount(0);
   await page.goto("/projects/nope");
   await expect(page.getByText("Not found")).toBeVisible();
@@ -95,7 +124,9 @@ test("case study route renders and unknown slug does not", async ({ page }) => {
 test("proof counter ends on the true value", async ({ page }) => {
   await page.goto("/");
   await page.locator("#proof").scrollIntoViewIfNeeded();
-  await expect(page.locator("#proof")).toContainText("148/156", { timeout: 3000 });
+  await expect(page.locator("#proof")).toContainText("148/156", {
+    timeout: 3000,
+  });
 });
 
 test("contact form shows validation errors", async ({ page }) => {
@@ -107,7 +138,12 @@ test("contact form shows validation errors", async ({ page }) => {
 });
 
 test("contact form surfaces a server error", async ({ page }) => {
-  await page.route("**/api/contact", (r) => r.fulfill({ status: 500, json: { error: "Contact form is not configured." } }));
+  await page.route("**/api/contact", (r) =>
+    r.fulfill({
+      status: 500,
+      json: { error: "Contact form is not configured." },
+    }),
+  );
   await page.goto("/contact");
   await page.getByLabel("Name", { exact: true }).fill("Test");
   await page.getByLabel("Email", { exact: true }).fill("test@example.com");
@@ -117,11 +153,21 @@ test("contact form surfaces a server error", async ({ page }) => {
   await expect(page.getByRole("status")).toContainText("not configured");
 });
 
-test("contact API rejects bad input and honeypot sends nothing", async ({ request }) => {
-  const bad = await request.post("/api/contact", { data: { name: "", email: "x", subject: "s", message: "m" } });
+test("contact API rejects bad input and honeypot sends nothing", async ({
+  request,
+}) => {
+  const bad = await request.post("/api/contact", {
+    data: { name: "", email: "x", subject: "s", message: "m" },
+  });
   expect(bad.status()).toBe(400);
   const bot = await request.post("/api/contact", {
-    data: { name: "Bot", email: "bot@example.com", subject: "s", message: "m", website: "http://spam" },
+    data: {
+      name: "Bot",
+      email: "bot@example.com",
+      subject: "s",
+      message: "m",
+      website: "http://spam",
+    },
   });
   expect(bot.status()).toBe(200);
 });
@@ -129,24 +175,36 @@ test("contact API rejects bad input and honeypot sends nothing", async ({ reques
 test("legal pages are reachable from the footer", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("link", { name: "Terms & Conditions" }).click();
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Terms & Conditions");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Terms & Conditions",
+  );
   await page.getByRole("link", { name: "Privacy Policy" }).click();
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Privacy Policy");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Privacy Policy",
+  );
   // Next keeps the previous route mounted but hidden, so only count the visible match.
-  await expect(page.getByText("Not legal advice").locator("visible=true")).toHaveCount(1);
+  await expect(
+    page.getByText("Not legal advice").locator("visible=true"),
+  ).toHaveCount(1);
 });
 
 test("footer lists site links and contact details", async ({ page }) => {
   await page.goto("/");
   const footer = page.getByRole("contentinfo");
-  await expect(footer.getByRole("navigation", { name: "Footer" }).getByRole("link")).toHaveCount(7);
-  await expect(footer.getByRole("link", { name: "boyparamio@gmail.com" })).toBeVisible();
+  await expect(
+    footer.getByRole("navigation", { name: "Footer" }).getByRole("link"),
+  ).toHaveCount(7);
+  await expect(
+    footer.getByRole("link", { name: "boyparamio@gmail.com" }),
+  ).toBeVisible();
   await expect(footer.getByText("Volatile Reaction")).toHaveCount(0);
 });
 
 test("hero has Message and Book me with a hover hint", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "Message", exact: true })).toHaveAttribute("href", "/contact");
+  await expect(
+    page.getByRole("link", { name: "Message", exact: true }),
+  ).toHaveAttribute("href", "/contact");
   const tip = page.getByRole("tooltip");
   await expect(tip).toHaveCSS("opacity", "0");
   await page.getByRole("link", { name: "Book me" }).hover();
@@ -159,15 +217,22 @@ test("Book me opens the Calendly modal and Esc closes it", async ({ page }) => {
   await page.getByRole("link", { name: "Book me" }).click();
   const dialog = page.getByRole("dialog", { name: "Book a call" });
   await expect(dialog).toBeVisible();
-  await expect(dialog.locator("iframe")).toHaveAttribute("src", /calendly\.com\/boyparamio\/30min/);
+  await expect(dialog.locator("iframe")).toHaveAttribute(
+    "src",
+    /calendly\.com\/boyparamio\/30min/,
+  );
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
   await expect(page.getByRole("link", { name: "Book me" })).toBeFocused();
 });
 
-test("How I work: tabs switch the track and hovering a step shows its scene", async ({ page }) => {
+test("How I work: tabs switch the track and hovering a step shows its scene", async ({
+  page,
+}) => {
   await page.goto("/");
-  const stage = page.locator("[aria-hidden=true]", { hasText: /Brief #07|Ticket #142/ });
+  const stage = page.locator("[aria-hidden=true]", {
+    hasText: /Brief #07|Ticket #142/,
+  });
   await expect(stage).toContainText("Brief #07");
   await expect(stage).toContainText("Idle");
   await page.locator("ol li", { hasText: "AI-assisted" }).hover();
@@ -180,10 +245,45 @@ test("How I work: tabs switch the track and hovering a step shows its scene", as
   await expect(stage).toContainText("Idle");
 });
 
-test("About: a picked skill lights up projects and the role explorer switches roles", async ({ page }) => {
+test("About: a picked skill lights up projects and the role explorer switches roles", async ({
+  page,
+}) => {
   await page.goto("/about");
   await page.getByRole("button", { name: "Laravel", exact: true }).click();
   await expect(page.getByText("✓ Laravel").first()).toBeVisible();
   await page.getByRole("tab", { name: /Software QA Intern/ }).click();
-  await expect(page.getByRole("heading", { level: 3, name: "Software QA Intern" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 3, name: "Software QA Intern" }),
+  ).toBeVisible();
+});
+
+test("theme toggle switches to dark and the choice persists", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const html = page.locator("html");
+  await expect(html).not.toHaveAttribute("data-theme", "dark");
+  const toggle = page.getByRole("button", { name: "Dark mode" });
+  await expect(toggle).toHaveAttribute("aria-pressed", "false");
+  await toggle.click();
+  await expect(html).toHaveAttribute("data-theme", "dark");
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await page.reload();
+  await expect(html).toHaveAttribute("data-theme", "dark");
+});
+
+test.describe("system dark preference", () => {
+  test.use({ colorScheme: "dark" });
+  test("starts dark when nothing is saved, and a saved light choice wins", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+    await page.evaluate(() => localStorage.setItem("theme", "light"));
+    await page.reload();
+    await expect(page.locator("html")).not.toHaveAttribute(
+      "data-theme",
+      "dark",
+    );
+  });
 });

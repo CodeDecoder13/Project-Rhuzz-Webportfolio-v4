@@ -20,7 +20,7 @@ export default function MobileMenu({ links, cv }: { links: readonly (readonly [s
 
   const item = "block rounded-[10px] px-3 py-3 hover:bg-line";
   return (
-    <div className="col-start-3 justify-self-end min-[801px]:hidden">
+    <div className="min-[801px]:hidden">
       <button
         ref={button}
         type="button"

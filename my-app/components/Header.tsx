@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/content/site";
 import MobileMenu from "./MobileMenu";
+import ThemeToggle from "./ThemeToggle";
 
 const nav = [
   ["About", "/about"],
@@ -8,7 +9,8 @@ const nav = [
   ["Contact", "/contact"],
 ] as const;
 
-const pill = "rounded-full border-[1.5px] px-[18px] py-[9px] font-mono text-xs uppercase tracking-[.06em]";
+const pill =
+  "rounded-full border-[1.5px] px-[18px] py-[9px] font-mono text-xs uppercase tracking-[.06em]";
 
 export default function Header() {
   return (
@@ -23,12 +25,16 @@ export default function Header() {
           </Link>
         ))}
       </nav>
-      <div className="col-start-3 flex items-center justify-end gap-2.5 max-[800px]:hidden">
-        <a href={site.cv} className={`${pill} border-ink text-ink`}>
+      <div className="col-start-3 flex items-center justify-end gap-2.5">
+        <ThemeToggle />
+        <a
+          href={site.cv}
+          className={`${pill} border-ink text-ink max-[800px]:hidden`}
+        >
           Download CV
         </a>
+        <MobileMenu links={nav} cv={site.cv} />
       </div>
-      <MobileMenu links={nav} cv={site.cv} />
     </header>
   );
 }

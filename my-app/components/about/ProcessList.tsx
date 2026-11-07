@@ -50,10 +50,10 @@ export default function ProcessList({
               aria-expanded={isOpen}
               onClick={() => setOpen(isOpen ? null : i)}
               onFocus={() => setOpen(i)}
-              className={`flex w-full items-start gap-3.5 rounded-xl border-[1.5px] border-ink p-3 text-left transition-[transform,box-shadow,background-color] duration-200 ease-out active:scale-[.99] ${isOpen ? "-translate-y-0.5 bg-white shadow-[4px_4px_0_var(--ink)]" : on ? "bg-sky/40" : "bg-paper"}`}
+              className={`flex w-full items-start gap-3.5 rounded-xl border-[1.5px] border-ink p-3 text-left transition-[transform,box-shadow,background-color] duration-200 ease-out active:scale-[.99] ${isOpen ? "-translate-y-0.5 bg-card shadow-[4px_4px_0_var(--ink)]" : on ? "bg-sky/40" : "bg-paper"}`}
             >
               <span
-                className={`grid size-11 shrink-0 place-items-center rounded-lg border-[1.5px] border-ink text-ink transition-colors duration-200 ${isOpen || on ? "bg-sky" : "bg-white"}`}
+                className={`grid size-11 shrink-0 place-items-center rounded-lg border-[1.5px] border-ink text-ink transition-colors duration-200 ${isOpen || on ? "bg-sky" : "bg-card"}`}
               >
                 <svg
                   viewBox="0 0 24 24"

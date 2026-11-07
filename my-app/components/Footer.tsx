@@ -16,7 +16,7 @@ const head = "mono mb-3 text-[#9FB4D1]";
 
 export default function Footer() {
   return (
-    <footer className="bg-ink px-4 pt-16 text-paper min-[801px]:px-8">
+    <footer className="island-light border-t border-white/10 bg-ink px-4 pt-16 text-paper min-[801px]:px-8">
       <div className="grid grid-cols-1 gap-10 min-[801px]:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Link href="/" className="display text-[64px]">

@@ -24,7 +24,7 @@ export default function Lifecycle() {
       <div
         role="tablist"
         aria-label="Way of working"
-        className="mb-[clamp(8px,2svh,20px)] flex w-full max-w-md gap-1 rounded-full border-[1.5px] border-ink bg-white p-1 min-[801px]:w-fit"
+        className="mb-[clamp(8px,2svh,20px)] flex w-full max-w-md gap-1 rounded-full border-[1.5px] border-ink bg-card p-1 min-[801px]:w-fit"
       >
         {(Object.keys(tracks) as Track[]).map((t) => (
           <button

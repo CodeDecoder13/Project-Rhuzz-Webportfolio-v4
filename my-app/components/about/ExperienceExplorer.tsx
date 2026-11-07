@@ -65,7 +65,7 @@ export function ExperienceExplorer() {
               type="button"
               aria-selected={on}
               onClick={() => setRole(e.id)}
-              className={`reveal rounded-[14px] border-[1.5px] p-4 text-left transition-[transform,box-shadow,border-color,background-color] duration-200 ease-out active:scale-[.99] ${on ? "-translate-y-0.5 border-blue bg-white shadow-[6px_6px_0_var(--ink)]" : "border-ink bg-card hover:-translate-y-0.5"} ${hit ? "ring-2 ring-blue ring-offset-2 ring-offset-paper" : ""}`}
+              className={`reveal rounded-[14px] border-[1.5px] p-4 text-left transition-[transform,box-shadow,border-color,background-color] duration-200 ease-out active:scale-[.99] ${on ? "-translate-y-0.5 border-blue bg-card shadow-[6px_6px_0_var(--ink)]" : "border-ink bg-card hover:-translate-y-0.5"} ${hit ? "ring-2 ring-blue ring-offset-2 ring-offset-paper" : ""}`}
             >
               <span className="mono block text-blue">{e.period}</span>
               <span className="mt-1 block text-[17px] font-bold leading-tight">
@@ -137,7 +137,7 @@ export function ExperienceExplorer() {
 function LogoSlot({ mark }: { mark: string }) {
   const src = logos[mark];
   return (
-    <span className="relative grid size-11 shrink-0 place-items-center overflow-hidden rounded-xl border-[1.5px] border-ink bg-white font-mono text-[10px] font-bold">
+    <span className="relative grid size-11 shrink-0 place-items-center overflow-hidden rounded-xl border-[1.5px] border-ink bg-card font-mono text-[10px] font-bold">
       {src ? (
         <Image
           src={src}

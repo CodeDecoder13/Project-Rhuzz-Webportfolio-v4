@@ -20,14 +20,14 @@ export default function AboutHero() {
   return (
     <section
       aria-label="About Rhuzzel"
-      className="relative flex min-h-svh flex-col overflow-hidden bg-[radial-gradient(55%_65%_at_52%_62%,rgba(31,95,191,.3),transparent_72%),linear-gradient(180deg,#F2F6FB_0%,#D6E5F8_60%,#B7D0F0_100%)]"
+      className="relative flex min-h-svh flex-col overflow-hidden bg-[radial-gradient(55%_65%_at_52%_62%,var(--glow),transparent_72%),linear-gradient(180deg,var(--hero-a)_0%,var(--hero-b)_60%,var(--hero-c)_100%)]"
     >
       <noscript>
         <style>{"[data-a]{opacity:1!important}"}</style>
       </noscript>
       <div
         data-a="tag"
-        className="mono absolute right-[max(16px,5vw)] top-24 z-[3] max-[800px]:left-4 max-[800px]:right-auto max-[800px]:top-[74px] flex items-center gap-2 rounded-full border-[1.5px] border-ink bg-white px-3.5 py-1.5"
+        className="mono absolute right-[max(16px,5vw)] top-24 z-[3] max-[800px]:left-4 max-[800px]:right-auto max-[800px]:top-[74px] flex items-center gap-2 rounded-full border-[1.5px] border-ink bg-card px-3.5 py-1.5"
       >
         <span aria-hidden="true" className="size-2 rounded-full bg-blue" />
         Open to opportunities
@@ -81,7 +81,7 @@ export default function AboutHero() {
           </p>
           <p
             data-a="left"
-            className="mono mt-4 inline-flex items-center gap-2 rounded-full border-[1.5px] border-ink bg-white px-3.5 py-1.5"
+            className="mono mt-4 inline-flex items-center gap-2 rounded-full border-[1.5px] border-ink bg-card px-3.5 py-1.5"
           >
             <span aria-hidden="true" className="size-2 rounded-full bg-blue" />
             Metro Manila · working worldwide

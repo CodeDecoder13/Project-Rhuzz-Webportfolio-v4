@@ -49,7 +49,7 @@ const dot = (
 // Sized to fit one screen on desktop, so the whole section reveals together and nothing scrolls past mid-animation.
 export default function Manifesto() {
   return (
-    <Section className="bg-[#E4EEFB] bg-[linear-gradient(rgba(11,27,51,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(11,27,51,.05)_1px,transparent_1px)] bg-[size:48px_48px] min-[801px]:flex min-[801px]:min-h-svh min-[801px]:flex-col min-[801px]:justify-center min-[801px]:!pb-8 min-[801px]:!pt-24">
+    <Section className="bg-tint bg-[linear-gradient(var(--grid)_1px,transparent_1px),linear-gradient(90deg,var(--grid)_1px,transparent_1px)] bg-[size:48px_48px] min-[801px]:flex min-[801px]:min-h-svh min-[801px]:flex-col min-[801px]:justify-center min-[801px]:!pb-8 min-[801px]:!pt-24">
       <p className="mono mb-3">
         <span className="text-blue">02</span> / Behind the work
       </p>
@@ -102,7 +102,7 @@ export default function Manifesto() {
               </div>
             ))}
           </dl>
-          <ul className="mt-4 grid grid-cols-1 divide-y divide-white/20 rounded-2xl border-[1.5px] border-ink bg-ink px-4 text-paper shadow-[6px_6px_0_var(--blue)]">
+          <ul className="mt-4 grid grid-cols-1 divide-y island-light divide-white/20 rounded-2xl border-[1.5px] border-ink bg-ink px-4 text-paper shadow-[6px_6px_0_var(--blue)]">
             {stats.map((s) => (
               <li key={s.title} className="flex items-center gap-3 py-2">
                 <svg

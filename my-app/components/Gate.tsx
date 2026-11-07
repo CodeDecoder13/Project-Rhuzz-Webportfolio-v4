@@ -68,7 +68,7 @@ export default function Gate() {
       role="dialog"
       aria-modal="true"
       aria-label="Enter portfolio"
-      className={`fixed inset-0 z-30 grid place-items-center bg-[rgba(11,27,51,.86)] p-6 text-center text-paper backdrop-blur-[14px] transition-[opacity,transform] duration-[400ms] ${phase === "out" ? "pointer-events-none scale-[1.04] opacity-0" : ""}`}
+      className={`island-light fixed inset-0 z-30 grid place-items-center bg-[rgba(11,27,51,.86)] p-6 text-center text-paper backdrop-blur-[14px] transition-[opacity,transform] duration-[400ms] ${phase === "out" ? "pointer-events-none scale-[1.04] opacity-0" : ""}`}
     >
       <div>
         <div className="mono mb-4 text-[#9FB4D1]">
