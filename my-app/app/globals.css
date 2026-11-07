@@ -549,3 +549,8 @@ body {
     animation: none;
   }
 }
+
+/* The composer pill is the focus indicator; the textarea itself shows no box. */
+.chat-input:focus-visible {
+  outline: none;
+}

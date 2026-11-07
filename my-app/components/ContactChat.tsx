@@ -203,7 +203,6 @@ export default function ContactChat() {
           rows={1}
           value={text}
           maxLength={2000}
-          disabled={busy}
           aria-label="Message"
           placeholder={sent ? "Anything else?" : "Message Rhuzzel's assistant…"}
           onChange={(e) => {
@@ -221,7 +220,7 @@ export default function ContactChat() {
               send(text);
             }
           }}
-          className="max-h-[140px] min-h-[40px] flex-1 resize-none bg-transparent py-2 text-[16px] outline-none placeholder:text-muted"
+          className="max-h-[140px] min-h-[40px] flex-1 resize-none bg-transparent py-2 text-[16px] chat-input outline-none placeholder:text-muted"
         />
         <button
           type="submit"
