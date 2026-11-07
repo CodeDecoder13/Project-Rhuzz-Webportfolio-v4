@@ -23,7 +23,10 @@ const sendTool = {
   parameters: {
     type: "OBJECT",
     properties: {
-      name: { type: "STRING", description: "Visitor's name" },
+      name: {
+        type: "STRING",
+        description: "Visitor's name, properly capitalised",
+      },
       email: {
         type: "STRING",
         description: "Visitor's email, exactly as they gave it",
@@ -31,7 +34,8 @@ const sendTool = {
       subject: { type: "STRING", description: "Short one-line subject" },
       message: {
         type: "STRING",
-        description: "What the visitor wants to say, in their words",
+        description:
+          "What the visitor wants to say, with spelling, grammar and punctuation corrected, same meaning and voice, first person",
       },
     },
     required: ["name", "email", "subject", "message"],
