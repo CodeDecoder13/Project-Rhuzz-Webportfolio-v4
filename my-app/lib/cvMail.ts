@@ -96,6 +96,7 @@ export async function sendCv(r: Req) {
   try {
     pdf = await readFile(CV_PATH);
   } catch {
+    console.error("[cv] cannot read", CV_PATH);
     return "The resume file is missing on the server.";
   }
   const { error } = await resend.emails.send({

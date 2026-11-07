@@ -23,17 +23,17 @@ export async function POST(req: Request) {
   const { name, role, email, website } = parsed.data;
   if (website) return Response.json({ ok: true }); // honeypot: pretend success, send nothing
 
-  // The same address can't be used to flood someone else's inbox: 2 resumes per address per hour.
-  if (!allow(`cv-mail:${email.toLowerCase()}`, Date.now(), 2))
-    return fail(
-      "That address already received my resume. Check your inbox and spam folder.",
-      429,
-    );
+  return fail(
+    "That address already received my resume. Check your inbox and spam folder.",
+    429,
+  );
 
   const bad = await checkEmail(email);
   if (bad) return fail(bad, 400, { fields: { email: [bad] } });
 
-  const err = await sendCv({ name, role, email });
+  // The same address can't be used to flood someone else's inbox: 2 resumes per address per hour (counted only once the address passed the checks).
+  if (!allow(`cv-mail:${email.toLowerCase()}`, Date.now(), 2))
+    const err = await sendCv({ name, role, email });
   if (err)
     return fail(
       err,
