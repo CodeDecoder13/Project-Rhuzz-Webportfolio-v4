@@ -15,3 +15,24 @@ export const contactSchema = z.object({
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
+
+export const cvRoles = [
+  "Recruiter / HR",
+  "Hiring manager",
+  "Client / business owner",
+  "Developer / engineer",
+  "QA / tester",
+  "Student / learner",
+  "Other",
+] as const;
+
+// Resume request: the visitor must pick a role and agree to share their details.
+export const cvSchema = z.object({
+  name: z.string().trim().min(2, "Enter your name").max(100),
+  role: z.enum(cvRoles, { error: "Pick your role" }),
+  email: z.email("Enter a valid email").max(200),
+  consent: z.literal(true, { error: "Please agree to continue" }),
+  website: z.string().optional(), // honeypot
+});
+
+export type CvInput = z.infer<typeof cvSchema>;

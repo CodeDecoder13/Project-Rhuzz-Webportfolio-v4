@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/content/site";
+import CvRequest from "./CvRequest";
 import { Section } from "./Section";
 
 export default function ContactSection() {
@@ -34,7 +35,7 @@ export default function ContactSection() {
         </li>
         <li>{site.location}</li>
         <li>
-          <a href={site.cv}>Download CV</a>
+          <CvRequest>Get my CV</CvRequest>
         </li>
       </ul>
     </Section>

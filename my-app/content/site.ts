@@ -6,6 +6,5 @@ export const site = {
   linkedin: "https://linkedin.com/in/rhuzz-6904b7187",
   location: "Philippines",
   replyTime: "24-48h",
-  cv: "/paramio-rhuzzel-cv-updated.pdf",
   calendly: "https://calendly.com/boyparamio/30min",
 } as const;

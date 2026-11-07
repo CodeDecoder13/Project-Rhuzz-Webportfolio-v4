@@ -3,7 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 
 // Renders the true value on the server and without JS; animates 0 -> value once in view and always ends on value.
-export default function CountUp({ value, ms = 1000 }: { value: number; ms?: number }) {
+export default function CountUp({
+  value,
+  ms = 1000,
+}: {
+  value: number;
+  ms?: number;
+}) {
   const ref = useRef<HTMLSpanElement>(null);
   const [n, setN] = useState(value);
 

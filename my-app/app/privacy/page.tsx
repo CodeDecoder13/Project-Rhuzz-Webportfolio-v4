@@ -23,6 +23,12 @@ export default function PrivacyPage() {
           .
         </li>
         <li>
+          <b>Resume requests:</b> the name, role and email address you enter to
+          receive my resume. The resume is sent to that address by email, and I
+          get a notice with those details so I can follow up. To limit abuse,
+          the address is also checked to confirm it can receive mail.
+        </li>
+        <li>
           <b>Technical data:</b> this site uses no analytics. The hosting
           provider may keep standard server logs (such as IP address) for
           security and reliability.
@@ -41,12 +47,16 @@ export default function PrivacyPage() {
       <H2>4. Who sees it</H2>
       <P>
         Only service providers needed to run the site: Vercel (hosting), Resend
-        (delivers the messages you confirm to my inbox) and an AI service
-        provider (generates the chat replies from the text of your
-        conversation). They process data on my behalf.
+        (delivers the messages you confirm to my inbox, and emails you my resume
+        when you request it) and an AI service provider (generates the chat
+        replies from the text of your conversation). They process data on my
+        behalf.
       </P>
       <H2>5. How long I keep it</H2>
-      <P>Contact messages: [12 months] or until you ask me to delete them.</P>
+      <P>
+        Contact messages and resume requests: [12 months] or until you ask me to
+        delete them.
+      </P>
       <H2>6. Your rights</H2>
       <P>
         You may ask to access, correct or delete your data, or to object to its

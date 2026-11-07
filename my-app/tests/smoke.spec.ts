@@ -39,8 +39,8 @@ test.describe("mobile", () => {
       "About",
       "Projects",
       "Contact",
-      "Download CV",
     ]);
+    await expect(menu.getByRole("button", { name: "Get my CV" })).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(menu).toBeHidden();
     await burger.click();
@@ -174,6 +174,61 @@ test("contact asks for AI consent each visit and can be declined", async ({
     "AI Consent",
   );
   await expect(page.getByRole("link", { name: "AI Consent" })).toBeVisible(); // footer link
+});
+
+test("resume request opens a form, validates, and the API refuses bad input", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/");
+  await page
+    .getByRole("banner")
+    .getByRole("button", { name: "Get my CV" })
+    .click();
+  const dialog = page.getByRole("dialog", { name: "Get my resume" });
+  await expect(dialog).toBeVisible();
+  await dialog.getByRole("button", { name: "Email me the resume" }).click();
+  await expect(dialog.getByRole("alert")).toHaveCount(4);
+  await expect(dialog.getByText("Please agree to continue")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  // The PDF is no longer a public file.
+  expect((await request.get("/assets/Paramio_cv-updated.pdf")).status()).toBe(
+    404,
+  );
+  const bad = await request.post("/api/cv", {
+    data: { name: "A", role: "x", email: "nope", consent: false },
+  });
+  expect(bad.status()).toBe(400);
+  const noConsent = await request.post("/api/cv", {
+    data: {
+      name: "Ann Lee",
+      role: "Recruiter / HR",
+      email: "ann@example.com",
+      consent: false,
+    },
+  });
+  expect(noConsent.status()).toBe(400);
+  const bot = await request.post("/api/cv", {
+    data: {
+      name: "Bot Bot",
+      role: "Other",
+      email: "bot@example.com",
+      consent: true,
+      website: "http://spam",
+    },
+  });
+  expect(bot.status()).toBe(200); // honeypot: pretends success, sends nothing
+  const fake = await request.post("/api/cv", {
+    data: {
+      name: "Ann Lee",
+      role: "Other",
+      email: "ann@mailinator.com",
+      consent: true,
+    },
+  });
+  expect(fake.status()).toBe(400);
+  expect((await fake.json()).fields.email[0]).toContain("temporary");
 });
 
 test("contact API rejects bad input and honeypot sends nothing", async ({

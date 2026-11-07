@@ -12,13 +12,20 @@ export default function MusicPlayer() {
     const a = audio.current;
     if (!a) return;
     a.volume = 0.5;
-    a.play().then(() => setState("on"), () => setState("missing"));
-    try { localStorage.setItem("snd", "1"); } catch {}
+    a.play().then(
+      () => setState("on"),
+      () => setState("missing"),
+    );
+    try {
+      localStorage.setItem("snd", "1");
+    } catch {}
   };
   const pause = () => {
     audio.current?.pause();
     setState("off");
-    try { localStorage.setItem("snd", "0"); } catch {}
+    try {
+      localStorage.setItem("snd", "0");
+    } catch {}
   };
 
   // Gate "with sound" fires this synchronously inside its click, so play() keeps the user gesture.
@@ -29,7 +36,13 @@ export default function MusicPlayer() {
 
   return (
     <>
-      <audio ref={audio} loop preload="none" src="/assets/music/soundtrack.mp3" onError={() => setState("missing")} />
+      <audio
+        ref={audio}
+        loop
+        preload="none"
+        src="/assets/music/soundtrack.mp3"
+        onError={() => setState("missing")}
+      />
       <button
         type="button"
         // No aria-label: it must contain the visible text (WCAG 2.5.3), so the content names the button.
@@ -41,9 +54,15 @@ export default function MusicPlayer() {
           className={`size-10 rounded-full border border-[#2c3d5e] bg-[radial-gradient(circle,var(--blue)_0_18%,#0B1B33_19%_24%,transparent_25%),repeating-radial-gradient(#111_0_2px,#1d2a44_3px_4px)] ${state === "on" ? "animate-[spin_3s_linear_infinite]" : ""}`}
         />
         <span className="text-left">
-          <small className="block font-mono text-[9px] tracking-[.1em] text-[#9FB4D1]">PORTFOLIO SOUNDTRACK</small>
+          <small className="block font-mono text-[9px] tracking-[.1em] text-[#9FB4D1]">
+            PORTFOLIO SOUNDTRACK
+          </small>
           <b className="font-mono text-xs font-semibold uppercase tracking-[.06em]">
-            {state === "on" ? "Playing" : state === "missing" ? "Add track" : "Sound off"}
+            {state === "on"
+              ? "Playing"
+              : state === "missing"
+                ? "Add track"
+                : "Sound off"}
           </b>
         </span>
       </button>

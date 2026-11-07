@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/content/site";
+import CvRequest from "./CvRequest";
 
 const explore = [
   ["Home", "/"],
@@ -68,9 +69,7 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href={site.cv} className={link}>
-                Download CV
-              </a>
+              <CvRequest className={link}>Get my CV</CvRequest>
             </li>
           </ul>
         </div>

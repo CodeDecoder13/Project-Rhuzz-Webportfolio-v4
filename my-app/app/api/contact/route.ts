@@ -3,11 +3,14 @@ import { allow } from "@/lib/rateLimit";
 import { sendContact } from "@/lib/mail";
 import { contactSchema } from "@/lib/validators";
 
-const fail = (error: string, status: number, extra?: object) => Response.json({ error, ...extra }, { status });
+const fail = (error: string, status: number, extra?: object) =>
+  Response.json({ error, ...extra }, { status });
 
 export async function POST(req: Request) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
-  if (!allow(ip)) return fail("Too many messages. Please try again later.", 429);
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+  if (!allow(ip))
+    return fail("Too many messages. Please try again later.", 429);
 
   let body: unknown;
   try {
@@ -16,7 +19,10 @@ export async function POST(req: Request) {
     return fail("Invalid request.", 400);
   }
   const parsed = contactSchema.safeParse(body);
-  if (!parsed.success) return fail("Invalid input.", 400, { fields: z.flattenError(parsed.error).fieldErrors });
+  if (!parsed.success)
+    return fail("Invalid input.", 400, {
+      fields: z.flattenError(parsed.error).fieldErrors,
+    });
 
   const { name, email, subject, message, website } = parsed.data;
   if (website) return Response.json({ ok: true }); // honeypot: pretend success, send nothing

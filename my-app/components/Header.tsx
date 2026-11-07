@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { site } from "@/content/site";
 import MobileMenu from "./MobileMenu";
+import CvRequest from "./CvRequest";
 import ThemeToggle from "./ThemeToggle";
 
 const nav = [
@@ -27,13 +27,10 @@ export default function Header() {
       </nav>
       <div className="col-start-3 flex items-center justify-end gap-2.5">
         <ThemeToggle />
-        <a
-          href={site.cv}
-          className={`${pill} border-ink text-ink max-[800px]:hidden`}
-        >
-          Download CV
-        </a>
-        <MobileMenu links={nav} cv={site.cv} />
+        <CvRequest className={`${pill} border-ink text-ink max-[800px]:hidden`}>
+          Get my CV
+        </CvRequest>
+        <MobileMenu links={nav} />
       </div>
     </header>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ConsentGate from "@/components/ConsentGate";
 import ContactChat from "@/components/ContactChat";
+import CvRequest from "@/components/CvRequest";
 import { Section, SectionHead, card } from "@/components/Section";
 import { site } from "@/content/site";
 
@@ -41,9 +42,7 @@ export default function ContactPage() {
               <li>{site.location}</li>
               <li className="text-muted">Replies in {site.replyTime}</li>
               <li>
-                <a href={site.cv} className="text-blue underline">
-                  Download CV
-                </a>
+                <CvRequest className="text-blue underline">Get my CV</CvRequest>
               </li>
             </ul>
           </div>
