@@ -11,6 +11,9 @@ assert.ok(allow("ip", t + 3_600_001), "window expires after an hour");
 const ok = { name: "A", email: "a@b.co", subject: "Hi", message: "Hello" };
 assert.ok(contactSchema.safeParse(ok).success);
 assert.equal(contactSchema.safeParse({ ...ok, email: "nope" }).success, false);
-assert.equal(contactSchema.safeParse({ ...ok, subject: "a\r\nBcc: x@y.z" }).success, false);
+assert.equal(
+  contactSchema.safeParse({ ...ok, subject: "a\r\nBcc: x@y.z" }).success,
+  false,
+);
 assert.equal(contactSchema.safeParse({ ...ok, message: "  " }).success, false);
 console.log("lib ok");

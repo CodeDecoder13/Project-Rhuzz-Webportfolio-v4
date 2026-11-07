@@ -129,28 +129,31 @@ test("proof counter ends on the true value", async ({ page }) => {
   });
 });
 
-test("contact form shows validation errors", async ({ page }) => {
-  await page.goto("/contact");
-  await page.getByRole("button", { name: "Send message" }).click();
-  // Next's route announcer also has role=alert, so scope to the form's field errors.
-  await expect(page.locator("form p[role=alert]")).toHaveCount(4);
-  await expect(page.getByText("Name is required")).toBeVisible();
-});
-
-test("contact form surfaces a server error", async ({ page }) => {
-  await page.route("**/api/contact", (r) =>
+test("contact chat greets and streams the reply", async ({ page }) => {
+  await page.route("**/api/chat", (r) =>
     r.fulfill({
-      status: 500,
-      json: { error: "Contact form is not configured." },
+      status: 200,
+      contentType: "application/x-ndjson",
+      body:
+        JSON.stringify({ t: "text", v: "Rhuzzel is a full-stack engineer." }) +
+        "\n",
     }),
   );
   await page.goto("/contact");
-  await page.getByLabel("Name", { exact: true }).fill("Test");
-  await page.getByLabel("Email", { exact: true }).fill("test@example.com");
-  await page.getByLabel("Subject", { exact: true }).fill("Hello");
-  await page.getByLabel("Message", { exact: true }).fill("Hi there");
-  await page.getByRole("button", { name: "Send message" }).click();
-  await expect(page.getByRole("status")).toContainText("not configured");
+  await expect(page.getByRole("log")).toContainText("AI assistant");
+  await page.getByLabel("Message", { exact: true }).fill("What does he do?");
+  await page.getByRole("button", { name: "Send", exact: true }).click();
+  await expect(page.getByRole("log")).toContainText("What does he do?");
+  await expect(page.getByRole("log")).toContainText("full-stack engineer");
+});
+
+test("contact chat surfaces a server error", async ({ page }) => {
+  await page.route("**/api/chat", (r) =>
+    r.fulfill({ status: 500, json: { error: "Chat is not configured." } }),
+  );
+  await page.goto("/contact");
+  await page.getByRole("button", { name: "I'd like to hire him" }).click();
+  await expect(page.getByRole("log")).toContainText("not configured");
 });
 
 test("contact API rejects bad input and honeypot sends nothing", async ({

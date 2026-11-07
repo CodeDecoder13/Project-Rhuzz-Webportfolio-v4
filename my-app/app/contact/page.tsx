@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ContactForm from "@/components/ContactForm";
+import ContactChat from "@/components/ContactChat";
 import { Section, SectionHead, card } from "@/components/Section";
 import { site } from "@/content/site";
 
@@ -12,13 +12,16 @@ export default function ContactPage() {
         <SectionHead title="Contact" />
         <div className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-[1.2fr_1fr]">
           <div className={card}>
-            <ContactForm />
+            <ContactChat />
           </div>
           <div className={card}>
             <div className="mono mb-3">Elsewhere</div>
             <ul className="grid gap-2">
               <li>
-                <a href={`mailto:${site.email}`} className="text-blue underline">
+                <a
+                  href={`mailto:${site.email}`}
+                  className="text-blue underline"
+                >
                   {site.email}
                 </a>
               </li>
