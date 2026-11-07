@@ -82,7 +82,8 @@ export async function POST(req: Request) {
         tools: [{ functionDeclarations: [sendTool] }],
         generationConfig: {
           temperature: 0.6,
-          maxOutputTokens: 500,
+          maxOutputTokens: 400,
+          thinkingConfig: { thinkingLevel: "minimal" },
         },
       }),
       signal: AbortSignal.timeout(25_000),

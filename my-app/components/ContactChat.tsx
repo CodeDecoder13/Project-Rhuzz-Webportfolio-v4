@@ -8,7 +8,7 @@ type Msg = { role: "user" | "assistant"; content: string };
 const hello: Msg = {
   role: "assistant",
   content:
-    "Hi, I'm Rhuzzel's AI assistant. Ask me about his work, or tell me what you have in mind and I'll pass it on to him.",
+    "Hi, I'm Rhuzz. Ask me about Rhuzzel's work, or anything else, or tell me what you have in mind and I'll pass it on to him.",
 };
 const chips = [
   "What does Rhuzzel do?",
@@ -118,7 +118,7 @@ export default function ContactChat() {
             Chat with Rhuzzel&rsquo;s assistant
           </p>
           <p className="mono text-[11px] text-muted">
-            AI · answers from his resume
+            AI · knows his resume, happy to chat about anything
           </p>
         </div>
         {msgs.length > 1 && (
