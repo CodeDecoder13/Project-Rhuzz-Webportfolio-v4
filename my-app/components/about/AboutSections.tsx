@@ -7,7 +7,7 @@ import BookButton from "../BookButton";
 import HowCover from "../HowCover";
 import { Section, SectionHead, card } from "../Section";
 import { FocusItem } from "./AboutFocus";
-import { ExperienceExplorer, TimelineCards } from "./ExperienceExplorer";
+import { ExperienceExplorer, LeadershipJourney } from "./ExperienceExplorer";
 import ProcessList from "./ProcessList";
 import QuoteCard from "./QuoteCard";
 import SkillsPanel from "./SkillsPanel";
@@ -125,7 +125,7 @@ export function Experience() {
     <Section>
       <SectionHead title="Experience" />
       <ExperienceExplorer />
-      <TimelineCards />
+      <LeadershipJourney />
     </Section>
   );
 }

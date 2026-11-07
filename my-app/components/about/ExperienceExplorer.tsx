@@ -6,7 +6,11 @@ import {
   useReducedMotion,
   type Variants,
 } from "motion/react";
-import { about } from "@/content/about";
+import Image from "next/image";
+import { useState } from "react";
+import { about, logos } from "@/content/about";
+import { Tags } from "../ProjectDetail";
+import JourneyPortrait from "./JourneyPortrait";
 import { card } from "../Section";
 import { useFocus } from "./AboutFocus";
 
@@ -129,51 +133,100 @@ export function ExperienceExplorer() {
   );
 }
 
-// Leadership beside a timeline whose years select the matching role above.
-export function TimelineCards() {
-  const { role, setRole } = useFocus();
+// Logo slot: shows the file from `logos[mark]` (content/about.ts) once a logo is supplied, otherwise the short mark.
+function LogoSlot({ mark }: { mark: string }) {
+  const src = logos[mark];
   return (
-    <div className="mt-5 grid grid-cols-1 gap-5 min-[801px]:grid-cols-2">
-      <div className={card}>
-        <div className="mono mb-3 text-blue">Leadership</div>
-        <ul className="list-disc space-y-1.5 pl-5 marker:text-blue">
+    <span className="relative grid size-11 shrink-0 place-items-center overflow-hidden rounded-xl border-[1.5px] border-ink bg-white font-mono text-[10px] font-bold">
+      {src ? (
+        <Image
+          src={src}
+          alt=""
+          fill
+          sizes="44px"
+          className="object-contain p-1"
+        />
+      ) : (
+        mark
+      )}
+    </span>
+  );
+}
+
+// Leadership on the left; on the right the road so far, with a portrait that opens from a blue silhouette
+// into picture 1 while the card is hovered (or tapped).
+export function LeadershipJourney() {
+  const [meet, setMeet] = useState(false);
+  return (
+    <div className="mt-5 grid grid-cols-1 gap-5 min-[801px]:grid-cols-[.9fr_1.4fr]">
+      <div className={`${card} flex flex-col`}>
+        <div className="mono mb-4 text-blue">Leadership</div>
+        <ul className="flex flex-1 flex-col gap-3">
           {about.leadership.map((l) => (
-            <li key={l}>{l}</li>
+            <li
+              key={l.role}
+              className="flex flex-1 items-center gap-4 rounded-xl border-[1.5px] border-ink bg-paper p-3 transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[4px_4px_0_var(--ink)]"
+            >
+              <LogoSlot mark={l.mark} />
+              <span className="min-w-0 flex-1">
+                <b className="block leading-snug">{l.role}</b>
+                <span className="block text-[15px] leading-snug text-muted">
+                  {l.org}
+                </span>
+              </span>
+              <span className="mono shrink-0">{l.period}</span>
+            </li>
           ))}
         </ul>
+        <div className="mono mb-2 mt-5 text-blue">Beyond code</div>
+        <Tags items={about.interests} />
       </div>
-      <div className={card}>
-        <div className="mono mb-3 text-blue">The road so far · tap a year</div>
-        <ol className="space-y-1">
-          {about.journey.map((j) => {
-            const content = (
-              <>
-                <span
-                  className={`mono w-10 shrink-0 pt-0.5 ${role === j.role ? "text-ink" : "text-blue"}`}
-                >
-                  {j.year}
+
+      <div
+        className={card}
+        onPointerEnter={(e) => e.pointerType === "mouse" && setMeet(true)}
+        onPointerLeave={(e) => e.pointerType === "mouse" && setMeet(false)}
+        onClick={(e) =>
+          e.nativeEvent instanceof PointerEvent &&
+          e.nativeEvent.pointerType !== "mouse" &&
+          setMeet((m) => !m)
+        }
+      >
+        <div className="mono mb-4 text-blue">The road so far</div>
+        <div className="grid grid-cols-1 gap-5 min-[801px]:grid-cols-[1fr_minmax(0,.62fr)]">
+          <ol className="space-y-1">
+            {about.journey.map((j) => (
+              <li
+                key={j.year}
+                className="flex items-center gap-3 rounded-lg px-1 py-1.5 transition-transform duration-200 ease-out hover:translate-x-1"
+              >
+                <LogoSlot mark={j.mark} />
+                <span className="mono w-10 shrink-0 text-blue">{j.year}</span>
+                <span className="leading-snug">
+                  {j.event}
+                  {"grad" in j && (
+                    <svg
+                      role="img"
+                      aria-label="Graduation cap"
+                      viewBox="0 0 24 24"
+                      className="ml-2 inline size-5 align-[-4px] text-blue"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M2 9l10-5 10 5-10 5z" />
+                      <path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5" />
+                      <path d="M22 9v6" />
+                    </svg>
+                  )}
                 </span>
-                <span className="leading-snug">{j.event}</span>
-              </>
-            );
-            return (
-              <li key={j.year}>
-                {j.role ? (
-                  <button
-                    type="button"
-                    aria-pressed={role === j.role}
-                    onClick={() => setRole(j.role)}
-                    className={`flex w-full gap-4 rounded-lg px-2 py-1 text-left transition-[background-color,transform] duration-150 ease-out active:scale-[.99] ${role === j.role ? "bg-sky/60" : "hover:bg-sky/30"}`}
-                  >
-                    {content}
-                  </button>
-                ) : (
-                  <div className="flex gap-4 px-2 py-1">{content}</div>
-                )}
               </li>
-            );
-          })}
-        </ol>
+            ))}
+          </ol>
+          <JourneyPortrait meet={meet} />
+        </div>
       </div>
     </div>
   );

@@ -76,9 +76,24 @@ export const about = {
     },
   ],
   leadership: [
-    "PR and Logistics Officer, FEU Tech Student Coordinating Council (2023-24)",
-    "Director of Logistics, Junior Philippine Computer Society, FEU Tech (2021-23)",
-    "Volunteer: DevCon Pro logistics (2023), FEU Tech mangrove tree planting (2024)",
+    {
+      mark: "SCC",
+      role: "PR and Logistics Officer",
+      org: "FEU Tech Student Coordinating Council",
+      period: "2023-24",
+    },
+    {
+      mark: "JPCS",
+      role: "Director of Logistics",
+      org: "Junior Philippine Computer Society, FEU Tech",
+      period: "2021-23",
+    },
+    {
+      mark: "VOL",
+      role: "Volunteer",
+      org: "DevCon Pro logistics · FEU Tech mangrove tree planting",
+      period: "2023-24",
+    },
   ],
   languages: [
     "English (professional)",
@@ -94,34 +109,51 @@ export const about = {
   ],
   interests: ["Gaming", "Coffee", "Anime", "Lo-fi", "Photography", "Learning"],
   journey: [
-    { year: "2014", event: "Junior High, Tayug Foundational Academy" },
-    { year: "2018", event: "TVL ICT with honors, Panpacific University" },
+    {
+      year: "2014",
+      event: "Junior High, Tayug Foundational Academy",
+      mark: "TFA",
+    },
+    {
+      year: "2018",
+      event: "TVL ICT with honors, Panpacific University",
+      mark: "PU",
+    },
     {
       year: "2020",
       event:
         "BS Computer Science (Software Engineering), FEU Institute of Technology",
+      mark: "FEU",
     },
-    { year: "2022", event: "Technical lead on university projects" },
+    {
+      year: "2022",
+      event: "Technical lead on university projects",
+      mark: "FEU",
+    },
     {
       year: "2023",
       event: "QA Intern / Software Developer, Reed Elsevier PH",
-      role: "reed",
+      mark: "REED",
     },
     {
       year: "2024",
       event: "Freelance Software Engineer",
-      role: "freelance-23",
+      mark: "FREE",
     },
     {
       year: "2025",
       event: "Graduated, BS Computer Science",
+      mark: "FEU",
       grad: true,
-      role: "freelance-25",
     },
     {
       year: "2026",
       event: "Junior IT Architect, Prisma International Corporation",
-      role: "prisma",
+      mark: "PRISMA",
     },
   ],
 };
+
+// Logos for the leadership and journey rows. Save a file under /public/assets/logos and map the row's `mark` to it,
+// e.g. FEU: "/assets/logos/feu.png". Rows without a logo show their short mark.
+export const logos: Record<string, string> = {};
