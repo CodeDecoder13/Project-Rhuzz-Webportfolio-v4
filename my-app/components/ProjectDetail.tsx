@@ -32,7 +32,7 @@ export default function ProjectDetail({ project: p, index }: { project: Project;
       <p className="mt-6 flex gap-2">
         {p.live && (
           <a href={p.live} target="_blank" rel="noopener noreferrer" className={`${link} border-blue bg-blue text-white`}>
-            Live demo ↗
+            Visit website ↗
           </a>
         )}
       </p>

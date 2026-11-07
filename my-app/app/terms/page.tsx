@@ -18,9 +18,9 @@ export default function TermsPage() {
         third-party work belong to their owners and are shown for portfolio purposes. Do not copy or redistribute without written
         permission. [Add license for open-source repositories.]
       </P>
-      <H2>3. Links and live demos</H2>
+      <H2>3. Links and live sites</H2>
       <P>
-        Demo links may point to third-party hosts. They are provided &quot;as is&quot;, may go offline, and may contain sample data. I am
+        Project links may point to third-party hosts. They are provided &quot;as is&quot;, may go offline, and may contain sample data. I am
         not responsible for external sites.
       </P>
       <H2>4. Contact form and messages</H2>
