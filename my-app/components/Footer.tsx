@@ -50,12 +50,20 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href={site.github} aria-label="GitHub profile" className={link}>
+              <a
+                href={site.github}
+                aria-label="GitHub profile"
+                className={link}
+              >
                 GitHub
               </a>
             </li>
             <li>
-              <a href={site.linkedin} aria-label="LinkedIn profile" className={link}>
+              <a
+                href={site.linkedin}
+                aria-label="LinkedIn profile"
+                className={link}
+              >
                 LinkedIn
               </a>
             </li>
@@ -77,6 +85,11 @@ export default function Footer() {
             <li>
               <Link href="/privacy" className={link}>
                 Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/ai-consent" className={link}>
+                AI Consent
               </Link>
             </li>
           </ul>

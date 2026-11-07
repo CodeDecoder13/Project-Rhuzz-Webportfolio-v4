@@ -140,6 +140,7 @@ test("contact chat greets and streams the reply", async ({ page }) => {
     }),
   );
   await page.goto("/contact");
+  await page.getByRole("button", { name: "I agree, start chat" }).click();
   await expect(page.getByRole("log")).toContainText("I'm Rhuzz");
   await page.getByLabel("Message", { exact: true }).fill("What does he do?");
   await page.getByRole("button", { name: "Send", exact: true }).click();
@@ -152,8 +153,27 @@ test("contact chat surfaces a server error", async ({ page }) => {
     r.fulfill({ status: 500, json: { error: "Chat is not configured." } }),
   );
   await page.goto("/contact");
+  await page.getByRole("button", { name: "I agree, start chat" }).click();
   await page.getByRole("button", { name: "I'd like to hire him" }).click();
   await expect(page.getByRole("log")).toContainText("not configured");
+});
+
+test("contact asks for AI consent each visit and can be declined", async ({
+  page,
+}) => {
+  await page.goto("/contact");
+  await expect(
+    page.getByRole("dialog", { name: "Before you chat" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "No thanks" }).click();
+  await expect(page.getByText("AI chat is off")).toBeVisible();
+  await page.getByRole("button", { name: "Review AI consent" }).click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await page.goto("/ai-consent");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "AI Consent",
+  );
+  await expect(page.getByRole("link", { name: "AI Consent" })).toBeVisible(); // footer link
 });
 
 test("contact API rejects bad input and honeypot sends nothing", async ({
