@@ -439,3 +439,8 @@ body {
 .cv-cursor {
   animation: blink 0.8s steps(1) infinite;
 }
+
+/* About hero pieces wait invisible until AboutMotion flies them in (shown at once for reduced motion). */
+[data-a] {
+  opacity: 0;
+}

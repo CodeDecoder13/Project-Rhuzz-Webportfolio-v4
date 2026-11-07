@@ -1,12 +1,22 @@
 import type { Metadata } from "next";
-import About from "@/components/About";
+import AboutHero from "@/components/about/AboutHero";
+import {
+  AboutContact,
+  Experience,
+  ProjectTeasers,
+  Profile,
+} from "@/components/about/AboutSections";
 
 export const metadata: Metadata = { title: "About" };
 
 export default function AboutPage() {
   return (
-    <main className="page-in pt-14">
-      <About />
+    <main>
+      <AboutHero />
+      <ProjectTeasers />
+      <Profile />
+      <Experience />
+      <AboutContact />
     </main>
   );
 }

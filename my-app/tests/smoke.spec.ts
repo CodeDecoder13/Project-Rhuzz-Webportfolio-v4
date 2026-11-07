@@ -51,7 +51,7 @@ test("gate can be skipped with Esc", async ({ page }) => {
 test("nav links open the dedicated pages", async ({ page }) => {
   await page.goto("/");
   for (const [link, path, heading] of [
-    ["About", "/about", "About"],
+    ["About", "/about", "Selected projects"],
     ["Projects", "/projects", "Selected work"],
     ["Contact", "/contact", "Contact"],
   ]) {

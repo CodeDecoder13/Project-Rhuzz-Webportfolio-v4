@@ -3,15 +3,10 @@ import { about } from "@/content/about";
 import { Tags } from "./ProjectDetail";
 import { Section, SectionHead, card } from "./Section";
 
-export default function About({
-  n,
-  compact = false,
-}: {
-  n?: string;
-  compact?: boolean;
-}) {
+// Home-page About: one screen, story + timeline. The full page lives at /about.
+export default function About({ n }: { n?: string }) {
   return (
-    <Section id="about" fit={compact}>
+    <Section id="about" fit>
       <SectionHead n={n} title="About" />
       <div className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-[1.2fr_1fr]">
         <div className={`${card} flex flex-col`}>
@@ -22,34 +17,20 @@ export default function About({
             <span className="text-blue">Tester by habit.</span>
           </p>
           <div className="mt-[clamp(10px,2.4svh,24px)] space-y-[clamp(6px,1.6svh,16px)] text-[clamp(14px,2svh,18px)] text-muted">
-            {about.bio.slice(0, compact ? 2 : 3).map((p) => (
+            {about.bio.slice(0, 2).map((p) => (
               <p key={p}>{p}</p>
             ))}
           </div>
-          {!compact && (
-            <>
-              <div className="mono mb-2 mt-7">How I work with people</div>
-              <Tags items={about.softSkills} />
-            </>
-          )}
-          {!compact && (
-            <>
-              <div className="mono mb-2 mt-5">Languages</div>
-              <Tags items={about.languages} />
-            </>
-          )}
           <div className="mono mb-2 mt-5">Beyond code</div>
           <Tags items={about.interests} />
-          {compact && (
-            <p className="mt-auto pt-[clamp(8px,2svh,20px)]">
-              <Link
-                href="/about"
-                className="mono inline-block rounded-full border-[1.5px] border-ink bg-ink px-5 py-[clamp(6px,1.2svh,10px)] text-paper"
-              >
-                Full story, experience and education →
-              </Link>
-            </p>
-          )}
+          <p className="mt-auto pt-[clamp(8px,2svh,20px)]">
+            <Link
+              href="/about"
+              className="mono inline-block rounded-full border-[1.5px] border-ink bg-ink px-5 py-[clamp(6px,1.2svh,10px)] text-paper"
+            >
+              Full story, experience and education →
+            </Link>
+          </p>
         </div>
         <div className={card}>
           <div className="mono mb-[clamp(8px,2svh,20px)]">The road so far</div>
@@ -89,51 +70,6 @@ export default function About({
           </ol>
         </div>
       </div>
-
-      {!compact && (
-        <>
-          <h3 className="display mb-4 mt-12 text-[clamp(32px,4vw,48px)]">
-            Experience
-          </h3>
-          <div className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-2">
-            {about.experience.map((e) => (
-              <div key={e.role} className={`${card} reveal`}>
-                <div className="mono text-blue">{e.period}</div>
-                <h4 className="mt-1 text-xl font-bold leading-tight">
-                  {e.role}
-                </h4>
-                <p className="mono mb-3 mt-1 text-muted">{e.org}</p>
-                <ul className="list-disc space-y-1.5 pl-5 text-muted marker:text-blue">
-                  {e.points.map((p) => (
-                    <li key={p}>{p}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-4 grid grid-cols-1 gap-4 min-[801px]:grid-cols-2">
-            <div className={card}>
-              <div className="mono mb-3">Education</div>
-              <ul className="space-y-2">
-                {about.education.map((e) => (
-                  <li key={e.school}>
-                    <b>{e.program}</b>, {e.school} · {e.period}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className={card}>
-              <div className="mono mb-3">Leadership</div>
-              <ul className="list-disc space-y-1.5 pl-5 marker:text-blue">
-                {about.leadership.map((l) => (
-                  <li key={l}>{l}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </>
-      )}
     </Section>
   );
 }
