@@ -129,54 +129,57 @@ export default function Manifesto() {
             ))}
           </ul>
         </div>
-        <div className="reveal relative flex h-[520px] items-end justify-center min-[801px]:h-[clamp(360px,calc(100svh-390px),760px)]">
+        <div className="reveal relative flex h-[520px] flex-col min-[801px]:h-[clamp(380px,calc(100svh-390px),760px)]">
+          {/* ponytail: the word sits in flow above the portrait (head overlaps only its faded foot) so it stays readable and the labels keep their % anchors inside the row below */}
           <div
             aria-hidden="true"
-            className="display absolute inset-x-0 top-0 select-none bg-[linear-gradient(rgba(31,95,191,.3),rgba(31,95,191,0)_85%)] bg-clip-text text-center text-[clamp(72px,12vw,180px)] leading-[.85] text-transparent"
+            className="display relative -mb-[.3em] shrink-0 select-none bg-[linear-gradient(rgba(31,95,191,.55),rgba(31,95,191,.1)_90%)] bg-clip-text text-center text-[clamp(80px,min(14vw,21svh),230px)] leading-[.85] text-transparent"
           >
             Tested.
           </div>
-          <div className="relative hidden h-full flex-1 min-[801px]:block">
-            {left.map((t) => (
-              <div
-                key={t.text}
-                style={{ top: t.top }}
-                className="mono absolute inset-x-0 z-[2] flex items-center gap-3"
-              >
-                <span className="shrink-0">{t.text}</span>
-                <span
-                  aria-hidden="true"
-                  style={{ marginRight: -t.reach }}
-                  className="h-px flex-1 bg-ink"
-                />
-                {dot}
-              </div>
-            ))}
-          </div>
-          <Image
-            src="/assets/portrait-crop.png"
-            alt="Rhuzzel Paramio"
-            width={690}
-            height={1452}
-            sizes="(max-width: 800px) 90vw, 400px"
-            className="relative z-[1] h-full w-auto max-w-[90vw] shrink-0 object-contain object-bottom grayscale"
-          />
-          <div className="relative hidden h-full flex-1 min-[801px]:block">
-            {right.map((t) => (
-              <div
-                key={t.text}
-                style={{ top: t.top }}
-                className="mono absolute inset-x-0 z-[2] flex items-center gap-3"
-              >
-                {dot}
-                <span
-                  aria-hidden="true"
-                  style={{ marginLeft: -t.reach }}
-                  className="h-px flex-1 bg-ink"
-                />
-                <span className="shrink-0">{t.text}</span>
-              </div>
-            ))}
+          <div className="relative z-[1] flex min-h-0 flex-1 items-end justify-center">
+            <div className="relative hidden h-full flex-1 min-[801px]:block">
+              {left.map((t) => (
+                <div
+                  key={t.text}
+                  style={{ top: t.top }}
+                  className="mono absolute inset-x-0 z-[2] flex items-center gap-3"
+                >
+                  <span className="shrink-0">{t.text}</span>
+                  <span
+                    aria-hidden="true"
+                    style={{ marginRight: -t.reach }}
+                    className="h-px flex-1 bg-ink"
+                  />
+                  {dot}
+                </div>
+              ))}
+            </div>
+            <Image
+              src="/assets/portrait-crop.png"
+              alt="Rhuzzel Paramio"
+              width={690}
+              height={1452}
+              sizes="(max-width: 800px) 90vw, 400px"
+              className="relative z-[1] h-full w-auto max-w-[90vw] shrink-0 object-contain object-bottom grayscale"
+            />
+            <div className="relative hidden h-full flex-1 min-[801px]:block">
+              {right.map((t) => (
+                <div
+                  key={t.text}
+                  style={{ top: t.top }}
+                  className="mono absolute inset-x-0 z-[2] flex items-center gap-3"
+                >
+                  {dot}
+                  <span
+                    aria-hidden="true"
+                    style={{ marginLeft: -t.reach }}
+                    className="h-px flex-1 bg-ink"
+                  />
+                  <span className="shrink-0">{t.text}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -74,7 +74,7 @@ export default function Gate() {
         <div className="mono mb-4 text-[#9FB4D1]">
           Rhuzzel Paramio · Full-stack + QA + AI
         </div>
-        <h2 className="display text-[clamp(56px,11vw,128px)]">
+        <h2 className="display text-[clamp(56px,11vw,128px)] text-paper">
           Enter the
           <br />
           <span className="text-sky">portfolio</span>

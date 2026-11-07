@@ -19,7 +19,7 @@ export default function Footer() {
     <footer className="island-light border-t border-white/10 bg-ink px-4 pt-16 text-paper min-[801px]:px-8">
       <div className="grid grid-cols-1 gap-10 min-[801px]:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <Link href="/" className="display text-[64px]">
+          <Link href="/" className="display text-[64px] text-paper">
             rhuzz<i className="not-italic text-sky">.</i>
           </Link>
           <p className="mt-3 max-w-[34ch] text-[#C9D6E8]">
