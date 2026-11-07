@@ -31,7 +31,7 @@ export default function Hero() {
           </span>
         </div>
         <Image
-          src="/assets/rhuzz-cutout.png"
+          src="/assets/rhuzz-cutout-dark.png"
           alt="Rhuzzel Paramio in a black blazer and navy tie"
           width={696}
           height={1207}
