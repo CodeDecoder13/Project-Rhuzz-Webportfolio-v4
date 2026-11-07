@@ -128,7 +128,8 @@ body {
   }
 }
 
-:focus-visible {
+:focus-visible:not(.chat-input) {
+  /* the chat composer pill is its own focus indicator */
   outline: 3px solid var(--blue);
   outline-offset: 3px;
 }
@@ -550,7 +551,3 @@ body {
   }
 }
 
-/* The composer pill is the focus indicator; the textarea itself shows no box. */
-.chat-input:focus-visible {
-  outline: none;
-}

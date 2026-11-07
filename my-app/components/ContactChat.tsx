@@ -138,7 +138,7 @@ export default function ContactChat() {
         role="log"
         aria-live="polite"
         aria-label="Conversation"
-        className="flex-1 space-y-5 overflow-y-auto py-5 pr-1"
+        className="flex-1 space-y-5 overflow-y-auto py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {msgs.map((m, i) =>
           m.role === "user" ? (
