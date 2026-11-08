@@ -48,12 +48,13 @@ export default function MusicPlayer() {
         // No aria-label: it must contain the visible text (WCAG 2.5.3), so the content names the button.
         aria-pressed={state === "on"}
         onClick={() => (state === "on" ? pause() : play())}
-        className="island-light fixed bottom-5 right-5 z-[15] flex items-center gap-3 rounded-full border border-white/25 bg-ink py-2 pl-2 pr-[18px] text-white shadow-[0_10px_30px_rgba(11,27,51,.35)]"
+        // Just the disc by default so it never covers page content; the label opens on hover/focus (and stays in the accessible name).
+        className="island-light group fixed bottom-4 right-4 z-[15] flex items-center gap-3 rounded-full border border-white/25 bg-ink p-1.5 text-white shadow-[0_10px_30px_rgba(11,27,51,.35)] transition-[padding] hover:pr-[18px] focus-visible:pr-[18px]"
       >
         <span
           className={`size-10 rounded-full border border-[#2c3d5e] bg-[radial-gradient(circle,var(--blue)_0_18%,#0B1B33_19%_24%,transparent_25%),repeating-radial-gradient(#111_0_2px,#1d2a44_3px_4px)] ${state === "on" ? "animate-[spin_3s_linear_infinite]" : ""}`}
         />
-        <span className="text-left">
+        <span className="sr-only text-left group-hover:not-sr-only group-focus-visible:not-sr-only">
           <small className="block font-mono text-[9px] tracking-[.1em] text-[#9FB4D1]">
             PORTFOLIO SOUNDTRACK
           </small>

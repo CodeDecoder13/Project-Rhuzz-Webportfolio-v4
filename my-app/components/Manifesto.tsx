@@ -50,9 +50,6 @@ const dot = (
 export default function Manifesto() {
   return (
     <Section className="bg-tint bg-[linear-gradient(var(--grid)_1px,transparent_1px),linear-gradient(90deg,var(--grid)_1px,transparent_1px)] bg-[size:48px_48px] min-[801px]:flex min-[801px]:min-h-svh min-[801px]:flex-col min-[801px]:justify-center min-[801px]:!pb-8 min-[801px]:!pt-24">
-      <p className="mono mb-3">
-        <span className="text-blue">02</span> / Behind the work
-      </p>
       <h2
         data-split
         className="display mb-6 text-[clamp(40px,min(6.4vw,7.5svh),104px)] leading-[.95] min-[801px]:mb-8"

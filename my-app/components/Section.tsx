@@ -29,10 +29,9 @@ export function Section({
 }
 
 // Words sit in a mask so RevealRoot can lift them in one by one.
-export function SectionHead({ n, title }: { n?: string; title: string }) {
+export function SectionHead({ title }: { n?: string; title: string }) {
   return (
     <div className="mb-[clamp(12px,3svh,32px)] flex flex-wrap items-baseline gap-4">
-      {n && <span className="mono">{n} /</span>}
       <h2
         data-split
         className="display text-[clamp(44px,min(8vw,10.5svh),110px)]"

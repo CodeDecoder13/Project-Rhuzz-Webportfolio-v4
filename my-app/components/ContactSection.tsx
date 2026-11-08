@@ -7,13 +7,10 @@ export default function ContactSection() {
   return (
     <Section id="contact" fit className="bg-sky">
       <div className="mb-8 flex flex-wrap items-baseline gap-4">
-        <span className="mono">07 /</span>
         <span className="mono">Replies in {site.replyTime}</span>
       </div>
       <h2 className="reveal display text-[clamp(56px,min(13vw,19svh),200px)]">
-        Let&apos;s ship
-        <br />
-        it ↗
+        Let&apos;s ship it ↗
       </h2>
       <p className="reveal my-5">
         <Link
@@ -35,7 +32,7 @@ export default function ContactSection() {
         </li>
         <li>{site.location}</li>
         <li>
-          <CvRequest>Get my CV</CvRequest>
+          <CvRequest className="uppercase">Get my CV</CvRequest>
         </li>
       </ul>
     </Section>
