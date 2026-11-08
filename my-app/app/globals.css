@@ -551,3 +551,29 @@ body {
   }
 }
 
+
+/* Hero: two soft blue glows drift slowly behind the content so the gradient feels alive (transform only, GPU). */
+.hero-aurora {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 46% at 28% 68%, var(--glow), transparent 70%),
+    radial-gradient(32% 42% at 74% 38%, var(--glow), transparent 70%);
+  animation: aurora 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes aurora {
+  from {
+    transform: translate3d(-5%, 3%, 0) rotate(0deg) scale(1);
+  }
+  to {
+    transform: translate3d(6%, -4%, 0) rotate(8deg) scale(1.12);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora {
+    animation: none;
+  }
+}

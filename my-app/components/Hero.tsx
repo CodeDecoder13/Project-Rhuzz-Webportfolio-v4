@@ -12,6 +12,7 @@ export default function Hero() {
         aria-label="Introduction"
         className="relative flex min-h-0 flex-1 items-end justify-center overflow-hidden bg-[radial-gradient(55%_65%_at_52%_62%,var(--glow),transparent_72%),linear-gradient(180deg,var(--hero-a)_0%,var(--hero-b)_60%,var(--hero-c)_100%)]"
       >
+        <div aria-hidden="true" className="hero-aurora" />
         <div
           aria-hidden="true"
           data-ghost
