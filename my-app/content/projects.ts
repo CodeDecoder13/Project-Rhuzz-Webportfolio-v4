@@ -122,7 +122,11 @@ const all: Project[] = [
     live: "https://devcollab-production-9ce4.up.railway.app",
     coverBg: "#1F5FBF",
     coverFg: "#F2F6FB",
-    ...placeholder,
+    problem:
+      "My team needed a simple, modern place to plan and track work together, without the clutter of heavy project tools.",
+    solution:
+      "Built a personal Kanban board for the team: a Vue 3 front end with Shadcn Vue and Tailwind, a Laravel 12 API and a PostgreSQL database.",
+    result: "A clean, modern board my team uses to work together day to day.",
   },
   {
     slug: "eagles-fraternal-portal",
