@@ -16,7 +16,7 @@ export default function TermsPage() {
       <P>
         Text, design, logo and code samples are owned by me unless stated. Project names, logos and screenshots of client or
         third-party work belong to their owners and are shown for portfolio purposes. Do not copy or redistribute without written
-        permission. [Add license for open-source repositories.]
+        permission. Open-source repositories on my GitHub carry their own license files; where none is stated, all rights are reserved.
       </P>
       <H2>3. Links and live sites</H2>
       <P>
@@ -36,7 +36,7 @@ export default function TermsPage() {
       <H2>6. Changes</H2>
       <P>I may update these terms. Continued use after changes means you accept them.</P>
       <H2>7. Governing law</H2>
-      <P>[Philippine law / jurisdiction: confirm with a lawyer.]</P>
+      <P>These terms are governed by the laws of the Republic of the Philippines, and any dispute falls under the courts of the Philippines.</P>
       <H2>8. Contact</H2>
       <P>{site.email}</P>
     </Legal>

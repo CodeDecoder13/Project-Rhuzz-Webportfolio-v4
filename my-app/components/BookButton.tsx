@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { readConsent } from "@/lib/consent";
 
 // Opens the Calendly page in a modal. The iframe fills the panel, so there is no blank band around it.
 // Without a Calendly URL (or JS) it is a plain link, so the button never dead-ends.
@@ -55,6 +56,8 @@ export default function BookButton({
         aria-describedby={describedBy}
         aria-haspopup="dialog"
         onClick={(e) => {
+          // Without "Accept all" nothing from Calendly loads here: the link opens Calendly in a new tab.
+          if (readConsent() !== "all") return;
           e.preventDefault();
           setOpen(true);
         }}

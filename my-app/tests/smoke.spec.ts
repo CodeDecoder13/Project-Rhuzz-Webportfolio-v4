@@ -16,6 +16,7 @@ test("home loads with centered nav and no view-projects button", async ({
   );
   const nav = page.getByRole("navigation", { name: "Primary" });
   await expect(nav.getByRole("link")).toHaveText([
+    "Home",
     "About",
     "Projects",
     "Contact",
@@ -36,6 +37,7 @@ test.describe("mobile", () => {
     await burger.click();
     const menu = page.getByRole("navigation", { name: "Mobile" });
     await expect(menu.getByRole("link")).toHaveText([
+      "Home",
       "About",
       "Projects",
       "Contact",
@@ -293,18 +295,34 @@ test("hero has Message and Book me with a hover hint", async ({ page }) => {
   await expect(tip).toHaveCSS("opacity", "1");
 });
 
-test("Book me opens the Calendly modal and Esc closes it", async ({ page }) => {
-  await page.goto("/");
-  await page.getByRole("link", { name: "Book me" }).click();
-  const dialog = page.getByRole("dialog", { name: "Book a call" });
-  await expect(dialog).toBeVisible();
-  await expect(dialog.locator("iframe")).toHaveAttribute(
-    "src",
-    /calendly\.com\/boyparamio\/30min/,
-  );
-  await page.keyboard.press("Escape");
-  await expect(dialog).toBeHidden();
-  await expect(page.getByRole("link", { name: "Book me" })).toBeFocused();
+// The in-page booking window only loads once the visitor accepts all cookies.
+test.describe("accepted cookies", () => {
+  test.use({
+    storageState: {
+      cookies: [],
+      origins: [
+        {
+          origin: "http://localhost:3100",
+          localStorage: [{ name: "cookie-consent", value: "all" }],
+        },
+      ],
+    },
+  });
+  test("Book me opens the Calendly modal and Esc closes it", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await page.getByRole("link", { name: "Book me" }).click();
+    const dialog = page.getByRole("dialog", { name: "Book a call" });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator("iframe")).toHaveAttribute(
+      "src",
+      /calendly\.com\/boyparamio\/30min/,
+    );
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(page.getByRole("link", { name: "Book me" })).toBeFocused();
+  });
 });
 
 test("How I work: tabs switch the track and hovering a step shows its scene", async ({
@@ -371,5 +389,28 @@ test.describe("system dark preference", () => {
       "data-theme",
       "dark",
     );
+  });
+});
+
+test.describe("new visitor", () => {
+  test.use({ storageState: { cookies: [], origins: [] } });
+
+  test("cookie banner asks once, remembers the choice and can be reopened", async ({
+    page,
+  }) => {
+    await page.goto("/privacy");
+    const banner = page.getByRole("region", { name: "Cookie consent" });
+    await expect(banner).toBeVisible();
+    await banner.getByRole("button", { name: "Necessary only" }).click();
+    await expect(banner).toBeHidden();
+    await page.reload();
+    await expect(banner).toBeHidden();
+    await page.getByRole("button", { name: "Cookie settings" }).click();
+    await expect(banner).toBeVisible();
+    await banner.getByRole("button", { name: "Accept all" }).click();
+    await expect(banner).toBeHidden();
+    expect(
+      await page.evaluate(() => localStorage.getItem("cookie-consent")),
+    ).toBe("all");
   });
 });

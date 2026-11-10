@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Anton, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import CookieConsent from "@/components/CookieConsent";
 import Gate from "@/components/Gate";
+import ImageGuard from "@/components/ImageGuard";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import RevealRoot from "@/components/RevealRoot";
@@ -78,6 +80,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <RevealRoot />
         <MusicPlayer />
         <Gate />
+        <CookieConsent />
+        <ImageGuard />
       </body>
     </html>
   );

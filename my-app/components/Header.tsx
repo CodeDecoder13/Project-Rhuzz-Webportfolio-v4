@@ -4,6 +4,7 @@ import CvRequest from "./CvRequest";
 import ThemeToggle from "./ThemeToggle";
 
 const nav = [
+  ["Home", "/"],
   ["About", "/about"],
   ["Projects", "/projects"],
   ["Contact", "/contact"],

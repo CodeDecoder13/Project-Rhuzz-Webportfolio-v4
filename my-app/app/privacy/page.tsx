@@ -34,9 +34,14 @@ export default function PrivacyPage() {
           security and reliability.
         </li>
         <li>
-          <b>Preferences:</b> your sound choice (localStorage) and whether you
-          have seen the intro screen (sessionStorage) are stored in your
-          browser. They are not sent to a server.
+          <b>Preferences:</b> your theme, sound choice and cookie choice
+          (localStorage) and whether you have seen the intro screen
+          (sessionStorage) are stored in your browser. They are not sent to a
+          server. See the{" "}
+          <a href="/cookies" className="underline">
+            Cookie Policy
+          </a>
+          .
         </li>
       </ul>
       <H2>3. Why I use it</H2>
@@ -54,16 +59,24 @@ export default function PrivacyPage() {
       </P>
       <H2>5. How long I keep it</H2>
       <P>
-        Contact messages and resume requests: [12 months] or until you ask me to
+        Contact messages and resume requests: 12 months or until you ask me to
         delete them.
       </P>
       <H2>6. Your rights</H2>
       <P>
         You may ask to access, correct or delete your data, or to object to its
-        processing. Email {site.email} and I will respond within [30 days].
+        processing. Email {site.email} and I will respond within 30 days.
       </P>
       <H2>7. Cookies</H2>
-      <P>This site sets no cookies. Audio never plays unless you turn it on.</P>
+      <P>
+        This site sets no analytics or advertising cookies. It keeps a few
+        essential preferences in your browser, and you choose whether the
+        Calendly booking window may load inside the page. Details are in the{" "}
+        <a href="/cookies" className="underline">
+          Cookie Policy
+        </a>
+        . Audio never plays unless you turn it on.
+      </P>
       <H2>8. Security</H2>
       <P>
         The site uses HTTPS and limits access to messages. No system is

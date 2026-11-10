@@ -11,6 +11,7 @@ for (const theme of ["light", "dark"]) {
     "/contact",
     "/qa-testing",
     "/ai-consent",
+    "/cookies",
   ]) {
     test(`no serious or critical a11y violations on ${path} (${theme})`, async ({
       page,

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/content/site";
+import CookieSettings from "./CookieSettings";
 import CvRequest from "./CvRequest";
 
 const explore = [
@@ -90,6 +91,14 @@ export default function Footer() {
               <Link href="/ai-consent" className={link}>
                 AI Consent
               </Link>
+            </li>
+            <li>
+              <Link href="/cookies" className={link}>
+                Cookie Policy
+              </Link>
+            </li>
+            <li>
+              <CookieSettings className={link} />
             </li>
           </ul>
         </div>

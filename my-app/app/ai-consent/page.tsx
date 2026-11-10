@@ -48,7 +48,7 @@ export default function AiConsentPage() {
         Chats travel over HTTPS, the AI service key never reaches your browser,
         and I only keep messages you asked me to send. The conversation itself
         is not stored on this site and disappears when you close or refresh the
-        page. Messages you send are kept for [12 months] or until you ask me to
+        page. Messages you send are kept for 12 months or until you ask me to
         delete them.
       </P>
       <H2>6. Your choice</H2>
@@ -56,7 +56,7 @@ export default function AiConsentPage() {
         Using the AI chat is optional. If you decline, you can email me at{" "}
         {site.email} or book a call instead. You will be asked again each time
         you open the Contact page. You may withdraw consent and ask me to delete
-        anything you sent by emailing me; I will respond within [30 days].
+        anything you sent by emailing me; I will respond within 30 days.
       </P>
       <H2>7. Changes</H2>
       <P>Updates will appear here with a new date.</P>
