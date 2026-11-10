@@ -31,11 +31,11 @@ export default function ContactPage() {
               href={site.calendly}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border-[1.5px] border-blue bg-blue px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-white transition-transform active:scale-[.97]"
+              className="btn-fill [--fill:var(--ink)] [--fill-text:var(--paper)] rounded-full border-[1.5px] border-blue bg-blue px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-white"
             >
               Book a call
             </a>
-            <CvRequest className="rounded-full border-[1.5px] border-ink bg-card px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] transition-transform active:scale-[.97]">
+            <CvRequest className="btn-fill [--fill:var(--blue)] [--fill-text:#fff] rounded-full border-[1.5px] border-ink bg-card px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em]">
               Get my CV
             </CvRequest>
           </>
@@ -67,11 +67,11 @@ export default function ContactPage() {
                 href={site.calendly}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border-[1.5px] border-blue bg-blue px-6 py-3 font-mono text-[13px] uppercase tracking-[.06em] text-white transition-transform active:scale-[.97]"
+                className="btn-fill [--fill:var(--ink)] [--fill-text:var(--paper)] rounded-full border-[1.5px] border-blue bg-blue px-6 py-3 font-mono text-[13px] uppercase tracking-[.06em] text-white"
               >
                 Book a call
               </a>
-              <CvRequest className="rounded-full border-[1.5px] border-ink px-6 py-3 font-mono text-[13px] uppercase tracking-[.06em] transition-transform active:scale-[.97]">
+              <CvRequest className="btn-fill [--fill:var(--blue)] [--fill-text:#fff] rounded-full border-[1.5px] border-ink px-6 py-3 font-mono text-[13px] uppercase tracking-[.06em]">
                 Get my CV
               </CvRequest>
             </div>
