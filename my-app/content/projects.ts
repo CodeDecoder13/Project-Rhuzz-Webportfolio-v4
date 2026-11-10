@@ -133,7 +133,12 @@ const all: Project[] = [
     live: "https://eagles-portal-management-production.up.railway.app/admin",
     coverBg: "#DCE8F7",
     coverFg: "#0B1B33",
-    ...placeholder,
+    problem:
+      "A friend's fraternity needed one internal system for its members and records instead of scattered chats and spreadsheets.",
+    solution:
+      "Built it for them as a full-stack web app: a Vue 3 front end with Shadcn Vue and Tailwind, a Laravel 12 API and a PostgreSQL database, with an admin side for officers.",
+    result:
+      "Deployed on Railway and built as a real project for a real client, my friend's fraternity.",
   },
   {
     slug: "portfolio-website-v3",
