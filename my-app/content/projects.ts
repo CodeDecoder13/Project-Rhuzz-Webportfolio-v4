@@ -144,7 +144,12 @@ const all: Project[] = [
     live: "https://project-rhuzz-graduated-version-production-0689.up.railway.app",
     coverBg: "#0B1B33",
     coverFg: "#8DBBF2",
-    ...placeholder,
+    problem:
+      "V2 got me into frameworks, but the design was still plain and I wanted a site that felt more polished and alive.",
+    solution:
+      "Rebuilt it on Next.js with TypeScript, Tailwind and Motion, with a stronger visual design, smoother animations and cleaner components than V2.",
+    result:
+      "An improvement on V2: a more refined, better-structured portfolio that shows how far my web development has come.",
   },
   {
     slug: "omnipos",
