@@ -83,17 +83,24 @@ function Tag({
 }
 
 const qaScenes: ReactNode[] = [
-  // 01 Manual test: walk the checkout by hand, one check fails
+  // 01 Explore & test: open the app, look for UI defects and broken flows
   <>
     <Card>
-      <Label>MANUAL TEST · CHECKOUT</Label>
-      <b className="text-[15px] leading-tight">Apply discount code</b>
+      <div className="mb-1.5 flex items-center gap-1.5">
+        {[0, 1, 2].map((i) => (
+          <span key={i} className="size-2 rounded-full border border-ink" />
+        ))}
+        <span className="mono ml-2 text-[10px] text-muted">
+          shop.app/checkout
+        </span>
+      </div>
+      <b className="text-[15px] leading-tight">Open the app, look around</b>
     </Card>
     <Card className="space-y-1.5">
       {[
-        "✓ Add an item to the cart",
-        "✓ Open the checkout page",
-        "✗ Apply SAVE10: total unchanged",
+        "✓ Layout holds on mobile and desktop",
+        "✗ Pay button overlaps the footer",
+        "✗ SAVE10 applied, total unchanged",
       ].map((t) => (
         <motion.p
           key={t}
@@ -104,9 +111,10 @@ const qaScenes: ReactNode[] = [
         </motion.p>
       ))}
     </Card>
-    <div className="flex gap-2">
-      <Tag>expected ₱900</Tag>
-      <Tag bad>actual ₱1,000</Tag>
+    <div className="flex flex-wrap gap-2">
+      <Tag>UI</Tag>
+      <Tag>functional</Tag>
+      <Tag bad>2 defects</Tag>
     </div>
   </>,
 

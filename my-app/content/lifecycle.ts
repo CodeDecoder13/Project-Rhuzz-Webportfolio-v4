@@ -50,8 +50,8 @@ export const tracks: Record<
     ticket: "Ticket #142",
     steps: [
       {
-        name: "Manual test",
-        text: "I read the requirement, then test by hand: happy path, edge cases and the things users actually do. Exploring finds what scripts miss.",
+        name: "Explore & test",
+        text: "I open the web app or system first and look for UI defects, broken flows and edge cases, then test by hand against the requirement.",
       },
       {
         name: "Automate",
