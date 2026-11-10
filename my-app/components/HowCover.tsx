@@ -27,14 +27,21 @@ export default function HowCover() {
       viewBox="40 24 330 206"
       role="img"
       aria-label="Rhuzzel typing code at a laptop"
-      className="block w-full max-w-[340px] max-[800px]:max-w-[170px]"
+      className="how-cover block w-full max-w-[340px] max-[800px]:max-w-[170px]"
     >
       <rect x={132} y={160} width={10} height={70} fill={INK} />
       <rect x={336} y={160} width={10} height={70} fill={INK} />
       <Box x={120} y={150} w={236} h={12} fill={BLUE} rx={3} />
       {/* laptop with code being typed in from the right */}
       <Box x={198} y={62} w={106} h={82} fill="#fff" rx={6} />
-      <rect x={206} y={70} width={90} height={66} fill={INK} />
+      <rect
+        className="cv-screen"
+        x={206}
+        y={70}
+        width={90}
+        height={66}
+        fill={INK}
+      />
       {code.map(([indent, len, fill], i) => (
         <rect
           key={i}

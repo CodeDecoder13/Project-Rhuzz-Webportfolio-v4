@@ -122,7 +122,7 @@ const qaScenes: ReactNode[] = [
   <>
     <motion.div
       variants={item}
-      className="rounded-xl border-[1.5px] border-ink bg-ink p-3 font-mono text-[12px] leading-relaxed text-paper shadow-[4px_4px_0_var(--blue)]"
+      className="island-light rounded-xl border-[1.5px] border-ink bg-ink p-3 font-mono text-[12px] leading-relaxed text-paper shadow-[4px_4px_0_var(--blue)]"
     >
       <motion.p variants={type} className="text-sky">
         {`test("SAVE10 takes 10% off", async () => {`}
@@ -412,7 +412,7 @@ const devScenes: ReactNode[] = [
     </div>
     <motion.div
       variants={item}
-      className="rounded-xl border-[1.5px] border-ink bg-ink p-3 font-mono text-[12px] leading-relaxed text-paper shadow-[4px_4px_0_var(--blue)]"
+      className="island-light rounded-xl border-[1.5px] border-ink bg-ink p-3 font-mono text-[12px] leading-relaxed text-paper shadow-[4px_4px_0_var(--blue)]"
     >
       <motion.p variants={type} className="text-sky">
         + total = subtotal − discount(code)
@@ -520,15 +520,89 @@ const devScenes: ReactNode[] = [
   </>,
 ];
 
-function Cover() {
+const icons: Record<Track, { d: string; cls: string; pos: string }[]> = {
+  dev: [
+    {
+      d: "M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16",
+      cls: "bg-[#F6E65A] text-[#0B1B33]",
+      pos: "left-[-4%] top-[-8%]",
+    },
+    {
+      d: "M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3",
+      cls: "bg-blue text-white",
+      pos: "right-[3%] top-[0%]",
+    },
+    {
+      d: "M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z",
+      cls: "bg-card",
+      pos: "left-[-5%] top-[46%]",
+    },
+    {
+      d: "M12 3l9 5-9 5-9-5zM3 13l9 5 9-5",
+      cls: "bg-sky",
+      pos: "right-[0%] top-[46%]",
+    },
+  ],
+  qa: [
+    {
+      d: "M9 8a3 3 0 016 0v1H9zM8 9h8v6a4 4 0 01-8 0zM4 10l4 2M20 10l-4 2M4 18l4-2M20 18l-4-2",
+      cls: "bg-[#F6E65A] text-[#0B1B33]",
+      pos: "left-[-4%] top-[-8%]",
+    },
+    {
+      d: "M4 12l5 5L20 6",
+      cls: "bg-blue text-white",
+      pos: "right-[3%] top-[0%]",
+    },
+    {
+      d: "M10.5 18a7.5 7.5 0 110-15 7.5 7.5 0 010 15zM16 16l5 5",
+      cls: "bg-card",
+      pos: "left-[-5%] top-[46%]",
+    },
+    {
+      d: "M9 4h6v3H9zM6 5h3M15 5h3v16H6V5M9 12h6M9 16h4",
+      cls: "bg-sky",
+      pos: "right-[0%] top-[46%]",
+    },
+  ],
+};
+
+function Cover({ track }: { track: Track }) {
   return (
     <>
-      <motion.div variants={item} className="flex w-full justify-center">
+      <motion.div
+        variants={item}
+        className="relative flex w-full justify-center"
+      >
         <HowCover />
+        {icons[track].map((ic, i) => (
+          <span
+            key={i}
+            aria-hidden="true"
+            style={{
+              animationDelay: `${-i * 1.3}s`,
+              animationDuration: `${4.6 + i * 0.7}s`,
+            }}
+            className={`how-fly pointer-events-none absolute grid size-9 place-items-center rounded-[10px] border-[1.5px] border-ink shadow-[3px_3px_0_var(--ink)] ${ic.cls} ${ic.pos}`}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="size-5"
+            >
+              <path d={ic.d} />
+            </svg>
+          </span>
+        ))}
       </motion.div>
       <motion.div variants={item} className="text-center">
-        <div className="display text-[34px] leading-none max-[800px]:text-[24px]">
-          How I work
+        <div className="mono text-[10px] text-blue">How I work</div>
+        <div className="display mt-1 text-[34px] leading-none max-[800px]:text-[24px]">
+          {tracks[track].label}
         </div>
         <p className="mono mt-2 text-[10px] text-muted">
           <span className="max-[800px]:hidden">
@@ -557,7 +631,7 @@ export default function HowStage({
   return (
     <div
       aria-hidden="true"
-      className="island-light flex h-full flex-col overflow-hidden rounded-[16px] border-[1.5px] border-ink bg-[#E4EEFB] bg-[linear-gradient(rgba(11,27,51,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(11,27,51,.05)_1px,transparent_1px)] bg-[size:24px_24px] shadow-[8px_8px_0_var(--blue)]"
+      className="how-stage flex h-full flex-col overflow-hidden rounded-[16px] border-[1.5px] border-ink bg-tint bg-[linear-gradient(var(--grid)_1px,transparent_1px),linear-gradient(90deg,var(--grid)_1px,transparent_1px)] bg-[size:24px_24px] shadow-[8px_8px_0_var(--blue)]"
     >
       <div className="flex shrink-0 items-center justify-between border-b-[1.5px] border-ink bg-card px-4 py-2">
         <span className="mono">{tracks[track].ticket}</span>
@@ -568,7 +642,7 @@ export default function HowStage({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6, transition: { duration: 0.1 } }}
             transition={{ duration: 0.2, ease }}
-            className="mono rounded-full bg-ink px-2.5 py-px text-sky"
+            className="island-light mono rounded-full bg-ink px-2.5 py-px text-sky"
           >
             {active === null ? "Idle" : steps[active].name}
           </motion.span>
@@ -585,7 +659,7 @@ export default function HowStage({
             className="absolute inset-0 flex flex-col items-center justify-center p-5 max-[800px]:[zoom:.74] min-[801px]:[zoom:1.45] min-[801px]:p-7"
           >
             <div className="flex w-full max-w-[380px] flex-col gap-3">
-              {active === null ? <Cover /> : scenes[active]}
+              {active === null ? <Cover track={track} /> : scenes[active]}
             </div>
           </motion.div>
         </AnimatePresence>

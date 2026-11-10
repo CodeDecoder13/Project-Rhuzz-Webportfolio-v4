@@ -577,3 +577,14 @@ body {
     animation: none;
   }
 }
+
+/* How I work panel: floating stickers on the cover, and the cover art re-inked for dark mode (outlines light, shadows blue). */
+.how-fly { animation: how-fly 5s ease-in-out infinite alternate; will-change: transform; }
+@keyframes how-fly {
+  from { transform: translate3d(0, 6px, 0) rotate(-6deg); }
+  to { transform: translate3d(0, -8px, 0) rotate(6deg); }
+}
+@media (prefers-reduced-motion: reduce) { .how-fly { animation: none; } }
+:root[data-theme="dark"] .how-stage [stroke="#0B1B33"] { stroke: #e6edf8; }
+:root[data-theme="dark"] .how-stage [fill="#0B1B33"] { fill: #2a4a82; }
+:root[data-theme="dark"] .how-stage .cv-screen { fill: #050b16; }
