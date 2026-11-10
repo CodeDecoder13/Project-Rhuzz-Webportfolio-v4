@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ConsentGate from "@/components/ConsentGate";
 import ContactChat from "@/components/ContactChat";
 import CvRequest from "@/components/CvRequest";
+import PageHero from "@/components/PageHero";
 import { Section, SectionHead, card } from "@/components/Section";
 import { site } from "@/content/site";
 
@@ -9,7 +10,28 @@ export const metadata: Metadata = { title: "Contact" };
 
 export default function ContactPage() {
   return (
-    <main className="page-in pt-14">
+    <main>
+      <PageHero
+        label="Contact Rhuzzel"
+        word="CONTACT"
+        photo={{
+          src: "/assets/rhuzz-cutout-dark.png",
+          w: 696,
+          h: 1207,
+          alt: "Rhuzzel Paramio in a black blazer and navy tie",
+        }}
+        tag="Open to opportunities"
+        eyebrow="got a project?"
+        title={["Let’s", "talk"]}
+        kicker="Chat · Book a call · Email"
+        blurb="Ask my assistant anything, book 30 minutes, or send a note. I reply within my usual window."
+        pill={`Based in ${site.location}`}
+        stats={[
+          { value: site.replyTime, label: "Reply time" },
+          { value: "30 min", label: "Intro call" },
+          { value: "24/7", label: "Assistant online" },
+        ]}
+      />
       <Section>
         <SectionHead title="Contact" />
         <div className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-[1.2fr_1fr]">

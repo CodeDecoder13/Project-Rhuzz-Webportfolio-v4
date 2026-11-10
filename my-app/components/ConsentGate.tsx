@@ -12,11 +12,11 @@ import {
 import { createPortal } from "react-dom";
 import { site } from "@/content/site";
 
-// Asks for AI consent every time the Contact page is opened (pages stay mounted when you navigate away, so the path change re-arms it).
+// Asks for AI consent every time the visitor reaches the chat on the Contact page (the hero shows first; pages stay mounted when you navigate away, so the path change re-arms it).
 // The chat behind the modal is inert until the visitor agrees. Declining leaves the email and booking routes open.
 export default function ConsentGate({ children }: { children: ReactNode }) {
   const path = usePathname();
-  const [state, setState] = useState<"ask" | "yes" | "no">("ask");
+  const [state, setState] = useState<"idle" | "ask" | "yes" | "no">("idle");
   // false while prerendering (no document for the portal), true once hydrated
   const client = useSyncExternalStore(
     () => () => {},
@@ -24,11 +24,23 @@ export default function ConsentGate({ children }: { children: ReactNode }) {
     () => false,
   );
   const agree = useRef<HTMLButtonElement>(null);
+  const box = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- re-ask on every visit
-    if (path === "/contact") setState("ask");
+    if (path === "/contact") setState("idle");
   }, [path]);
+
+  // the modal opens once the chat card scrolls into view, so the hero above is never covered
+  useEffect(() => {
+    if (state !== "idle" || !box.current) return;
+    const io = new IntersectionObserver(
+      ([e]) => e.isIntersecting && setState("ask"),
+      { threshold: 0.35 },
+    );
+    io.observe(box.current);
+    return () => io.disconnect();
+  }, [state]);
 
   useEffect(() => {
     if (state !== "ask") return;
@@ -43,7 +55,7 @@ export default function ConsentGate({ children }: { children: ReactNode }) {
   }, [state]);
 
   return (
-    <>
+    <div ref={box}>
       {state === "no" ? (
         <div className="grid h-[min(640px,calc(100svh-340px))] min-h-[420px] place-content-center gap-4 text-center">
           <p className="display text-[28px] leading-tight">AI chat is off</p>
@@ -142,6 +154,6 @@ export default function ConsentGate({ children }: { children: ReactNode }) {
           </div>,
           document.body,
         )}
-    </>
+    </div>
   );
 }
