@@ -54,7 +54,12 @@ const all: Project[] = [
     live: "https://project-rhuzzparamio.vercel.app",
     coverBg: "#DCE8F7",
     coverFg: "#0B1B33",
-    ...placeholder,
+    problem:
+      "The first version worked but was hard to grow: no components, no types, no real structure.",
+    solution:
+      "Rebuilt it on Next.js with TypeScript, Tailwind and Framer Motion, with Supabase behind it. Reusable components and proper routing replaced copy-pasted HTML.",
+    result:
+      "My first step into real web development: a framework-based site that is easier to maintain and extend.",
   },
   {
     slug: "cicd-pipeline-templates",
@@ -89,7 +94,12 @@ const all: Project[] = [
     live: "https://project-rhuzz.vercel.app",
     coverBg: "#B8C7DD",
     coverFg: "#0B1B33",
-    ...placeholder,
+    problem:
+      "I wanted a first place online to show my work, and I had never built a website before.",
+    solution:
+      "Built it from scratch in plain HTML, CSS and JavaScript, with no framework. Every layout, animation and interaction was hand-written.",
+    result:
+      "My discovery phase: I learned how the web works at its core, and it is live on Vercel.",
   },
   {
     slug: "construction-contractors-inc",
