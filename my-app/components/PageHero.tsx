@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import AboutMotion from "./about/AboutMotion";
 import CountUp from "./CountUp";
 
@@ -25,6 +25,7 @@ export default function PageHero({
   blurb,
   pill,
   stats,
+  actions,
 }: {
   label: string;
   word: string;
@@ -36,6 +37,7 @@ export default function PageHero({
   blurb: string;
   pill: string;
   stats: HeroStat[];
+  actions?: ReactNode;
 }) {
   // ghost word width scales with its letter count so long words still fit the screen
   const size = {
@@ -113,6 +115,14 @@ export default function PageHero({
             <span aria-hidden="true" className="size-2 rounded-full bg-blue" />
             {pill}
           </p>
+          {actions && (
+            <div
+              data-a="left"
+              className="mt-4 flex flex-wrap gap-2.5 max-[800px]:justify-center"
+            >
+              {actions}
+            </div>
+          )}
         </div>
 
         <dl className="absolute bottom-[14svh] right-[max(32px,5vw)] z-[3] w-[min(230px,20vw)] max-[800px]:static max-[800px]:mb-8 max-[800px]:grid max-[800px]:w-full max-[800px]:grid-cols-3 max-[800px]:gap-2 max-[800px]:px-4">

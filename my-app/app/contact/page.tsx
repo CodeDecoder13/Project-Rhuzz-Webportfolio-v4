@@ -20,12 +20,26 @@ export default function ContactPage() {
           h: 1207,
           alt: "Rhuzzel Paramio in a black blazer and navy tie",
         }}
-        tag="Open to opportunities"
         eyebrow="got a project?"
         title={["Let’s", "talk"]}
         kicker="Chat · Book a call · Email"
         blurb="Ask my assistant anything, book 30 minutes, or send a note. I reply within my usual window."
         pill={`Based in ${site.location}`}
+        actions={
+          <>
+            <a
+              href={site.calendly}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border-[1.5px] border-blue bg-blue px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-white transition-transform active:scale-[.97]"
+            >
+              Book a call
+            </a>
+            <CvRequest className="rounded-full border-[1.5px] border-ink bg-card px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] transition-transform active:scale-[.97]">
+              Get my CV
+            </CvRequest>
+          </>
+        }
         stats={[
           { value: site.replyTime, label: "Reply time" },
           { value: "30 min", label: "Intro call" },
