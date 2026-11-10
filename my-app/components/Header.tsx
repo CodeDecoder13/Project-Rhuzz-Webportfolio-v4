@@ -10,7 +10,7 @@ const nav = [
 ] as const;
 
 const pill =
-  "rounded-full border-[1.5px] px-[18px] py-[9px] font-mono text-xs uppercase tracking-[.06em]";
+  "btn-fill rounded-full border-[1.5px] px-[18px] py-[9px] font-mono text-xs uppercase tracking-[.06em]";
 
 export default function Header() {
   return (

@@ -126,7 +126,7 @@ export default function ContactChat() {
             type="button"
             onClick={reset}
             disabled={busy}
-            className="mono rounded-full border-[1.5px] border-ink px-3 py-1.5 text-[11px] uppercase transition-transform active:scale-[.96] disabled:opacity-40"
+            className="btn-fill mono rounded-full border-[1.5px] border-ink px-3 py-1.5 text-[11px] uppercase transition-transform active:scale-[.96] disabled:opacity-40"
           >
             New chat
           </button>
@@ -182,7 +182,7 @@ export default function ContactChat() {
                 key={c}
                 type="button"
                 onClick={() => send(c)}
-                className="rounded-full border-[1.5px] border-ink bg-card px-3.5 py-2 text-sm transition-transform hover:-translate-y-0.5 active:scale-[.97]"
+                className="btn-fill rounded-full border-[1.5px] border-ink bg-card px-3.5 py-2 text-sm transition-transform hover:-translate-y-0.5 active:scale-[.97]"
               >
                 {c}
               </button>

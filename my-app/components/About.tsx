@@ -26,7 +26,7 @@ export default function About({ n }: { n?: string }) {
           <p className="mt-auto pt-[clamp(8px,2svh,20px)]">
             <Link
               href="/about"
-              className="mono inline-block rounded-full border-[1.5px] border-ink bg-ink px-5 py-[clamp(6px,1.2svh,10px)] text-paper"
+              className="btn-fill mono inline-block rounded-full border-[1.5px] border-ink bg-ink px-5 py-[clamp(6px,1.2svh,10px)] text-paper"
             >
               Full story, experience and education →
             </Link>

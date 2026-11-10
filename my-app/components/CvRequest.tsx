@@ -147,7 +147,7 @@ export default function CvRequest({
                   type="button"
                   onClick={close}
                   aria-label="Close"
-                  className="mono rounded-full border-[1.5px] border-ink bg-card px-3 py-1 text-[11px] uppercase"
+                  className="btn-fill mono rounded-full border-[1.5px] border-ink bg-card px-3 py-1 text-[11px] uppercase"
                 >
                   Close
                 </button>
@@ -163,7 +163,7 @@ export default function CvRequest({
                   <button
                     type="button"
                     onClick={close}
-                    className="justify-self-start rounded-full border-[1.5px] border-blue bg-blue px-6 py-3 font-mono text-[13px] uppercase tracking-[.06em] text-white transition-transform active:scale-[.97]"
+                    className="btn-fill justify-self-start rounded-full border-[1.5px] border-blue bg-blue px-6 py-3 font-mono text-[13px] uppercase tracking-[.06em] text-white transition-transform active:scale-[.97]"
                   >
                     Done
                   </button>
@@ -262,7 +262,7 @@ export default function CvRequest({
                     <button
                       type="submit"
                       disabled={busy}
-                      className="rounded-full border-[1.5px] border-blue bg-blue px-6 py-3 font-mono text-[13px] uppercase tracking-[.06em] text-white transition-transform active:scale-[.97] disabled:opacity-60"
+                      className="btn-fill rounded-full border-[1.5px] border-blue bg-blue px-6 py-3 font-mono text-[13px] uppercase tracking-[.06em] text-white transition-transform active:scale-[.97] disabled:opacity-60"
                     >
                       {busy ? "Sending…" : "Email me the resume"}
                     </button>

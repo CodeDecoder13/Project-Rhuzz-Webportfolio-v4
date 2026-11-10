@@ -1,7 +1,7 @@
 import type { Project } from "@/content/projects";
 
 const link =
-  "rounded-full border-[1.5px] px-[26px] py-3.5 font-mono text-[13px] uppercase tracking-[.06em]";
+  "btn-fill rounded-full border-[1.5px] px-[26px] py-3.5 font-mono text-[13px] uppercase tracking-[.06em]";
 
 export function Tags({ items }: { items: string[] }) {
   return (

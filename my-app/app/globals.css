@@ -590,6 +590,10 @@ body {
 :root[data-theme="dark"] .how-stage .cv-screen { fill: #050b16; }
 
 /* Fill-on-hover buttons: a colour sweeps in from the left (out to the right on leave), text flips, press squeezes with a soft ring. Transform-only. */
+@layer components {
+  .btn-fill { --fill: var(--blue); --fill-text: #fff; }
+  .btn-fill.bg-blue { --fill: var(--ink); --fill-text: var(--paper); }
+}
 .btn-fill { position: relative; overflow: hidden; isolation: isolate; transition: color .3s ease, transform .18s cubic-bezier(.23, 1, .32, 1), box-shadow .3s ease; }
 .btn-fill::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--fill); transform: scaleX(0); transform-origin: right; transition: transform .5s cubic-bezier(.23, 1, .32, 1); }
 .btn-fill:focus-visible { color: var(--fill-text); }

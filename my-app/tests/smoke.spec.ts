@@ -140,9 +140,7 @@ test("contact chat greets and streams the reply", async ({ page }) => {
     }),
   );
   await page.goto("/contact");
-  await page
-    .getByRole("heading", { name: "Prefer a call?" })
-    .scrollIntoViewIfNeeded();
+  await page.getByLabel("Message", { exact: true }).click(); // using the chat is what asks for consent
   await page.getByRole("button", { name: "I agree, start chat" }).click();
   await expect(page.getByRole("log")).toContainText("I'm Rhuzz");
   await page.getByLabel("Message", { exact: true }).fill("What does he do?");
@@ -156,9 +154,7 @@ test("contact chat surfaces a server error", async ({ page }) => {
     r.fulfill({ status: 500, json: { error: "Chat is not configured." } }),
   );
   await page.goto("/contact");
-  await page
-    .getByRole("heading", { name: "Prefer a call?" })
-    .scrollIntoViewIfNeeded();
+  await page.getByLabel("Message", { exact: true }).click(); // using the chat is what asks for consent
   await page.getByRole("button", { name: "I agree, start chat" }).click();
   await page.getByRole("button", { name: "I'd like to hire him" }).click();
   await expect(page.getByRole("log")).toContainText("not configured");
@@ -168,9 +164,7 @@ test("contact asks for AI consent each visit and can be declined", async ({
   page,
 }) => {
   await page.goto("/contact");
-  await page
-    .getByRole("heading", { name: "Prefer a call?" })
-    .scrollIntoViewIfNeeded();
+  await page.getByLabel("Message", { exact: true }).click(); // using the chat is what asks for consent
   await expect(
     page.getByRole("dialog", { name: "Before you chat" }),
   ).toBeVisible();

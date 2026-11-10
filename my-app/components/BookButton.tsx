@@ -80,7 +80,7 @@ export default function BookButton({
                   ref={close}
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="mono rounded-full border-[1.5px] border-ink bg-card px-3 py-1"
+                  className="btn-fill mono rounded-full border-[1.5px] border-ink bg-card px-3 py-1"
                 >
                   Close
                 </button>

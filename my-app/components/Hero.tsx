@@ -61,7 +61,7 @@ export default function Hero() {
           <div data-h="left" className="mt-5 flex flex-wrap gap-2.5">
             <Link
               href="/contact"
-              className="rounded-full border-[1.5px] border-ink bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-paper max-[800px]:[text-shadow:none]"
+              className="btn-fill rounded-full border-[1.5px] border-ink bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-paper max-[800px]:[text-shadow:none]"
             >
               Message
             </Link>
@@ -69,7 +69,7 @@ export default function Hero() {
               <BookButton
                 url={site.calendly}
                 describedBy="book-tip"
-                className="block rounded-full border-[1.5px] border-ink bg-card px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-ink max-[800px]:[text-shadow:none]"
+                className="btn-fill block rounded-full border-[1.5px] border-ink bg-card px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-ink max-[800px]:[text-shadow:none]"
               />
               <span
                 id="book-tip"

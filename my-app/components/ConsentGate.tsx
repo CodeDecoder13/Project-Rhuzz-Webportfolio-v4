@@ -12,7 +12,7 @@ import {
 import { createPortal } from "react-dom";
 import { site } from "@/content/site";
 
-// Asks for AI consent every time the visitor reaches the chat on the Contact page (the hero shows first; pages stay mounted when you navigate away, so the path change re-arms it).
+// Asks for AI consent every time the visitor starts using the chat on the Contact page (pages stay mounted when you navigate away, so the path change re-arms it).
 // The chat behind the modal is inert until the visitor agrees. Declining leaves the email and booking routes open.
 export default function ConsentGate({ children }: { children: ReactNode }) {
   const path = usePathname();
@@ -24,23 +24,18 @@ export default function ConsentGate({ children }: { children: ReactNode }) {
     () => false,
   );
   const agree = useRef<HTMLButtonElement>(null);
-  const box = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- re-ask on every visit
     if (path === "/contact") setState("idle");
   }, [path]);
 
-  // the modal opens once the chat card scrolls into view, so the hero above is never covered
-  useEffect(() => {
-    if (state !== "idle" || !box.current) return;
-    const io = new IntersectionObserver(
-      ([e]) => e.isIntersecting && setState("ask"),
-      { threshold: 0.35 },
-    );
-    io.observe(box.current);
-    return () => io.disconnect();
-  }, [state]);
+  // The modal opens the moment the visitor tries to use the chat (focus, click or typing), never just from landing on the page.
+  const ask = (e: { preventDefault(): void }) => {
+    if (state !== "idle") return;
+    e.preventDefault();
+    setState("ask");
+  };
 
   useEffect(() => {
     if (state !== "ask") return;
@@ -55,7 +50,7 @@ export default function ConsentGate({ children }: { children: ReactNode }) {
   }, [state]);
 
   return (
-    <div ref={box}>
+    <div onFocusCapture={ask} onPointerDownCapture={ask} onKeyDownCapture={ask}>
       {state === "no" ? (
         <div className="grid h-[min(640px,calc(100svh-340px))] min-h-[420px] place-content-center gap-4 text-center">
           <p className="display text-[28px] leading-tight">AI chat is off</p>
@@ -69,13 +64,13 @@ export default function ConsentGate({ children }: { children: ReactNode }) {
           <button
             type="button"
             onClick={() => setState("ask")}
-            className="mono mx-auto rounded-full border-[1.5px] border-ink px-4 py-2 text-[12px] uppercase transition-transform active:scale-[.96]"
+            className="btn-fill mono mx-auto rounded-full border-[1.5px] border-ink px-4 py-2 text-[12px] uppercase transition-transform active:scale-[.96]"
           >
             Review AI consent
           </button>
         </div>
       ) : (
-        <div inert={state !== "yes"}>{children}</div>
+        <div inert={state === "ask"}>{children}</div>
       )}
       {client &&
         state === "ask" &&
@@ -138,14 +133,14 @@ export default function ConsentGate({ children }: { children: ReactNode }) {
                   ref={agree}
                   type="button"
                   onClick={() => setState("yes")}
-                  className="rounded-full border-[1.5px] border-blue bg-blue px-6 py-3 font-mono text-[13px] uppercase tracking-[.06em] text-white transition-transform active:scale-[.97]"
+                  className="btn-fill rounded-full border-[1.5px] border-blue bg-blue px-6 py-3 font-mono text-[13px] uppercase tracking-[.06em] text-white transition-transform active:scale-[.97]"
                 >
                   I agree, start chat
                 </button>
                 <button
                   type="button"
                   onClick={() => setState("no")}
-                  className="rounded-full border-[1.5px] border-ink px-6 py-3 font-mono text-[13px] uppercase tracking-[.06em] transition-transform active:scale-[.97]"
+                  className="btn-fill rounded-full border-[1.5px] border-ink px-6 py-3 font-mono text-[13px] uppercase tracking-[.06em] transition-transform active:scale-[.97]"
                 >
                   No thanks
                 </button>

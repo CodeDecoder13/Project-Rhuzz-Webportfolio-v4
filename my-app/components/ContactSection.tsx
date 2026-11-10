@@ -15,7 +15,7 @@ export default function ContactSection() {
       <p className="reveal my-5">
         <Link
           href="/contact"
-          className="inline-block rounded-full border-[1.5px] border-ink bg-ink px-[26px] py-3.5 font-mono text-[13px] uppercase tracking-[.06em] text-paper"
+          className="btn-fill inline-block rounded-full border-[1.5px] border-ink bg-ink px-[26px] py-3.5 font-mono text-[13px] uppercase tracking-[.06em] text-paper"
         >
           Send a message
         </Link>

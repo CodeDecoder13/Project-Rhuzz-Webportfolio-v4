@@ -13,7 +13,7 @@ import QuoteCard from "./QuoteCard";
 import SkillsPanel from "./SkillsPanel";
 
 const pill =
-  "mono inline-block rounded-full border-[1.5px] border-ink px-5 py-2.5 transition-transform duration-150 ease-out active:scale-[.97]";
+  "btn-fill mono inline-block rounded-full border-[1.5px] border-ink px-5 py-2.5";
 
 // 01 Selected projects: three cards linking to the case studies (same covers as the work grid).
 const picks = ["omnipos", "whale-wallet", "devcollab"];
