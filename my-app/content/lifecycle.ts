@@ -50,28 +50,28 @@ export const tracks: Record<
     ticket: "Ticket #142",
     steps: [
       {
-        name: "New",
-        text: "A bug or a requirement lands. I reproduce it, write the steps down and decide what “fixed” looks like.",
+        name: "Manual test",
+        text: "I read the requirement, then test by hand: happy path, edge cases and the things users actually do. Exploring finds what scripts miss.",
       },
       {
-        name: "Assigned",
-        text: "One owner, one priority, one definition of done. Nothing sits in a shared inbox.",
+        name: "Automate",
+        text: "Every bug worth catching twice becomes an automated test (Playwright, API and regression checks) that runs on every change.",
       },
       {
-        name: "In progress",
-        text: "I fix the cause, not the symptom, and add a test that fails without the fix.",
+        name: "Document",
+        text: "Test cases, exact steps, expected vs actual, plus screenshots and logs. Anyone can reproduce it without asking me.",
       },
       {
-        name: "Fixed",
-        text: "Reviewed, merged, and the test that failed now passes in CI.",
+        name: "Create ticket",
+        text: "A clear ticket with severity, steps and evidence attached, assigned to one owner with one definition of done.",
       },
       {
-        name: "Verified",
-        text: "A second pass on a clean build: the original steps, plus the neighbours it could have broken.",
+        name: "Test again",
+        text: "When the fix lands I retest on a clean build: the original steps, the automated suite, and the neighbours it could have broken.",
       },
       {
         name: "Closed",
-        text: "Shipped with proof attached: the test run, the notes, the link. “Works on my machine” never closes a ticket.",
+        text: "Closed with proof attached: the test run, the notes, the link. “Works on my machine” never closes a ticket.",
       },
     ],
   },

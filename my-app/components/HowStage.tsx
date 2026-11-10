@@ -10,7 +10,7 @@ import type { ReactNode } from "react";
 import { tracks, type Track } from "@/content/lifecycle";
 import HowCover from "./HowCover";
 
-// One bug ticket (#142) travels through all six steps. Each scene is a short, single-idea animation.
+// One bug (#142) travels through all six QA steps; the dev track has its own scenes. Each scene is a short, single-idea animation.
 const ease = [0.22, 1, 0.36, 1] as const;
 const scene: Variants = {
   hidden: { opacity: 0, filter: "blur(6px)", y: 12 },
@@ -83,21 +83,23 @@ function Tag({
 }
 
 const qaScenes: ReactNode[] = [
-  // 01 New: the bug lands and gets written down
+  // 01 Manual test: walk the checkout by hand, one check fails
   <>
     <Card>
-      <Label>#142 · BUG</Label>
-      <b className="text-[15px] leading-tight">
-        Discount code ignored at checkout
-      </b>
+      <Label>MANUAL TEST · CHECKOUT</Label>
+      <b className="text-[15px] leading-tight">Apply discount code</b>
     </Card>
     <Card className="space-y-1.5">
       {[
-        "1. Add an item to the cart",
-        "2. Apply code SAVE10",
-        "3. Total does not change",
+        "✓ Add an item to the cart",
+        "✓ Open the checkout page",
+        "✗ Apply SAVE10: total unchanged",
       ].map((t) => (
-        <motion.p key={t} variants={type} className="font-mono text-[12px]">
+        <motion.p
+          key={t}
+          variants={type}
+          className={`font-mono text-[12px] ${t.startsWith("✗") ? "text-fail" : ""}`}
+        >
           {t}
         </motion.p>
       ))}
@@ -108,8 +110,64 @@ const qaScenes: ReactNode[] = [
     </div>
   </>,
 
-  // 02 Assigned: one owner, one priority, one definition of done
+  // 02 Automate: the bug becomes a regression test that fails, then guards the fix
   <>
+    <motion.div
+      variants={item}
+      className="rounded-xl border-[1.5px] border-ink bg-ink p-3 font-mono text-[12px] leading-relaxed text-paper shadow-[4px_4px_0_var(--blue)]"
+    >
+      <motion.p variants={type} className="text-sky">
+        {`test("SAVE10 takes 10% off", async () => {`}
+      </motion.p>
+      <motion.p variants={type} className="pl-3 text-sky">
+        await applyCode(&quot;SAVE10&quot;);
+      </motion.p>
+      <motion.p variants={type} className="pl-3 text-sky">
+        expect(total).toBe(900);
+      </motion.p>
+      <motion.p variants={type} className="text-sky">
+        {`});`}
+      </motion.p>
+    </motion.div>
+    <div className="flex flex-wrap gap-2">
+      <Tag>Playwright</Tag>
+      <Tag>regression</Tag>
+      <Tag bad>fails today ✗</Tag>
+    </div>
+  </>,
+
+  // 03 Document: test case, steps, evidence
+  <>
+    <Card>
+      <Label>TC-142 · TEST CASE</Label>
+      <b className="text-[15px] leading-tight">
+        Discount code applies at checkout
+      </b>
+    </Card>
+    <Card className="space-y-1.5">
+      {["Steps: cart → code → total", "Expected: ₱900", "Actual: ₱1,000"].map(
+        (t) => (
+          <motion.p key={t} variants={type} className="font-mono text-[12px]">
+            {t}
+          </motion.p>
+        ),
+      )}
+    </Card>
+    <div className="flex flex-wrap gap-2">
+      {["▸ screenshot.png", "▸ console.log", "▸ video.webm"].map((a) => (
+        <Tag key={a}>{a}</Tag>
+      ))}
+    </div>
+  </>,
+
+  // 04 Create ticket: one owner, one priority, one definition of done
+  <>
+    <Card>
+      <Label>#142 · BUG · NEW TICKET</Label>
+      <b className="text-[15px] leading-tight">
+        Discount code ignored at checkout
+      </b>
+    </Card>
     <Card className="flex items-center gap-3">
       <motion.span
         variants={{
@@ -122,11 +180,11 @@ const qaScenes: ReactNode[] = [
         }}
         className="display grid size-10 place-items-center rounded-full bg-blue text-lg text-white"
       >
-        RP
+        DV
       </motion.span>
       <div>
-        <Label>OWNER</Label>
-        <b>Rhuzzel</b>
+        <Label>ASSIGNED TO</Label>
+        <b>Developer</b>
       </div>
       <motion.span
         variants={{
@@ -154,118 +212,11 @@ const qaScenes: ReactNode[] = [
     </Card>
   </>,
 
-  // 03 In progress: failing test, then the fix, then green
-  <>
-    <motion.div
-      variants={item}
-      className="rounded-xl border-[1.5px] border-ink bg-ink p-3 font-mono text-[12px] leading-relaxed text-paper shadow-[4px_4px_0_var(--blue)]"
-    >
-      <div className="relative">
-        <motion.span
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 0 }}
-          transition={{ delay: 1.7, duration: 0.2 }}
-          className="text-[#FF9B87]"
-        >
-          ✗ applies SAVE10 to the total
-        </motion.span>
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.7, duration: 0.2 }}
-          className="absolute left-0 top-0 text-sky"
-        >
-          ✓ applies SAVE10 to the total
-        </motion.span>
-      </div>
-      <motion.p variants={type} className="mt-2 text-[#FF9B87]">
-        − total = subtotal
-      </motion.p>
-      <motion.p
-        variants={type}
-        className="text-sky"
-        transition={{ delay: 0.5 }}
-      >
-        + total = subtotal − discount(code)
-      </motion.p>
-    </motion.div>
-    <motion.div variants={item} className="mono text-[10px] text-muted">
-      test first, fix second
-    </motion.div>
-  </>,
-
-  // 04 Fixed: the branch merges and CI ticks green
-  <>
-    <Card>
-      <div className="flex items-center justify-between">
-        <Label>PR #143</Label>
-        <span className="mono rounded-full bg-ink px-2 py-px text-[10px] text-sky">
-          merged
-        </span>
-      </div>
-      <svg
-        viewBox="0 0 300 64"
-        className="mt-1 w-full"
-        fill="none"
-        stroke="#0B1B33"
-        strokeWidth="3"
-        strokeLinecap="round"
-      >
-        <path d="M10 52H290" opacity=".25" />
-        <motion.path
-          d="M60 52C90 52 90 14 122 14H188C220 14 220 52 250 52"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 0.9, ease, delay: 0.2 }}
-        />
-        {[
-          [60, 52],
-          [155, 14],
-          [250, 52],
-        ].map(([x, y], i) => (
-          <motion.circle
-            key={i}
-            cx={x}
-            cy={y}
-            r="6"
-            fill={i === 2 ? "#1F5FBF" : "#8DBBF2"}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{
-              delay: 0.3 + i * 0.35,
-              type: "spring",
-              duration: 0.4,
-              bounce: 0.4,
-            }}
-          />
-        ))}
-      </svg>
-    </Card>
-    <div className="flex flex-wrap gap-2">
-      {["lint", "types", "unit", "e2e"].map((c, i) => (
-        <motion.span
-          key={c}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            delay: 0.9 + i * 0.22,
-            type: "spring",
-            duration: 0.4,
-            bounce: 0.3,
-          }}
-          className="mono rounded-full border-[1.5px] border-ink bg-sky px-2.5 py-0.5 text-[10px]"
-        >
-          ✓ {c}
-        </motion.span>
-      ))}
-    </div>
-  </>,
-
-  // 05 Verified: a clean build, the original steps plus the neighbours
+  // 05 Test again: clean build, the failing test now passes, plus the neighbours
   <>
     <Card>
       <div className="mb-2 flex items-center justify-between">
-        <Label>CLEAN BUILD</Label>
+        <Label>RETEST · CLEAN BUILD</Label>
         <span className="mono text-[10px]">32 / 32</span>
       </div>
       <div className="grid grid-cols-8 gap-1">
@@ -286,9 +237,9 @@ const qaScenes: ReactNode[] = [
       </div>
     </Card>
     <div className="flex gap-2">
-      <Tag>original steps ✓</Tag>
-      <Tag>cart ✓</Tag>
-      <Tag>refunds ✓</Tag>
+      <Tag>manual ✓</Tag>
+      <Tag>automated ✓</Tag>
+      <Tag>regression ✓</Tag>
     </div>
   </>,
 
@@ -320,7 +271,7 @@ const qaScenes: ReactNode[] = [
       </motion.div>
     </motion.div>
     <div className="flex flex-wrap gap-2">
-      {["▸ test-run.html", "▸ notes.md", "▸ PR #143"].map((a) => (
+      {["▸ test-run.html", "▸ test-cases.md", "▸ ticket #142"].map((a) => (
         <Tag key={a}>{a}</Tag>
       ))}
     </div>
@@ -573,10 +524,10 @@ function Cover() {
         </div>
         <p className="mono mt-2 text-[10px] text-muted">
           <span className="max-[800px]:hidden">
-            Hover a step to follow one bug from New to Closed
+            Hover a step to see how it plays out
           </span>
           <span className="min-[801px]:hidden">
-            Tap a step to follow one bug from New to Closed
+            Tap a step to see how it plays out
           </span>
         </p>
       </motion.div>

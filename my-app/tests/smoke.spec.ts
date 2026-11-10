@@ -317,8 +317,13 @@ test("How I work: tabs switch the track and hovering a step shows its scene", as
   await expect(stage).toContainText("reviewed by me");
   await page.getByRole("tab", { name: "QA Engineer" }).click();
   await expect(stage).toContainText("Ticket #142");
-  await page.locator("ol li", { hasText: "In progress" }).hover();
-  await expect(stage).toContainText("applies SAVE10");
+  await page
+    .locator("ol li")
+    .filter({
+      has: page.getByRole("heading", { name: "Automate", exact: true }),
+    })
+    .hover();
+  await expect(stage).toContainText("SAVE10 takes 10% off");
   await page.mouse.move(2, 2);
   await expect(stage).toContainText("Idle");
 });
