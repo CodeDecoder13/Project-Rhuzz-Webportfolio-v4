@@ -8,6 +8,7 @@ export const metadata: Metadata = { title: "Cookie Policy" };
 const rows = [
   ["cookie-consent", "Remembers your cookie choice", "localStorage", "Until you clear it"],
   ["theme", "Remembers light or dark mode", "localStorage", "Until you clear it"],
+  ["persona", "Remembers which version of the site you chose (recruiter, business, developer or everything)", "localStorage", "Until you clear it"],
   ["snd", "Remembers whether the soundtrack is on", "localStorage", "Until you clear it"],
   ["gate", "Remembers you passed the intro screen", "sessionStorage", "Until you close the tab"],
 ];

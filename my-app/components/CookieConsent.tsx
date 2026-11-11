@@ -39,7 +39,7 @@ export default function CookieConsent() {
         Your choice
       </h2>
       <p className="text-[14px] leading-snug text-muted">
-        I use a few essential items to remember your theme, sound and consent.
+        I use a few essential items to remember your theme, sound, view and consent.
         No analytics, no ads. &ldquo;Accept all&rdquo; also lets the booking
         window load Calendly inside the page, which may set its own cookies.
         Read the{" "}

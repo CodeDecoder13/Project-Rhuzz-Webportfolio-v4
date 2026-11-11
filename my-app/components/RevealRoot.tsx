@@ -93,6 +93,11 @@ export default function RevealRoot() {
       attributes: true,
       attributeFilter: ["style", "hidden", "class"],
     });
+    // switching view shows blocks that had no box before
+    mo.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-persona"],
+    });
     return () => {
       mo.disconnect();
       cancelAnimationFrame(raf);

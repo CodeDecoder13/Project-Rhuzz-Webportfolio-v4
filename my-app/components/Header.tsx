@@ -2,6 +2,7 @@ import Link from "next/link";
 import MobileMenu from "./MobileMenu";
 import CvRequest from "./CvRequest";
 import ThemeToggle from "./ThemeToggle";
+import ViewSwitch from "./ViewSwitch";
 
 const nav = [
   ["Home", "/"],
@@ -27,6 +28,7 @@ export default function Header() {
         ))}
       </nav>
       <div className="col-start-3 flex items-center justify-end gap-2.5">
+        <ViewSwitch className="max-[800px]:hidden" />
         <ThemeToggle />
         <CvRequest className={`${pill} border-ink text-ink max-[800px]:hidden`}>
           Get my CV

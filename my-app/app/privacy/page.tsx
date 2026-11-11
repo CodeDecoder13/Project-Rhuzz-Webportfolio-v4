@@ -34,7 +34,7 @@ export default function PrivacyPage() {
           security and reliability.
         </li>
         <li>
-          <b>Preferences:</b> your theme, sound choice and cookie choice
+          <b>Preferences:</b> your theme, sound choice, the version of the site you chose (view) and cookie choice
           (localStorage) and whether you have seen the intro screen
           (sessionStorage) are stored in your browser. They are not sent to a
           server. See the{" "}

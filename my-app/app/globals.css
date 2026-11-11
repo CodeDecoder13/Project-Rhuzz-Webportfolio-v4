@@ -607,3 +607,9 @@ body {
 
 /* Images can't be dragged out or long-pressed into a save menu. */
 img { -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
+
+/* Adaptive view: the server renders every wording; <html data-persona> (set before paint) picks one. No attribute = "all". */
+:root:not([data-persona]) [data-for]:not([data-for~="all"]),
+:root[data-persona="dev"] [data-for]:not([data-for~="dev"]),
+:root[data-persona="recruiter"] [data-for]:not([data-for~="recruiter"]),
+:root[data-persona="business"] [data-for]:not([data-for~="business"]) { display: none !important; }

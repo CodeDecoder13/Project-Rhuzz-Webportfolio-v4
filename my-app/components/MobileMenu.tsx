@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import CvRequest from "./CvRequest";
+import ViewSwitch from "./ViewSwitch";
 
 export default function MobileMenu({
   links,
@@ -58,6 +59,7 @@ export default function MobileMenu({
           aria-label="Mobile"
           className="mono absolute inset-x-4 top-full rounded-[14px] border-[1.5px] border-ink bg-paper p-2 text-sm shadow-[0_12px_32px_rgba(11,27,51,.18)]"
         >
+          <ViewSwitch className="px-3 py-2" />
           {links.map(([label, href]) => (
             <Link
               key={href}
