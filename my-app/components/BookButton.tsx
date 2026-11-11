@@ -11,10 +11,12 @@ export default function BookButton({
   url,
   className,
   describedBy,
+  label = "Book me",
 }: {
   url: string;
   className: string;
   describedBy: string;
+  label?: string;
 }) {
   const [open, setOpen] = useState(false);
   const trigger = useRef<HTMLAnchorElement>(null);
@@ -41,7 +43,7 @@ export default function BookButton({
         aria-describedby={describedBy}
         className={className}
       >
-        Book me
+        {label}
       </Link>
     );
 
@@ -63,7 +65,7 @@ export default function BookButton({
         }}
         className={className}
       >
-        Book me
+        {label}
       </a>
       {open &&
         createPortal(

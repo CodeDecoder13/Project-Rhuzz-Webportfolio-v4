@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { Section } from "./Section";
+import { copy, type Copy } from "@/content/personas";
+import { Section, Swap } from "./Section";
 
 const stats = [
   {
@@ -21,15 +22,9 @@ const stats = [
   },
 ];
 
-const facts = [
-  [
-    "Now",
-    "Junior IT Architect at Prisma International. Websites, internal tools and n8n automation for global clients.",
-  ],
-  [
-    "Shipped",
-    "OmniPOS (30% faster checkout), Whale Wallet (Gemini receipt reader) and AirZen (ESP32 sensors to a Laravel API).",
-  ],
+const facts: [string, Copy][] = [
+  ["Now", copy.manifesto.now],
+  ["Shipped", copy.manifesto.shipped],
 ];
 
 // Annotation labels; each line runs into the portrait. Hidden on mobile where there's no room.
@@ -74,18 +69,15 @@ export default function Manifesto() {
           <div>
             <p>
               I&rsquo;m{" "}
-              <span className="font-semibold text-blue">Rhuzzel Paramio</span>,
-              a full-stack engineer and QA specialist building web systems that
-              hold up after launch.
+              <span className="font-semibold text-blue">Rhuzzel Paramio</span>,{" "}
+              <Swap c={copy.manifesto.intro} />
             </p>
             <p className="mt-3">
               I work where development and testing meet, so I&rsquo;m not here
               to ship features and hope.
             </p>
             <p className="mt-3">
-              I think about the requirement, the user, the edge case, the
-              failure, and the fix. Then I build around what actually needs to
-              happen. Vue and Laravel or Next.js, the rule stays the same:
+              <Swap c={copy.manifesto.rule} />
             </p>
             <p className="mt-3 text-[clamp(18px,2.7svh,24px)] font-bold leading-tight">
               If it can&rsquo;t be tested, it isn&rsquo;t done.
@@ -95,11 +87,16 @@ export default function Manifesto() {
             {facts.map(([k, v]) => (
               <div key={k} className="flex gap-3">
                 <dt className="mono w-16 shrink-0 pt-0.5 text-blue">{k}</dt>
-                <dd>{v}</dd>
+                <dd>
+                  <Swap c={v} />
+                </dd>
               </div>
             ))}
           </dl>
-          <ul className="mt-4 grid grid-cols-1 divide-y island-light divide-white/20 rounded-2xl border-[1.5px] border-ink bg-ink px-4 text-paper shadow-[6px_6px_0_var(--blue)]">
+          <ul
+            data-for="all dev"
+            className="mt-4 grid grid-cols-1 divide-y island-light divide-white/20 rounded-2xl border-[1.5px] border-ink bg-ink px-4 text-paper shadow-[6px_6px_0_var(--blue)]"
+          >
             {stats.map((s) => (
               <li key={s.title} className="flex items-center gap-3 py-2">
                 <svg
@@ -135,7 +132,10 @@ export default function Manifesto() {
             Tested.
           </div>
           <div className="relative z-[1] flex min-h-0 flex-1 items-end justify-center">
-            <div className="relative hidden h-full flex-1 min-[801px]:block">
+            <div
+              data-for="all dev"
+              className="relative hidden h-full flex-1 min-[801px]:block"
+            >
               {left.map((t) => (
                 <div
                   key={t.text}
@@ -160,7 +160,10 @@ export default function Manifesto() {
               sizes="(max-width: 800px) 90vw, 400px"
               className="relative z-[1] h-full w-auto max-w-[90vw] shrink-0 object-contain object-bottom grayscale"
             />
-            <div className="relative hidden h-full flex-1 min-[801px]:block">
+            <div
+              data-for="all dev"
+              className="relative hidden h-full flex-1 min-[801px]:block"
+            >
               {right.map((t) => (
                 <div
                   key={t.text}

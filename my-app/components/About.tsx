@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { about } from "@/content/about";
 import { Tags } from "./ProjectDetail";
-import { Section, SectionHead, card } from "./Section";
+import { copy } from "@/content/personas";
+import { Section, SectionHead, Swap, card } from "./Section";
 
 // Home-page About: one screen, story + timeline. The full page lives at /about.
 export default function About({ n }: { n?: string }) {
@@ -17,12 +18,16 @@ export default function About({ n }: { n?: string }) {
             <span className="text-blue">Tester by habit.</span>
           </p>
           <div className="mt-[clamp(10px,2.4svh,24px)] space-y-[clamp(6px,1.6svh,16px)] text-[clamp(14px,2svh,18px)] text-muted">
-            {about.bio.slice(0, 2).map((p) => (
-              <p key={p}>{p}</p>
+            {about.bio.slice(0, 2).map((p, i) => (
+              <p key={p}>
+                <Swap c={{ ...copy.about.bio[i], all: p }} />
+              </p>
             ))}
           </div>
-          <div className="mono mb-2 mt-5">Beyond code</div>
-          <Tags items={about.interests} />
+          <div data-for="all dev recruiter">
+            <div className="mono mb-2 mt-5">Beyond code</div>
+            <Tags items={about.interests} />
+          </div>
           <p className="mt-auto pt-[clamp(8px,2svh,20px)]">
             <Link
               href="/about"
@@ -46,7 +51,13 @@ export default function About({ n }: { n?: string }) {
                 />
                 <span className="mono text-blue">{j.year}</span>
                 <p className="text-[clamp(12px,1.8svh,16px)] leading-snug">
-                  {j.event}
+                  <Swap
+                    c={{
+                      all: j.event,
+                      recruiter: copy.about.journey[j.year],
+                      business: copy.about.journey[j.year],
+                    }}
+                  />
                   {"grad" in j && (
                     <svg
                       role="img"

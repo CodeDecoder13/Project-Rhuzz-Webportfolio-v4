@@ -1,9 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+import { copy, views } from "@/content/personas";
 import { site } from "@/content/site";
+import CvRequest from "./CvRequest";
+import { Swap } from "./Section";
 import BookButton from "./BookButton";
 import HeroMotion from "./HeroMotion";
 import Marquee from "./Marquee";
+
+const cta =
+  "btn-fill block rounded-full border-[1.5px] border-ink px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] max-[800px]:[text-shadow:none]";
 
 export default function Hero() {
   return (
@@ -55,43 +61,81 @@ export default function Hero() {
             data-h="left"
             className="mt-4 text-[clamp(16px,1.35vw,20px)] font-semibold"
           >
-            I build web systems, then try to break them. Shipped with proof that
-            they pass.
+            <Swap c={copy.heroSub} />
           </p>
           <div data-h="left" className="mt-5 flex flex-wrap gap-2.5">
-            <Link
-              href="/contact"
-              className="btn-fill rounded-full border-[1.5px] border-ink bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-paper max-[800px]:[text-shadow:none]"
-            >
-              Message
-            </Link>
-            <span className="group relative">
+            <div data-for="all" className="contents">
+              <Link
+                href="/contact"
+                className="btn-fill rounded-full border-[1.5px] border-ink bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-paper max-[800px]:[text-shadow:none]"
+              >
+                Message
+              </Link>
+              <span className="group relative">
+                <BookButton
+                  url={site.calendly}
+                  describedBy="book-tip"
+                  className="btn-fill block rounded-full border-[1.5px] border-ink bg-card px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-ink max-[800px]:[text-shadow:none]"
+                />
+                <span
+                  id="book-tip"
+                  role="tooltip"
+                  className="pointer-events-none absolute bottom-full left-0 z-10 mb-2 w-60 translate-y-1 rounded-[12px] border-[1.5px] border-ink bg-ink px-3.5 py-2.5 text-sm font-medium leading-snug text-paper opacity-0 transition-[opacity,transform] duration-150 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 max-[800px]:[text-shadow:none]"
+                >
+                  Want to collaborate, or schedule a 1:1? Pick a time that works
+                  for you.
+                </span>
+              </span>
+            </div>
+            <div data-for="dev" className="contents">
+              <Link href="#work" className={`${cta} bg-ink text-paper`}>
+                See the work
+              </Link>
+              <a href={site.github} className={`${cta} bg-card text-ink`}>
+                GitHub
+              </a>
+            </div>
+            <div data-for="recruiter" className="contents">
+              <CvRequest className={`${cta} bg-ink text-paper`}>
+                Get my CV
+              </CvRequest>
               <BookButton
                 url={site.calendly}
                 describedBy="book-tip"
-                className="btn-fill block rounded-full border-[1.5px] border-ink bg-card px-5 py-2.5 font-mono text-xs uppercase tracking-[.06em] text-ink max-[800px]:[text-shadow:none]"
+                label="Book a call"
+                className={`${cta} bg-card text-ink`}
               />
-              <span
-                id="book-tip"
-                role="tooltip"
-                className="pointer-events-none absolute bottom-full left-0 z-10 mb-2 w-60 translate-y-1 rounded-[12px] border-[1.5px] border-ink bg-ink px-3.5 py-2.5 text-sm font-medium leading-snug text-paper opacity-0 transition-[opacity,transform] duration-150 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 max-[800px]:[text-shadow:none]"
-              >
-                Want to collaborate, or schedule a 1:1? Pick a time that works
-                for you.
-              </span>
-            </span>
+            </div>
+            <div data-for="business" className="contents">
+              <BookButton
+                url={site.calendly}
+                describedBy="book-tip"
+                label="Book a call"
+                className={`${cta} bg-ink text-paper`}
+              />
+              <Link href="#work" className={`${cta} bg-card text-ink`}>
+                See results
+              </Link>
+            </div>
           </div>
         </div>
         <div
           data-h="right"
           className="absolute bottom-[8%] right-[max(32px,6vw)] z-[3] rounded-[18px] border-[1.5px] border-ink bg-card px-6 py-4 text-[clamp(20px,2.3vw,34px)] font-semibold leading-[1.1] tracking-[-.02em] shadow-[0_12px_32px_rgba(11,27,51,.18)] max-[800px]:right-4 max-[800px]:bottom-[4%]"
         >
-          Full-stack Engineer /<br />
-          QA Specialist /<br />
-          AI Engineer
+          {views.map((v) => (
+            <span key={v} data-for={v} className="block">
+              {copy.heroBadge[v].map((l, i) => (
+                <span key={l} className="block">
+                  {l}
+                  {i < 2 && " /"}
+                </span>
+              ))}
+            </span>
+          ))}
         </div>
       </section>
-      <div data-h="up">
+      <div data-h="up" data-for="all dev">
         <Marquee />
       </div>
       <HeroMotion />

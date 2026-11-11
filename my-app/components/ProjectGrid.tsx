@@ -68,7 +68,15 @@ function Card({
             </span>
           )}
         </div>
-        <Tags items={p.stack.slice(0, 4)} />
+        <div data-for="all dev">
+          <Tags items={p.stack.slice(0, 4)} />
+        </div>
+        <p data-for="recruiter" className="text-[15px] leading-snug">
+          {p.plain?.summary ?? p.problem}
+        </p>
+        <p data-for="business" className="text-[15px] leading-snug">
+          {p.plain?.result ?? p.result}
+        </p>
       </div>
     </button>
   );

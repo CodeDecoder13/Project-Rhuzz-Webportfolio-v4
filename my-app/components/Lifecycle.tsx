@@ -3,11 +3,12 @@
 import { useRef, useState } from "react";
 import { tracks, type Track } from "@/content/lifecycle";
 import HowStage from "./HowStage";
+import type { View } from "@/content/personas";
 import { Section, SectionHead } from "./Section";
 
 // Two ways I work (tabs). Steps on the left fill the column; the ticket scene sits on the right. Nothing plays by
 // itself: the panel shows an idle cover until a step is hovered or focused (desktop) or tapped (mobile).
-export default function Lifecycle() {
+export default function Lifecycle({ only }: { only?: readonly View[] }) {
   const [track, setTrack] = useState<Track>("dev");
   const [active, setActive] = useState<number | null>(null);
   const list = useRef<HTMLOListElement>(null);
@@ -19,7 +20,7 @@ export default function Lifecycle() {
   };
 
   return (
-    <Section fit>
+    <Section fit only={only}>
       <SectionHead n="04" title="How I work" />
       <div
         role="tablist"

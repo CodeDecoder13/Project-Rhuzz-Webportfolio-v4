@@ -14,6 +14,13 @@ export type Project = {
   problem: string;
   solution: string;
   result: string;
+  // Everyday wording for recruiters and business owners (no tool names). Drafted from the facts above; owner to approve.
+  plain?: {
+    summary: string;
+    problem?: string;
+    solution: string;
+    result: string;
+  };
 };
 
 const placeholder = {
@@ -47,6 +54,14 @@ const all: Project[] = [
   },
   {
     slug: "portfolio-website-v2",
+    plain: {
+      summary: "My second personal website, rebuilt to be easier to grow.",
+      problem: "The first version worked but was hard to keep adding to.",
+      solution:
+        "Rebuilt it with a modern toolkit so every part is reusable and easier to change.",
+      result:
+        "My first step into professional web development: a site that is easier to maintain and extend.",
+    },
     cover: "/assets/webdev/portfolio-v2.png",
     title: "Portfolio Website V2",
     category: "Web Dev",
@@ -73,6 +88,12 @@ const all: Project[] = [
   },
   {
     slug: "project-airzen",
+    plain: {
+      summary: "A live dashboard that shows how clean the air is indoors.",
+      solution:
+        "Rebuilt my college thesis into a live web app: small sensors measure temperature, humidity, gases and dust, and a dashboard turns the readings into an air-quality score with recommendations.",
+      result: "Live on its own web address.",
+    },
     cover: "/assets/webdev/project-airzen.png",
     title: "Project Airzen",
     category: "Capstone",
@@ -87,6 +108,13 @@ const all: Project[] = [
   },
   {
     slug: "portfolio-website-v1",
+    plain: {
+      summary: "My first website, built from scratch before I knew the tools.",
+      solution:
+        "Built by hand with the web's basic building blocks and no shortcuts. Every layout, animation and interaction was written by hand.",
+      result:
+        "My discovery phase: I learned how the web works at its core, and it is still online.",
+    },
     cover: "/assets/webdev/portfolio-v1.png",
     title: "Portfolio Website V1",
     category: "Web Dev",
@@ -115,6 +143,12 @@ const all: Project[] = [
   },
   {
     slug: "devcollab",
+    plain: {
+      summary: "A simple team task board for planning and tracking work.",
+      solution:
+        "Built a clean task board the whole team can use, with a modern look and none of the clutter of heavy project tools.",
+      result: "A clean, modern board my team uses to work together day to day.",
+    },
     cover: "/assets/webdev/devcollab.png",
     title: "DevCollab",
     category: "Web Dev",
@@ -130,6 +164,14 @@ const all: Project[] = [
   },
   {
     slug: "eagles-fraternal-portal",
+    plain: {
+      summary:
+        "A members-and-records system for a fraternity, built for a real client.",
+      solution:
+        "Built the whole system for them, including an admin area for officers.",
+      result:
+        "Live on the internet and built as a real project for a real client, my friend's fraternity.",
+    },
     cover: "/assets/webdev/eagles.png",
     title: "Eagles Fraternal Portal",
     category: "Web Dev",
@@ -146,6 +188,15 @@ const all: Project[] = [
   },
   {
     slug: "portfolio-website-v3",
+    plain: {
+      summary: "My current portfolio site: more polished and animated.",
+      problem:
+        "The second version worked, but the design was still plain and I wanted something more polished and alive.",
+      solution:
+        "Rebuilt it with a stronger visual design, smoother animations and cleaner, better-organised parts.",
+      result:
+        "An improvement on V2: a more refined, better-structured portfolio that shows how far my web development has come.",
+    },
     title: "Portfolio Website V3",
     category: "Web Dev",
     cover: "/assets/webdev/portfolio-v3.png",
@@ -162,6 +213,12 @@ const all: Project[] = [
   },
   {
     slug: "omnipos",
+    plain: {
+      summary: "One sales system that runs many shops and branches.",
+      solution:
+        "A single system where each business keeps its own data, staff and subscription. It has a live checkout screen, stock and branch management, staff shifts, reports and a kitchen order screen.",
+      result: "Faster checkout.",
+    },
     title: "OmniPOS",
     category: "Web Dev",
     cover: "/assets/webdev/omnipos.png",
@@ -184,6 +241,14 @@ const all: Project[] = [
   },
   {
     slug: "whale-wallet",
+    plain: {
+      summary:
+        "A money app that shows how much you can safely spend until payday.",
+      solution:
+        "A finance app that forecasts your balance from bills, subscriptions and spending. An AI assistant logs expenses, reads receipts from payment apps and banks, and edits bills by chat, with every figure it quotes checked against your own data.",
+      result:
+        "A daily safe-to-spend amount until payday. Protected with two-step sign-in and passkeys, ready to support a companion mobile app, and tested with about 250 automatic checks.",
+    },
     title: "Whale Wallet",
     category: "Web Dev",
     cover: "/assets/webdev/whalewallet.png",

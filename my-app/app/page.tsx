@@ -14,7 +14,7 @@ export default function Home() {
       <Work />
       <Manifesto />
       <Services />
-      <Lifecycle />
+      <Lifecycle only={["all", "dev"]} />
       <Proof />
       <About n="06" />
       <ContactSection />
