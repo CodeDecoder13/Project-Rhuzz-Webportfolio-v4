@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { projects, type Project } from "@/content/projects";
 import ProjectDetail, { Tags } from "./ProjectDetail";
@@ -143,6 +144,14 @@ export default function ProjectGrid() {
                 <Card p={p} i={i} onOpen={(el) => openAt(i, el)} />
               </div>
             ),
+        )}
+        {cat === "All" && (
+          <Link
+            href="/projects"
+            className="btn-fill reveal mono flex min-h-[160px] items-center justify-center rounded-[14px] border-[1.5px] border-dashed border-ink p-6 text-center"
+          >
+            Every project, with the full story →
+          </Link>
         )}
       </div>
       {open !== null && (

@@ -15,7 +15,7 @@ export default function Proof() {
         A sample run from my own test suite. The failures stay on the page,
         because finding them is the job.
       </p>
-      <div className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-[1.2fr_1fr]">
+      <div className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-[1.2fr_1fr] [:root[data-persona=recruiter]_&]:min-[801px]:grid-cols-1">
         <div data-for="all dev" className="contents">
           <TestReport />
         </div>
@@ -26,11 +26,11 @@ export default function Proof() {
               {String(certs.length).padStart(2, "0")}
             </span>
           </div>
-          <ul>
+          <ul className="[:root[data-persona=recruiter]_&]:min-[801px]:columns-2 [:root[data-persona=recruiter]_&]:min-[801px]:gap-12">
             {certs.map((c) => (
               <li
                 key={c.name}
-                className="flex items-baseline justify-between gap-4 border-t border-line py-[clamp(5px,1.3svh,12px)] first:border-t-0 first:pt-0"
+                className="break-inside-avoid flex items-baseline justify-between gap-4 border-t border-line py-[clamp(5px,1.3svh,12px)] first:border-t-0 first:pt-0"
               >
                 <b className="font-semibold">{c.name}</b>
                 <span className="mono shrink-0 text-muted">

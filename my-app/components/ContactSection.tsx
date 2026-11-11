@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/content/site";
 import CvRequest from "./CvRequest";
@@ -10,7 +11,7 @@ const big =
 
 export default function ContactSection() {
   return (
-    <Section id="contact" fit className="bg-sky">
+    <Section id="contact" fit className="relative overflow-hidden bg-sky">
       <div className="mb-8 flex flex-wrap items-baseline gap-4">
         <span className="mono">Replies in {site.replyTime}</span>
       </div>
@@ -58,6 +59,14 @@ export default function ContactSection() {
           <CvRequest className="uppercase">Get my CV</CvRequest>
         </li>
       </ul>
+      <Image
+        data-for="recruiter business"
+        src="/assets/rhuzz-cutout-dark.png"
+        alt=""
+        width={696}
+        height={1207}
+        className="pointer-events-none absolute bottom-0 right-[6%] hidden h-[82%] w-auto select-none opacity-95 min-[1000px]:block"
+      />
     </Section>
   );
 }
