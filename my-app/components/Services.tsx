@@ -21,7 +21,7 @@ export default function Services() {
             key={s.title}
             className="svc reveal border-b border-line pb-7 min-[801px]:border-b-0"
           >
-            <div className="mb-[clamp(10px,2svh,20px)] overflow-hidden rounded-[14px] border-[1.5px] border-ink bg-[#DCE8F7] min-[801px]:h-[clamp(150px,32svh,320px)]">
+            <div data-for="all dev" className="mb-[clamp(10px,2svh,20px)] overflow-hidden rounded-[14px] border-[1.5px] border-ink bg-[#DCE8F7] min-[801px]:h-[clamp(150px,32svh,320px)]">
               <ServiceScene level={(i + 1) as 1 | 2 | 3} />
             </div>
             <b className="display block text-[clamp(36px,7svh,64px)] text-blue">
