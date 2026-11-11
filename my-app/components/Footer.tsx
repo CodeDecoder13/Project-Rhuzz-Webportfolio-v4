@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { site } from "@/content/site";
+import { copy } from "@/content/personas";
+import { Swap } from "./Section";
 import CookieSettings from "./CookieSettings";
 import CvRequest from "./CvRequest";
 
@@ -7,9 +9,9 @@ const explore = [
   ["Home", "/"],
   ["About", "/about"],
   ["Projects", "/projects"],
-  ["QA & testing", "/qa-testing"],
-  ["Tech stack", "/tech-stack"],
-  ["Certifications", "/certifications"],
+  ["QA & testing", "/qa-testing", "all dev"],
+  ["Tech stack", "/tech-stack", "all dev"],
+  ["Certifications", "/certifications", "all dev recruiter"],
   ["Contact", "/contact"],
 ] as const;
 
@@ -25,7 +27,7 @@ export default function Footer() {
             rhuzz<i className="not-italic text-sky">.</i>
           </Link>
           <p className="mt-3 max-w-[34ch] text-[#C9D6E8]">
-            {site.role}. I build web systems, then try to break them.
+            <Swap c={copy.footerTag} />
           </p>
           <p className="mono mt-4 text-[#9FB4D1]">
             {site.location} · Replies in {site.replyTime}
@@ -34,8 +36,8 @@ export default function Footer() {
         <nav aria-label="Footer">
           <h2 className={head}>Explore</h2>
           <ul className="grid gap-2">
-            {explore.map(([label, href]) => (
-              <li key={href}>
+            {explore.map(([label, href, only]) => (
+              <li key={href} data-for={only}>
                 <Link href={href} className={link}>
                   {label}
                 </Link>

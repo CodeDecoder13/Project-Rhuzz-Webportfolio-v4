@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { sendContact } from "@/lib/mail";
-import { systemPrompt } from "@/lib/persona";
+import { views } from "@/content/personas";
+import { systemPromptFor } from "@/lib/persona";
 import { allow } from "@/lib/rateLimit";
 import { contactSchema } from "@/lib/validators";
 
@@ -14,6 +15,8 @@ const body = z.object({
     )
     .min(1)
     .max(30),
+  // an enum, so the client can never inject prompt text
+  view: z.enum(views).default("all"),
 });
 
 const sendTool = {
@@ -87,7 +90,9 @@ export async function POST(req: Request) {
   // answering within 8s (rate-limited, retired, overloaded or slow models are skipped). GEMINI_MODEL goes first.
   const reqBody = (think: boolean) =>
     JSON.stringify({
-      systemInstruction: { parts: [{ text: systemPrompt }] },
+      systemInstruction: {
+        parts: [{ text: systemPromptFor(parsed.data.view) }],
+      },
       contents,
       tools: [{ functionDeclarations: [sendTool] }],
       generationConfig: {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { copy } from "@/content/personas";
 import Lifecycle from "@/components/Lifecycle";
 import { Section, SectionHead, card } from "@/components/Section";
 import TestReport from "@/components/TestReport";
@@ -6,9 +7,18 @@ import TestReport from "@/components/TestReport";
 export const metadata: Metadata = { title: "QA & testing" };
 
 const layers = [
-  { title: "Manual", text: "Exploratory and regression testing, with bugs reported and tracked through their lifecycle." },
-  { title: "Automation", text: "Selenium (C#, NUnit) and Playwright (TypeScript) suites covering UI and API checks." },
-  { title: "CI", text: "Suites run on every change through GitHub Actions, Jenkins or Azure DevOps pipelines." },
+  {
+    title: "Manual",
+    text: "Exploratory and regression testing, with bugs reported and tracked through their lifecycle.",
+  },
+  {
+    title: "Automation",
+    text: "Selenium (C#, NUnit) and Playwright (TypeScript) suites covering UI and API checks.",
+  },
+  {
+    title: "CI",
+    text: "Suites run on every change through GitHub Actions, Jenkins or Azure DevOps pipelines.",
+  },
 ];
 
 export default function QaTestingPage() {
@@ -16,6 +26,9 @@ export default function QaTestingPage() {
     <main className="page-in pt-14">
       <Section>
         <SectionHead title="QA & testing" />
+        <p data-for="recruiter business" className="mb-6 text-muted">
+          {copy.plainIntro.qa}
+        </p>
         <div className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-3">
           {layers.map((l) => (
             <div key={l.title} className={card}>

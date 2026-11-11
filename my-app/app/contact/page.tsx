@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { copy } from "@/content/personas";
 import ConsentGate from "@/components/ConsentGate";
 import ContactChat from "@/components/ContactChat";
 import CvRequest from "@/components/CvRequest";
@@ -20,7 +21,7 @@ export default function ContactPage() {
           h: 1207,
           alt: "Rhuzzel Paramio in a black blazer and navy tie",
         }}
-        eyebrow="got a project?"
+        eyebrow={copy.pageHero.contactEyebrow}
         title={["Let’s", "talk"]}
         kicker="Chat · Book a call · Email"
         blurb="Ask my assistant anything, book 30 minutes, or send a note. I reply within my usual window."

@@ -8,6 +8,7 @@ import {
 } from "motion/react";
 import { useState } from "react";
 import { about } from "@/content/about";
+import { copy } from "@/content/personas";
 import { skillGroups, targetLabel, uses } from "@/content/skills";
 import { useFocus } from "./AboutFocus";
 
@@ -77,69 +78,81 @@ export default function SkillsPanel() {
         ))}
       </ul>
 
-      <div className="mono mb-2 mt-5 text-blue">Skills</div>
-      <div
-        role="tablist"
-        aria-label="Skill category"
-        className="mb-3 flex flex-wrap gap-1.5"
-      >
-        {tabs.map((t) => (
-          <button
-            key={t}
-            role="tab"
-            type="button"
-            aria-selected={group === t}
-            onClick={() => setGroup(t)}
-            className={`mono rounded-full border-[1.5px] border-ink px-2.5 py-0.5 text-[10px] transition-[background-color,color,transform] duration-150 ease-out active:scale-[.97] ${group === t ? "bg-ink text-paper" : "hover:bg-sky/50"}`}
-          >
-            {t}
-          </button>
-        ))}
-      </div>
-      <LayoutGroup>
-        <motion.ul
-          layout
-          className="flex min-h-[76px] flex-wrap content-start gap-1.5"
+      <div data-for="all dev">
+        <div className="mono mb-2 mt-5 text-blue">Skills</div>
+        <div
+          role="tablist"
+          aria-label="Skill category"
+          className="mb-3 flex flex-wrap gap-1.5"
         >
-          <AnimatePresence initial={false} mode="popLayout">
-            {shown.map((s) => (
-              <motion.li
-                key={s}
-                layout={!reduce}
-                initial={reduce ? false : { opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{
-                  opacity: 0,
-                  scale: 0.9,
-                  transition: { duration: 0.12 },
-                }}
-                transition={{ type: "spring", duration: 0.4, bounce: 0.15 }}
-              >
-                <button
-                  type="button"
-                  aria-pressed={skill === s}
-                  onClick={() => setSkill(skill === s ? null : s)}
-                  onPointerEnter={() => setPeek(s)}
-                  onPointerLeave={() => setPeek(null)}
-                  onFocus={() => setPeek(s)}
-                  onBlur={() => setPeek(null)}
-                  className={`rounded-full border-[1.5px] border-ink px-2.5 py-0.5 font-mono text-[11px] font-medium transition-[background-color,color,transform] duration-150 ease-out active:scale-[.97] ${skill === s ? "bg-blue text-white" : "hover:-translate-y-0.5 hover:bg-sky/50"}`}
+          {tabs.map((t) => (
+            <button
+              key={t}
+              role="tab"
+              type="button"
+              aria-selected={group === t}
+              onClick={() => setGroup(t)}
+              className={`mono rounded-full border-[1.5px] border-ink px-2.5 py-0.5 text-[10px] transition-[background-color,color,transform] duration-150 ease-out active:scale-[.97] ${group === t ? "bg-ink text-paper" : "hover:bg-sky/50"}`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+        <LayoutGroup>
+          <motion.ul
+            layout
+            className="flex min-h-[76px] flex-wrap content-start gap-1.5"
+          >
+            <AnimatePresence initial={false} mode="popLayout">
+              {shown.map((s) => (
+                <motion.li
+                  key={s}
+                  layout={!reduce}
+                  initial={reduce ? false : { opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.9,
+                    transition: { duration: 0.12 },
+                  }}
+                  transition={{ type: "spring", duration: 0.4, bounce: 0.15 }}
                 >
-                  {s}
-                </button>
-              </motion.li>
-            ))}
-          </AnimatePresence>
-        </motion.ul>
-      </LayoutGroup>
-      <p
-        aria-live="polite"
-        className="mono mt-3 min-h-[2.4em] text-[10px] text-muted"
-      >
-        {info
-          ? `${info} · used in ${(uses[info] ?? []).map((t) => targetLabel[t]).join(", ")}`
-          : "Pick a skill to light up where I used it."}
-      </p>
+                  <button
+                    type="button"
+                    aria-pressed={skill === s}
+                    onClick={() => setSkill(skill === s ? null : s)}
+                    onPointerEnter={() => setPeek(s)}
+                    onPointerLeave={() => setPeek(null)}
+                    onFocus={() => setPeek(s)}
+                    onBlur={() => setPeek(null)}
+                    className={`rounded-full border-[1.5px] border-ink px-2.5 py-0.5 font-mono text-[11px] font-medium transition-[background-color,color,transform] duration-150 ease-out active:scale-[.97] ${skill === s ? "bg-blue text-white" : "hover:-translate-y-0.5 hover:bg-sky/50"}`}
+                  >
+                    {s}
+                  </button>
+                </motion.li>
+              ))}
+            </AnimatePresence>
+          </motion.ul>
+        </LayoutGroup>
+        <p
+          aria-live="polite"
+          className="mono mt-3 min-h-[2.4em] text-[10px] text-muted"
+        >
+          {info
+            ? `${info} · used in ${(uses[info] ?? []).map((t) => targetLabel[t]).join(", ")}`
+            : "Pick a skill to light up where I used it."}
+        </p>
+      </div>
+      <div data-for="recruiter">
+        <div className="mono mb-2 mt-5 text-blue">What I do</div>
+        <ul className="space-y-2">
+          {copy.skillGloss.map(([g, d]) => (
+            <li key={g}>
+              <b>{g}.</b> <span className="text-muted">{d}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }

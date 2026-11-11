@@ -9,6 +9,8 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 import { about, logos } from "@/content/about";
+import { copy } from "@/content/personas";
+import { Swap } from "../Section";
 import { Tags } from "../ProjectDetail";
 import JourneyPortrait from "./JourneyPortrait";
 import { card } from "../Section";
@@ -98,7 +100,18 @@ export function ExperienceExplorer() {
             <motion.p variants={row} className="mono mb-4 mt-1 text-muted">
               {cur.org}
             </motion.p>
-            <ul className="space-y-2.5">
+            <ul data-for="recruiter" className="space-y-2.5">
+              {(copy.experiencePlain[cur.id] ?? cur.points).map((p) => (
+                <li key={p} className="flex gap-3 text-muted">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 size-1.5 shrink-0 rounded-full bg-blue"
+                  />
+                  {p}
+                </li>
+              ))}
+            </ul>
+            <ul data-for="all dev" className="space-y-2.5">
               {cur.points.map((p) => (
                 <motion.li
                   key={p}
@@ -113,7 +126,11 @@ export function ExperienceExplorer() {
                 </motion.li>
               ))}
             </ul>
-            <motion.ul variants={row} className="mt-5 flex flex-wrap gap-1.5">
+            <motion.ul
+              variants={row}
+              data-for="all dev"
+              className="mt-5 flex flex-wrap gap-1.5"
+            >
               {cur.stack.map((c) => {
                 const hit = skill !== null && norm(c) === norm(skill);
                 return (
@@ -159,7 +176,7 @@ export function LeadershipJourney() {
   const [meet, setMeet] = useState(false);
   return (
     <div className="mt-5 grid grid-cols-1 gap-5 min-[801px]:grid-cols-[.9fr_1.4fr]">
-      <div className={`${card} flex flex-col`}>
+      <div data-for="all dev recruiter" className={`${card} flex flex-col`}>
         <div className="mono mb-4 text-blue">Leadership</div>
         <ul className="flex flex-1 flex-col gap-3">
           {about.leadership.map((l) => (
@@ -183,7 +200,7 @@ export function LeadershipJourney() {
       </div>
 
       <div
-        className={`${card} relative overflow-hidden`}
+        className={`${card} relative overflow-hidden min-[801px]:col-start-2`}
         onPointerEnter={(e) => e.pointerType === "mouse" && setMeet(true)}
         onPointerLeave={(e) => e.pointerType === "mouse" && setMeet(false)}
         onClick={(e) =>
@@ -204,7 +221,13 @@ export function LeadershipJourney() {
                 <LogoSlot mark={j.mark} />
                 <span className="mono w-10 shrink-0 text-blue">{j.year}</span>
                 <span className="leading-snug">
-                  {j.event}
+                  <Swap
+                    c={{
+                      all: j.event,
+                      recruiter: copy.about.journey[j.year],
+                      business: copy.about.journey[j.year],
+                    }}
+                  />
                   {"grad" in j && (
                     <svg
                       role="img"

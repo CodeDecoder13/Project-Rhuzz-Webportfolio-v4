@@ -1,10 +1,14 @@
 import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import AboutMotion from "./about/AboutMotion";
+import type { Copy } from "@/content/personas";
 import CountUp from "./CountUp";
+import { Swap } from "./Section";
 
 const ghost =
   "bg-[linear-gradient(var(--blue)_10%,rgba(31,95,191,0)_88%)] bg-clip-text text-transparent";
+
+const t = (x: string | Copy) => (typeof x === "string" ? x : <Swap c={x} />);
 
 export type HeroStat = {
   value: number | string;
@@ -31,10 +35,10 @@ export default function PageHero({
   word: string;
   photo: { src: string; w: number; h: number; alt: string };
   tag?: string;
-  eyebrow: string;
+  eyebrow: string | Copy;
   title: [string, string];
-  kicker: string;
-  blurb: string;
+  kicker: string | Copy;
+  blurb: string | Copy;
   pill: string;
   stats: HeroStat[];
   actions?: ReactNode;
@@ -89,7 +93,7 @@ export default function PageHero({
 
         <div className="absolute bottom-[14svh] left-[max(32px,5vw)] z-[3] max-w-[min(34ch,30vw)] max-[800px]:static max-[800px]:mt-6 max-[800px]:max-w-none max-[800px]:px-4 max-[800px]:pb-6 max-[800px]:text-center">
           <p data-a="left" className="mono text-ink">
-            {eyebrow}
+            {t(eyebrow)}
           </p>
           <h1
             data-a="left"
@@ -100,13 +104,13 @@ export default function PageHero({
             {title[1]}
           </h1>
           <p data-a="left" className="mono mt-3 text-ink">
-            {kicker}
+            {t(kicker)}
           </p>
           <p
             data-a="left"
             className="mt-2 text-[clamp(14px,1.9svh,18px)] font-medium"
           >
-            {blurb}
+            {t(blurb)}
           </p>
           <p
             data-a="left"

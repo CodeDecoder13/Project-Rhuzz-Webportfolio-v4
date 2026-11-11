@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
+import { copy } from "@/content/personas";
+import { useView } from "@/lib/visitor";
 import { cvRoles, cvSchema } from "@/lib/validators";
 
 type Errors = Partial<Record<"name" | "role" | "email" | "consent", string>>;
@@ -25,6 +27,7 @@ export default function CvRequest({
   const [done, setDone] = useState<string | null>(null);
   const [errors, setErrors] = useState<Errors>({});
   const [serverError, setServerError] = useState("");
+  const view = useView();
   const trigger = useRef<HTMLButtonElement>(null);
   const first = useRef<HTMLInputElement>(null);
 
@@ -194,7 +197,7 @@ export default function CvRequest({
                     <select
                       id="cv-role"
                       name="role"
-                      defaultValue=""
+                      defaultValue={copy.cvRole[view]}
                       className={input}
                       {...aria("role")}
                     >

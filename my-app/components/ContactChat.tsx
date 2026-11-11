@@ -1,24 +1,26 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { copy } from "@/content/personas";
 import { site } from "@/content/site";
+import { useView } from "@/lib/visitor";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-const hello: Msg = {
-  role: "assistant",
-  content:
-    "Hi, I'm Rhuzz. Ask me about Rhuzzel's work, or anything else, or tell me what you have in mind and I'll pass it on to him.",
-};
-const chips = [
-  "What does Rhuzzel do?",
-  "Show me his projects",
-  "I'd like to hire him",
-];
-
 // ChatGPT-style conversation: assistant text flows unboxed beside an avatar, the visitor's turns are bubbles, the composer is a pill.
 export default function ContactChat() {
-  const [msgs, setMsgs] = useState<Msg[]>([hello]);
+  const view = useView();
+  const { hello: greeting, chips } = copy.chat[view];
+  const hello: Msg = { role: "assistant", content: greeting };
+  // Until the visitor says something, the greeting follows the chosen view (the saved view is read after hydration).
+  const [started, setStarted] = useState<Msg[]>([]);
+  const [msgs, setMsgs] = [
+    started.length ? started : [hello],
+    (f: Msg[] | ((m: Msg[]) => Msg[])) =>
+      setStarted((s) =>
+        typeof f === "function" ? f(s.length ? s : [hello]) : f,
+      ),
+  ] as const;
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
@@ -55,7 +57,7 @@ export default function ContactChat() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: next }),
+        body: JSON.stringify({ messages: next, view }),
       });
       if (!res.ok || !res.body) {
         const j = await res.json().catch(() => null);
@@ -99,7 +101,7 @@ export default function ContactChat() {
   };
 
   const reset = () => {
-    setMsgs([hello]);
+    setStarted([]);
     setSent(false);
     setText("");
   };

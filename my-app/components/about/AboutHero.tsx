@@ -1,5 +1,6 @@
 import { projects } from "@/content/projects";
 import { certs } from "@/content/certs";
+import { copy } from "@/content/personas";
 import PageHero from "../PageHero";
 
 // Half-body crop (head to hips) of About_me_nobg.png at its native 920x1330, so it stays sharp.
@@ -19,8 +20,8 @@ export default function AboutHero() {
       tag="Open to opportunities"
       eyebrow="hello, I’m"
       title={["Rhuzzel", "Paramio"]}
-      kicker="Full-stack · QA · AI Engineer"
-      blurb="I build web systems, test them like someone who didn’t write them, and add AI where it earns its place."
+      kicker={copy.pageHero.aboutKicker}
+      blurb={copy.pageHero.aboutBlurb}
       pill="Metro Manila · working worldwide"
       stats={[
         { value: 3, label: "Years building", plus: true },

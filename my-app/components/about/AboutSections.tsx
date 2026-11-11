@@ -102,10 +102,10 @@ export function Profile() {
   return (
     <Section>
       <div className="grid grid-cols-1 gap-5 min-[801px]:grid-cols-[1fr_1.15fr_.85fr]">
-        <div className={card}>
+        <div data-for="all dev recruiter" className={card}>
           <SkillsPanel />
         </div>
-        <div className={card}>
+        <div data-for="all dev" className={card}>
           <h2 className="display mb-4 text-[clamp(28px,3vw,40px)]">
             Work process
           </h2>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { copy } from "@/content/personas";
 import PageHero from "@/components/PageHero";
 import Work from "@/components/Work";
 import { projects } from "@/content/projects";
@@ -19,8 +20,8 @@ export default function ProjectsPage() {
         }}
         eyebrow="selected work"
         title={["Things", "I’ve built"]}
-        kicker="Web · QA · Capstone"
-        blurb="Web apps, test frameworks and AI builds, each one shipped and tested."
+        kicker={copy.pageHero.projectsKicker}
+        blurb={copy.pageHero.projectsBlurb}
         pill="Live demos and source"
         stats={[
           { value: projects.length, label: "Projects live" },
