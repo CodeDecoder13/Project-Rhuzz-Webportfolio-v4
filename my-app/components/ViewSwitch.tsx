@@ -20,7 +20,7 @@ export default function ViewSwitch({ className = "" }: { className?: string }) {
   return (
     <div className={className}>
       <label className="group flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[.14em] text-ink/60">
-        <span className="max-[1100px]:sr-only">Viewing as</span>
+        <span className="max-[1400px]:sr-only">Viewing as</span>
         <span className="relative inline-flex items-center">
           <span
             aria-hidden="true"

@@ -1,6 +1,7 @@
 import About from "@/components/About";
 import ContactSection from "@/components/ContactSection";
 import Hero from "@/components/Hero";
+import LatestPosts from "@/components/blog/LatestPosts";
 import Lifecycle from "@/components/Lifecycle";
 import Manifesto from "@/components/Manifesto";
 import Proof from "@/components/Proof";
@@ -12,6 +13,7 @@ export default function Home() {
     <main>
       <Hero />
       <Work />
+      <LatestPosts />
       <Manifesto />
       <Services />
       <Lifecycle only={["all", "dev"]} />

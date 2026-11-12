@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { connection } from "next/server";
 import PageHero from "@/components/PageHero";
-import PostCard from "@/components/blog/PostCard";
+import { PostRow } from "@/components/blog/PostCard";
 import { Section, SectionHead } from "@/components/Section";
 import { listPosts, safe } from "@/lib/db";
 
@@ -21,15 +21,11 @@ async function Posts() {
       </p>
     );
   return (
-    <ul className="grid gap-6 min-[801px]:grid-cols-2 min-[1101px]:grid-cols-3">
+    <div className="mx-auto max-w-[820px]">
       {posts.map((p) => (
-        <li key={p.id} className="flex">
-          <div className="flex w-full">
-            <PostCard post={p} />
-          </div>
-        </li>
+        <PostRow key={p.id} post={p} />
       ))}
-    </ul>
+    </div>
   );
 }
 

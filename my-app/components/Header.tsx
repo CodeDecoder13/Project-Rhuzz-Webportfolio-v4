@@ -31,7 +31,9 @@ export default function Header() {
       <div className="col-start-3 flex items-center justify-end gap-2.5">
         <ViewSwitch className="max-[800px]:hidden" />
         <ThemeToggle />
-        <CvRequest className={`${pill} border-ink text-ink max-[800px]:hidden`}>
+        <CvRequest
+          className={`${pill} whitespace-nowrap border-ink text-ink max-[800px]:hidden`}
+        >
           Get my CV
         </CvRequest>
         <MobileMenu links={nav} />
