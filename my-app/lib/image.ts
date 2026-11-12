@@ -24,3 +24,9 @@ export const MAX_PHOTO = 5 * 1024 * 1024;
 const U = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
 export const UUID = new RegExp(`^${U}$`);
 export const PHOTO_NAME = new RegExp(`^${U}\\.(jpg|png|webp)$`);
+
+// Public URL for a stored key like `posts/<uuid>.jpg`; anything unexpected yields no image.
+export const photoUrl = (key: string | null) =>
+  key?.startsWith("posts/") && PHOTO_NAME.test(key.slice(6))
+    ? `/api/blog/photo/${key.slice(6)}`
+    : null;
