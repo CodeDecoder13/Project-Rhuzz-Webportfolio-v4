@@ -1,8 +1,8 @@
 import { clientIp, sameOrigin, setCookie } from "@/lib/adminAuth";
+import { count, hit } from "@/lib/dbLimit";
 import { missingAuth, missingDb } from "@/lib/env";
 import { sendCode, userByEmail } from "@/lib/otp";
 import { dummyVerify, verifyPin } from "@/lib/pin";
-import { allow, recent } from "@/lib/rateLimit";
 import { makeToken } from "@/lib/token";
 
 const FAIL_WINDOW = 15 * 60 * 1000;
@@ -36,25 +36,29 @@ export async function POST(req: Request) {
   const pin = typeof body.pin === "string" ? body.pin : "";
   const ipKey = `pinfail:ip:${clientIp(req)}`;
   const mailKey = `pinfail:${email}`;
-  const failed = () => {
-    allow(ipKey, Date.now(), Infinity, FAIL_WINDOW);
-    allow(mailKey, Date.now(), Infinity, FAIL_WINDOW);
+
+  // Counters live in Postgres so every serverless instance shares them. Any DB error blocks the attempt (fail closed).
+  const failed = async () => {
+    // the IP is always counted; the email only while that IP is under its cap, so one source cannot fill the table
+    await hit(ipKey, FAIL_WINDOW);
+    if ((await count(ipKey, FAIL_WINDOW)) <= MAX_FAILS)
+      await hit(mailKey, FAIL_WINDOW);
     return invalid();
   };
 
-  if (
-    body.website ||
-    recent(ipKey, FAIL_WINDOW) >= MAX_FAILS ||
-    recent(mailKey, FAIL_WINDOW) >= MAX_FAILS
-  )
-    return invalid(); // honeypot or locked out: indistinguishable from a wrong PIN
-  if (!email || !/^\d{6}$/.test(pin)) return failed();
-
   try {
+    if (
+      body.website ||
+      (await count(ipKey, FAIL_WINDOW)) >= MAX_FAILS ||
+      (await count(mailKey, FAIL_WINDOW)) >= MAX_FAILS
+    )
+      return await invalid(); // honeypot or locked out: indistinguishable from a wrong PIN
+    if (!email || !/^\d{6}$/.test(pin)) return await failed();
+
     const user = await userByEmail(email);
     const ok = user ? verifyPin(pin, user.pin_hash) : dummyVerify(pin);
-    if (!user || !ok) return failed();
-    if (!allow(`otp:${email}`, Date.now(), 5, HOUR))
+    if (!user || !ok) return await failed();
+    if ((await hit(`otp:${email}`, HOUR)) > 5)
       return fail("Too many codes requested. Please try again later.", 429);
     if (await sendCode(user)) return fail("Could not send the code.", 502);
     const res = Response.json({ ok: true });

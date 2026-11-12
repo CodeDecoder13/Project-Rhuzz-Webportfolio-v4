@@ -35,5 +35,10 @@ await client.query(`CREATE TABLE IF NOT EXISTS admin_otps (
   used boolean NOT NULL DEFAULT false,
   created_at timestamptz DEFAULT now()
 )`);
+await client.query(`CREATE TABLE IF NOT EXISTS rate_limits (
+  key text PRIMARY KEY,
+  window_start timestamptz NOT NULL DEFAULT now(),
+  count int NOT NULL DEFAULT 1
+)`);
 await client.end();
 console.log("tables ready");

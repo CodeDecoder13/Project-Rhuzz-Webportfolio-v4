@@ -6,7 +6,7 @@ import {
   setCookie,
 } from "@/lib/adminAuth";
 import { checkCode } from "@/lib/otp";
-import { allow } from "@/lib/rateLimit";
+import { hit } from "@/lib/dbLimit";
 import { makeToken } from "@/lib/token";
 
 const err = (error: string, status: number) =>
@@ -17,11 +17,15 @@ export async function POST(req: Request) {
   const id = await pendingUser();
   if (!id) return err("Unauthorized.", 401); // no PIN step, no code step
   const win = 15 * 60 * 1000;
-  if (
-    !allow(`code:${id}`, Date.now(), 10, win) ||
-    !allow(`codeip:${clientIp(req)}`, Date.now(), 20, win)
-  )
-    return err("Too many attempts. Please try again later.", 429);
+  try {
+    if (
+      (await hit(`code:${id}`, win)) > 10 ||
+      (await hit(`codeip:${clientIp(req)}`, win)) > 20
+    )
+      return err("Too many attempts. Please try again later.", 429);
+  } catch {
+    return err("Could not verify the code.", 503); // fail closed
+  }
 
   let body: { code?: unknown };
   try {

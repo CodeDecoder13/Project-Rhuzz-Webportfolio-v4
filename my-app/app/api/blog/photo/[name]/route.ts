@@ -1,4 +1,6 @@
+import { clientIp } from "@/lib/adminAuth";
 import { PHOTO_NAME } from "@/lib/image";
+import { allow } from "@/lib/rateLimit";
 import { getPhoto } from "@/lib/s3";
 
 const types: Record<string, string> = {
@@ -9,9 +11,11 @@ const types: Record<string, string> = {
 
 // Public read-only: only `posts/<uuid>.<ext>` keys can ever be built from the path.
 export async function GET(
-  _req: Request,
+  req: Request,
   { params }: { params: Promise<{ name: string }> },
 ) {
+  if (!allow(`photo:${clientIp(req)}`, Date.now(), 240, 60_000))
+    return new Response("Too many requests", { status: 429 });
   const { name } = await params;
   if (!PHOTO_NAME.test(name)) return new Response("Not found", { status: 404 });
   try {
