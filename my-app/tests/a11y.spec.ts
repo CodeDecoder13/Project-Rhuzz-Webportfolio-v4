@@ -14,6 +14,8 @@ for (const theme of ["light", "dark"]) {
     "/certifications",
     "/ai-consent",
     "/cookies",
+    "/blog",
+    "/admin",
   ]) {
     test(`no serious or critical a11y violations on ${path} (${theme})`, async ({
       page,
@@ -45,7 +47,7 @@ const serious = (
     .map((v) => `${v.id}: ${v.nodes.map((n) => n.target).join(" | ")}`);
 
 for (const view of ["dev", "recruiter", "business"]) {
-  for (const path of ["/", "/about", "/projects", "/contact"]) {
+  for (const path of ["/", "/about", "/projects", "/contact", "/blog"]) {
     test(`no serious or critical a11y violations on ${path} (${view} view)`, async ({
       page,
     }) => {

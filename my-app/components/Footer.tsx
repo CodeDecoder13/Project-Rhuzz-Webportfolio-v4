@@ -9,6 +9,7 @@ const explore = [
   ["Home", "/"],
   ["About", "/about"],
   ["Projects", "/projects"],
+  ["Blog", "/blog"],
   ["QA & testing", "/qa-testing", "all dev"],
   ["Tech stack", "/tech-stack", "all dev"],
   ["Certifications", "/certifications", "all dev recruiter"],

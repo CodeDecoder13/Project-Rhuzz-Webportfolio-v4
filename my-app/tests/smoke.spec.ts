@@ -19,6 +19,7 @@ test("home loads with centered nav and no view-projects button", async ({
     "Home",
     "About",
     "Projects",
+    "Blog",
     "Contact",
   ]);
   await expect(page.getByText("View projects")).toHaveCount(0);
@@ -40,6 +41,7 @@ test.describe("mobile", () => {
       "Home",
       "About",
       "Projects",
+      "Blog",
       "Contact",
     ]);
     await expect(menu.getByRole("button", { name: "Get my CV" })).toBeVisible();
@@ -276,7 +278,7 @@ test("footer lists site links and contact details", async ({ page }) => {
   const footer = page.getByRole("contentinfo");
   await expect(
     footer.getByRole("navigation", { name: "Footer" }).getByRole("link"),
-  ).toHaveCount(7);
+  ).toHaveCount(8);
   await expect(
     footer.getByRole("link", { name: "boyparamio@gmail.com" }),
   ).toBeVisible();
