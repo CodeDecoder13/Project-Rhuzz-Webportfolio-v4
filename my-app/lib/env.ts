@@ -1,5 +1,5 @@
 // Names only: values are never put into messages or logs.
-const AUTH = ["ADMIN_PASSWORD", "ADMIN_SESSION_SECRET"];
+const AUTH = ["ADMIN_SESSION_SECRET", "RESEND_API_KEY"];
 const DB = ["DATABASE_URL"];
 const S3 = [
   "S3_ENDPOINT",

@@ -19,7 +19,7 @@ type Row = {
 
 const g = globalThis as unknown as { __pool?: Pool };
 
-function pool() {
+export function pool() {
   if (missingDb().length) throw new Error("Database not configured");
   if (!g.__pool) {
     const url = process.env.DATABASE_URL!;

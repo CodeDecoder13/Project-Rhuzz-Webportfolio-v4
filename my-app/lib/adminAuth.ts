@@ -1,39 +1,26 @@
-import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
+import { TTL_S, readToken, type Kind } from "./token";
 
 export const COOKIE = "admin_session";
-export const TTL_S = 60 * 60 * 8;
+export const PENDING = "admin_pending";
 
-const sign = (data: string) =>
-  createHmac("sha256", process.env.ADMIN_SESSION_SECRET!)
-    .update(data)
-    .digest("base64url");
+const attrs = (maxAge: number) =>
+  `Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${
+    process.env.NODE_ENV === "production" ? "; Secure" : ""
+  }`;
 
-// Both sides are hashed first so the comparison is constant-time whatever the lengths.
-const same = (a: string, b: string) =>
-  timingSafeEqual(
-    createHash("sha256").update(a).digest(),
-    createHash("sha256").update(b).digest(),
-  );
+export const setCookie = (kind: Kind, token: string) =>
+  `${kind === "session" ? COOKIE : PENDING}=${token}; ${attrs(TTL_S[kind])}`;
+export const clearCookie = (kind: Kind) =>
+  `${kind === "session" ? COOKIE : PENDING}=; ${attrs(0)}`;
 
-export const passwordOk = (given: string) =>
-  !!process.env.ADMIN_PASSWORD && same(given, process.env.ADMIN_PASSWORD);
-
-export function makeToken(now = Date.now()) {
-  const exp = String(Math.floor(now / 1000) + TTL_S);
-  return `${exp}.${sign(exp)}`;
+export async function sessionUser() {
+  return readToken("session", (await cookies()).get(COOKIE)?.value);
 }
+export const isAdmin = async () => !!(await sessionUser());
 
-export function tokenOk(token: string | undefined, now = Date.now()) {
-  if (!token || !process.env.ADMIN_SESSION_SECRET) return false;
-  const [exp, mac] = token.split(".");
-  if (!exp || !mac || !/^\d+$/.test(exp) || Number(exp) * 1000 < now)
-    return false;
-  return same(mac, sign(exp));
-}
-
-export async function isAdmin() {
-  return tokenOk((await cookies()).get(COOKIE)?.value);
+export async function pendingUser() {
+  return readToken("pending", (await cookies()).get(PENDING)?.value);
 }
 
 // CSRF defence on top of SameSite=Lax: a mutating request must come from this site.
@@ -48,7 +35,10 @@ export function sameOrigin(req: Request) {
   }
 }
 
-// Every mutating admin route calls this first: null means "go ahead".
+export const clientIp = (req: Request) =>
+  req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+
+// Every mutating admin route calls this first: null means "go ahead". Only a full session passes.
 export async function guard(req: Request): Promise<Response | null> {
   if (!sameOrigin(req))
     return Response.json({ error: "Forbidden." }, { status: 403 });
