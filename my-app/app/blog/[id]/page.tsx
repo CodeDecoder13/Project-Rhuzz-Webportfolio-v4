@@ -27,7 +27,7 @@ async function Post({ params }: { params: Promise<{ id: string }> }) {
           alt=""
           width={1200}
           height={750}
-          className="mt-8 w-full rounded-[14px] border-[1.5px] border-ink object-cover"
+          className="mt-8 h-auto w-full rounded-[14px] border-[1.5px] border-ink"
         />
       )}
       <div className="mt-8">

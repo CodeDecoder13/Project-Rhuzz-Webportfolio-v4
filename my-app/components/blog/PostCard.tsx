@@ -22,7 +22,7 @@ export default function PostCard({ post }: { post: Post }) {
           width={1200}
           height={750}
           loading="lazy"
-          className="aspect-[8/5] w-full border-b-[1.5px] border-ink object-cover"
+          className="h-auto w-full border-b-[1.5px] border-ink"
         />
       ) : (
         <div
@@ -81,7 +81,7 @@ export function PostRow({ post }: { post: Post }) {
           width={400}
           height={267}
           loading="lazy"
-          className="aspect-[3/2] w-[220px] shrink-0 rounded-[10px] border-[1.5px] border-ink object-cover max-[600px]:w-full"
+          className="h-auto w-[260px] shrink-0 rounded-[10px] border-[1.5px] border-ink max-[600px]:w-full"
         />
       )}
     </article>

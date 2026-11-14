@@ -230,8 +230,8 @@ test("header switcher changes the view live and announces it", async ({
   await skipGate(page);
   await page.goto("/");
   const sel = page.getByRole("combobox", { name: "Viewing as" });
-  await sel.focus();
-  await sel.selectOption("business");
+  await sel.click();
+  await page.getByRole("option", { name: /Business view/ }).click();
   await expect(html(page)).toHaveAttribute("data-persona", "business");
   await expect(
     page
@@ -239,7 +239,8 @@ test("header switcher changes the view live and announces it", async ({
       .filter({ hasText: "Now showing the business view" }),
   ).toBeAttached();
   await expect(sel).toBeFocused();
-  await sel.selectOption("all");
+  await sel.click();
+  await page.getByRole("option", { name: /Everything/ }).click();
   await expect(html(page)).not.toHaveAttribute("data-persona", /.+/);
 });
 
@@ -249,9 +250,8 @@ test.describe("mobile switcher", () => {
     await skipGate(page);
     await page.goto("/");
     await page.getByRole("button", { name: "Menu" }).click();
-    await page
-      .getByRole("combobox", { name: "Viewing as" })
-      .selectOption("recruiter");
+    await page.getByRole("combobox", { name: "Viewing as" }).click();
+    await page.getByRole("option", { name: /Recruiter view/ }).click();
     await expect(html(page)).toHaveAttribute("data-persona", "recruiter");
   });
 });

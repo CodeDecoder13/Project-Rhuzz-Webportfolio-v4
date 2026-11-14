@@ -32,7 +32,36 @@ export default function Proof() {
                 key={c.name}
                 className="break-inside-avoid flex items-baseline justify-between gap-4 border-t border-line py-[clamp(5px,1.3svh,12px)] first:border-t-0 first:pt-0"
               >
-                <b className="font-semibold">{c.name}</b>
+                <b className="flex items-center gap-3 font-semibold">
+                  {c.logo && (
+                    // eslint-disable-next-line @next/next/no-img-element -- small static badge
+                    <img
+                      src={c.logo}
+                      alt=""
+                      width={672}
+                      height={352}
+                      loading="lazy"
+                      draggable={false}
+                      className="aspect-square size-9 shrink-0 select-none object-cover"
+                    />
+                  )}
+                  {c.url ? (
+                    <a
+                      href={c.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-blue"
+                    >
+                      {c.name}
+                      <span className="sr-only">
+                        {" "}
+                        (verify on Credly, opens in a new tab)
+                      </span>
+                    </a>
+                  ) : (
+                    c.name
+                  )}
+                </b>
                 <span className="mono shrink-0 text-muted">
                   {c.issuer.split(" ")[0]} · {c.year}
                 </span>
