@@ -34,25 +34,22 @@ export default function CertificationsPage() {
                   AI
                 </div>
               )}
-              <div className="flex min-w-0 flex-1 flex-col self-stretch">
-                <p className="mono text-muted">
-                  {c.issuer} · {c.year}
-                </p>
-                <h2 className="display mt-1 text-[clamp(24px,2.4vw,30px)] leading-[1.05]">
-                  {c.name}
-                </h2>
-                {c.description && (
-                  <p className="mt-3 text-[15px] leading-relaxed text-ink/80">
-                    {c.description}
-                  </p>
-                )}
-                {c.url && (
-                  <div className="mt-auto pt-4">
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-3">
+                  <div className="min-w-0">
+                    <p className="mono text-muted">
+                      {c.issuer} · {c.year}
+                    </p>
+                    <h2 className="display mt-1 text-[clamp(24px,2.4vw,30px)] leading-[1.05]">
+                      {c.name}
+                    </h2>
+                  </div>
+                  {c.url && (
                     <a
                       href={c.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-fill mono inline-block rounded-full border-[1.5px] border-ink px-4 py-2"
+                      className="btn-fill mono shrink-0 whitespace-nowrap rounded-full border-[1.5px] border-ink px-3.5 py-1.5 text-[11px]"
                     >
                       Verify on Credly ↗
                       <span className="sr-only">
@@ -60,7 +57,12 @@ export default function CertificationsPage() {
                         ({c.name}, opens in a new tab)
                       </span>
                     </a>
-                  </div>
+                  )}
+                </div>
+                {c.description && (
+                  <p className="mt-3 text-[15px] leading-relaxed text-ink/80">
+                    {c.description}
+                  </p>
                 )}
               </div>
             </li>
