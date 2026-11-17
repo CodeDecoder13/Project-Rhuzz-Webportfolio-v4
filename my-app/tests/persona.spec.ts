@@ -123,7 +123,9 @@ test.describe("recruiter", () => {
     await page.goto("/");
     const nav = page.getByRole("navigation", { name: "Primary" });
     await nav.getByRole("link", { name: "About" }).click();
+    await page.waitForURL("**/about");
     await nav.getByRole("link", { name: "Projects" }).click();
+    await page.waitForURL("**/projects");
     await expect(html(page)).toHaveAttribute("data-persona", "recruiter");
     await page.getByRole("button", { name: /OmniPOS/ }).click();
     const drawer = page.getByRole("dialog", { name: "Project details" });

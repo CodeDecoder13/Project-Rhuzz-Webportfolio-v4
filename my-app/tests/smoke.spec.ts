@@ -368,6 +368,7 @@ test.describe("accepted cookies", () => {
     page,
   }) => {
     await page.goto("/");
+    await page.waitForLoadState("networkidle"); // a click before hydration follows the plain link instead of opening the modal
     await page.getByRole("link", { name: "Book me" }).click();
     const dialog = page.getByRole("dialog", { name: "Book a call" });
     await expect(dialog).toBeVisible();
