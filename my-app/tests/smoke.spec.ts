@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { proofCount, snapshot } from "./snapshot";
 
 // Every test except the gate one starts as a returning visitor so the intro overlay stays out of the way.
 test.beforeEach(async ({ page }, info) => {
@@ -128,9 +129,62 @@ test("case study route renders and unknown slug does not", async ({ page }) => {
 test("proof counter ends on the true value", async ({ page }) => {
   await page.goto("/");
   await page.locator("#proof").scrollIntoViewIfNeeded();
-  await expect(page.locator("#proof")).toContainText("148/156", {
+  await expect(page.locator("#proof")).toContainText(proofCount, {
     timeout: 3000,
   });
+});
+
+test("proof replay plays the last run back once per session", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const proof = page.locator("#proof");
+  await proof.scrollIntoViewIfNeeded();
+  await proof.getByRole("button", { name: "Run replay" }).click();
+  await expect(proof.getByText(/^Replay of a recorded run, /)).toBeVisible();
+  await expect(proof.getByRole("status")).toContainText("Replay finished", {
+    timeout: 30_000,
+  });
+  const log = proof.getByRole("list", { name: "Replay log" });
+  await expect(log.getByRole("listitem")).toHaveCount(snapshot.total + 1);
+  await expect(log).toContainText(snapshot.tests[0].title);
+  await expect(proof).toContainText(proofCount);
+  await expect(proof.getByRole("button", { name: /replay/i })).toHaveCount(0);
+  expect(
+    await page.evaluate(() => sessionStorage.getItem("proof-replay")),
+  ).toBe("1");
+  await expect(log).toBeFocused();
+  await page.reload();
+  // Give hydration time to (not) render the button; the storage flag above is the real guard.
+  await page.waitForLoadState("load");
+  await page.waitForTimeout(1000);
+  await expect(proof.getByRole("button", { name: /replay/i })).toHaveCount(0);
+});
+
+test.describe("proof replay with reduced motion", () => {
+  test.use({ reducedMotion: "reduce" });
+  test("shows the final state at once", async ({ page }) => {
+    await page.goto("/");
+    const proof = page.locator("#proof");
+    await proof.getByRole("button", { name: "Run replay" }).click();
+    await expect(proof.getByRole("status")).toContainText("Replay finished", {
+      timeout: 1000,
+    });
+    await expect(
+      proof.getByRole("list", { name: "Replay log" }).getByRole("listitem"),
+    ).toHaveCount(snapshot.total + 1);
+  });
+});
+
+test("proof report is plain HTML without JS", async ({ browser }) => {
+  const ctx = await browser.newContext({ javaScriptEnabled: false });
+  const page = await ctx.newPage();
+  await page.goto("/");
+  await expect(page.locator("#proof")).toContainText(proofCount);
+  await expect(
+    page.locator("#proof").getByRole("button", { name: /replay/i }),
+  ).toHaveCount(0);
+  await ctx.close();
 });
 
 test("contact chat greets and streams the reply", async ({ page }) => {

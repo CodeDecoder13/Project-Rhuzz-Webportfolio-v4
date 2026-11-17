@@ -223,7 +223,7 @@ export function AboutContact() {
             );
           })}
         </ul>
-        <div className="reveal rounded-[14px] border-[1.5px] border-ink bg-[#E4EEFB] p-4 shadow-[6px_6px_0_var(--ink)]">
+        <div className="reveal rounded-[14px] border-[1.5px] border-ink bg-[#E4EEFB] p-4 transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--ink)]">
           <HowCover />
         </div>
       </div>

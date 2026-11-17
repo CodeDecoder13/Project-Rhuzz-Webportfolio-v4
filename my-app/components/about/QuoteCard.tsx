@@ -45,7 +45,7 @@ export default function QuoteCard() {
         rx.set(0);
         ry.set(0);
       }}
-      className="island-light flex w-full flex-col justify-between rounded-[14px] border-[1.5px] border-ink bg-blue p-[clamp(16px,3svh,32px)] text-white shadow-[6px_6px_0_var(--ink)]"
+      className="island-light flex w-full flex-col justify-between rounded-[14px] border-[1.5px] border-ink bg-blue p-[clamp(16px,3svh,32px)] text-white transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--ink)]"
     >
       <span
         aria-hidden="true"

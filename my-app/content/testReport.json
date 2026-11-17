@@ -1,0 +1,615 @@
+{
+  "generatedAt": "2026-11-17T05:35:48.632Z",
+  "durationMs": 67997,
+  "total": 97,
+  "passed": 97,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "a11y",
+      "total": 43,
+      "failed": 0
+    },
+    {
+      "name": "blog",
+      "total": 9,
+      "failed": 0
+    },
+    {
+      "name": "persona",
+      "total": 19,
+      "failed": 0
+    },
+    {
+      "name": "smoke",
+      "total": 26,
+      "failed": 0
+    }
+  ],
+  "tests": [
+    {
+      "title": "no serious or critical a11y violations on / (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 4356
+    },
+    {
+      "title": "no serious or critical a11y violations on /privacy (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1321
+    },
+    {
+      "title": "no serious or critical a11y violations on /terms (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1275
+    },
+    {
+      "title": "no serious or critical a11y violations on /about (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 2363
+    },
+    {
+      "title": "no serious or critical a11y violations on /projects (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1684
+    },
+    {
+      "title": "no serious or critical a11y violations on /contact (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1113
+    },
+    {
+      "title": "no serious or critical a11y violations on /qa-testing (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1205
+    },
+    {
+      "title": "no serious or critical a11y violations on /tech-stack (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1197
+    },
+    {
+      "title": "no serious or critical a11y violations on /certifications (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1123
+    },
+    {
+      "title": "no serious or critical a11y violations on /ai-consent (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 776
+    },
+    {
+      "title": "no serious or critical a11y violations on /cookies (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 827
+    },
+    {
+      "title": "no serious or critical a11y violations on /blog (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 824
+    },
+    {
+      "title": "no serious or critical a11y violations on /admin (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 780
+    },
+    {
+      "title": "no serious or critical a11y violations on / (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1843
+    },
+    {
+      "title": "no serious or critical a11y violations on /privacy (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 970
+    },
+    {
+      "title": "no serious or critical a11y violations on /terms (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 949
+    },
+    {
+      "title": "no serious or critical a11y violations on /about (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1564
+    },
+    {
+      "title": "no serious or critical a11y violations on /projects (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1130
+    },
+    {
+      "title": "no serious or critical a11y violations on /contact (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1002
+    },
+    {
+      "title": "no serious or critical a11y violations on /qa-testing (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1013
+    },
+    {
+      "title": "no serious or critical a11y violations on /tech-stack (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1084
+    },
+    {
+      "title": "no serious or critical a11y violations on /certifications (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 910
+    },
+    {
+      "title": "no serious or critical a11y violations on /ai-consent (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 915
+    },
+    {
+      "title": "no serious or critical a11y violations on /cookies (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 943
+    },
+    {
+      "title": "no serious or critical a11y violations on /blog (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 953
+    },
+    {
+      "title": "no serious or critical a11y violations on /admin (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 919
+    },
+    {
+      "title": "no serious or critical a11y violations on / (dev view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 2118
+    },
+    {
+      "title": "no serious or critical a11y violations on /about (dev view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1530
+    },
+    {
+      "title": "no serious or critical a11y violations on /projects (dev view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1017
+    },
+    {
+      "title": "no serious or critical a11y violations on /contact (dev view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 882
+    },
+    {
+      "title": "no serious or critical a11y violations on /blog (dev view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 805
+    },
+    {
+      "title": "no serious or critical a11y violations on / (recruiter view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1376
+    },
+    {
+      "title": "no serious or critical a11y violations on /about (recruiter view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1155
+    },
+    {
+      "title": "no serious or critical a11y violations on /projects (recruiter view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 872
+    },
+    {
+      "title": "no serious or critical a11y violations on /contact (recruiter view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 815
+    },
+    {
+      "title": "no serious or critical a11y violations on /blog (recruiter view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 769
+    },
+    {
+      "title": "no serious or critical a11y violations on / (business view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1190
+    },
+    {
+      "title": "no serious or critical a11y violations on /about (business view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1043
+    },
+    {
+      "title": "no serious or critical a11y violations on /projects (business view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 922
+    },
+    {
+      "title": "no serious or critical a11y violations on /contact (business view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 819
+    },
+    {
+      "title": "no serious or critical a11y violations on /blog (business view)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 750
+    },
+    {
+      "title": "no serious or critical a11y violations with the picker open (light)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1762
+    },
+    {
+      "title": "no serious or critical a11y violations with the picker open (dark)",
+      "suite": "a11y",
+      "status": "passed",
+      "ms": 1881
+    },
+    {
+      "title": "blog renders its heading and the empty state without a database",
+      "suite": "blog",
+      "status": "passed",
+      "ms": 1251
+    },
+    {
+      "title": "blog is in the nav",
+      "suite": "blog",
+      "status": "passed",
+      "ms": 1067
+    },
+    {
+      "title": "a missing post is a 404 page, not a crash",
+      "suite": "blog",
+      "status": "passed",
+      "ms": 651
+    },
+    {
+      "title": "admin shows a login or not-configured notice and is noindex",
+      "suite": "blog",
+      "status": "passed",
+      "ms": 541
+    },
+    {
+      "title": "admin mutations refuse unauthenticated requests",
+      "suite": "blog",
+      "status": "passed",
+      "ms": 402
+    },
+    {
+      "title": "the code step and resend cannot be reached without passing the PIN step",
+      "suite": "blog",
+      "status": "passed",
+      "ms": 270
+    },
+    {
+      "title": "a forged pending cookie grants no admin access",
+      "suite": "blog",
+      "status": "passed",
+      "ms": 211
+    },
+    {
+      "title": "bad sign-in input gets one generic error",
+      "suite": "blog",
+      "status": "passed",
+      "ms": 2251
+    },
+    {
+      "title": "photo route only serves well-formed keys",
+      "suite": "blog",
+      "status": "passed",
+      "ms": 529
+    },
+    {
+      "title": "gate asks who you are on first visit",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 1393
+    },
+    {
+      "title": "gate choice is applied and remembered",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 1607
+    },
+    {
+      "title": "gate Esc keeps the default view and saves nothing",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 1019
+    },
+    {
+      "title": "gate is keyboard operable and traps focus",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 861
+    },
+    {
+      "title": "gate: share link presets the view and skips the intro; junk is ignored",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 807
+    },
+    {
+      "title": "canonical ignores the share param",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 475
+    },
+    {
+      "title": "default view is unchanged",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 423
+    },
+    {
+      "title": "header switcher changes the view live and announces it",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 753
+    },
+    {
+      "title": "reduced motion: every view shows its content",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 1224
+    },
+    {
+      "title": "chat API validates the view",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 11857
+    },
+    {
+      "title": "Home has no tool jargon and hides the technical sections",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 554
+    },
+    {
+      "title": "view survives navigation and the drawer shows plain wording",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 1007
+    },
+    {
+      "title": "hidden-from-nav pages still load",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 380
+    },
+    {
+      "title": "chat chips and request follow the view; CV form preselects the role",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 1476
+    },
+    {
+      "title": "Home leads with outcomes and has no invented numbers",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 624
+    },
+    {
+      "title": "no layout shift between first parse and load",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 866
+    },
+    {
+      "title": "Home keeps the technical view",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 463
+    },
+    {
+      "title": "is in the burger menu",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 625
+    },
+    {
+      "title": "full default page, no dialog",
+      "suite": "persona",
+      "status": "passed",
+      "ms": 448
+    },
+    {
+      "title": "home loads with centered nav and no view-projects button",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 1631
+    },
+    {
+      "title": "gate can be skipped with Esc",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 1605
+    },
+    {
+      "title": "nav links open the dedicated pages",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 1185
+    },
+    {
+      "title": "filter changes the card count",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 629
+    },
+    {
+      "title": "drawer opens, syncs the URL and closes",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 641
+    },
+    {
+      "title": "case study route renders and unknown slug does not",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 808
+    },
+    {
+      "title": "proof counter ends on the true value",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 767
+    },
+    {
+      "title": "proof replay plays the last run back once per session",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 11935
+    },
+    {
+      "title": "proof report is plain HTML without JS",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 500
+    },
+    {
+      "title": "contact chat greets and streams the reply",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 1703
+    },
+    {
+      "title": "contact chat surfaces a server error",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 1261
+    },
+    {
+      "title": "contact asks for AI consent each visit and can be declined",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 1913
+    },
+    {
+      "title": "resume request opens a form, validates, and the API refuses bad input",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 1171
+    },
+    {
+      "title": "contact API rejects bad input and honeypot sends nothing",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 142
+    },
+    {
+      "title": "legal pages are reachable from the footer",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 1515
+    },
+    {
+      "title": "footer lists site links and contact details",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 398
+    },
+    {
+      "title": "hero has Message and Book me with a hover hint",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 732
+    },
+    {
+      "title": "How I work: tabs switch the track and hovering a step shows its scene",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 992
+    },
+    {
+      "title": "About: a picked skill lights up projects and the role explorer switches roles",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 748
+    },
+    {
+      "title": "theme toggle switches to dark and the choice persists",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 693
+    },
+    {
+      "title": "burger menu replaces the nav and opens the pages",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 1242
+    },
+    {
+      "title": "hero text is white over the photo",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 604
+    },
+    {
+      "title": "shows the final state at once",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 570
+    },
+    {
+      "title": "Book me opens the Calendly modal and Esc closes it",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 553
+    },
+    {
+      "title": "starts dark when nothing is saved, and a saved light choice wins",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 556
+    },
+    {
+      "title": "cookie banner asks once, remembers the choice and can be reopened",
+      "suite": "smoke",
+      "status": "passed",
+      "ms": 1194
+    }
+  ]
+}

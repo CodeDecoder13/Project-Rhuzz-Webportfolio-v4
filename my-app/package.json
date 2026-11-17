@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "e2e": "playwright test",
+    "report": "node scripts/report-summary.mjs",
+    "report:snapshot": "node scripts/report-summary.mjs --snapshot",
     "typecheck": "next typegen && tsc --noEmit",
     "db:init": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/db-init.mjs",
     "db:seed": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/seed-admin.mjs",

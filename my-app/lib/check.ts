@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { fmtDate, fmtDuration, parseSummary } from "./testSummary.ts";
 import { allow } from "./rateLimit.ts";
 import { contactSchema } from "./validators.ts";
 import { cleanHtml } from "./sanitize.ts";
@@ -64,4 +66,30 @@ assert.equal(
 );
 assert.equal(readToken("pending", undefined), null);
 assert.notEqual(hashCode("u1", "111111"), hashCode("u1", "111112"));
+// test report: the committed snapshot is valid; bad or inconsistent data is rejected (the page then uses the snapshot)
+const snap = JSON.parse(readFileSync("content/testReport.json", "utf8"));
+assert.ok(parseSummary(snap), "committed snapshot is valid");
+assert.equal(
+  parseSummary({ ...snap, total: snap.total + 1 }),
+  null,
+  "totals must add up",
+);
+assert.equal(parseSummary({ ...snap, sha: "<script>" }), null, "bad sha");
+assert.equal(parseSummary("nope"), null);
+assert.equal(fmtDate("2026-11-17T09:00:00.000Z"), "17 Nov 2026");
+assert.equal(fmtDuration(72_400), "1m 12s");
+assert.equal(fmtDuration(119_600), "2m 00s");
+assert.equal(fmtDuration(59_600), "1m 00s");
+assert.equal(fmtDuration(900), "900ms");
+assert.equal(
+  parseSummary({ ...snap, passed: snap.passed + 1, failed: snap.failed - 1 }),
+  null,
+  "counts must match the statuses",
+);
+assert.equal(parseSummary({ ...snap, suites: [] }), null, "suites must match");
+assert.equal(
+  parseSummary({ ...snap, generatedAt: "2026-13-45T00:00:00Z" }),
+  null,
+  "bad date",
+);
 console.log("lib ok");

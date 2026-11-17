@@ -1,45 +1,43 @@
-import { testReport as r } from "@/content/testReport";
+import { getTestReport } from "@/lib/testReport";
+import { fmtDate, fmtDuration } from "@/lib/testSummary";
 import { card } from "./Section";
-import CountUp from "./CountUp";
+import ReportLive from "./ReportLive";
 
-// Failures sit at even intervals across the run.
-const failedAt = new Set(
-  Array.from({ length: r.failed }, (_, k) =>
-    Math.floor(((k + 1) * (r.passed + r.failed)) / (r.failed + 1)),
-  ),
-);
-
-export default function TestReport() {
+// Real results of this site's own Playwright suite (see scripts/report-summary.mjs).
+export default async function TestReport() {
+  const r = await getTestReport();
+  const date = fmtDate(r.generatedAt);
+  const slowest = r.tests.reduce((a, t) => (t.ms > a.ms ? t : a), r.tests[0]);
   return (
     <div className={card}>
       <div className="mono flex items-center justify-between">
         <span>$ npm run e2e</span>
         <span className="rounded-full bg-ink px-2.5 py-px text-sky">
-          {r.failed} FAILED
+          {r.failed
+            ? `${r.failed} FAILED`
+            : r.passed === r.total
+              ? "ALL PASSED"
+              : "0 FAILED"}
         </span>
       </div>
-      <div className="display mt-3 text-[clamp(36px,min(9vw,11svh),120px)] leading-none">
-        <CountUp value={r.passed} />
-        <span className="text-[.4em]">/{r.total}</span>
-        <span className="mono ml-3 align-middle text-muted">tests passed</span>
-      </div>
-      {/* One cell per test; failures are spread out so they read as scattered, not grouped. */}
-      <div
-        aria-hidden="true"
-        className="my-[clamp(8px,1.8svh,20px)] grid grid-cols-[repeat(auto-fill,minmax(9px,1fr))] gap-[3px]"
-      >
-        {Array.from({ length: r.total }, (_, i) => (
-          <span
-            key={i}
-            className={`h-[clamp(6px,1.2svh,10px)] rounded-[2px] ${failedAt.has(i) ? "bg-fail" : i < r.passed + r.failed ? "bg-blue" : "bg-line"}`}
-          />
-        ))}
-      </div>
+      <ReportLive
+        tests={r.tests.map((t) => ({ n: t.title, s: t.status, ms: t.ms }))}
+        counts={{
+          total: r.total,
+          passed: r.passed,
+          failed: r.failed,
+          skipped: r.skipped,
+          flaky: r.flaky,
+        }}
+        date={date}
+        live={r.source === "live"}
+        duration={fmtDuration(r.durationMs)}
+      />
       <dl className="grid grid-cols-3 border-t border-line pt-4">
         {[
-          ["Coverage", `${r.coverage}%`, ""],
-          ["Failed", String(r.failed), "text-fail"],
-          ["Duration", r.duration, ""],
+          ["Failed", String(r.failed), r.failed ? "text-fail" : ""],
+          ["Skipped", String(r.skipped), ""],
+          ["Duration", fmtDuration(r.durationMs), ""],
         ].map(([k, v, c]) => (
           <div key={k}>
             <dt className="mono text-muted">{k}</dt>
@@ -58,15 +56,43 @@ export default function TestReport() {
           </tr>
         </thead>
         <tbody>
-          {r.categories.map((c) => (
+          {r.suites.map((c) => (
             <tr key={c.name} className="border-t border-line">
               <td className="py-[clamp(2px,.7svh,8px)]">{c.name}</td>
               <td>{c.total}</td>
-              <td className="text-fail">{c.failed}</td>
+              <td className={c.failed ? "text-fail" : "text-muted"}>
+                {c.failed}
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <p className="mono mt-[clamp(8px,1.6svh,20px)] text-muted">
+        {r.source === "live" ? "Last run" : "Snapshot from"}{" "}
+        <time dateTime={r.generatedAt}>{date}</time>
+        {r.source === "live" && r.sha && (
+          <>
+            {" · commit "}
+            {r.runUrl ? (
+              <a
+                href={r.runUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-blue"
+              >
+                {r.sha.slice(0, 7)}
+                <span className="sr-only"> (opens the run on GitHub)</span>
+              </a>
+            ) : (
+              r.sha.slice(0, 7)
+            )}
+          </>
+        )}
+        {r.flaky ? ` · ${r.flaky} flaky` : ""}
+        {slowest
+          ? ` · slowest: ${slowest.title} (${fmtDuration(slowest.ms)})`
+          : ""}
+      </p>
     </div>
   );
 }

@@ -1,9 +1,12 @@
 import { certs } from "@/content/certs";
 import Link from "next/link";
 import { Section, SectionHead, card } from "./Section";
+import { getTestReport } from "@/lib/testReport";
+import { fmtDate } from "@/lib/testSummary";
 import TestReport from "./TestReport";
 
-export default function Proof() {
+export default async function Proof() {
+  const r = await getTestReport();
   return (
     <Section id="proof" fit only={["all", "dev", "recruiter"]}>
       <SectionHead title="Proof" only={["all", "dev"]} />
@@ -12,8 +15,21 @@ export default function Proof() {
         data-for="all dev"
         className="reveal mb-[clamp(10px,2.6svh,28px)] max-w-[52ch] text-[clamp(14px,2svh,18px)] text-muted"
       >
-        A sample run from my own test suite. The failures stay on the page,
-        because finding them is the job.
+        {r.source === "live" ? "The last verified run" : "A recorded run"} of
+        this site&apos;s own test suite. Failures stay on the page, because
+        finding them is the job.
+      </p>
+      <p
+        data-for="recruiter"
+        className="reveal mb-[clamp(10px,2.6svh,28px)] max-w-[52ch] text-[clamp(14px,2svh,18px)] text-muted"
+      >
+        Every change to this site is checked by {r.total} automated tests. Last
+        check, {fmtDate(r.generatedAt)}:{" "}
+        {r.failed
+          ? `${r.failed} did not pass.`
+          : r.passed === r.total
+            ? "all passed."
+            : "none failed."}
       </p>
       <div className="grid grid-cols-1 gap-4 min-[801px]:grid-cols-[1.2fr_1fr] [:root[data-persona=recruiter]_&]:min-[801px]:grid-cols-1">
         <div data-for="all dev" className="contents">

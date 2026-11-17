@@ -2,6 +2,8 @@ import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   testDir: "tests",
+  // The JSON report feeds scripts/report-summary.mjs (the Proof section on the home page).
+  reporter: [["list"], ["json", { outputFile: "test-results/report.json" }]],
   // Every test starts as a returning visitor who already chose cookies, so the banner never covers the page.
   use: {
     baseURL: "http://localhost:3100",

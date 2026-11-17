@@ -95,7 +95,7 @@ export default function Manifesto() {
           </dl>
           <ul
             data-for="all dev"
-            className="mt-4 grid grid-cols-1 divide-y island-light divide-white/20 rounded-2xl border-[1.5px] border-ink bg-ink px-4 text-paper shadow-[6px_6px_0_var(--blue)]"
+            className="mt-6 grid grid-cols-1 divide-y island-light divide-white/20 rounded-2xl border-[1.5px] border-ink bg-ink px-4 text-paper transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--blue)]"
           >
             {stats.map((s) => (
               <li key={s.title} className="flex items-center gap-3 py-2">

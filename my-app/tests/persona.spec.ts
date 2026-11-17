@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { jargon } from "../content/personas";
+import { proofCount, snapshot } from "./snapshot";
 
 const seed = (view: string) => ({
   cookies: [],
@@ -109,7 +110,9 @@ test.describe("recruiter", () => {
     await expect(
       page.getByRole("button", { name: "Get my CV" }).first(),
     ).toBeVisible();
-    expect(await page.locator("#proof").innerText()).not.toContain("148/156");
+    const proof = await page.locator("#proof").innerText();
+    expect(proof).not.toContain(proofCount);
+    expect(proof).toContain(`checked by ${snapshot.total} automated tests`);
     await expect(page.getByRole("tab", { name: "QA Engineer" })).toHaveCount(0);
     await expect(page.getByText("Next.js ✦").first()).toBeHidden();
   });
@@ -206,7 +209,7 @@ test.describe("dev", () => {
     await expect(page.getByText("Laravel with Vue or Next.js")).toBeVisible();
     await expect(page.getByRole("tab", { name: "QA Engineer" })).toBeVisible();
     await expect(page.locator("#work")).toContainText("Laravel");
-    await expect(page.locator("#proof")).toContainText("148/156", {
+    await expect(page.locator("#proof")).toContainText(proofCount, {
       timeout: 4000,
     });
   });
