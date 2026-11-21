@@ -77,3 +77,28 @@ assert.ok(
   "no invented percentages in business copy",
 );
 console.log("views ok");
+
+
+// Tech stack: a fundamentals core plus two rings per category, every logo file and link target exists.
+import { existsSync } from "node:fs";
+import { links, stack } from "./stack.ts";
+
+const ids = new Set<string>();
+for (const c of stack) {
+  assert.ok(c.core.items.length >= 3 && c.core.items.length <= 5, `${c.id} core size`);
+  for (const r of [c.core, ...c.rings]) {
+    assert.ok(r.items.length >= 1 && r.items.length <= 8, `${c.id}/${r.label} ring size`);
+    for (const it of r.items) {
+      assert.ok(!ids.has(`${c.id}:${it.id}`), `duplicate item ${it.id}`);
+      ids.add(`${c.id}:${it.id}`);
+      assert.ok(!it.icon || existsSync(`public/assets/stack/${it.icon}.svg`), `${it.name} logo file missing`);
+      assert.ok(it.icon || it.glyph || it.t, `${it.name} needs a logo, glyph or text badge`);
+    }
+  }
+}
+const slugs = new Set(projects.map((p) => p.slug));
+for (const [k, [, href]] of Object.entries(links)) {
+  const m = href.match(/^\/projects\/(.+)$/);
+  assert.ok(!m || slugs.has(m[1]), `stack link ${k} points at a missing project`);
+}
+console.log("stack ok");

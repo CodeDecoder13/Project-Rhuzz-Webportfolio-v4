@@ -1,0 +1,165 @@
+/* Tech stack orbit. Tokens come from app/globals.css, so both themes work with no extra rules. */
+.so-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px}
+.so-tabs{display:flex;gap:2px;padding:5px;border:1.5px solid var(--ink);border-radius:999px;background:var(--card);overflow-x:auto;scrollbar-width:none;max-width:100%}
+.so-tabs::-webkit-scrollbar{display:none}
+.so-tab{position:relative;flex:none;border-radius:999px;white-space:nowrap;padding:0;background:none;border:0;color:var(--ink);cursor:pointer;
+  transition:color .25s ease,background .25s ease,transform .18s cubic-bezier(.23,1,.32,1)}
+.so-tab-in{position:relative;display:inline-flex;align-items:center;gap:8px;padding:9px 16px}
+.so-tab b{font-weight:500;color:var(--blue-text);transition:color .25s ease}
+.so-tab[aria-selected=true]{color:var(--paper)}
+.so-tab[aria-selected=true] b{color:inherit;opacity:.6}
+.so-pill{position:absolute;inset:0;border-radius:999px;background:var(--ink)}
+.so-tab:active{transform:scale(.96)}
+.so-tab:focus-visible{outline-offset:-1px}
+@media (hover:hover){.so-tab:not([aria-selected=true]):hover{background:var(--tint)}}
+.so-halt{border:1.5px solid var(--ink);border-radius:999px;padding:5px 14px;font-size:11px;white-space:nowrap;background:transparent;color:var(--ink);cursor:pointer}
+.so-halt[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+
+.so-panel{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(330px,.75fr);grid-template-areas:"stage intro" "stage side";grid-template-rows:auto 1fr;
+  column-gap:56px;row-gap:18px;align-items:start;padding:36px 0 20px}
+.so-panel[hidden]{display:none}
+.so-intro{grid-area:intro;align-self:end}
+.so-stage{grid-area:stage;grid-row:1/3;align-self:center}
+.so-side{grid-area:side}
+.so-intro h3{font-size:clamp(40px,5vw,68px);margin:10px 0 14px}
+.so-blurb{color:var(--muted);max-width:40ch}
+.so-tiers{margin:18px 0 0;padding:0;list-style:none;border-top:1.5px solid var(--line)}
+.so-tiers li{display:grid;grid-template-columns:64px 1fr auto;align-items:baseline;gap:10px;padding:7px 0;border-bottom:1.5px solid var(--line);font-size:15px}
+.so-tiers .mono{font-size:10.5px}
+.so-tiers b{font-weight:600}
+
+/* ---------- Orbit ---------- */
+.so-stage{position:relative;container-type:inline-size;aspect-ratio:1;width:100%;max-width:680px;margin:0 auto;
+  --b:clamp(42px,9.6cqw,64px);--fb:clamp(38px,7.4cqw,50px);--ease:cubic-bezier(.16,1,.3,1)}
+.so-stage::before{content:"";position:absolute;inset:-5%;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,var(--glow),transparent 58%),
+    linear-gradient(var(--grid) 1px,transparent 1px) 0 0/28px 28px,
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/28px 28px;
+  -webkit-mask:radial-gradient(closest-side,#000 55%,transparent);mask:radial-gradient(closest-side,#000 55%,transparent)}
+.so-system{position:absolute;inset:0;animation:so-in .9s var(--ease) both}
+@keyframes so-in{from{opacity:0;scale:.94;filter:blur(6px)}}
+
+.so-core{position:absolute;left:50%;top:50%;width:39cqw;height:39cqw;margin:-19.5cqw;border-radius:50%;
+  background:radial-gradient(circle,var(--card) 55%,var(--tint));border:1.5px solid var(--ink);
+  box-shadow:0 0 0 1.1cqw var(--paper),0 0 0 calc(1.1cqw + 1.5px) var(--line)}
+.so-core::after{content:"";position:absolute;inset:6.3cqw;border-radius:50%;border:1.5px dashed var(--line)}
+.so-hub{position:absolute;left:50%;top:50%;width:15.4cqw;height:15.4cqw;margin:-7.7cqw;border-radius:50%;z-index:1;
+  background:var(--ink);color:var(--paper);display:grid;place-content:center;text-align:center;gap:.7cqw}
+.so-hub .display{font-size:3.1cqw;line-height:1}
+.so-hub .mono{font-size:clamp(7.5px,1.35cqw,9.5px);opacity:.7;letter-spacing:.1em}
+
+.so-tier{display:contents}
+.so-ring,.so-dots{position:absolute;left:50%;top:50%;width:calc(var(--r)*2);height:calc(var(--r)*2);margin:calc(var(--r)*-1) 0 0 calc(var(--r)*-1);
+  border-radius:50%;pointer-events:none;padding:0;list-style:none;animation:so-spin var(--d) linear infinite}
+.so-ring{border:1.5px solid var(--line)}
+.r0{--r:13.2cqw;--b:var(--fb)}
+.r1{--r:30cqw;--d:80s}
+.r2{--r:43cqw;--d:120s}
+.so-ring.r0{border:0;animation:none}
+.so-ring.r2{border-style:dashed;animation-direction:reverse}
+.so-dots.r1{--d:36s;animation-direction:reverse}
+.so-dots.r2{--d:52s}
+@keyframes so-spin{to{rotate:360deg}}
+
+.so-slot,.so-dot{position:absolute;left:50%;top:50%;width:0;height:0;transform:rotate(var(--a)) translateX(var(--r)) rotate(calc(var(--a)*-1))}
+.so-slot:has(.so-node:is(:hover,:focus-visible,.on)){z-index:3}
+.so-dot::after{content:"";position:absolute;width:var(--s,8px);height:var(--s,8px);margin:calc(var(--s,8px)/-2);border-radius:50%;background:var(--c,var(--blue))}
+
+/* A node keeps upright by spinning the other way at the same speed */
+.so-node{position:absolute;left:calc(var(--b)/-2);top:calc(var(--b)/-2);width:var(--b);height:var(--b);border-radius:50%;padding:0;border:0;background:none;color:var(--ink);
+  pointer-events:auto;cursor:pointer;animation:so-spin var(--d) linear infinite reverse}
+.so-ring.r2 .so-node{animation-direction:normal}
+.so-ring.r0 .so-node{animation:none}
+.so-ring:is(:hover,.paused,:has(.so-node:focus-visible)),
+.so-ring:is(:hover,.paused,:has(.so-node:focus-visible)) .so-node,
+.so-halt-on .so-ring,.so-halt-on .so-node,.so-halt-on .so-dots{animation-play-state:paused}
+
+.so-disc{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:var(--card);border:1.5px solid var(--ink);color:var(--ink);
+  transition:scale .3s var(--ease),background .2s,color .2s,border-color .2s,box-shadow .3s var(--ease);
+  animation:so-pop .7s var(--ease) both;animation-delay:calc(var(--i)*45ms + 180ms)}
+@keyframes so-pop{from{opacity:0;scale:.5}}
+.so-disc img,.so-disc svg,.so-disc .so-mask{width:52%;height:52%;display:block}
+.so-disc svg.so-txt{width:100%;height:100%}
+.so-mask{background:currentColor;-webkit-mask:var(--u) center/contain no-repeat;mask:var(--u) center/contain no-repeat}
+.so-node.cap .so-disc{border-radius:32%}
+.so-node.todo .so-disc{border-style:dashed}
+.so-node.todo::after{content:"?";position:absolute;top:-3px;right:-3px;width:17px;height:17px;border-radius:50%;display:grid;place-items:center;
+  background:var(--fail);color:var(--card);font:700 10px/1 ui-monospace,Consolas,monospace}
+@media (hover:hover){.so-node:hover .so-disc{scale:1.14;box-shadow:0 0 0 4px var(--paper),0 0 0 5.5px var(--blue)}}
+.so-node:focus-visible .so-disc{scale:1.14}
+.so-node.on .so-disc{scale:1.14;background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 0 0 4px var(--paper),0 0 0 5.5px var(--blue)}
+.so-node:active .so-disc{scale:1.04}
+.so-node.on .so-disc img{filter:brightness(0) invert(1)}
+
+.so-tag{position:absolute;left:50%;top:calc(100% + 10px);translate:-50% -4px;white-space:nowrap;padding:3px 9px;border-radius:999px;z-index:4;
+  background:var(--ink);color:var(--paper);font:500 10.5px/1.5 var(--font-jetbrains-mono),ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;
+  opacity:0;pointer-events:none;transition:opacity .18s,translate .3s var(--ease)}
+.so-node:is(:hover,:focus-visible,.on) .so-tag{opacity:1;translate:-50% 0}
+
+.so-rlabel{position:absolute;left:50%;top:calc(50% - var(--r));translate:-50% -50%;margin:0;padding:1px 10px;border-radius:999px;
+  background:var(--paper);border:1.5px solid var(--line);color:var(--muted);font-size:9.5px;white-space:nowrap}
+.so-rlabel.r0{top:calc(50% - 19.5cqw);background:var(--ink);border-color:var(--ink);color:var(--paper);z-index:2}
+
+/* ---------- Detail card ---------- */
+.so-card{position:relative;min-height:300px;border:1.5px solid var(--ink);border-radius:14px;background:var(--card);padding:28px 24px 24px;overflow:hidden}
+.so-card:not(.empty)::before{content:"";position:absolute;inset:0 0 auto;height:6px;background:var(--blue)}
+.so-card.empty{border-style:dashed;border-color:var(--line);background:transparent;display:grid;place-content:center;text-align:center;gap:10px}
+.so-card.empty .display{font-size:30px}
+.so-card.empty p{color:var(--muted);font-size:15px;max-width:30ch}
+.so-card kbd{font:500 11px ui-monospace,Consolas,monospace;border:1.5px solid var(--line);border-bottom-width:3px;border-radius:6px;padding:1px 6px}
+.so-chead{display:flex;align-items:center;gap:14px;margin-bottom:14px;padding-right:40px}
+.so-big{flex:none;display:grid;place-items:center;width:60px;height:60px;border-radius:50%;background:var(--card);border:1.5px solid var(--ink);color:var(--ink)}
+.so-big.cap{border-radius:32%}
+.so-big img,.so-big svg,.so-big .so-mask{width:52%;height:52%}
+.so-big svg.so-txt{width:100%;height:100%}
+.so-chead h4{font-size:34px}
+.so-meta{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+.so-chip{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:999px;padding:2px 10px;font-size:10.5px}
+.so-chip.solid{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.so-chip.flag{border-color:var(--fail);color:var(--fail)}
+.so-lbl{font-size:10.5px;color:var(--blue-text);margin:0 0 4px}
+.so-use{font-size:16px;margin:0 0 16px}
+.so-links{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.so-link{border:1.5px solid var(--ink);border-radius:999px;padding:5px 12px;font-size:11px;text-decoration:none;color:var(--ink)}
+.so-x{position:absolute;top:18px;right:14px;width:44px;height:44px;margin:-6px;border-radius:50%;border:0;background:none;display:grid;place-items:center;font-size:20px;color:var(--ink);cursor:pointer}
+.so-x::before{content:"";position:absolute;inset:6px;border-radius:50%;border:1.5px solid var(--ink);transition:background .2s}
+.so-x{z-index:0}
+@media (hover:hover){.so-x:hover::before{background:var(--tint)}}
+.so-peek{position:absolute;top:24px;right:20px;color:var(--muted);font-size:10px}
+
+/* ---------- 700 to 1040px: orbit on top, card under it ---------- */
+@media (max-width:1040px){
+  .so-panel{grid-template-columns:1fr;grid-template-areas:"intro" "stage" "side";grid-template-rows:auto;row-gap:28px}
+  .so-stage{grid-row:auto}
+  .so-card{min-height:0}
+  .so-card.empty{padding:28px}
+}
+
+/* ---------- Under 700px: no orbit. The same lists become a grid, the card a bottom sheet. ---------- */
+@media (max-width:699px){
+  .so-halt{display:none}
+  .so-panel{padding-top:20px}
+  .so-tiers{display:none}
+  .so-stage{container-type:normal;aspect-ratio:auto;max-width:none}
+  .so-stage::before,.so-core,.so-hub,.so-dots{display:none}
+  .so-system{position:static}
+  .so-tier{display:block}
+  .so-rlabel,.so-rlabel.r0{position:static;translate:none;display:block;padding:0;margin:20px 0 8px;font-size:11px;background:none;border:0;color:var(--muted)}
+  .so-ring,.so-ring.r0{position:static;width:auto;height:auto;margin:0;border:0;border-radius:0;animation:none;pointer-events:auto;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .so-slot{position:static;width:auto;height:auto;transform:none}
+  .so-node{position:relative;left:auto;top:auto;width:100%;min-height:48px;height:auto;animation:none;display:flex;align-items:center;gap:10px;padding:8px;border-radius:14px;border:1.5px solid var(--ink);background:var(--card);text-align:left}
+  .so-disc{flex:none;width:40px;height:40px;border:1.5px solid var(--line);animation-delay:calc(var(--i)*25ms)}
+  .so-node.todo{border-style:dashed}
+  .so-node.todo::after{top:6px;right:6px}
+  .so-node .so-disc,.so-node.on .so-disc,.so-node:hover .so-disc{scale:1;box-shadow:none}
+  .so-node.on{background:var(--ink);color:var(--paper)}
+  .so-tag,.so-node:is(:hover,:focus-visible,.on) .so-tag{position:static;translate:none;opacity:1;padding:0;background:none;color:inherit;white-space:normal;font-size:11px;line-height:1.3}
+  .so-card.empty{display:none}
+  .so-card{position:fixed;left:12px;right:12px;bottom:12px;z-index:20;max-height:70vh;overflow:auto;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+  .so-chead h4{font-size:28px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .so-system,.so-ring,.so-dots,.so-node,.so-disc{animation:none!important}
+  .so-halt{display:none}
+}
