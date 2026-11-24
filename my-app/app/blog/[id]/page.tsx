@@ -8,7 +8,7 @@ import { postDate } from "@/components/blog/PostCard";
 import { getPost, safe } from "@/lib/db";
 import { UUID, photoUrl } from "@/lib/image";
 
-const plain = (html: string) => html.replace(/<[^>]*>/g, " ").replace(/s+/g, " ").trim();
+const plain = (html: string) => html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   await connection();
