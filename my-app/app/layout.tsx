@@ -52,6 +52,15 @@ const personLd = JSON.stringify({
   sameAs: [site.github, site.linkedin],
 }).replace(/</g, "\\u003c");
 
+const siteLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.name,
+  url: "https://rhuzz.online",
+  inLanguage: "en",
+  author: { "@type": "Person", name: site.name },
+}).replace(/</g, "\\u003c");
+
 const THEME_INIT = `try{var t=localStorage.getItem("theme");if(t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}`;
 
 // ?for=dev|recruiter|business|all (share link) or the saved choice sets the view before paint; values are checked against the fixed list.
@@ -79,6 +88,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: personLd }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: siteLd }}
         />
         <Header />
         {children}

@@ -217,7 +217,7 @@ const all: Project[] = [
       summary: "One sales system that runs many shops and branches.",
       solution:
         "A single system where each business keeps its own data, staff and subscription. It has a live checkout screen, stock and branch management, staff shifts, reports and a kitchen order screen.",
-      result: "Faster checkout.",
+      result: "Checkout became about 30% faster.",
     },
     title: "OmniPOS",
     category: "Web Dev",

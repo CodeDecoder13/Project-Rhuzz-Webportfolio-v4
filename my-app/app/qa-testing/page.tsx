@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { copy } from "@/content/personas";
 import Lifecycle from "@/components/Lifecycle";
 import { Section, SectionHead, card } from "@/components/Section";
@@ -37,6 +38,12 @@ export default function QaTestingPage() {
             </div>
           ))}
         </div>
+      </Section>
+      <Section>
+        <h2 className="display text-[clamp(28px,3vw,40px)] leading-[1.1]">What is end-to-end testing?</h2>
+        <p className="mt-3 max-w-3xl text-muted">
+          End-to-end testing is checking a whole product the way a user uses it: opening the page, signing in, completing a task and seeing the right result. I write these checks in Playwright and Selenium and run them on every change, so a broken journey is caught before release. More answers are on the <Link href="/faq" className="text-blue underline">FAQ page</Link>.
+        </p>
       </Section>
       <Lifecycle />
       <Section>
