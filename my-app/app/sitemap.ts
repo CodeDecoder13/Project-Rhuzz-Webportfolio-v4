@@ -13,6 +13,7 @@ const routes = [
   "/about",
   "/certifications",
   "/contact",
+  "/faq",
   "/terms",
   "/privacy",
   "/ai-consent",

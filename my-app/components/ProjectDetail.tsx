@@ -1,6 +1,7 @@
 import type { Project } from "@/content/projects";
 import BookButton from "./BookButton";
 import { site } from "@/content/site";
+import { stories } from "@/content/stories";
 
 const link =
   "btn-fill rounded-full border-[1.5px] px-[26px] py-3.5 font-mono text-[13px] uppercase tracking-[.06em]";
@@ -75,6 +76,12 @@ export default function ProjectDetail({
             </section>
           ))}
         </div>
+      ))}
+      {page && stories[p.slug]?.map(({ h, p: text }) => (
+        <section key={h}>
+          <h2 className="mt-8 text-xl font-semibold">{h}</h2>
+          <p className="mt-2 text-muted">{text}</p>
+        </section>
       ))}
       <p data-for="business" className="mt-6">
         <BookButton

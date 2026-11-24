@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { projects } from "./projects.ts";
+import { stories } from "./stories.ts";
 
 assert.equal(
   new Set(projects.map((p) => p.slug)).size,
@@ -15,6 +16,11 @@ assert.deepEqual(
   [projects.length, n("Web Dev"), n("QA"), n("Capstone")],
   [8, 7, 0, 1],
 );
+// Each case-study page should carry 400+ words (story plus problem/solution/result) for search and answer engines.
+for (const p of projects) {
+  const words = [...(stories[p.slug] ?? []).map((s) => s.p), p.problem, p.solution, p.result].join(" ").split(/\s+/).length;
+  assert.ok(words >= 400, `${p.slug} case study has ${words} words, needs 400+`);
+}
 console.log("content ok");
 
 // Adaptive views: every audience has every copy block, and the plain views contain no tool names.
