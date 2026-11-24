@@ -9,7 +9,7 @@ export const generateStaticParams = () => projects.map(({ slug }) => ({ slug }))
 export async function generateMetadata({ params }: PageProps<"/projects/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const p = projects.find((x) => x.slug === slug);
-  return p ? { title: p.title, description: `${p.title}: a ${p.category} project by Rhuzzel Paramio, built with ${p.stack.join(", ")}. Read the problem, solution and result.` } : {};
+  return p ? { title: p.title, description: `${p.title}: a ${p.category} project by Rhuzzel Paramio, built with ${p.stack.slice(0, 4).join(", ")}. Read the problem, solution and result.` } : {};
 }
 
 export default async function ProjectPage({ params }: PageProps<"/projects/[slug]">) {

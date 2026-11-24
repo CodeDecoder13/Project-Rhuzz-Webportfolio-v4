@@ -30,11 +30,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://rhuzz.online"),
   title: {
     default:
-      "Rhuzzel Paramio — Full-stack Engineer / QA Specialist / AI Engineer",
+      "Rhuzzel Paramio — Full-stack, QA & AI Engineer",
     template: "%s — Rhuzzel Paramio",
   },
   description:
-    "Portfolio of Rhuzzel Paramio: web systems built, then broken, then shipped with proof that they pass.",
+    "Portfolio of Rhuzzel Paramio, a full-stack, QA and AI engineer. See web systems built, then broken, then shipped with published test proof. Book a call or ask the AI.",
   alternates: { canonical: "./" }, // each page names itself as the canonical URL so Google indexes one version
   // Search Console "HTML tag" verification: set GOOGLE_SITE_VERIFICATION to the content="..." value it gives you.
   verification: { google: process.env.GOOGLE_SITE_VERIFICATION },

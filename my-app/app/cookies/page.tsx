@@ -3,7 +3,7 @@ import Legal, { H2, P } from "@/components/Legal";
 import CookieSettings from "@/components/CookieSettings";
 import { site } from "@/content/site";
 
-export const metadata: Metadata = { title: "Cookie Policy" };
+export const metadata: Metadata = { title: "Cookie Policy", description: "Which cookies and local storage rhuzz.online uses, why, and how to change your consent choices at any time." };
 
 const rows = [
   ["cookie-consent", "Remembers your cookie choice", "localStorage", "Until you clear it"],

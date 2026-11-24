@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Legal, { H2, P } from "@/components/Legal";
 import { site } from "@/content/site";
 
-export const metadata: Metadata = { title: "Privacy Policy" };
+export const metadata: Metadata = { title: "Privacy Policy", description: "How rhuzz.online collects, uses and protects your data, including contact forms, CV requests, cookies and the AI assistant, and how to ask for deletion." };
 
 export default function PrivacyPage() {
   return (

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Legal, { H2, P } from "@/components/Legal";
 import { site } from "@/content/site";
 
-export const metadata: Metadata = { title: "Terms & Conditions" };
+export const metadata: Metadata = { title: "Terms & Conditions", description: "The terms for using rhuzz.online: what the site offers, acceptable use, intellectual property, and how to contact Rhuzzel Paramio with questions." };
 
 export default function TermsPage() {
   return (

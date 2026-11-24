@@ -3,7 +3,7 @@ import Link from "next/link";
 import Legal, { H2, P } from "@/components/Legal";
 import { site } from "@/content/site";
 
-export const metadata: Metadata = { title: "AI Consent" };
+export const metadata: Metadata = { title: "AI Consent", description: "What the AI assistant on rhuzz.online does with your messages, which provider processes them, and how to give or withdraw consent." };
 
 export default function AiConsentPage() {
   return (
