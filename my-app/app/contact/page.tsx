@@ -7,7 +7,7 @@ import PageHero from "@/components/PageHero";
 import { Section, SectionHead, card } from "@/components/Section";
 import { site } from "@/content/site";
 
-export const metadata: Metadata = { title: "Contact" };
+export const metadata: Metadata = { title: "Contact", description: "Contact Rhuzzel Paramio by email, book a call on Calendly, or ask the AI assistant. Replies within 24 to 48 hours." };
 
 export default function ContactPage() {
   return (

@@ -53,17 +53,20 @@ export function Section({
 export function SectionHead({
   title,
   only,
+  h1,
 }: {
   n?: string;
   title: string;
   only?: readonly View[];
+  h1?: boolean; // the page's one H1; other sections stay H2
 }) {
+  const H = h1 ? "h1" : "h2";
   return (
     <div
       data-for={forAttr(only)}
       className="mb-[clamp(12px,3svh,32px)] flex flex-wrap items-baseline gap-4"
     >
-      <h2
+      <H
         data-split
         className="display text-[clamp(44px,min(8vw,10.5svh),110px)]"
       >
@@ -77,7 +80,7 @@ export function SectionHead({
             </span>
           </span>
         ))}
-      </h2>
+      </H>
     </div>
   );
 }

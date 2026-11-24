@@ -4,7 +4,7 @@ import Lifecycle from "@/components/Lifecycle";
 import { Section, SectionHead, card } from "@/components/Section";
 import TestReport from "@/components/TestReport";
 
-export const metadata: Metadata = { title: "QA & testing" };
+export const metadata: Metadata = { title: "QA & testing", description: "Manual and automated QA by Rhuzzel Paramio: Selenium and Playwright suites, CI pipelines, and a published, live test report." };
 
 const layers = [
   {
@@ -25,7 +25,7 @@ export default function QaTestingPage() {
   return (
     <main className="page-in pt-14">
       <Section>
-        <SectionHead title="QA & testing" />
+        <SectionHead title="QA & testing" h1 />
         <p data-for="recruiter business" className="mb-6 text-muted">
           {copy.plainIntro.qa}
         </p>

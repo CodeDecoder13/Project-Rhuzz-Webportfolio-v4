@@ -47,6 +47,8 @@ const personLd = JSON.stringify({
   jobTitle: site.role,
   url: "https://rhuzz.online",
   email: site.email,
+  description: "Full-stack engineer, QA specialist and AI engineer who ships web systems with published proof that they pass.",
+  address: { "@type": "PostalAddress", addressLocality: "Metro Manila", addressCountry: "PH" },
   sameAs: [site.github, site.linkedin],
 }).replace(/</g, "\\u003c");
 

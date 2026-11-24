@@ -24,18 +24,21 @@ export function Tags({ items }: { items: string[] }) {
 export default function ProjectDetail({
   project: p,
   index,
+  page,
 }: {
   project: Project;
   index: number;
+  page?: boolean; // true on /projects/[slug], where the title is the page's H1
 }) {
+  const H = page ? "h1" : "h2";
   return (
     <>
       <div className="mono">
         {String(index + 1).padStart(2, "0")} · {p.category}
       </div>
-      <h2 className="display mb-3.5 mt-2 text-[44px] leading-none">
+      <H className="display mb-3.5 mt-2 text-[44px] leading-none">
         {p.title}
-      </h2>
+      </H>
       <div data-for="all dev">
         <Tags items={p.stack} />
         {(["problem", "solution", "result"] as const).map((k) => (

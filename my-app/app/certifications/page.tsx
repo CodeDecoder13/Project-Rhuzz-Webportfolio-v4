@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { Section, SectionHead, card } from "@/components/Section";
 import { certs } from "@/content/certs";
 
-export const metadata: Metadata = { title: "Certifications" };
+export const metadata: Metadata = { title: "Certifications", description: "Seven Credly-verifiable certifications held by Rhuzzel Paramio, covering QA, cloud and AI. Verify each one on Credly." };
 
 export default function CertificationsPage() {
   return (
     <main className="page-in pt-14">
       <Section>
-        <SectionHead title="Certifications" />
+        <SectionHead title="Certifications" h1 />
         <ul className="grid grid-cols-1 gap-4 min-[1000px]:grid-cols-2">
           {certs.map((c) => (
             <li

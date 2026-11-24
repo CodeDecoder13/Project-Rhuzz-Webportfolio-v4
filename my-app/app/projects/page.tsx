@@ -4,7 +4,7 @@ import PageHero from "@/components/PageHero";
 import Work from "@/components/Work";
 import { projects } from "@/content/projects";
 
-export const metadata: Metadata = { title: "Projects" };
+export const metadata: Metadata = { title: "Projects", description: "Selected projects by Rhuzzel Paramio, from a Laravel e-commerce platform to QA automation frameworks, each with the problem, solution and result." };
 
 export default function ProjectsPage() {
   return (

@@ -4,13 +4,13 @@ import { Section, SectionHead } from "@/components/Section";
 import { StackOrbit } from "@/components/stack/StackOrbit";
 import { toolbox } from "@/content/stack";
 
-export const metadata: Metadata = { title: "Tech stack" };
+export const metadata: Metadata = { title: "Tech stack", description: "The languages, frameworks and testing tools Rhuzzel Paramio builds with, grouped by how much they are used day to day." };
 
 export default function TechStackPage() {
   return (
     <main className="page-in pt-14">
       <Section>
-        <SectionHead title="Tech stack" />
+        <SectionHead title="Tech stack" h1 />
         <p data-for="recruiter business" className="mb-6 text-muted">
           {copy.plainIntro.stack}
         </p>

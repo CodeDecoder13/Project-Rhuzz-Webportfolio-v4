@@ -8,7 +8,7 @@ import { listPosts, safe } from "@/lib/db";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Achievements and milestones from Rhuzzel Paramio.",
+  description: "Achievements, milestones and testing write-ups from Rhuzzel Paramio: what was built, what broke, and what shipped.",
 };
 
 async function Posts() {
