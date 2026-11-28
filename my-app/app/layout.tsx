@@ -64,7 +64,7 @@ const siteLd = JSON.stringify({
 const THEME_INIT = `try{var t=localStorage.getItem("theme");if(t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}`;
 
 // ?for=dev|recruiter|business|all (share link) or the saved choice sets the view before paint; values are checked against the fixed list.
-const PERSONA_INIT = `try{var d=document.documentElement,V=["dev","recruiter","business","all"],p=new URLSearchParams(location.search).get("for");if(V.indexOf(p)>-1){localStorage.setItem("persona",p);sessionStorage.setItem("gate","1")}else p=localStorage.getItem("persona");if(p&&p!=="all"&&V.indexOf(p)>-1)d.dataset.persona=p}catch(e){}`;
+const PERSONA_INIT = `try{var d=document.documentElement,V=["dev","recruiter","business","all"],p=new URLSearchParams(location.search).get("for");if(V.indexOf(p)>-1){localStorage.setItem("persona",p);sessionStorage.setItem("gate","1")}else p=localStorage.getItem("persona");if(p&&p!=="all"&&V.indexOf(p)>-1)d.dataset.persona=p;if(p||sessionStorage.getItem("gate")==="1")d.dataset.gate="skip"}catch(e){document.documentElement.dataset.gate="skip"}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -77,6 +77,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Sets the theme before first paint so there is no flash: saved choice, else the system preference. */}
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
         <script dangerouslySetInnerHTML={{ __html: PERSONA_INIT }} />
+        <noscript>
+          <style>{`.gate-ssr{display:none!important}`}</style>
+        </noscript>
       </head>
       <body className="min-h-full flex flex-col">
         <a

@@ -8,7 +8,8 @@ import { setView, storedView } from "@/lib/visitor";
 
 const btn = "rounded-full px-7 py-4 font-mono text-sm tracking-[.06em]";
 
-// Client-only overlay: real page content stays in the DOM underneath for SEO.
+// Overlay on top of the real page content. It is in the server HTML so first-time visitors see it paint without waiting
+// for JavaScript; PERSONA_INIT in layout.tsx hides that server copy (data-gate="skip") for everyone else.
 const seenThisSession = () => {
   try {
     return sessionStorage.getItem("gate") === "1";
@@ -22,8 +23,8 @@ const card =
   "btn-fill flex min-h-[44px] flex-col rounded-[14px] border-[1.5px] border-ink bg-card p-4 text-left text-ink";
 
 export default function Gate() {
-  // Server snapshot says "seen" so SSR renders no overlay; the client re-reads after hydration.
-  const seen = useSyncExternalStore(subscribe, seenThisSession, () => true);
+  const mounted = useSyncExternalStore(subscribe, () => true, () => false);
+  const seen = useSyncExternalStore(subscribe, seenThisSession, () => false);
   // First-time visitors (nothing saved) are asked who they are; returning ones get the plain intro with a "change" link.
   const saved = useSyncExternalStore(subscribe, storedView, () => null);
   const [changing, setChanging] = useState(false);
@@ -53,7 +54,7 @@ export default function Gate() {
   };
 
   useEffect(() => {
-    if (!visible || phase !== "open") return;
+    if (!mounted || !visible || phase !== "open") return;
     opener.current = document.activeElement;
     const els = () =>
       root.current!.querySelectorAll<HTMLElement>("button, a[href], input");
@@ -74,7 +75,7 @@ export default function Gate() {
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [visible, phase]);
+  }, [mounted, visible, phase]);
 
   if (!visible) return null;
   return (
@@ -83,7 +84,7 @@ export default function Gate() {
       role="dialog"
       aria-modal="true"
       aria-label="Enter portfolio"
-      className={`island-light fixed inset-0 z-30 grid place-items-center bg-[rgba(11,27,51,.86)] p-6 text-center text-paper backdrop-blur-[14px] transition-[opacity,transform] duration-[400ms] ${phase === "out" ? "pointer-events-none scale-[1.04] opacity-0" : ""}`}
+      className={`${mounted ? "" : "gate-ssr "}island-light fixed inset-0 z-30 grid place-items-center bg-[rgba(11,27,51,.86)] p-6 text-center text-paper backdrop-blur-[14px] transition-[opacity,transform] duration-[400ms] ${phase === "out" ? "pointer-events-none scale-[1.04] opacity-0" : ""}`}
     >
       {asking ? (
         <div className="w-full max-w-[920px]">

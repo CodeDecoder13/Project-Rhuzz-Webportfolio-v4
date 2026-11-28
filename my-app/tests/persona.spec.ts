@@ -298,3 +298,11 @@ test("chat API validates the view", async ({ request }) => {
   });
   expect([200, 429, 500, 502]).toContain(ok.status()); // 500/502 when no Gemini key is set locally
 });
+
+test.describe("intro overlay without JavaScript", () => {
+  test.use({ javaScriptEnabled: false });
+  test("does not trap the page", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("dialog", { name: "Enter portfolio" })).toBeHidden();
+  });
+});
