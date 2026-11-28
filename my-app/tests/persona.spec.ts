@@ -136,7 +136,7 @@ test.describe("recruiter", () => {
   test("hidden-from-nav pages still load", async ({ page }) => {
     await page.goto("/tech-stack");
     await expect(
-      page.getByRole("heading", { level: 2, name: "Tech stack" }),
+      page.getByRole("heading", { level: 1, name: "Tech stack" }),
     ).toBeVisible();
     await expect(
       page.getByText("The tools I use to build and test software"),

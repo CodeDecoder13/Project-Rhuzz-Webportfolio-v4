@@ -119,7 +119,7 @@ test("drawer opens, syncs the URL and closes", async ({ page }) => {
 test("case study route renders and unknown slug does not", async ({ page }) => {
   await page.goto("/projects/project-airzen");
   await expect(
-    page.getByRole("heading", { level: 2, name: "Project Airzen" }),
+    page.getByRole("heading", { level: 1, name: "Project Airzen" }),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "Code" })).toHaveCount(0);
   await page.goto("/projects/nope");
@@ -332,7 +332,7 @@ test("footer lists site links and contact details", async ({ page }) => {
   const footer = page.getByRole("contentinfo");
   await expect(
     footer.getByRole("navigation", { name: "Footer" }).getByRole("link"),
-  ).toHaveCount(8);
+  ).toHaveCount(9);
   await expect(
     footer.getByRole("link", { name: "boyparamio@gmail.com" }),
   ).toBeVisible();
@@ -470,4 +470,16 @@ test.describe("new visitor", () => {
       await page.evaluate(() => localStorage.getItem("cookie-consent")),
     ).toBe("all");
   });
+});
+
+// Card entrance transforms once widened the phone layout, pushing the menu button off screen.
+test.describe("phone", () => {
+  test.use({ viewport: { width: 360, height: 740 }, isMobile: true, hasTouch: true });
+  for (const path of ["/", "/about"]) {
+    test(`${path} layout is no wider than the screen`, async ({ page }) => {
+      await page.goto(`${path}?for=all`);
+      await page.waitForTimeout(1500);
+      expect(await page.evaluate(() => innerWidth)).toBe(360);
+    });
+  }
 });

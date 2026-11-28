@@ -87,6 +87,8 @@ html {
 }
 
 body {
+  /* Phones ignore the clip on html and widen the layout to fit the card entrance transforms, cutting off the header. */
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-space-grotesk), system-ui, sans-serif;
